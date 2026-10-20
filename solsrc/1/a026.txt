@@ -1,0 +1,66 @@
+=== 1.55.2
+This is Euclid's algorithm. Every two steps, the larger argument at least halves: if $m \le n/2$ then $n \bmod m < m \le n/2$, and otherwise $n \bmod m = n - m < n/2$. So the number of calls is $O(\log n)$.
+
+The worst case, consecutive Fibonacci numbers, really does take $\Theta(\log n)$ steps. **Option A**.
+=== 1.55.3
+For a fixed $y \ne 1$, `Count(1024, y)` halves $x$ from 1024 down to 1. That prints **10** stars, since $1024 = 2^{10}$. Then it decrements $y$ and starts over with $x = 1024$.
+
+This repeats for $y = 1024, 1023, \dots, 2$, which is 1023 values. It stops when $y = 1$.
+
+The total is $1023\times10 = \mathbf{10230}$.
+=== 1.55.4
+Each call subtracts $q = 10$ from $x$, from $y$, or (in the general case) branches into both. A leaf is reached when both are at most 0, and it returns 10.
+
+Going from 15 to at most 0 takes exactly 2 subtractions of 10, for both $x$ and $y$. Each leaf matches one ordering of 2 x-steps and 2 y-steps, and there are $\binom42 = 6$ orderings.
+
+The result is $6\times10 = \mathbf{60}$.
+=== 1.55.5
+Each recursive call is pushed onto the call stack. The most recent call finishes first, i.e. **last in, first out**. **Option B**.
+=== 1.55.6
+Naive recursive Fibonacci, $F(n) = F(n-1) + F(n-2)$, recomputes the same subproblems over and over, taking exponential time $\Theta(\phi^n)$. A simple loop does it in $O(n)$. That makes it the classic **bad** use of recursion. **Option B**.
+=== 1.56.1
+Red-black trees keep their height at most $2\lg(n+1)$. So search, insert and delete all run in **$O(\lg n)$** in the worst case. **Option B**.
+=== 1.57.1
+**Non-adaptive (static) routing** algorithms compute routes in advance and don't react to current traffic or topology. Adaptive algorithms do. **Option C**.
+=== 1.58.1
+The bug is `i := k`, which should be `i := k+1`. Once $j = i+1$, we get $k = \lfloor(i+j)/2\rfloor = i$. If $a[i] < x$, then $i$ is set to $k = i$ again. Nothing changes, and since $i < j$ the loop never ends.
+
+**It fails (loops forever)** whenever the search narrows to two adjacent positions $i, i+1$ with $a[i] < x$. In particular:
+
+- when $x > a[N-1]$, including $x = a[N]$ (the last element) and $x$ larger than every element;
+- more generally, whenever $x$ is absent and lies above the element at the left end of the final pair.
+
+Example: $N = 2$, $a = [1, 2]$, $x = 2$. Then $k = 1$, $a[1] < 2$, so $i = 1$ again, forever.
+
+(If $x$ is smaller than everything, $j$ keeps moving left and the loop ends correctly.)
+=== 1.58.2
+If the item is equally likely to be at any of the $n$ positions, finding it at position $i$ takes $i$ comparisons:
+$$\frac1n\sum_{i=1}^n i = \frac{n+1}{2}$$
+**Option C**.
+=== 1.58.3
+Each random probe succeeds with probability $\frac1n$, independently of the others. The number of probes is geometric, so its expectation is $\frac1p = n$. **Option A**.
+=== 1.58.4
+With Y all 2s and $x > 2$, every comparison goes right:
+
+| i, j | k | action |
+|---|---|---|
+| 0, 9 | 4 | i = 4 |
+| 4, 9 | 6 | i = 6 |
+| 6, 9 | 7 | i = 7 |
+| 7, 9 | 8 | i = 8 |
+| 8, 9 | 8 | i = 8, which is stuck |
+
+$i$ stays 8 and $j$ stays 9 forever, and $Y[k] \ne x$, so the program **loops forever**. **Option C**.
+
+(The other cases end correctly.)
+=== 1.58.5
+The fix is to move past the probed element on both sides: `i = k+1` when $Y[k] < x$, and `j = k-1` otherwise. Then the interval always shrinks and the loop terminates. **Option A**.
+=== 1.58.6
+The array is sorted (0s then 1s), so binary search for the first 1. There are 32 possible answers: index 1 through 31, plus "no 1 at all". Each probe at most halves the possibilities, so we need $\lceil\log_2 32\rceil = \mathbf{5}$ probes.
+=== 1.58.7
+- **A is false.** A DFS tree can follow long detours, so its paths needn't be shortest.
+- **B is true.** In an *undirected* DFS, every non-tree edge joins a vertex to an ancestor or a descendant. There are no cross edges.
+- **C is true.** For any edge in an undirected BFS, the levels of its endpoints differ by at most 1.
+- **D is true.** Each new search started from an unvisited vertex finds exactly one connected component, with either algorithm.
+
+Answer: **B, C and D**.

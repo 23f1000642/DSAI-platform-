@@ -1,0 +1,104 @@
+=== 1.59.1
+X = B C D C A B C and Y = C A D B C B.
+
+A common subsequence of length 4 is **C A B C**:
+
+- X: positions 2, 5, 6, 7
+- Y: positions 1, 2, 4, 5
+
+C D C B is another. No common subsequence of length 5 exists, which the LCS table confirms. The length is **4**, **option C**.
+=== 1.60.1
+This is Floyd–Warshall on hop counts. The loop variable `i` is the outermost loop, so it must act as the **intermediate vertex**.
+
+**(a) Initialisation:**
+```
+{ if a[i,j] = 0 then P[i,j] = ∞ else P[i,j] = 1; }
+```
+(Optionally, set P[i,i] = 0.)
+
+**(b) Algorithm:**
+```
+{ P[j,k] = min{ P[j,k], P[j,i] + P[i,k] }; }
+```
+
+**(c)** Three nested loops of $n$ each, so **$O(n^3)$**.
+=== 1.60.2
+Edges in $E_1$ cost 0, and all others cost 1. A vertex $u$ is at distance 0 from $v_1$ exactly when it can be reached from $v_1$ using only $E_1$ edges.
+
+So $G_1$ is connected if and only if every vertex of $V_1$ is at distance 0. That can always be read off the computed costs. Nothing about edge counts, cliques or trees can be. **Option B**.
+=== 1.60.3
+For an unweighted graph, BFS from $S$ visits vertices in order of hop distance and finds all shortest paths in $O(V+E)$. Dijkstra adds a $\log$ factor, Warshall is $O(V^3)$, and DFS doesn't find shortest paths. **Option D**.
+=== 1.60.4
+For any path $u_0\to u_1\to\dots\to u_k$, the new weights telescope:
+$$w'(\text{path}) = w(\text{path}) + f(u_0) - f(u_k)$$
+Every path between the same two endpoints shifts by the same constant. So shortest paths stay shortest, **for every** $f$. That's the idea behind Johnson's reweighting.
+
+(Option D's choice of $f$ also makes all the weights non-negative, but that isn't needed just to keep shortest paths.) **Option A**.
+=== 1.60.5
+The height of a BFS tree rooted at $r$ is $r$'s eccentricity, i.e. its maximum distance to any vertex.
+
+Let $u, v$ be at distance 30. By the triangle inequality, $30 \le d(u,r) + d(r,v)$, so one of those distances is at least 15. Hence the height is **at least 15**. It can be anywhere from 15 to 30, depending on the root. **Option C**.
+=== 1.60.6
+$T$ is a subgraph of $G$, so every path in $T$ is also a path in $G$. So $d_1(u,v) \le d_2(u,v)$. The tree path can be longer, because the MST doesn't preserve shortest paths. **Option B**.
+=== 1.60.7
+- **MST:** every spanning tree has $n-1$ edges, so all of them gain the same $(n-1)\alpha$. Every MST remains an MST.
+- **Shortest paths:** a path with $k$ edges gains $k\alpha$, so paths with more edges are penalised more. Shortest paths can change.
+
+**Option C**.
+=== 1.60.8
+Use the fact that a **shortest** path has no shortcut edges.
+
+- a–b–c–d is shortest, so a–c, a–d and **b–d** are not edges. A ✔
+- e–f–g–h is shortest, so e–g, e–h and f–h are not edges. D ✔
+- a–f–c–h is shortest (length 3). If **b–h** were an edge, a–b–h would have length 2. So b–h isn't an edge. C ✔
+- (b, g) can't be ruled out: a–b–g–h would also have length 3, which contradicts nothing.
+
+Answer: **A, C and D**.
+=== 1.60.9
+The triangle inequality for shortest paths gives $d(v) \le d(u) + w(u,v)$. So $65 \le 53 + w$, i.e. **$w(u,v) \ge 12$**. It could be larger, if $v$'s shortest path doesn't go through $u$. **Option C**.
+=== 1.60.10
+Dijkstra greedily finalises the nearest vertex. Floyd–Warshall builds a DP table of intermediate vertices. **Greedy, dynamic programming**, **option C**.
+=== 1.60.11
+Relax the edge: $d[v] = \min(d[v],\, d[u] + w(u,v)) = \min(29,\, 15+12) = \mathbf{27}$. **Option B**.
+=== 1.60.12
+Single-source shortest paths with Dijkstra and an array (or adjacency matrix) takes **$O(n^2)$**. **Option D**.
+=== 1.60.13
+**Floyd–Warshall** solves all-pairs shortest paths directly in $O(V^3)$, and handles negative edges as long as there are no negative cycles. **Option D**.
+=== 1.61.1
+In the worst case quicksort takes $O(n^2)$, while heapsort always takes $O(n\log n)$. So quicksort is **less** efficient than heapsort in the worst case.
+=== 1.61.2
+A comparison sort's decision tree has at least $n!$ leaves, so it needs $\Omega(\log n!) = \Omega(n\log n)$ comparisons. Merge sort and heapsort achieve $O(n\log n)$. The complexity is **$\Theta(n\log n)$**, **option A**.
+=== 1.61.3
+The lower bound is $\lceil\log_2 5!\rceil = \lceil\log_2 120\rceil = 7$. The Ford–Johnson merge-insertion method sorts 5 elements in exactly 7 comparisons, so the minimum is **7**.
+=== 1.61.4
+**Idea:** keep only the $k$ distinct values, with a count for each, in a balanced BST (e.g. an AVL or red-black tree).
+
+```
+procedure SortFewDistinct(A[1..n])
+    T := empty balanced BST          { key -> count }
+    for i := 1 to n do
+        if T contains A[i] then T[A[i]].count += 1      { O(log k) }
+        else insert (A[i], 1) into T                    { O(log k) }
+    p := 1
+    for each (key, cnt) in T in inorder do              { O(k) }
+        repeat cnt times: A[p] := key; p := p + 1        { O(n) total }
+```
+
+**Analysis.** The tree never has more than $k$ nodes, so each of the $n$ lookups or inserts costs $O(\log k)$. Writing the output costs $O(n)$. The total is **$O(n\log k)$**, and $k$ doesn't need to be known in advance.
+
+**Optimality.** There are about $k^n/k!$ distinct orderings to tell apart, which gives a lower bound of $\Omega(n\log k)$ comparisons. So the algorithm is optimal.
+=== 1.61.5
+Write each number in **base $n$**. Every number up to $n^3$ fits in at most 4 base-$n$ digits. Radix sort does one counting-sort pass per digit, at $O(n + n)$ each, so the total is $O(n)$.
+
+Heap sort, quick sort and merge sort are comparison sorts, so they need $\Omega(n\log n)$. **Option D**.
+=== 1.61.6
+Each pass bubbles the largest remaining element to its final position:
+
+| pass | sequence |
+|---|---|
+| start | 92 37 52 12 11 25 |
+| 1 | 37 52 12 11 25 **92** |
+| 2 | 37 12 11 25 **52 92** |
+| 3 | 12 11 25 **37 52 92** |
+| 4 | 11 12 **25 37 52 92** |
+| 5 | 11 12 25 37 52 92 (no swaps, so it's sorted) |

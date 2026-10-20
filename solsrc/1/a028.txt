@@ -1,0 +1,144 @@
+=== 1.61.7
+**(a)** Every element is smaller than the elements to its right and below it, so the minimum is at the top-left: **i = 1, j = 1**.
+
+**(b)** Put $x$ at $A[1][1]$ and sift it down. At each step, swap with the **smaller** of the cell below and the cell to the right, until $x$ is smaller than both.
+```
+procedure insert (x: integer);
+var i,j: integer;
+begin
+   i:=1; j:=1; A[i][j]:=x;
+   while (x > A[i+1][j] or x > A[i][j+1]) do
+      if A[i+1][j] < A[i][j+1] then begin
+         A[i][j]:=A[i+1][j]; i:=i+1;
+      end
+      else begin
+         A[i][j]:=A[i][j+1]; j:=j+1;
+      end;
+   A[i][j]:=x
+end
+```
+$x$ is smaller than everything in the last row and column, so the loop stops before running off the array. Each step increases $i+j$ by one, so there are at most $2n$ steps: **$O(n)$**.
+=== 1.61.8
+- Binary search: $O(\log n)$ → A-R
+- Selection (finding the $k$-th smallest, e.g. median of medians): $O(n)$ → B-P
+- Merge sort: $O(n\log n)$ → C-S
+- Insertion sort: $O(n^2)$ → D-Q
+
+**Option B**.
+=== 1.61.9
+A sort is **stable** if equal keys keep their original relative order. **Option B**.
+=== 1.61.10
+Rows and columns are both sorted, so:
+
+- **1st smallest** = $A[1][1]$, with no comparisons needed.
+- **2nd smallest** is one of $A[1][2]$ or $A[2][1]$, the only cells with no other unseen cell above or to the left.
+- **3rd smallest** is the winner of a comparison between the other candidate and the new cell exposed by removing the 2nd.
+
+The decision tree:
+```
+              A[1][2] < A[2][1] ?
+             /                     \
+          yes                       no
+   2nd = A[1][2]               2nd = A[2][1]
+   A[1][3] < A[2][1] ?         A[3][1] < A[1][2] ?
+     /         \                 /         \
+ 3rd=A[1][3]  3rd=A[2][1]   3rd=A[3][1]  3rd=A[1][2]
+```
+($A[2][2]$ can never be 3rd, because it's larger than both $A[1][2]$ and $A[2][1]$.)
+
+It takes **2 comparisons**, which is the minimum possible.
+=== 1.61.11
+Each swap of adjacent elements removes exactly one inversion. So the minimum number of swaps equals the number of inversions.
+
+**(b) Worst ordering:** reverse sorted, **2 2 2 1 1 1 1 1 0 0 0 0**.
+
+**(a)** Count the inversions in that ordering:
+
+- each 2 before each 1: $3\times5 = 15$
+- each 2 before each 0: $3\times4 = 12$
+- each 1 before each 0: $5\times4 = 20$
+
+The maximum is **47** swaps.
+=== 1.61.12
+Each of the $\binom n2$ pairs is inverted with probability $\frac12$. By linearity of expectation, the expected count is $\frac{n(n-1)}{4}$. **Option B**.
+=== 1.61.13
+Use a min-heap holding the current head of each of the $k = \lceil\log n\rceil$ lists. Each of the $n$ elements is extracted once and replaced once, at $O(\log k)$ each:
+$$O(n\log k) = O(n\log\log n)$$
+**Option A**.
+=== 1.61.14
+**Selection sort** makes at most one swap per pass, so at most $n-1$ swaps in total. Quick sort, insertion sort and heap sort can need $\Theta(n\log n)$ or $\Theta(n^2)$ swaps. **Option C**.
+=== 1.61.15
+- Merge sort: $O(n\log n)$ worst case
+- Bubble, quick and selection sort: $O(n^2)$ worst case
+
+**Option A**.
+=== 1.61.16
+Selection sort does at most one swap per pass, over $n-1$ passes: $\Theta(n)$. **Option A**.
+=== 1.61.17
+Heap sort on $k$ elements takes $\Theta(k\log k)$. Setting $k\log k = \Theta(\log n)$ gives
+$$k = \Theta\!\left(\frac{\log n}{\log\log n}\right)$$
+Check: $k\log k \approx \frac{\log n}{\log\log n}\cdot\log\log n = \log n$ ✔. **Option C**.
+=== 1.61.18
+There are $n-1$ passes, each with at most one swap, so the tightest bound is **$O(n)$**. **Option B**.
+=== 1.61.19
+Process the numbers in pairs:
+
+1. Compare the two numbers in each pair: 50 comparisons.
+2. Find the minimum of the 50 smaller ones: 49 comparisons.
+3. Find the maximum of the 50 larger ones: 49 comparisons.
+
+The total is $\lceil 3n/2\rceil - 2 = 150 - 2 = \mathbf{148}$.
+=== 1.61.20
+- **Insertion sort:** $\Theta(n^2)$ (reverse-sorted input)
+- **Merge sort:** $\Theta(n\log n)$ always
+- **Quicksort:** $\Theta(n^2)$ (bad pivots)
+
+**Option D**.
+=== 1.61.21
+On already-sorted input:
+
+- **I is true.** Quicksort with a first or last pivot degrades to $\Theta(n^2)$.
+- **II is false.** Bubble sort with an early-exit flag stops after one pass, $\Theta(n)$.
+- **III is false.** Merge sort still takes $\Theta(n\log n)$.
+- **IV is true.** Insertion sort makes one comparison per element, $\Theta(n)$.
+
+**I and IV**, **option D**.
+=== 1.61.22
+The array is already sorted.
+
+- **Insertion sort:** each element is compared once with its predecessor, so $n-1 = 7$ comparisons.
+- Selection sort always makes $\binom n2 = 28$.
+- Merge sort makes more than 7.
+- Quicksort with the last element as pivot hits its worst case.
+
+**Option C**.
+=== 1.61.23
+Build a max-heap bottom-up on 82, 101, 90, 11, 111, 75, 33, 131, 44, 93 (positions 1 to 10):
+
+| sift down from | change |
+|---|---|
+| position 5 (111) | no change (child 93 is smaller) |
+| position 4 (11) | swap with 131 |
+| position 3 (90) | no change |
+| position 2 (101) | swap with 131. Then 101 is above 11 and 44, which is fine |
+| position 1 (82) | swap with 131, then with 111, then with 93 |
+
+Result: **131, 111, 90**, 101, 93, 75, 33, 11, 44, 82. **Option D**.
+=== 1.61.24
+Keep the longest **non-decreasing subsequence** and replace everything else.
+
+In [2, 5, 3, 1, 4, 2, 6], the longest is 2, 3, 4, 6, with length 4.
+
+The distance is $7 - 4 = \mathbf{3}$.
+=== 1.61.25
+Compare any two elements. The smaller one can't be the largest. That takes **1** comparison, **option A**.
+=== 1.61.26
+Sort [4, 3, 2, 1, 5] and look at the array after two passes:
+
+| algorithm | after pass 1 | after pass 2 |
+|---|---|---|
+| bubble | 3 2 1 4 5 | 2 1 3 4 5 ✘ |
+| insertion | 3 4 2 1 5 | 2 3 4 1 5 ✘ |
+| selection | 1 3 2 4 5 | **1 2 3 4 5** ✔ |
+
+**(iii) only**, **option B**.

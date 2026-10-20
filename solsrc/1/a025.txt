@@ -1,0 +1,84 @@
+=== 1.54.26
+Count the calls to $A(n/2)$ along the **longest** route through the flowchart:
+
+1. the first call (1)
+2. at the first diamond, the right branch: two calls (+2)
+3. at the second diamond, the down branch: one call (+1)
+4. at the third diamond, the left branch: one more call (+1)
+
+That's at most **5** calls, plus $O(1)$ work:
+$$T(n) = 5T(n/2) + O(1) \Rightarrow T(n) = \Theta(n^{\log_2 5}) = \Theta(n^{2.3219})$$
+The least $\alpha$ is $\log_2 5 \approx \mathbf{2.32}$.
+=== 1.54.27
+Let $n = 2^m$ and $S(m) = T(2^m)$. Then $S(m) = 2S(m/2) + 1$, so $S(m) = \Theta(m)$. That gives $T(n) = \Theta(\log n)$, **option B**.
+=== 1.54.28
+After $k$ steps, the argument is $n^{1/a^k}$. The recursion stops at $b$:
+$$n^{1/a^k} = b \iff a^k = \log_b n \iff k = \log_a\log_b n$$
+Each step adds 1, so $T(n) = \Theta(\log_a\log_b n)$. **Option A**.
+=== 1.54.29
+The fractions add up to $\frac12 + \frac25 = \frac9{10} < 1$. So the work at each level of the recursion tree shrinks geometrically: $7n\left(1 + 0.9 + 0.81 + \dots\right) = 70n$.
+
+$T(n) = \Theta(n)$, **option C**.
+=== 1.54.30
+- **C** is exactly Master theorem case 1, so it's correct.
+- A depends on $a$ and $b$. For example, with $a = 4$, $b = 2$ the answer is $\Theta(n^2)$.
+- B is wrong whenever $n^{\log_b a}$ dominates.
+- D is missing a log factor. Case 2 gives $\Theta(n^{\log_b a}\log n)$.
+
+**Option C**.
+=== 1.54.31
+Divide by $n$:
+$$\frac{T(n)}{n} = \frac{T(\sqrt n)}{\sqrt n} + 1$$
+So $S(n) = T(n)/n$ satisfies $S(n) = S(\sqrt n) + 1$, which gives $S(n) = \Theta(\log\log n)$.
+
+Therefore $T(n) = \Theta(n\log\log n)$, **option A**.
+=== 1.54.32
+Divide by $2^n$:
+$$\frac{T(n)}{2^n} = \frac{T(n-1)}{2^{n-1}} + n$$
+So $U(n) = T(n)/2^n$ satisfies $U(n) = U(0) + \sum_{i=1}^{n} i = \Theta(n^2)$.
+
+Therefore $T(n) = \Theta(n^2 2^n)$, **option A**.
+=== 1.54.33
+- Binary search: $T(n/2) + 1$ → IV
+- Merge sort: $2T(n/2) + cn$ → III
+- Quicksort, with an unbalanced split: $T(n-k) + T(k) + cn$ → I
+- Tower of Hanoi: $2T(n-1) + 1$ → II
+
+P-IV, Q-III, R-I, S-II, **option B**.
+=== 1.54.34
+By the Master theorem with $a = b = 2$: $n^{\log_2 2} = n$, which beats $\sqrt n$. Case 1 gives $T(n) = \Theta(n)$. **Option C**.
+=== 1.54.35
+Substitute $T(n) = \sqrt n\,U(n)$:
+$$\sqrt n\,U(n) = \sqrt2\sqrt{n/2}\,U(n/2) + \sqrt n = \sqrt n\,U(n/2) + \sqrt n$$
+So $U(n) = U(n/2) + 1$ with $U(1) = 1$, which gives $U(n) = \log_2 n + 1$.
+
+Therefore $T(n) = \sqrt n(\log n + 1)$, **option A**.
+=== 1.54.36
+$T(n) = 2T(n/2) + \sqrt n$ is Master case 1, so it's $\Theta(n)$. The tightest bound offered is **$O(n)$**, **option C**.
+=== 1.54.37
+fix: B;C
+This is the median-of-medians (SELECT) recurrence, with $s = 5$:
+$$T(n) \le T(n/5) + T(7n/10 + 6) + O(n)$$
+The fractions add up to $\frac15 + \frac7{10} = \frac9{10} < 1$, so the work shrinks geometrically from level to level. **$T(n) = O(n)$**.
+
+The tight answer is **B, $O(n)$**. The official key says C, $O(n\lg n)$. That's also a true upper bound, just not tight, so both B and C are accepted here.
+=== 1.54.38
+Each step multiplies $m$ by $\frac34$ and adds 1. It takes $\log_{4/3} m$ steps to reach a constant, so $T(m) = \Theta(\lg m)$. **Option A**.
+=== 1.54.39
+Let $n = 2^m$ and $S(m) = T(2^m)$:
+$$S(m) = 2S(m/2) + m \Rightarrow S(m) = \Theta(m\log m)$$
+So $T(n) = \Theta(\log n\cdot\log\log n)$, **option D**.
+=== 1.54.40
+With $a = 3$, $b = 4$: $n^{\log_4 3} \approx n^{0.79} < n$. Master case 3 gives $T(n) = O(n)$. **Option C**.
+=== 1.54.41
+Each level of the recursion tree costs about $cn$: the pieces at every level add up to $n$. The longest branch, always taking the $2/3$ side, has depth $\log_{3/2} n$.
+
+So $T(n) = O(n\lg n)$, **option C**.
+=== 1.55.1
+For s = "acbc":
+
+- head(s) = 'a'
+- tail(s) = "cbc", and tail(tail(s)) = "bc"
+- head("bc") = 'b'
+
+concat('a', 'b') = **"ab"**, **option C**.
