@@ -1,0 +1,69 @@
+=== 3.37.8
+The PDF leaves out the actual expression for this question. Here is what each candidate table corresponds to, worked out from R, S and T:
+
+- **R ⋈ S** (on B): (1,2,4), (1,2,5), (3,2,4), (3,2,5), (5,6,2), (7,8,1), (7,8,3), (9,8,1), (9,8,3). That's **table (a)**.
+- **R ⋈ T** (on A): R's (A,B) pairs combine with T's C for the same A: (1,2,2), (3,2,5), (5,6,4), (7,8,1), (9,8,3). That's **table (b)**.
+- **(R ⋈ S) ⋈ T** (on A and C): keep the rows of (a) whose (A,C) pair is in T: (3,2,5), (7,8,1), (9,8,3). That's **table (d)**.
+
+The official answer is **(b)**, which matches **R ⋈ T**, the expression asked in the original paper. **Option B**.
+=== 3.37.9
+a: A
+An **inner join** returns exactly the rows that satisfy the join condition. Outer joins add unmatched rows padded with nulls. **Option A**.
+=== 3.37.10
+a: D
+Oracle supports inner joins, outer joins (left, right and full), **semi-joins** (through EXISTS/IN) and **anti-joins** (through NOT EXISTS/NOT IN). **Option D**.
+=== 3.38.1
+a: A
+This is the same as GATE IT 2008 Q61.
+
+**Lossless.** B → C makes (A,B) ⋈ (B,C) lossless, and B → D (B → C → D) does the same for the join with (B,D).
+
+**Dependency-preserving.** A → B, B → C and D → B lie in single relations. C → D follows from C → B (B ↔ C in (B,C)) and B → D (in (B,D)).
+
+**Option A**.
+=== 3.39.1
+- **(i) Invalid.** MVDs don't imply FDs.
+- **(ii) Valid.** $A\to B$ and $A\to C$ give $A\to BC$ (union), and every FD is also an MVD.
+- **(iii) Invalid.** The coalescence rule only lets you derive FDs to attributes that something *outside* $BC$ determines. Nothing gives $A\to C$.
+- **(iv) Valid.** $A\to BC$ gives $A\to C$, which in turn gives $A\twoheadrightarrow C$.
+
+That's **2** valid implications, **option C**.
+=== 3.40.1
+A lossy decomposition never **loses** tuples. Every tuple of $r$ reappears after the join, but **spurious** extra tuples appear as well. So $r\subset s$, **option C**.
+=== 3.40.2
+The join attribute is B. In R, B → A → C, so **B is a key of R**. Each S tuple therefore matches **at most one** R tuple. The maximum is $|S| = \mathbf{100}$, **option A**.
+=== 3.40.3
+The full outer join is on A:
+
+- A = 1: (1,5) matches (1,7), giving **(1,5,7)** = e
+- A = 3: only in R1, giving **(3,7,null)** = f
+- A = 4: only in R2, giving **(4,null,9)** = g
+
+R = {e, f, g}, **option C**.
+=== 3.41.1
+a: A
+3NF (in its classic form) means no transitive dependency: **no non-prime attribute depends on other non-prime attributes**. 2NF already rules out dependence on part of a key. **Option A**.
+=== 3.41.2
+a: D
+- **$R_1(A,B,C)$**: the key is A, and every FD has A on the left. So it's in BCNF, and therefore in **3NF**.
+- **$R_2(A,D,E)$**: the key is A. D → E is transitive, so it's **2NF but not 3NF**.
+- **Dependency preservation fails.** $BC\to D$ can't be derived from $f_1\cup f_2$: $BC^+ = \{B,C\}$. So A is false.
+
+"R1 is in 3NF and R2 is in 2NF" (**D**) is exactly right. B is also literally true, but D is the precise answer. C mentions a nonexistent $R_3$. **Option D**.
+=== 3.41.3
+a: A
+- $A\to BC$ splits into $A\to B$ and $A\to C$.
+- $A\to D$ is **redundant**: $A\to BC$ and $BC\to D$ already give it.
+- $BC\to D$: neither B nor C alone determines D, so nothing is extraneous.
+
+$F' = \{A\to B, A\to C, BC\to D, D\to E\}$, **option A**.
+=== 3.41.4
+a: B
+$A^+ = \{A,B,C,D,E\}$, so the key is A (a single attribute). There are no partial dependencies, so R is in **2NF**.
+
+$BC\to D$ and $D\to E$ are transitive dependencies of non-prime attributes, so R is **not 3NF**. **Option B**.
+=== 3.41.5
+a: B
+BCNF ⊂ 3NF, so a BCNF relation is always in 3NF. **Option B**.
+=== 3.41.6
+Modification anomalies are prevented by decomposing relations into the **normal forms**. **Option D**.

@@ -1,0 +1,52 @@
+=== 3.41.7
+If every non-key attribute depends on the primary key (and only on the primary key, so there are no partial or transitive dependencies), the relation is in **3NF**. **Option C**.
+=== 3.41.8
+a: C
+- **BCNF** is not always dependency-preserving → (II)
+- **3NF** removes transitive dependencies → (III)
+- **2NF** removes partial dependencies → (IV)
+- **4NF** removes multivalued dependencies → (I)
+
+**Option C**.
+=== 3.41.9
+a: A
+- In ABCD → E, **B is extraneous**, because A → B. So it becomes ACD → E.
+- **ACDF → EG** is redundant. ACD → E gives E, and then EF → G gives G.
+
+The minimal cover is $\{A\to B,\; ACD\to E,\; EF\to G,\; EF\to H\}$, **option A**.
+=== 3.42.1
+The official key is **B (ii, iii and iv)**. This comes from a textbook list of object-oriented features: representing the world in a non-geometric way, natural-language-style modelling, and decomposing objects into component parts.
+
+(Statement i, "more realistic models", is also commonly listed as an advantage of OO. That makes this question ambiguous, but the key is B.)
+=== 3.42.2
+Object-oriented databases are better at **complex, unstructured** data (multimedia, CAD, nested objects). For **structured, analytical** data, relational databases are the better fit. So C is false. **Option C**.
+=== 3.43.1
+LIST1, LIST2 and LIST3 hold the students taking a course offered by Dr. X, Dr. Y and Dr. Z respectively. The final retrieve keeps students who appear in **all three** lists.
+
+**In one sentence:** find the students who are taking at least one course from each of Dr. X, Dr. Y and Dr. Z.
+=== 3.44.1
+- 2PL guarantees conflict serialisability but **can deadlock**.
+- Timestamp ordering guarantees conflict serialisability and is **deadlock-free**: transactions never wait, they abort instead.
+
+**II only**, **option B**.
+=== 3.45.1
+**(i)** Π_eno(INVOLVED) × Π_pno(PROJ) is every (employee, project) pair. Subtracting INVOLVED leaves the pairs where the employee is **not** in that project. Removing those employees leaves this answer: **the employees involved in every project** (relational division).
+
+**(ii)** The selection keeps the ages E.age that are **less than some other employee's age**. Subtracting them from all ages leaves this answer: **the maximum age among employees**, i.e. the age of the oldest employee.
+=== 3.45.2
+a: B
+The subquery returns the classes that have **at least one** student with 100 in maths. The outer query lists **every** student in those classes. **Option B**.
+=== 3.45.3
+a: B
+The query keeps only departments D1 and D2, groups by department, and keeps the groups with more than 5 employees. For each such department it shows the count, labelled "total". The closest description is **B**: the number of employees in D1 and D2, shown when the count is above 5. (Strictly, the count is per department.)
+=== 3.45.4
+a: C
+The query (with `IN` before the subquery) returns the **names** of every student whose semester 1 and semester 2 marks are equal. That can be several students, and roll numbers aren't selected. **Option C**.
+=== 3.46.1
+a: B
+The **query optimiser** reorders operations, removes redundancy, and picks efficient algorithms and indexes to build the execution plan. **Option B**.
+=== 3.47.1
+a: B
+E and C appear on no right-hand side. $EC^+$: E → A, A → B, C → F, EC → D, which gives everything. **EC**, **option B**.
+=== 3.48.1
+**Entity integrity**: no primary-key attribute may be NULL. **Option C**.

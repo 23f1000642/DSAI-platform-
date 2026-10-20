@@ -1,0 +1,49 @@
+=== 3.48.2
+Primary-key columns can **never** be NULL (entity integrity), so NULLs can't be used to allow duplicate tuples. The other three are legitimate uses of NULL. **Option A**.
+=== 3.48.3
+a: C
+For each book B, the subquery counts the books **more expensive** than B. The condition `< 7` keeps books with 0 to 6 pricier books, i.e. the books ranked 1st to 7th by price (all prices are distinct). These are the **titles of the seven most expensive books**. **Option C**.
+=== 3.48.4
+a: A
+The key is ab. a → c and b → d are partial dependencies, so the relation is **in 1NF but not 2NF**. **Option A**.
+=== 3.48.5
+In a many-to-one relationship from $r_1$ to $r_2$, each $r_1$ entity determines one $r_2$ entity. So $Pk(r_1)\to Pk(r_2)$, **option A**.
+=== 3.48.6
+A Horn clause has **at most one positive literal**. Written as an implication, its head (left side) is a **single atom** (a rule or fact) or **empty** (a goal or query). **Option D**.
+=== 3.48.7
+Projection picks **columns**. Each original row gives one result row, so the row count stays the same. (Strictly, pure relational algebra removes duplicates, so it can be fewer. The key's answer assumes no duplicates.) **Option C**.
+=== 3.48.8
+This is the same FD set as GATE 2013 Q54/55. The keys are AD, BD, DE and DF, and **C** is non-prime.
+
+$A\to BC$ makes C depend on part of key AD. That's a partial dependency, so R is **in 1NF but not 2NF**. **Option A**.
+=== 3.49.1
+**Checkpointing** limits how much of the log has to be scanned and processed during recovery after a crash. **Option B**.
+=== 3.50.1
+- **Insert into S (II)** can add a d value that doesn't exist in R.
+- **Delete from R (III)** can remove a key that S still refers to.
+
+Inserting into R and deleting from S are always safe. **Option B**.
+=== 3.50.2
+Deleting (2,4) cascades to every tuple with C = 2, and then recursively:
+
+1. C = 2: **(5,2)** and **(7,2)** are deleted.
+2. Deleting 5 leads to C = 5: **(9,5)** is deleted.
+3. Deleting 7 or 9: no tuples have C = 7 or C = 9.
+
+The additional deletions are (5,2), (7,2) and (9,5), **option C**.
+=== 3.50.3
+Referential integrity means every B value in $r_1$ appears as a C value in $r_2$. So $\Pi_B(r_1)\subseteq\Pi_C(r_2)$, and therefore $\Pi_B(r_1) - \Pi_C(r_2) = \varnothing$. **Option A**.
+=== 3.50.4
+Delete ⟨3, 8⟩ from T1.
+
+- **T2.S references T1.P with ON DELETE SET NULL.** T2's tuple (8, 3) has S = 3, so its S becomes NULL. No T2 tuple is deleted.
+- **T1.Q references T2.R with cascade.** Nothing was deleted from T2, so nothing cascades back into T1.
+
+The number of additional deletions from T1 is **0**.
+=== 3.50.5
+- **S1 is false.** A relation can have many foreign keys.
+- **S2 is false.** A foreign key can refer to the same relation, e.g. Employee.manager_id → Employee.id.
+
+**Both false**, **option D**.
+=== 3.50.6
+Referential integrity is enforced through **foreign keys**. **Option B**.

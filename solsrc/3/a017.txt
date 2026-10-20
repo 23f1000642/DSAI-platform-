@@ -1,0 +1,63 @@
+=== 3.34.12
+**Data file.** A block holds $\lfloor1024/100\rfloor = 10$ records, so there are $25000/10 = 2500$ data blocks.
+
+**Index file.** It's sparse, with one entry (anchor key + block pointer) per data block. Each entry is $15 + 5 = 20$ bytes, so a block holds $\lfloor1024/20\rfloor = 51$ entries. That needs $\lceil 2500/51\rceil = 50$ index blocks.
+
+Binary search on the index then takes $\lceil\log_2 50\rceil = \mathbf{6}$ block accesses. That's enough to identify the data block.
+=== 3.34.13
+A **scan** reads every record.
+
+- **Sorted** and **heap** files store records packed in consecutive blocks, so a scan reads each block once. That's I/O efficient.
+- An **unclustered** tree or hash index scan fetches records through the index, which can cost about one I/O per record. That's inefficient.
+
+**A and B**.
+=== 3.34.14
+a: A
+A clustering index is defined on a **non-key** field that the file is **ordered** by. **Option A**.
+=== 3.34.15
+The key's answer is **A**: the file is ordered on a field. (Strictly, an index on an ordered *key* field is the primary index. A clustering index is built on an ordered *non-key* field. UGC's key treats it loosely.)
+=== 3.35.1
+a: A
+Syntax checks (format) and range checks (value limits) can be done on input data at entry time. **Consistency** across the whole database usually depends on other stored data, so it can't be checked on the input alone. That's the expected answer, **option A**.
+=== 3.36.1
+In the CODASYL DML, RECONNECT moves a member record from one set occurrence to another. That's not allowed for **FIXED** set membership, where a member, once connected, must stay with the same owner. It's allowed for MANDATORY and OPTIONAL. **Option B**.
+=== 3.37.1
+The natural join is on **rollno**. In Enroll, rollno references Students (each enrollment belongs to one existing student), and Students.rollno is a key.
+
+- **Maximum:** each of the 8 Enroll rows matches exactly one student, so 8.
+- **Minimum:** also 8, assuming referential integrity holds.
+
+**8, 8**, **option A**.
+=== 3.37.2
+$A\cup B$ has 5 tuples: 12, 15, 99, 25, 98 (the duplicates 15 Shreya and 99 Rohit appear once).
+
+The join condition is A.Id > 40 ∨ C.Id < 15:
+
+- **C.Id = 10:** the condition is true for all 5 tuples.
+- **C.Id = 99:** it needs A.Id > 40, which gives 99 and 98, so 2 tuples.
+
+The total is $5 + 2 = \mathbf{7}$, **option A**.
+=== 3.37.3
+Block nested loop costs $b_{outer} + b_{outer}\times b_{inner}$. The product term is the same either way, so the cost is smallest when the **smaller** relation $r$ is the outer one. **Option A**.
+=== 3.37.4
+For a tuple-at-a-time nested loop, the cost is (outer records × inner blocks) + outer blocks:
+
+- **T1 outer:** $2000\times20 + 80 = 40080$
+- **T2 outer:** $400\times80 + 20 = \mathbf{32020}$
+
+T2 should be the outer table. **Option C**.
+=== 3.37.5
+For a **block** nested loop with T2 outer, the cost is (outer blocks × inner blocks) + outer blocks:
+$$20\times80 + 20 = 1620$$
+The reduction is $32020 - 1620 = \mathbf{30400}$, **option B**.
+=== 3.37.6
+The join attribute R is the primary key of $r_2$. So each $r_1$ tuple matches **at most one** $r_2$ tuple. The maximum size of the join is $|r_1| = \mathbf{2000}$, **option A**.
+=== 3.37.7
+The most efficient plan applies each selection as **early** as possible: filter branch on b-city and account on bal **before** the expensive joins.
+
+A: $\Pi(\sigma_{bal<0}(\sigma_{b\text{-}city='Agra'}\,branch \bowtie account) \bowtie depositor)$ filters the small branch relation first, then joins with account, then filters on bal, and joins depositor last.
+
+- B and D join the large account and depositor relations first.
+- C applies b-city to account, which doesn't have that attribute, so it's invalid.
+
+**Option A**.

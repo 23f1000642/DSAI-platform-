@@ -1,0 +1,111 @@
+=== 3.29.1
+A DBMS was developed to fix **all** of these file-system problems: redundancy and inconsistency, difficulty accessing data, data isolation (data scattered across files in different formats), and integrity problems. Others include atomicity, concurrent access and security. **Option D**.
+=== 3.30.1
+The key of team is **name**. Both FDs have name on the left side, so team is already in **BCNF**. A and D are false.
+
+- t1(name, city) and t2(name, owner) each have key name, so both are in BCNF. **B is true.**
+- The common attribute, name, is a key of both. So the decomposition is **lossless**. **C is true.**
+
+**B and C**.
+=== 3.30.2
+Keys:
+
+- $A^+$: A → BCEF, E → DG, so everything. **A** is a key.
+- $BC^+$: BC → A, then everything. **BC** is a key.
+- $E^+ = \{E, D, G\}$, so E isn't a key.
+
+The candidate keys are **A and BC**, so B is true.
+
+E → DG has a left side that isn't a superkey, so R is **not in BCNF**. D is true.
+
+**B and D**.
+=== 3.30.3
+a: C
+Check which FD follows from the others:
+
+- $A\to D$: from $A\to BC$ and $BC\to D$, by transitivity. So it's **redundant**.
+- None of the others can be derived without itself.
+
+**Option C**.
+=== 3.30.4
+In a many-to-one relationship from $R_1$ to $R_2$, each $R_1$ tuple determines one $R_2$ tuple. So $pk(R_1)\to pk(R_2)$, **option B**.
+=== 3.30.5
+a: B
+2NF means every non-prime attribute is **fully** functionally dependent on every candidate key, with no partial dependencies. **Option B**.
+=== 3.31.1
+a: B
+Generalisation combines lower-level entity types into a higher-level one: a **bottom-up** process. **Option B**.
+=== 3.32.1
+Granularity is the **size of the data item** that is locked or accessed: a field, a record, a block, a table or the whole database. **Option B**.
+=== 3.33.1
+a: D
+In a hierarchical database, hashing is used to locate the **records** (root records, typically) directly from their key. **Option D**.
+=== 3.34.1
+**C: Inverted file organisation.**
+
+An inverted file keeps, for each value of a secondary (non-key) attribute, the list of records that have that value. So queries on secondary keys go straight to the matching records, without scanning the file.
+=== 3.34.2
+- Number of data blocks: $\frac{1\text{ GB}}{1\text{ KB}} = 2^{20}$. (A blocking factor of 8 means records are 128 bytes.)
+- Each index block can point to 32 blocks (fan-out 32). The top-level block is the master index.
+
+| level | entries (blocks pointed to) | index blocks | size |
+|---|---|---|---|
+| 1 | $2^{20}$ | $2^{20}/32 = 2^{15}$ | 32 MB |
+| 2 | $2^{15}$ | $2^{10}$ | 1 MB |
+| 3 | $2^{10}$ | $2^{5} = 32$ | 32 KB |
+| 4 (master) | 32 | 1 | 1 KB |
+
+That's **4 levels** of indexing, and the master index is **1 block (1 KB)**.
+=== 3.34.3
+**Data area.** Each 512-byte block holds $512/64 = 8$ records. $16384/8 = $ **2048 data blocks**.
+
+**Index area (sparse, one entry per data block).** Each entry is key + pointer $= 14 + 2 = 16$ bytes, so a block holds $512/16 = 32$ entries.
+
+| level | blocks |
+|---|---|
+| 1 | 2048/32 = 64 |
+| 2 | 64/32 = 2 |
+| 3 | 1 |
+
+The index takes 67 blocks in **3 levels**.
+=== 3.34.4
+The index entries 1, 3, 2, 5, 4 are the positions of the records **in sorted order** of some field.
+
+- Sorted by Occupation, the order is CON (Rama, 1), DOC (Jennifer, 3), ENG (Abdul, 2), MUS (Dev, 5), SER (Maya, 4). That gives **1, 3, 2, 5, 4** ✔
+- Sorted by Name it would be 2, 5, 3, 4, 1. Sorted by Age it would be 2, 5, 1, 3, 4.
+
+**Occupation**, **option C**.
+=== 3.34.5
+A clustering index is built on a **non-key** field that the file is **ordered** on. Records with equal values sit together, and the index points to the first block holding each value. **Option A**.
+=== 3.34.6
+**First level.** A secondary index on a key is dense: one entry per record, so 16384 entries. Each entry is $6 + 10 = 16$ bytes, so a block holds $1024/16 = 64$ entries.
+$$16384/64 = \mathbf{256} \text{ blocks}$$
+
+**Second level.** One entry per first-level block: $256/64 = $ **4** blocks.
+
+**Option C**.
+=== 3.34.7
+- **Q1** is an equality selection ($A_p = c$). Hashing finds the bucket in $O(1)$, which beats an ordered index.
+- **Q2** is a range selection. A hash scatters values, so a range needs a full scan. An ordered index can scan the range directly.
+
+**Option C**.
+=== 3.34.8
+An index is **clustered** when the data records are physically stored in the same order as the index entries. **Option C**.
+=== 3.34.9
+That's the definition of a **clustered** index. **Option C**.
+=== 3.34.10
+**Order of the B+-tree.** With $p$ pointers per node, $8p + 12(p-1) \le 4096$, so $20p \le 4108$ and $p = 205$.
+
+**Levels needed** for $10^6$ records:
+
+- $205^2 = 42025 < 10^6$
+- $205^3 \approx 8.6\times10^6 \ge 10^6$
+
+So there are **3** index levels. One more access reads the record's own block.
+
+The total is $3 + 1 = \mathbf{4}$ disk accesses.
+=== 3.34.11
+Each index entry is $12 + 7 = 19$ bytes, so a block holds $\lfloor 4096/19\rfloor = 215$ entries (entries aren't split across blocks).
+
+ANum is a candidate key and the file is sorted on RollNo, so this is a **dense** secondary index with one entry per record:
+$$\left\lceil\frac{150000}{215}\right\rceil = \lceil 697.67\rceil = \mathbf{698}$$
