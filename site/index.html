@@ -293,6 +293,11 @@ const fmtKey = (type, key) => !key ? '—' : type === 'NAT' ? key.split(';').map
 
 // tiny markdown for solutions: paragraphs, **bold**, `code`, ```blocks```, lists, | tables |
 function md(src){
+  const maths = []; src = String(src).replace(/\$\$[\s\S]+?\$\$|\$[^$\n]+?\$/g, m => { maths.push(m); return '\u0001' + (maths.length - 1) + '\u0001'; });
+  const unmath = h => h.replace(/\u0001(\d+)\u0001/g, (_, i) => esc(maths[+i]));
+  return unmath(md0(src));
+}
+function md0(src){
   const blocks = []; src = String(src).replace(/```[a-z]*\n?([\s\S]*?)```/g, (_, c) => { blocks.push(c); return '\u0000' + (blocks.length - 1) + '\u0000'; });
   const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>');
   return src.split(/\n{2,}/).map(par => {
