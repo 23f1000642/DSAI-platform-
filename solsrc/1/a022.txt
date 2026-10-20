@@ -1,0 +1,121 @@
+=== 1.49.2
+- **Work:** $T_1(N) = 4T_1(N/2) + \Theta(1) = \Theta(N^2)$, since every element is copied once.
+- **Span:** the four spawns run in parallel, but they're issued one after another (no parallel loop), so each level adds $\Theta(1)$:
+$$T_\infty(N) = T_\infty(N/2) + \Theta(1) = \Theta(\lg N)$$
+
+Parallelism is $T_1/T_\infty = \Theta(N^2/\lg N)$. **Option A**.
+=== 1.50.1
+- **Parallel FFT:** span $\Theta(\lg n)$ (a butterfly network of depth $\lg n$) → III
+- **Iterative FFT:** $\Theta(n\lg n)$ → IV
+- **Evaluating a polynomial at $n$ points by Horner's rule:** $n$ points × $\Theta(n)$ each = $\Theta(n^2)$ → I
+- **Multiplying two polynomials in point-value form:** multiply the values pointwise, $\Theta(n)$ → II
+
+A-III, B-IV, C-I, D-II, **option C**.
+=== 1.51.1
+The edges are A–B 10, A–C 22, A–D 7, B–C 30, B–E 49, C–D 26, C–E 10, C–F 4, D–F 22, E–G 2 and F–G 5.
+
+Prim from A always adds the cheapest edge leaving the tree:
+
+| step | edge | weight | why |
+|---|---|---|---|
+| 1 | A–D | 7 | cheapest from A |
+| 2 | A–B | 10 | |
+| 3 | D–F | 22 | ties with A–C (22); either is allowed |
+| 4 | F–C | 4 | |
+| 5 | F–G | 5 | |
+| 6 | G–E | 2 | |
+
+This matches **option D**.
+
+The others fail. A and C don't start from A's cheapest edge. B adds A–C before F, then (C, F), then jumps to (G, E) while G isn't in the tree yet.
+=== 1.51.2
+The edges are a–b 1, a–d 5, a–c 6, b–c 6, d–f 2, c–f 3, c–e 7, d–g 10, f–h 8, e–h 12, g–h 7, g–i 3 and h–i 8.
+
+Check **C**, starting from d:
+
+| step | edge | weight | cheapest edge leaving the tree? |
+|---|---|---|---|
+| 1 | d–f | 2 | yes |
+| 2 | f–c | 3 | yes |
+| 3 | d–a | 5 | yes (vs c–a 6, c–b 6) |
+| 4 | a–b | 1 | yes |
+| 5 | c–e | 7 | yes (vs f–h 8, d–g 10) |
+| 6 | f–h | 8 | yes |
+| 7 | h–g | 7 | yes |
+| 8 | g–i | 3 | yes |
+
+✔ **Option C**.
+
+The other options break Prim's rules:
+
+- **A:** after (a, b), it adds (d, f), but neither d nor f is in the tree yet.
+- **B:** it starts at c with (c, e) (7), but (c, f) (3) is cheaper.
+- **D:** after h, g, i and f, it adds (f, c) (3) before (f, d) (2), which is cheaper.
+
+=== 1.51.3
+The edges are a–b 4, a–h 8, b–c 8, b–h 11, c–d 7, c–i 2, c–f 4, d–e 9, d–f 14, e–f 10, f–g 2, g–h 1, g–i 6 and h–i 7.
+
+Prim from a: first a–b (4). Then a–h (8) and b–c (8) tie, so there are two valid runs.
+
+- **Via a–h:** a–h, then g–h 1, f–g 2, c–f 4, c–i 2, c–d 7, d–e 9. That's **option A** ✔.
+- **Via b–c:** b–c, then c–i 2, c–f 4, f–g 2, g–h 1, c–d 7, d–e 9. That's **option C** ✔.
+
+B picks b–h (11), which isn't the minimum. D adds g–h before g or h is in the tree.
+
+Answer: **A and C**.
+=== 1.52.1
+In an unsorted array:
+
+- **Insert:** append at the end, $\Theta(1)$.
+- **Extract-min:** scan all $n$ elements to find the minimum, $\Theta(n)$. Then swap it with the last element and shrink the array, $O(1)$.
+
+**Option A**.
+=== 1.53.1
+With a fixed pivot (first or last element), sorted input and reverse-sorted input are both worst cases. Each partition removes only the pivot. [1 2 3 4] has 4 elements and [5 4 3 2 1] has 5, so the 4-element input does less work:
+
+$t_1 = \binom42 = 6$ comparisons, and $t_2 = \binom52 = 10$. So $t_1 < t_2$, **option C**.
+=== 1.53.2
+**(i) Quicksort** (pivot = first element of each subfile; after partitioning, the pivot is in its final position):
+
+| step | file |
+|---|---|
+| start | 25 7 34 2 70 9 61 16 49 19 |
+| pivot 25 | [19 7 16 2 9] **25** [61 70 49 34] |
+| pivot 19 | [9 7 16 2] **19** — |
+| pivot 9 | [2 7] **9** [16] |
+| pivot 2 | — **2** [7] |
+| pivot 61 | [34 49] **61** [70] |
+| pivot 34 | — **34** [49] |
+
+Result: 2 7 9 16 19 25 34 49 61 70.
+
+**(ii) Two-way merge sort** (bottom-up):
+
+| pass | runs |
+|---|---|
+| start | [25] [7] [34] [2] [70] [9] [61] [16] [49] [19] |
+| 1 | [7 25] [2 34] [9 70] [16 61] [19 49] |
+| 2 | [2 7 25 34] [9 16 61 70] [19 49] |
+| 3 | [2 7 9 16 25 34 61 70] [19 49] |
+| 4 | [2 7 9 16 19 25 34 49 61 70] |
+=== 1.53.3
+With the last element as pivot, the worst case is every partition being as lopsided as possible: the pivot is always the largest or smallest remaining element. An **already sorted** input does this, e.g. $1, 2, 3, \dots, n$. So does a reverse-sorted one, $n, n-1, \dots, 1$.
+
+Each pass then removes only the pivot, giving $\binom n2 = \Theta(n^2)$ comparisons.
+=== 1.53.4
+With the first element as pivot:
+
+- For **sorted** input, each pivot is the minimum, so the partition is (0, k−1).
+- For **reverse-sorted** input, each pivot is the maximum, so the partition is (k−1, 0).
+
+Either way the subproblem sizes are $n-1, n-2, \dots$, giving $\frac{n(n-1)}{2}$ comparisons in both cases. **$C_1 = C_2$**, **option C**.
+=== 1.53.5
+Randomisation makes the **expected** time $O(n\log n)$ for every input. But an unlucky sequence of pivot choices (always the min or max) is still possible, so the **worst case** is $O(n^2)$. **Option C**.
+=== 1.53.6
+Choosing the median as pivot takes $O(n)$ and splits the array exactly in half:
+$$T(n) = 2T(n/2) + O(n) = \Theta(n\log n)$$
+**Option B**.
+=== 1.53.7
+Each split puts at least $n/5$ elements on each side, so the worst split is $(n/5, 4n/5)$. Partitioning costs $O(n)$:
+$$T(n) \le T(n/5) + T(4n/5) + n$$
+**Option B**. This still solves to $O(n\log n)$.
