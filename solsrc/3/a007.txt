@@ -1,0 +1,51 @@
+=== 3.16.2
+**Data mining** is the semi-automatic analysis of large databases to find useful patterns: associations, clusters and classifications. A data warehouse stores the data; it doesn't do the analysis. **Option A**.
+=== 3.17.1
+Of the three abstraction levels:
+
+- The **physical** level describes *how* the data is stored.
+- The **logical (conceptual)** level describes *what* data is stored and how the pieces relate.
+- The **view** level describes the part each user sees.
+
+**Option D**.
+=== 3.17.2
+A view can **hide** columns or rows a user shouldn't see, and it can combine data from several relations into one virtual table. **Option A**.
+=== 3.18.1
+"Marks ≤ 100" restricts the values an attribute may take. That's a domain or check constraint, which is a kind of **integrity constraint**. **Option A**.
+=== 3.19.1
+**False.** **Physical** data independence (changing storage structures or indexes without affecting the conceptual schema) is the easier one to achieve. **Logical** data independence (changing the conceptual schema without breaking views or applications) is harder, because applications depend directly on the logical structure of the data they use.
+=== 3.19.2
+a: D
+- **Specialisation:** taking a subset of a higher-level entity set to form a lower-level one → **C**
+- **Generalisation:** the union of lower-level entity sets producing a higher-level one → **A**
+- **Aggregation:** treating relationship sets as higher-level entities → **D**
+- **Mapping cardinality:** the number of entities another entity can be associated with → **B**
+
+I-C, II-A, III-D, IV-B, **option D**.
+=== 3.19.3
+a: B
+The **completeness constraint** on a specialisation says whether every supertype entity must belong to some subtype (**total**) or may belong to none (**partial**). **Option B**.
+=== 3.19.4
+a: B
+In the relational model, each attribute (field) of a tuple takes its values from a **domain**. The question intends "domains" for the fields. **Option B**.
+=== 3.19.5
+a: B
+- **(A) Not correct.** The first record in each block is the **anchor** record (block anchor), not an "actor" record.
+- **(B) Correct.** A dense index has an entry for every search-key value.
+- **(C) Not correct.** Searching is generally *easier* (or equal) in a B+-tree. The linked leaves help with range scans.
+- **(D) Not correct.** The directory has $2^d$ entries, not $2^{d-1}$, where $d$ is the global depth.
+
+The NOT-correct statements are **(A), (C) and (D)**, choice (2). That's **option B**.
+=== 3.19.6
+The operator is a **left outer join** on X.S = Y.S. Every tuple of X is kept. A tuple with no match in Y gets NULLs for Y's attributes P and D.
+
+| S | Si | C | P | D |
+|---|---|---|---|---|
+| J | 1 | M | S₁ | CA |
+| B | 2 | N | P₁ | AB |
+| R | 3 | H | D₁ | DC |
+| T | 4 | G | Null | Null |
+
+T has no partner in Y, so it gets nulls. Y's tuple A has no match in X and is **dropped**, because this is a left join. This is choice **(1)**.
+
+(Choice (2) would be a right outer join, and (3) a full outer join.)

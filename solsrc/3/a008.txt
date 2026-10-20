@@ -1,0 +1,124 @@
+=== 3.19.7
+- `VARCHAR(20)` is variable length: it stores only the characters actually used, so 'Ram' takes **3**.
+- `CHAR(20)` is fixed length: it's padded with blanks to the full **20**.
+
+**Option B**.
+=== 3.19.8
+a: C
+The DBA defines the overall logical schema (records, sets and so on) with the **schema DDL**. The subschema DDL defines user views, and the DML manipulates data. **Option C**.
+=== 3.19.9
+a: D
+This is the same question as 3.13.1. The hierarchical and network models lack data independence, and the relational model lacks only (some) **logical** independence. So "relational model suffers only from **physical** data independence" is the false statement. **Option D**.
+=== 3.19.10
+a: B
+**3NF** (or BCNF) is considered adequate for most practical database designs. It removes most anomalies while keeping dependency preservation possible. **Option B**.
+=== 3.19.11
+a: B
+With an **unclustered** index, retrieving records in sorted order means:
+
+- scanning all the leaf (data-entry) pages: about $F\cdot N$ pages
+- one I/O for **every record**, because consecutive entries point to different pages: $P\cdot N$ I/Os
+
+The total is $F N + P N = (F+P)\cdot N$, **option B**.
+=== 3.19.12
+a: D
+- **I is false.** Composite attributes *can* be divided into subparts. For example, Name splits into First and Last.
+- **II is true.** That's the definition of a complex attribute.
+- **III is true.** That's the definition of a derived attribute, e.g. Age from DOB.
+
+**Option D**.
+=== 3.20.1
+**True.** $X\to Y$ only forbids two tuples with the **same X** and different Y. Here the X values are 1 and 2, which are different, so the FD isn't violated.
+=== 3.20.2
+**Armstrong's axioms:**
+
+1. **Reflexivity:** if $Y\subseteq X$, then $X\to Y$.
+2. **Augmentation:** if $X\to Y$, then $XZ\to YZ$ for any $Z$.
+3. **Transitivity:** if $X\to Y$ and $Y\to Z$, then $X\to Z$.
+
+They are sound (they only derive valid FDs) and complete (they derive every FD that's implied).
+=== 3.20.3
+Derive $x\to yz$ (the union rule):
+
+1. $x\to y$ (given). Augment with $x$: $x\to xy$.
+2. $x\to z$ (given). Augment with $y$: $xy\to yz$.
+3. Transitivity on steps 1 and 2: $x\to xy\to yz$, so **$x\to yz$**.
+=== 3.20.4
+Derive $xw\to z$ (pseudo-transitivity):
+
+1. $x\to y$ (given). Augment with $w$: $xw\to yw$.
+2. $wy\to z$ (given).
+3. Transitivity: $xw\to wy\to z$, so **$xw\to z$**.
+=== 3.20.5
+Derive $x\to z$ (the decomposition rule):
+
+1. $z\subseteq y$, so by reflexivity $y\to z$.
+2. $x\to y$ (given).
+3. Transitivity: **$x\to z$**.
+=== 3.20.6
+- (a) Secondary index → (q) B-tree
+- (b) Non-procedural query language → (r) domain calculus
+- (c) Closure of a set of attributes → (p) functional dependency
+- (d) Natural join → (s) relational algebraic operations
+
+a-q, b-r, c-p, d-s.
+=== 3.20.7
+3NF allows a non-trivial FD $X\to A$ even when $X$ isn't a superkey, **provided $A$ is prime**. Such FDs survive in 3NF and cause redundancy that BCNF would remove:
+
+- **A:** transitive dependencies whose end attribute is prime are allowed. ✔
+- **B:** FDs with prime attributes on the right side. ✔
+- **D:** FDs made up only of prime attributes. ✔
+- **C** is wrong. If the right side is non-prime and the left side is a proper part of a key, 2NF/3NF already forbids it.
+
+**A, B and D**.
+=== 3.20.8
+**False.** There's always a **lossless** BCNF decomposition, but it may **not preserve dependencies**.
+
+Counterexample: $R(A,B,C)$ with $AB\to C$ and $C\to B$. It isn't in BCNF (C isn't a superkey). Any BCNF decomposition, e.g. $(A,C)$ and $(C,B)$, loses $AB\to C$. A 3NF decomposition, by contrast, can always be both lossless and dependency-preserving.
+=== 3.20.9
+FDs: $AB\to C$, $C\to A$.
+
+**(b) Keys.** B appears on no right-hand side, so every key contains B.
+
+- $B^+ = \{B\}$
+- $AB^+ = \{A,B,C\}$ ✔
+- $BC^+ = \{B,C,A\}$ ✔
+
+The minimal keys are **AB** and **BC**.
+
+**(a)** The prime attributes are A, B and C, i.e. all of them.
+
+- $AB\to C$: AB is a key, so this is fine for BCNF.
+- $C\to A$: **C isn't a superkey**, so R is **not in BCNF**. But A is prime, so the 3NF condition holds.
+
+R is in 3NF but not in BCNF.
+=== 3.20.10
+The FDs are $a\to c$ and $b\to d$, so the only key is **ab**. Then $a\to c$ is a **partial dependency**: the non-prime attribute c depends on part of the key. That violates 2NF.
+
+The domains are atomic, so R is in **1NF but not 2NF**, **option A**.
+=== 3.20.11
+**3NF**, **option D**. (BCNF is better, but 3NF is the standard target because it always allows a dependency-preserving decomposition.)
+=== 3.20.12
+**(a)** The FDs are Book_id → Subject_Category, Name_of_Author, and Name_of_Author → Nationality_of_Author.
+
+The key is a single attribute, so there are no partial dependencies, and the relation is in 2NF. But Book_id → Author → Nationality is a **transitive** dependency of a non-prime attribute. So it's **not 3NF**. The highest normal form is **2NF**.
+
+**(b)** The key becomes {Name_of_Author, Book_title}. Now Name_of_Author → Nationality, Author_address is a **partial** dependency on part of the key. So the relation isn't even 2NF. The highest normal form is **1NF**.
+=== 3.20.13
+E and C appear on no right-hand side, so every key contains **EC**:
+$$EC^+:\; E\to A,\; A\to B,\; C\to F,\; EC\to D \;\Rightarrow\; \{A,B,C,D,E,F\}$$
+**EC** is the key, **option B**.
+=== 3.20.14
+The FDs form a cycle, S→T→U→V→S, so **each single attribute is a key**. For any decomposition $R_1, R_2$, the projected FDs still form a chain of mutual determination inside each part. So every attribute in each part is a key of that part.
+
+Every left side is a superkey, so both parts are in BCNF, and therefore in 2NF and 3NF. **Option D**.
+=== 3.20.15
+Check each FD against the instance (X, Y, Z) = (1,4,2), (1,5,3), (1,6,3), (3,2,2):
+
+- **YZ → X:** all YZ pairs are distinct, so it holds. ✔
+- **Y → Z:** all Y values are distinct, so it holds. ✔
+- Z → Y fails: Z = 2 gives Y = 4 and Y = 2.
+- X → Z fails: X = 1 gives Z = 2 and Z = 3.
+- Y → X holds, but it's paired with XZ → Y in D. XZ = (1,3) gives Y = 5 and Y = 6, so XZ → Y fails.
+
+**Option B**.

@@ -1,0 +1,88 @@
+=== 3.11.5
+- **S1** = r1(x) r1(y) r2(x) r2(y) w2(y) w1(x). r1(y) comes before w2(y), giving T1→T2. r2(x) comes before w1(x), giving T2→T1. That's a **cycle**, so S1 is not conflict serialisable.
+- **S2** = r1(x) r2(x) r2(y) w2(y) r1(y) w1(x). The conflicts are w2(y) before r1(y) and r2(x) before w1(x), so both edges are T2→T1. It's acyclic, equivalent to the serial order **T2 T1**.
+
+**Option B**.
+=== 3.11.6
+**P (conflict serialisable):**
+
+- R1(Y) comes before W2(Y), giving T1→T2.
+- W1(X) comes before R3(X), giving T1→T3.
+- R2(Z) comes before W3(Z), giving T2→T3.
+
+The graph is acyclic, with order T1, T2, T3. **P is true.**
+
+**Q (recoverable):** T3 reads X written by T1. If T3 commits before T1 finishes, and T1 then aborts, T3 has committed using a dirty value. So the schedule is **not** recoverable. **Q is false.**
+
+**Option B**.
+=== 3.11.7
+Conflicts in S = R4(x) R2(x) R3(x) R1(y) W1(y) W2(x) W3(y) R4(y):
+
+- R4(x) before W2(x) gives T4→T2. R3(x) before W2(x) gives T3→T2.
+- R1(y) or W1(y) before W3(y) gives T1→T3. W1(y) before R4(y) gives T1→T4. W3(y) before R4(y) gives T3→T4.
+
+The topological order is **T1 → T3 → T4 → T2**, **option A**.
+=== 3.11.8
+Look for conflicts in S = r1(z) w1(z) r2(x) r3(y) w3(y) r2(y) w2(x) w2(y):
+
+- z is used only by T1, and x only by T2.
+- On y: r3(y) and w3(y) come before r2(y) and w2(y), giving **T3→T2** only.
+
+T1 has no conflicts with anything, so it can go anywhere. Every order with T3 before T2 works: **T1T3T2, T3T2T1, T3T1T2**. **Options B, C and D**.
+=== 3.11.9
+Build the precedence graph for each option:
+
+| option | conflicts | graph |
+|---|---|---|
+| A | R1(X)→W2(X) gives T1→T2. W2(X)→R1(X) (2nd read) gives T2→T1 | cycle ✘ |
+| **B** | W2(X) before R1(X) and W1(X), and W2(Y) before W1(Y). All edges are T2→T1 | acyclic ✔ |
+| C | R1(X)→W2(X) and W1(Y)→W2(Y) give T1→T2. W2(X)→R1(X) gives T2→T1 | cycle ✘ |
+| D | W2(X)→R1(X) gives T2→T1. W1(Y)→W2(Y) gives T1→T2 | cycle ✘ |
+
+**Only B**.
+=== 3.11.10
+a: B
+- **(A) True.** Granularity is the size of the data item that gets locked or accessed.
+- **(B)** As printed ("same transaction") it's false. Operations conflict when they belong to **different** transactions, access the same item, and at least one is a write. The question intends the correct definition.
+- **(C) True.** That's the definition of conflict equivalence.
+- **(D)** is garbled. A blind write is a write performed *without first reading* the item.
+
+The intended correct set is **(A), (B) and (C)**, choice (2), which is **option B** here.
+=== 3.11.11
+a: D
+These are the same schedules as before:
+
+- **S1** has edges T1→T2 (r1(Y) before w2(Y)) and T2→T1 (r2(X) before w1(X)). That's a cycle, so it's **not** conflict serialisable.
+- **S2** has only T2→T1 edges, so it's conflict serialisable.
+
+**Option D**.
+=== 3.12.1
+A **cross-tab** (pivot table) shows two dimensions at a time: one along the rows and one along the columns, with aggregated values in the cells. **Option B**.
+=== 3.13.1
+a: D
+"Suffers from" here means "lacks".
+
+- The hierarchical and network models **lack** data independence, because programs navigate physical access paths. So A and B are true in the intended sense.
+- The relational model gives full **physical** data independence. Logical data independence is harder (schema changes can still affect applications), so "suffers only from logical data independence" is the accepted statement (C).
+- "Relational model suffers only from **physical** data independence" is the **false** statement. **Option D**.
+=== 3.13.2
+FDs: U→V, VW→X, Y→W, X→U.
+
+Y and Z never appear on a right-hand side, so every key contains **YZ**. $YZ^+ = \{Y,Z,W\}$, so YZ needs one more attribute:
+
+- $UYZ^+$: U→V, Y→W, VW→X. That's everything. ✔
+- $VYZ^+$: Y→W, VW→X, X→U. That's everything. ✔
+- $XYZ^+$: X→U, U→V, Y→W. That's everything. ✔
+- $WYZ^+ = \{W,Y,Z\}$. ✘
+
+The candidate keys are **UYZ, VYZ, XYZ**, **option D**.
+=== 3.14.1
+The key's answer is **passwords to prohibit unauthorised access to files**, **option B**.
+
+(Strictly, range limits such as option A are the classic *integrity* constraint, and passwords are a *security* control. UGC's key treated access control as part of integrity control.)
+=== 3.15.1
+a: A
+A DML such as SQL includes a query language based on **both** relational algebra and tuple relational calculus. SELECT–FROM–WHERE is a calculus-style declaration, and operators like UNION, INTERSECT and JOIN come from algebra. **(i) only**, **option A**.
+=== 3.16.1
+a: B
+**OLAP** (Online Analytical Processing) analyses large volumes of historical data, using aggregations, slicing and drill-down, to extract information. **OLTP** handles day-to-day transactions. **Option B**.

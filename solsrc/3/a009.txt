@@ -1,0 +1,108 @@
+=== 3.20.16
+Option C: $AB\to C$, $C\to AD$. The keys are AB and BC.
+
+$C\to A$ violates BCNF, because C isn't a superkey. Decomposing on it splits A away from B and C. Then $AB\to C$ spans attributes that no longer sit together in any single relation, so it can't be preserved. **C** has no lossless, dependency-preserving BCNF decomposition.
+
+The others work:
+
+- **A** splits into (AB), (BCD).
+- **B** splits into (AB), (BC), (CD).
+- **D** is already in BCNF.
+
+**Option C**.
+=== 3.20.17
+In BCNF, the left side of every non-trivial FD is a superkey. So FDs cause **no redundancy**: no fact implied by an FD is ever stored twice. **Zero**, **option A**.
+=== 3.20.18
+The FDs are $M\to O$, $NO\to P$, $P\to L$ and $L\to MN$. The decomposition is $R_1(L,M,N,P)$ and $R_2(M,O)$.
+
+**(a) Lossless? Yes.** The common attribute is $M$, and $M\to O$, so $M$ is a key of $R_2$.
+
+**(b) Dependency-preserving? No.**
+
+- In $R_2$: $M\to O$ holds.
+- In $R_1$: $P\to L$ and $L\to MN$ hold, and so does $MN\to LP$ (since $MN^+$ = everything).
+- **$NO\to P$** can't be derived. Using only the projected FDs, $NO^+$ stays $\{N, O\}$. So **$NO\to P$ is not preserved**.
+
+**(c)** In $R_1$ the keys are L, P and MN, and every FD there has a key on the left side. In $R_2$, M is the key. Both relations are in **BCNF**.
+=== 3.20.19
+A 3NF decomposition can always be made dependency-preserving, but a BCNF one sometimes can't. That doesn't give a guaranteed test, though: a BCNF decomposition might happen to preserve dependencies too.
+
+What always tells them apart is checking the **BCNF definition** on each decomposition. The one that passes is BCNF. (If both pass, either label is fine.) **Option C**.
+=== 3.20.20
+- A = 1 gives B = 1 and A = 2 gives B = 3, so **A → B holds** in this instance.
+- B = 1 appears with C = 1 and C = 0, so **B → C does not hold**.
+
+But an instance can only *refute* FDs, never establish them. So the only safe conclusion is **"B does not functionally determine C"**, **option C**.
+=== 3.20.21
+In (Roll_number, Name, Date_of_birth, Age), the keys are Roll_number and Name (they determine each other).
+
+But **Date_of_birth** isn't determined by either key, since no FD gives it. So the only key is {Roll_number, Date_of_birth}, or equivalently {Name, Date_of_birth}.
+
+Then Roll_number → Name is a **partial dependency**. Name is prime, though, so that's allowed. But **Date_of_birth → Age**, with Age non-prime, is also a partial dependency. That violates 2NF.
+
+The relation is in **none** of the listed forms, **option D**.
+=== 3.20.22
+The keys are (name, courseNo) and (rollNo, courseNo). The prime attributes are name, rollNo and courseNo, and grade is the only non-prime attribute.
+
+- name → rollNo and rollNo → name: the left sides aren't superkeys, so these **violate BCNF**. But the right sides are prime, so **3NF is satisfied**.
+- grade depends on full keys, so there's no partial or transitive dependency.
+
+The highest normal form is **3NF**, **option B**.
+=== 3.20.23
+A lossless **and** dependency-preserving decomposition into **BCNF** is **not always** possible. It is always possible for 3NF. **Option C**.
+=== 3.20.24
+E and H appear on no right-hand side, so every key contains EH. $EH^+ = \{E,H,C\}$, which needs more:
+
+- $AEH^+$: A→B, E→C, BC→D. That's everything. ✔
+- $BEH^+$: E→C, BC→D, D→A. That's everything. ✔
+- $DEH^+$: D→A, A→B, E→C. That's everything. ✔
+- $CEH^+ = \{C,E,H\}$. ✘
+
+The keys are **AEH, BEH, DEH**, **option D**.
+=== 3.20.25
+Compute each closure:
+
+- $CF^+$: C→G, G→A, F→E, AF→D. That's {A,C,D,E,F,G} ✔
+- $BG^+$: G→A, AB→CD. That's {A,B,C,D,G} ✔
+- $AF^+$: AF→D, F→E, DE→F. That's **{A,D,E,F}**, but the option claims {A,C,D,E,F,G} ✘
+- $AB^+$: AB→CD, C→G. That's {A,B,C,D,G} ✔
+
+The false one is **C**.
+=== 3.20.26
+- A relation with two attributes is always in BCNF. True.
+- If every key has one attribute, there can't be partial dependencies, so it's in 2NF. True.
+- 3NF allows a **prime** attribute to depend transitively on a key. True.
+- **BCNF does not** allow this, because every FD's left side must be a superkey. So D is false.
+
+**Option D**.
+=== 3.20.27
+**Book.** The key is {Title, Author}. The FDs inside Book:
+
+- Catalog_no → Title, Author, Publisher, Year
+- Publisher, Title, Year → Price
+
+So Catalog_no is also a candidate key. But {Publisher, Title, Year} → Price is a **transitive** dependency of a non-prime attribute (Price) on a non-key. Book is in **2NF but not 3NF**: there are no partial dependencies, since Price depends on Publisher, Title and Year, not on part of a key.
+
+**Collection** (Title, Author, Catalog_no): the only FDs are TA → C and C → TA, and both sides are keys. So it's in **BCNF**, and therefore in 3NF.
+
+**Option C**.
+=== 3.20.28
+BCNF ⊂ 3NF: every BCNF relation also satisfies 3NF. **Option C**.
+=== 3.20.29
+D appears on no right-hand side, so every key contains D. $D^+ = \{D\}$, so it needs one more attribute:
+
+- $AD^+$: A→BC, B→CFH, F→EG. That's everything. ✔
+- $BD^+$: B→CFH, F→EG, E→A. ✔
+- $ED^+$: E→A, and then as AD. ✔
+- $FD^+$: F→EG, E→A, … ✔
+- CD, GD and HD don't reach everything.
+
+That's **4** candidate keys (AD, BD, DE, DF), **option B**.
+=== 3.20.30
+The candidate keys are AD, BD, DE and DF, so the prime attributes are A, B, D, E and F. The non-prime attributes are C, G and H.
+
+$A\to BC$: the non-prime attribute **C** depends on just A, which is a **proper part** of key AD. That's a partial dependency, so R is **not in 2NF**. It is in 1NF (all values are atomic). **Option A**.
+=== 3.20.31
+E and H appear on no right-hand side, and neither does F:
+$$EFH^+:\; EF\to G,\; F\to IJ,\; EH\to KL,\; K\to M,\; L\to N \;\Rightarrow\; \text{all 10 attributes}$$
+**{E, F, H}** is the key, **option B**.

@@ -1,0 +1,83 @@
+=== 3.20.32
+- **S1 is true.** With two attributes $\{A, B\}$, the only possible non-trivial FDs are $A\to B$ or $B\to A$. Either way the left side is a key, so the table is in BCNF, and hence also in 1NF, 2NF and 3NF.
+- **S2 is false.** In $\{AB\to C, D\to E, E\to C\}$, the FD $AB\to E$ is **lost**: $AB^+ = \{A,B,C\}$ doesn't contain E. A minimal cover must be **equivalent** to the original set, so this one isn't. (The correct cover keeps $AB\to E$ and drops $AB\to C$, since $AB\to E\to C$.)
+
+**Option A**.
+=== 3.20.33
+An FD $X\to Y$ is **trivial** when $Y\subseteq X$. $\{P,S\}\to\{S\}$ is trivial. **Option C**.
+=== 3.20.34
+A superkey must contain the primary key **VY**.
+
+- VXYZ ✔, VWXY ✔, VWXYZ ✔
+- **VWXZ** has no **Y**, so it's not a superkey.
+
+**Option B**.
+=== 3.20.35
+**Old schema:** (VOLUME, NUMBER) → YEAR. That's a dependency on **part** of the primary key, i.e. a partial dependency, so the old schema is only in 1NF.
+
+**New schemas:**
+
+- (VOLUME, NUMBER, STARTPAGE, ENDPAGE, TITLE, PRICE): every FD has the full key on the left.
+- (VOLUME, NUMBER, YEAR): the key is (VOLUME, NUMBER).
+
+Both new schemas are in BCNF. The **weakest** normal form that the new design satisfies and the old one doesn't is **2NF**, **option B**.
+=== 3.20.36
+1. **Extraneous attribute:** in $VW\to X$, W is extraneous because $V\to W$. So it becomes $V\to X$.
+2. **Split** $Y\to VX$ into $Y\to V$ and $Y\to X$.
+3. **Redundant FD:** $Y\to X$ follows from $Y\to V\to X$, so drop it.
+
+The minimal cover is $\{V\to W,\; V\to X,\; Y\to V,\; Y\to Z\}$, **option A**.
+=== 3.20.37
+**Schema II:** the keys are (rollno, courseid) and (email, courseid). email → rollno has a left side that isn't a superkey, so it **violates BCNF**. But rollno is **prime**, so 3NF holds.
+
+The others:
+
+- **I** isn't even 1NF: courses is a set-valued attribute.
+- **III** has marks → grade, a transitive dependency on a non-prime attribute, so it isn't 3NF.
+- **IV** has courseid → credit, a partial dependency, so it isn't 2NF.
+
+**Option B**.
+=== 3.20.38
+**Is it lossless?** Y = (PR) and Z = (QRS) share R. Since R → P, R is a key of Y, so the decomposition is **lossless**.
+
+**Is it dependency-preserving?** R → P lies in Y, and QR → S and S → Q both lie in Z. So it **preserves dependencies**.
+
+**Is each schema in BCNF?** Z's keys are QR and RS. S → Q has a left side that **isn't a superkey** of Z, so Z is **not in BCNF**.
+
+So I is false and II is true. **Option C**.
+=== 3.20.39
+3NF allows a non-trivial FD $X\to A$ with $X$ not a superkey, but **only when $A$ is prime**. BCNF forbids this. So a relation in 3NF but not BCNF must have such an FD. **Option A**.
+
+B and C describe violations of 3NF and 2NF, respectively.
+=== 3.20.40
+Use the rule: if the common attributes determine one side, the join is lossless.
+
+**D1:**
+
+1. Join (Q,Y) with (Y,Z,W) on Y: since Y → ZW, the result is (Q,Y,Z,W).
+2. Join (P,Q,S,T) with (P,T,X) on PT: since P → X, the result is (P,Q,S,T,X).
+3. Join the two on Q: since Q → YZW, the result is the full relation.
+
+D1 is **lossless**.
+
+**D2:** (T,X) shares only T with the others, and nothing determines anything from T. So the X attribute gets attached to the wrong tuples, and D2 is **lossy**.
+
+**Option A**.
+=== 3.20.41
+- **A: PS → T.** P → R, so PS → RS, and RS → T. ✔
+- **B: R → T** needs S too. ✘
+- **C: P → R** comes from decomposing P → QR. ✔
+- **D: PS → Q** is augmentation of P → Q. ✔
+
+**A, C and D**.
+=== 3.20.42
+A and B appear on no right-hand side, and $AB^+ = \{A,B,C,D,E\}$. So **AB** is the only candidate key.
+
+Every superkey is AB plus any subset of {C, D, E}: $2^3 = \mathbf{8}$.
+=== 3.20.43
+- **A is true.** In a two-attribute relation, every non-trivial FD has a key on the left side.
+- B is false. All-prime relations can still violate BCNF, e.g. $AB\to C$, $C\to B$.
+- C is false. Relations can have no non-prime attributes at all.
+- D is false. BCNF decompositions don't always preserve dependencies.
+
+**Option A**.
