@@ -1,0 +1,189 @@
+=== 13.6.2
+**False.** The number of leaves in a binary tree can be any positive number. For example, a root with two children, one of which has two children of its own, has **3** leaves.
+=== 13.6.3
+**Preorder** K L N M P R Q S T, **inorder** N L K P R M S Q T.
+
+- Root **K**. In the inorder sequence, {N, L} is on its left and {P, R, M, S, Q, T} is on its right.
+- **Left subtree:** the preorder is L N, so L is the root and N is its left child.
+- **Right subtree:** the preorder is M P R Q S T, so M is the root, with inorder {P, R} on the left and {S, Q, T} on the right.
+  - Left of M: P, with right child R.
+  - Right of M: Q, with left child S and right child T.
+
+```
+            K
+          /   \
+         L     M
+        /     /  \
+       N     P    Q
+              \  / \
+              R S   T
+```
+=== 13.6.4
+- **Height of a binary tree:** the number of edges on the longest path from the root to a leaf. An empty tree has height −1, and a single node has height 0.
+- **Height-balanced (AVL) tree:** a binary search tree in which, for **every** node, the heights of the left and right subtrees differ by at most 1. That is, every balance factor is −1, 0 or +1.
+=== 13.6.5
+**Insert 13:** 17 → 12 → 15 → 14, so 13 becomes the left child of 14.
+
+**Balance factors without rebalancing** (left height − right height):
+
+| node | 13 | 14 | 15 | 5 | 12 | 17 | others |
+|---|---|---|---|---|---|---|---|
+| BF | 0 | +1 | +1 | +1 | −1 | **+2** | 0 |
+
+17 is unbalanced. The path goes left (to 12), then right (to 15), so this is the **LR case**. Fix it with a double rotation: rotate left at 12, then right at 17.
+
+```
+               15
+            /      \
+          12        17
+         /  \      /  \
+        5    14   16   20
+       /    /         /  \
+      1    13        18   24
+```
+New balance factors: 15: 0, 12: 0, 5: +1, 14: +1, 17: −1, 20: 0, and every leaf is 0.
+=== 13.6.6
+- **A: false (per the key).** Overlays let a program run when it's larger than the available **main memory**, not the address space.
+- **B: true.** Optimal BST construction is a classic dynamic-programming problem.
+- **C: false.** DFS finds connected components easily.
+- **D: false.** Prefix (preorder) plus postfix (postorder) doesn't determine a binary tree uniquely.
+
+The false ones are **A, C and D**.
+=== 13.6.7
+A tree with $n$ external nodes has EPL **at least** $n\log_2 n$. The minimum comes from a balanced tree, where every leaf is at depth about $\log_2 n$. Skewed trees can reach about $n^2/2$.
+
+So the EPL is always $\ge n\log_2 n$, **option B**.
+=== 13.6.8
+The weighted external path length is the sum of (weight × depth) over the leaves:
+
+| leaf | 15 | 9 | 10 | 2 | 4 | 5 | 7 |
+|---|---|---|---|---|---|---|---|
+| depth | 1 | 3 | 3 | 4 | 4 | 4 | 4 |
+
+$$15(1) + (9+10)(3) + (2+4+5+7)(4) = 15 + 57 + 72 = \mathbf{144}$$
+=== 13.6.9
+Inorder is left subtree, then node, then right subtree.
+
+- Left subtree of 7: **4 1 6**
+- Then **7**
+- Right subtree: 3 has no left child, so **3**, then 5's subtree **2 5 8**
+
+The order is **4 1 6 7 3 2 5 8**.
+=== 13.6.10
+Every node is **smaller than its children** (1 < 5, 18; 5 < 7, 13; 7 < 11, 9; …). The tree is also **complete**, with the last level filled from the left. So it's a **min-heap** (a priority queue).
+=== 13.6.11
+**Delete 5** while keeping the min-heap structure:
+
+1. Replace 5 with the **last** element in level order, **27**, and remove 27's old leaf (under 25).
+2. **Sift down** 27: its children are 7 and 13, so swap with 7. Its new children are 11 and 9, so swap with 9. Now 27 is a leaf.
+
+```
+              1
+          /       \
+         7         18
+       /   \      /  \
+      9     13   25   20
+     / \   /  \
+   11  27 15  17
+```
+=== 13.6.12
+```
+procedure delete(A, n, i)        { heap stored in A[1..n] }
+    A[i] := A[n];  n := n - 1;
+    if i > n then return;
+    if i > 1 and A[i] < A[i div 2] then     { too small: move up }
+        while i > 1 and A[i] < A[i div 2] do
+            swap(A[i], A[i div 2]);  i := i div 2
+    else                                   { too large: move down }
+        loop
+            c := smaller child of i (if any);
+            if c = none or A[i] <= A[c] then exit;
+            swap(A[i], A[c]);  i := c
+        end
+```
+The element moves along a single root-to-leaf path, so the worst case is **$O(\log n)$**.
+=== 13.6.13
+**Claim:** in a binary tree where every non-leaf node has exactly 2 children, $L = I + 1$. Here $L$ is the number of leaves and $I$ the number of internal nodes.
+
+Use induction on the number of nodes.
+
+- **Base case:** a single node has $L = 1$ and $I = 0$. ✔
+- **Inductive step:** the root has subtrees $T_1$ and $T_2$, both full binary trees, so $L_i = I_i + 1$. Then
+$$L = L_1 + L_2 = (I_1+1) + (I_2+1) = (I_1 + I_2 + 1) + 1 = I + 1$$
+since $I = I_1 + I_2 + 1$ (the root is internal). ✔
+=== 13.6.14
+Use preorder 1..12 and postorder 3 5 4 2 7 8 6 10 11 12 9 1.
+
+- The root is **1**. Its next node in preorder, 2, starts a subtree. In postorder that subtree is {3, 5, 4, 2}, which is 4 nodes, so it covers preorder 2–5.
+  - Within it, 3 is a leaf, and 4 has child 5.
+- The next child of 1 is **6**. In postorder its subtree is {7, 8, 6}, so 6 has children 7 and 8.
+- The last child of 1 is **9**. Its subtree is {10, 11, 12, 9}, so 9 has children 10, 11 and 12.
+
+```
+              1
+        /     |      \
+       2      6       9
+      / \    / \    / | \
+     3   4  7   8  10 11 12
+         |
+         5
+```
+Parents: 2, 6, 9 → 1; 3, 4 → 2; 5 → 4; 7, 8 → 6; 10, 11, 12 → 9.
+=== 13.6.15
+In any binary tree, (nodes of degree 2) = (leaves) − 1. So there are **$n - 1$**, **option B**.
+=== 13.6.16
+The postorder ends with the root, so **C** is the root. The 3-node shapes are the $C_3 = 5$ binary-tree shapes, and each gets exactly one labelling that matches postorder A, B, C.
+
+There are **5** trees:
+
+1. C → left B → left A
+2. C → left B → right A
+3. C with left A and right B
+4. C → right B → left A
+5. C → right B → right A
+=== 13.6.17
+Postorder is left, right, root.
+
+- Left subtree of b: g c d, then b
+- Right subtree of a: f, then e
+- Then a
+
+**g c d b f e a**, **option C**.
+=== 13.6.18
+**(a)** Let $N(h)$ be the minimum number of nodes. A tree of height $h \ge 1$ has a subtree of height $h-1$, which holds at least $N(h-1)$ nodes. Size balance means the other subtree holds at least $N(h-1) - 1$ nodes. So
+$$N(h) \ge 1 + N(h-1) + (N(h-1) - 1) = 2N(h-1)$$
+With $N(0) = 1 = 2^0$, induction gives $N(h) \ge 2^h$. ✔
+
+**(b)** Size balance at every node forces all levels except the last to be full. So there are $2^{h-1}$ nodes at distance $h-1$.
+=== 13.6.19
+**Inorder** a f b c d g e, **postorder** a f c g e d b.
+
+- The root is **b** (last in postorder). Inorder left is {a, f}, right is {c, d, g, e}.
+- **Left:** postorder a f gives root **f**, with **a** as its left child.
+- **Right:** postorder c g e d gives root **d**, with left child **c**. Its right part {g, e} has postorder g e, so root **e** with left child **g**.
+
+```
+          b
+        /   \
+       f     d
+      /     / \
+     a     c   e
+              /
+             g
+```
+=== 13.6.20
+A valid node is (X Y Z), with exactly three parts.
+
+- A: (4 5 6 7) has four parts. ✘
+- B: has extra parts outside the brackets. ✘
+- **C: (1 (2 3 4) (5 6 7))** ✔
+- D: (4 5) has only two parts. ✘
+
+**Option C**.
+=== 13.6.21
+Try two small complete trees.
+
+- **Root plus a left child:** LASTIN = root, LASTPOST = root, LASTPRE = left child. So B and C fail.
+- **Perfect 3-node tree:** LASTIN = right child, LASTPOST = root. So A fails.
+
+None of the equalities holds for every complete tree. **None of the above**, **option D**.

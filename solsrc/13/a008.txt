@@ -1,0 +1,68 @@
+=== 13.6.22
+Weight balance means each subtree holds at most about $\frac23$ of the nodes below its parent. Following the heavier child at every step, the size shrinks by a factor of $\frac32$ each level. So the longest path has about $\log_{3/2} n$ nodes, **option D**.
+=== 13.6.23
+The preorder is C, B, A, so **C** is the root. Any 3-node shape works, with labels assigned in preorder. That gives $C_3 = 5$ trees:
+
+1. C → left B → left A
+2. C → left B → right A
+3. C with left B and right A
+4. C → right B → left A
+5. C → right B → right A
+=== 13.6.24
+A tree is determined uniquely only when **inorder** is one of the two traversals. Inorder tells you how to split around the root, and the other traversal tells you which node is the root.
+
+- Preorder + postorder (I) is ambiguous for single-child nodes.
+- Level order + postorder (IV) isn't enough either.
+
+**II and III**, **option B**.
+=== 13.6.25
+For each node, `value` becomes 1 + DoSomething(left), and then max(value, 1 + DoSomething(right)). A leaf gives 0. That's the length of the longest root-to-leaf path in **edges**: the **height**. **Option D**.
+=== 13.6.26
+The worst case is a chain of right children. Its indices are 1, 3, 7, …, so the last node is at $2^n - 1$. The array needs **$2^n - 1$** slots, **option D**.
+=== 13.6.27
+A full binary tree of height $h$ (in edges) has $1 + 2 + \dots + 2^h = 2^{h+1} - 1$ nodes. **Option C**.
+=== 13.6.28
+The number of shapes is the Catalan number $C_3 = 5$. **Option B**.
+=== 13.6.29
+Use preorder a b d e c f g and inorder d b e a f c g.
+
+- Root **a**. Left subtree {d, b, e} has root b, with children d and e.
+- Right subtree {f, c, g} has root c, with children f and g.
+
+Postorder: **d e b f g c a**, **option A**.
+=== 13.6.30
+A leaf returns 1, and an internal node returns the sum from its children. So the function counts the **leaf nodes**. **Option C**.
+=== 13.6.31
+Every subtree has odd size. Suppose a node had exactly one child: its subtree size would be 1 + (an odd number) = even, which is a contradiction. So **0** nodes have exactly one child. **Option A**.
+=== 13.6.32
+For a fixed shape, the inorder positions must hold the sorted keys. That gives **exactly one** valid assignment. **Option B**.
+=== 13.6.33
+- **B1:** n has no left child but has a right child. Its height is 1 + height(right).
+- **B2:** n has both children. Its height is 1 + max(h1, h2).
+
+**Option A**.
+=== 13.6.34
+One postorder traversal computes every subtree's size and counts the ones equal to 4. That's $O(n)$, so $a = 1$, $b = 0$, and $a + 10b = \mathbf{1}$.
+=== 13.6.35
+- **Maximum:** a perfect tree, $2^{6} - 1 = 63$ nodes.
+- **Minimum:** a chain, $h + 1 = 6$ nodes.
+
+**Option A**.
+=== 13.6.36
+In a binary tree, nodes with two children = leaves − 1 = 20 − 1 = **19**.
+=== 13.6.37
+Nodes with two children = leaves − 1 = 200 − 1 = **199**.
+=== 13.6.38
+**Build the expression tree** from 3 4 \* 5 − 2 ^ 6 7 \* 1 + −:
+
+- left part: $((3 * 4) - 5)\ \hat{}\ 2$
+- right part: $(6 * 7) + 1$
+- root: the final −
+
+**New-order** is root, then right subtree, then left subtree:
+
+- root: **−**
+- right subtree (+): **+ 1 \* 7 6**
+- left subtree (^): **^ 2 − 5 \* 4 3**
+
+Result: **− + 1 \* 7 6 ^ 2 − 5 \* 4 3**, **option C**.

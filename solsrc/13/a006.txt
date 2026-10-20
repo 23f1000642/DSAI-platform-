@@ -1,0 +1,96 @@
+=== 13.5.24
+Rebuild the tree from preorder 15, 10, 12, 11, 20, 18, 16, 19:
+
+- Root 15.
+- Left subtree: 10, with right child 12, which has left child 11.
+- Right subtree: 20, with left child 18, which has children 16 and 19.
+
+Postorder: **11, 12, 10, 16, 19, 18, 20, 15**, **option B**.
+=== 13.5.25
+Look at the root and one of its children. If the root has a left child, that child is smaller than the root. Otherwise the root is the minimum and its right child is larger, so the root itself is smaller than the maximum. Either way, a constant number of steps finds the element: **$\Theta(1)$**, **option D**.
+=== 13.5.26
+In a complete binary tree stored as a heap array, an inorder traversal visits the array positions in BST order. Doing that traversal for 1000 nodes (indices from 0), the third-to-last position visited is **index 509**. That's where the 3rd largest key sits.
+
+(The largest keys lie along the rightmost path and its last left branches. The traversal confirms the position is 509.)
+=== 13.5.27
+An inorder traversal of a BST is always the **sorted** order of $V$, whatever the insertion order. So it can be determined from $V$ alone. The root, preorder and postorder all depend on the insertion order. **Option A**.
+=== 13.5.28
+- **A ✔.** A BST shaped like a chain has a path of length $n-1$.
+- **B ✔.** An inorder traversal of a BST is sorted.
+- **C ✘.** The worst-case search is $O(n)$, not $O(\log n)$.
+- **D ✘.** A BST isn't a heap.
+
+**A and B**.
+=== 13.5.29
+Insert 10, −4, 15, 30, 20, 5, 60, 19. The path to 19 is 10 → 15 → 30 → 20 → 19. That's **4** edges.
+=== 13.5.30
+The right subtree holds the $p$ keys larger than the root, so the root is the $(n-p)$-th smallest key. The first key inserted always becomes the root, so it must be **$n-p$**. **Option C**.
+=== 13.5.31
+Rebuild from preorder 5, 3, 1, 2, 4, 6, 8, 7. Postorder: **2, 1, 4, 3, 7, 8, 6, 5**, **option D**.
+=== 13.5.32
+Each probe narrows the range for 55. Check that every value stays inside the current bounds:
+
+- A: 10, 75, 64, 43, 60, 57, 55 ✔
+- B: 90, 12, 68, 34, 62, 45, 55 ✔
+- **C:** 9, then 85 (<), then 47 (>), then 68 (<), then **43**, which is outside (47, 68). ✘
+- D: 79, 14, 72, 56, 16, 53, 55 ✔
+
+**Option C**.
+=== 13.5.33
+On the path to 60, the keys smaller than 60 (10, 20, 40, 50) must appear in **increasing** order. The keys larger than 60 (70, 80, 90) must appear in **decreasing** order. Any interleaving of the two orders works:
+$$\binom73 = \mathbf{35}$$
+**Option A**.
+=== 13.5.34
+Check each sequence as a search path for 273, keeping the (low, high) bounds:
+
+- **I:** after 285 (high = 285), the next key is 376, which is outside. ✘
+- **II:** after 242, the search for 273 goes right, so the lower bound is 242. Then 381 > 273 sends it left (upper bound 381), so the next key must be below 381. But 472 is above. ✘
+- **III:** 142, 248, 520, 386, 345, 270, 307 stay inside the bounds. ✔
+- **IV:** after 395 (high = 395), the next key is 463, which is outside. ✘
+
+**III only**, **option D**.
+=== 13.5.35
+- **A ✘.** I and IV aren't sorted, so they can't be inorder sequences.
+- **C ✔.** II is sorted, so it's an inorder sequence. Make 121 the root, with 97 as its left child and 52 as 97's left child (a leaf).
+- B and D fail the structural checks for preorder and postorder.
+
+**Option C**.
+=== 13.5.36
+The Catalan number $C_3 = 5$. **Option B**.
+=== 13.5.37
+a: C
+Any traversal visits each node once: $O(n)$. **Option C**.
+=== 13.5.38
+a: B
+An inorder traversal of a BST lists the keys in ascending order. **Option B**.
+=== 13.5.39
+The keys smaller than the root 60 are 25, 15, 30, 13, 18, 47 and 34. That's **7**, **option C**.
+=== 13.5.40
+Deleting the root 24 (which has two children) replaces it with its **inorder predecessor**: the maximum of the left subtree, which is **16**. **Option D**.
+=== 13.5.41
+Check each sequence as a search path for 364:
+
+- A ✔ and B ✔ stay within their bounds.
+- **C:** 926, 203, 912, 241, then **913**, which exceeds the current upper bound 912. ✘
+- D ✔
+
+**Option C**.
+=== 13.5.42
+a: B
+In a strictly (full) binary tree, internal nodes = leaves − 1 = 18. So the total is $19 + 18 = \mathbf{37}$, **exactly**. **Option B**.
+=== 13.5.43
+a: C
+Insert into an AVL tree, rebalancing after each step:
+
+| insert | imbalance | fix |
+|---|---|---|
+| 35, 50, 40 | 35 is right-heavy (RL case) | right rotation at 50, then left rotation at 35 |
+| 25, 30 | 35 is left-heavy (LR case) | left rotation at 25, then right rotation at 35 |
+| 60, 78 | 50 is right-heavy (RR case) | left rotation at 50 |
+| 20, 28 | — | none |
+
+That's **3 left rotations and 2 right rotations**, **option C**.
+=== 13.5.44
+Run the optimal-BST dynamic program on these $p$ and $q$ values. The minimum expected search cost is $e[1,5] = \mathbf{2.75}$ (the CLRS example). **Option C**.
+=== 13.6.1
+**False.** Preorder plus postorder can't tell a lone left child from a lone right child. For example, root A with only child B gives preorder AB and postorder BA, whichever side B is on. With inorder plus either of the others, the tree is unique.
