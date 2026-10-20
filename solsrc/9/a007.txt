@@ -1,0 +1,88 @@
+=== 9.21.7
+- (i) Poisson: mean = variance = λ. ✔
+- (ii) Standard normal: mean 0, variance 1. ✔
+
+**Both true**, **option A**.
+=== 9.21.8
+- $E[X] = \tfrac14$ and $E[Y] = \tfrac34$.
+- $XY = X$, because X = 1 implies Y = 1. So $E[XY] = \tfrac14$.
+
+$\operatorname{Cov} = \tfrac14 - \tfrac14\cdot\tfrac34 = \tfrac{1}{16} = \mathbf{0.0625}$.
+=== 9.22.1
+a: C
+The mean time between failures is $(6+4+8+5+6)/5 = 29/5$ hours, so the failure rate is $\lambda = 5/29$ per hour.
+
+The reliability for 1 hour is $R(1) = e^{-\lambda} = e^{-5/29}$. **Option C**.
+=== 9.23.1
+Square-invariant means $\{\alpha^2, \beta^2\} = \{\alpha, \beta\}$ as multisets.
+
+- **Case $\alpha^2 = \alpha$, $\beta^2 = \beta$:** both are in {0, 1}, giving the polynomials (0,0), (1,1) and (0,1).
+- **Case $\alpha^2 = \beta$, $\beta^2 = \alpha$:** then $\alpha^4 = \alpha$, so α = 0, α = 1 or α is a primitive cube root of unity ω. α = ω gives β = ω², which is a new polynomial, $(x-\omega)(x-\omega^2)$.
+
+The distinct polynomials are $x^2$, $(x-1)^2$, $x(x-1)$ and $x^2 + x + 1$. Of these 4, two have equal roots: $2/4 = \mathbf{0.5}$.
+=== 9.24.1
+A result that is significant at the 0.05 level means we **reject $H_0$** and **accept $H_1$**. **1 and 3**, **option D**.
+=== 9.25.1
+$\sigma = \sqrt{np(1-p)} = \sqrt{1000\cdot0.4\cdot0.6} = \sqrt{240}\approx\mathbf{15.49}$.
+=== 9.25.2
+a: D
+Since $0\le y\le1$, $xy\le x$, so $\bar z\le\bar x$ always. **Option D**.
+
+(A needs independence. B and C depend on the sign of the covariance.)
+=== 9.25.3
+$z = \frac{106000 - 96000}{21000}\approx\mathbf{0.476}$. **Option B**.
+=== 9.25.4
+a: B
+- **I is incorrect.** Pearson's r measures the linear relationship between **interval/ratio** variables, not nominal ones.
+- **II is incorrect.** r ranges from **−1 to +1**.
+
+**Both incorrect**, **option B**.
+=== 9.25.5
+a: C
+- **I is true.** A Type I error (rejecting a true null hypothesis) is more likely at α = 0.05 than at α = 0.01.
+- **II is false.** Type I risk is *higher* at 0.05.
+
+**Option C**.
+=== 9.25.6
+**Non-probability** sampling methods: judgmental (2), snowball (4) and quota (5). Cluster and systematic sampling are probability methods. **Option B**.
+=== 9.26.1
+Let both arrival times be uniform on [0, 60] minutes. They meet if the later one arrives within 10 minutes of the earlier one ($|x - y|\le10$). Arriving near 5:00 doesn't change this, because the waiting window still covers any later arrival within the hour.
+
+$$P(\text{meet}) = 1 - \left(\frac{50}{60}\right)^2 = \frac{11}{36}$$
+$$P(\text{not meet}) = \frac{25}{36}\approx\mathbf{0.69}$$
+=== 9.26.2
+Choose which $d$ positions differ, and each position independently differs with probability ½:
+$$P = \frac{\binom nd}{2^n}$$
+**Option A**.
+=== 9.26.3
+$$E[x^2 + y^2] = E[x^2] + E[y^2] = \frac13 + \frac{2^2}{3} = \frac13 + \frac43 = \frac53$$
+**Option D**.
+=== 9.26.4
+Only the relative order of the 10 even numbers matters. By symmetry, each is equally likely to come first: $\tfrac1{10}$. **Option B**.
+=== 9.26.5
+The shorter piece is $\min(U, 1-U)$, which is uniform on $[0, \tfrac12]$. Its mean is **0.25**.
+=== 9.26.6
+The roots are real when the discriminant is non-negative: $36Y^2 - 12(3Y + 6)\ge0$, i.e. $Y^2 - Y - 2\ge0$, so $(Y - 2)(Y + 1)\ge0$, which means $Y\ge2$.
+
+$P(2\le Y < 6) = \tfrac45 = \mathbf{0.8}$.
+=== 9.26.7
+Pick an index $j$ with $a_j = 1$. Condition on all the other $x_i$. Flipping $x_j$ changes the parity of the sum, so exactly half the choices give odd. $P = \mathbf{0.5}$.
+=== 9.26.8
+X depends only on the relative order of 1 and 2, and Y only on 3 and 4. These are disjoint, so the events are **independent**, with $P(X) = P(Y) = \tfrac12$. **Option B**.
+=== 9.26.9
+Break the interval at U:
+
+- If $U > 0.4$, the piece containing 0.4 is $[0, U]$, with length U.
+- If $U < 0.4$, it's $[U, 1]$, with length $1 - U$.
+
+$$E = \int_0^{0.4}(1-u)\,du + \int_{0.4}^{1}u\,du = (0.4 - 0.08) + (0.5 - 0.08) = 0.32 + 0.42 = \mathbf{0.74}$$
+=== 9.26.10
+$X\ge Y$ only in the overlap $[2, 3]$. The joint density is $\tfrac14$ on the $2\times2$ square. The region $\{2\le y\le x\le3\}$ is a triangle with area ½:
+$$P = \tfrac12\cdot\tfrac14 = \mathbf{0.125}$$
+=== 9.27.1
+$Y = Z^2$ is $\chi^2_1$, so $E[Y] = 1$ and $E[Y^2] = E[Z^4] = 3$. Then $\operatorname{Var}(Y) = 3 - 1 = \mathbf{2}$. **Option B**.
+=== 9.28.1
+a: A
+By inclusion–exclusion:
+$$30 + 35 + 100 - 15 - 15 - 20 + 5 = \mathbf{120}$$
+**Option A**.
