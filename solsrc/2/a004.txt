@@ -1,0 +1,76 @@
+=== 2.19.3
+a: D
+The standard GA mutation operators are bit flip, random resetting, swap, scramble and inversion. "**Difference**" isn't one of them; it's a differential-evolution step, not a classic GA mutation. **D only**, **option D**.
+=== 2.19.4
+a: D
+Common GA encodings are **binary**, **real-valued**, **integer** and **permutation**. "Combinations" isn't a standard representation. **Option D**.
+=== 2.20.1
+A* is optimal when the estimate $h^*$ **never overestimates** the true cost h, i.e. when $h^*$ is admissible (it underestimates or equals h). **Option C**.
+=== 2.20.2
+a: A
+The maximum of admissible heuristics is still admissible, and it dominates each of them, giving the tightest estimate. **$h = \max\{h_1, \dots, h_m\}$**, **option A**.
+=== 2.21.1
+a: D
+- **S1** is the definition of admissible.
+- **S2**: a monotone (consistent) heuristic satisfies $h(n)\le c(n,n') + h(n')$, which is a triangle inequality.
+
+**Both true**, **option D**.
+=== 2.21.2
+a: A
+With an **admissible** heuristic, A* always returns the **lowest-cost** solution. **Option A**.
+=== 2.22.1
+a: D
+Text planning, sentence planning and sentence generation (surface realisation) are stages of **natural language generation**. Mapping the input to a useful representation is **natural language understanding**.
+
+A-II, B-II, C-II, D-I. **Option D**.
+=== 2.23.1
+If an artificial variable is still basic (with a positive value) in the optimal tableau, the original problem is **infeasible**. **Option B**.
+=== 2.24.1
+- Supervised learning: manual labels are used → 3
+- Unsupervised learning: labels aren't used → 2
+- Reinforcement learning: rewards at the end of a sequence → 1
+- Inductive learning: learning by example → 4
+
+That's 3, 2, 1, 4. **Option D**.
+=== 2.24.2
+Perceptron, delta and LMS learning all adjust weights using the **error** between the desired and actual output. That's **error-correction learning, with a teacher**. **Option A**.
+=== 2.25.1
+Map colouring is the textbook **constraint satisfaction** problem: variables are regions, domains are colours, and neighbouring regions must differ. **Option B**.
+=== 2.26.1
+Means–ends analysis picks an **operator** that reduces the difference between the current state and the goal. **Option D**.
+=== 2.27.1
+a: C
+Work bottom-up. Each MAX node takes the max of its leaves, and each MIN node the min of its children:
+
+| MIN node | MAX children | MIN value |
+|---|---|---|
+| left | max(4) = 4, max(6,2,6) = 6, max(3,9) = 9 | **4** |
+| middle | max(5,2) = 5, max(7,3) = 7 | **5** |
+| right | max(1) = 1, max(7,2) = 7, max(4,6,3) = 6 | **1** |
+
+Root (MAX): max(4, 5, 1) = **5**. **Option C**.
+=== 2.27.2
+Only the leaves that alpha–beta actually reads are shown. Evaluate left to right:
+
+**Left MIN node:**
+
+- 1st MAX child: its MIN children give min(7, 9) = 7, and then min(6, …) ≤ 6. So this MAX node = 7.
+- 2nd MAX child: its first MIN child = min(11, 12) = 11 > 7. This MAX node is already ≥ 11, so the rest is pruned.
+
+The left MIN node = min(7, ≥11) = **7**. So α = 7 at the root.
+
+**Right MIN node:**
+
+- 1st MAX child: its MIN children give min(5, …) ≤ 5 and min(4, …) ≤ 4. So this MAX node ≤ 5 < α. The rest of the right subtree is pruned.
+
+The root = **7**. **Option B**.
+=== 2.28.1
+a: C
+**Top-down parsing**, **bottom-up parsing**, **dependency parsing** and **Earley parsing** are all syntactic parsing techniques. Statistical machine translation isn't parsing.
+
+**(A), (B), (C) and (E)** is choice (3), which is **option C** here.
+=== 2.29.1
+- OR is linearly separable, so a **single-layer perceptron** can solve it.
+- XOR isn't linearly separable. It needs a non-linear model such as a **radial basis function** network, or a multilayer perceptron.
+
+**Option D**.
