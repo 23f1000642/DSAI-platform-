@@ -110,8 +110,13 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .chip{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap}
 .chip.t{background:var(--accent-soft);color:var(--accent)}
 .qsrc{font-size:14px;color:var(--muted);flex:1;min-width:0}
-.qimg{background:var(--paper);padding:14px;border-bottom:1px solid var(--line);overflow-x:auto}
-.qimg img{display:block;width:100%;max-width:820px;height:auto}
+.qimg{background:var(--paper);padding:14px;}
+@media (max-width:640px){.qimg{padding:8px}}
+.qimg{border-bottom:1px solid var(--line);overflow-x:auto}
+.qimg img{display:block;max-width:100%;height:auto;cursor:zoom-in}
+.qimg.zoom img{max-width:none;cursor:zoom-out}
+.zoomhint{display:none;font-size:12px;color:#667;margin-top:6px}
+@media (max-width:640px){.zoomhint{display:block}}
 .qimg .ph{height:160px;display:grid;place-items:center;color:#667}
 .ans{padding:16px;display:grid;gap:12px}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
@@ -688,6 +693,10 @@ function renderResult(A){
   });
 }
 
+// question images: show at true print size (rendered at 2x), tap to zoom on small screens
+document.addEventListener('load', e => { const t = e.target; if (t.tagName === 'IMG' && t.closest('.qimg')) { t.style.width = Math.round(t.naturalWidth * 0.72) + 'px';
+  if (!t.nextElementSibling) t.insertAdjacentHTML('afterend', '<div class="zoomhint">Tap the question to zoom</div>'); } }, true);
+document.addEventListener('click', e => { const t = e.target; if (t.tagName === 'IMG' && t.closest('.qimg')) t.closest('.qimg').classList.toggle('zoom'); });
 // ---------- boot ----------
 fetch('index.json').then(r => r.json()).then(d => {
   DB = d; d.q.forEach(q => QBY[q.id] = q); d.subjects.forEach(s => { SUBJBY[s.id] = s; s.subs.forEach(t => SUBBY[t.id] = t); });
