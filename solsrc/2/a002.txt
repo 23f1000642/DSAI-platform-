@@ -1,0 +1,103 @@
+=== 2.7.10
+a: C
+- **(A) is broadly right.** A subtree is cut off once the bounds cross, i.e. its value lies outside the [α, β] window.
+- **(B) is right.** Alpha–beta's purpose is to search fewer nodes while getting the same answer as minimax.
+- **(C) is wrong.** It does **not** explore the entire tree; that's the whole point.
+- **(D) is right.** At the root, α = −∞ and β = +∞.
+
+**(A), (B) and (D)** is choice (3), which is **option C** here.
+=== 2.7.11
+- From α ⊃ β and α, infer β. That's **modus ponens**, but R1 calls it modus tollens.
+- From α ⊃ β and ¬β, infer ¬α. That's **modus tollens**, but R2 calls it modus ponens.
+
+Both are **mislabelled**. **Option D**.
+=== 2.7.12
+The **inference engine** applies rules to the knowledge base to derive new facts. **Option C**.
+=== 2.7.13
+An environment is uncertain if it's **not fully observable or not deterministic**. Either one is enough. **Option B**.
+=== 2.7.14
+a: D
+With a consistent heuristic (Russell & Norvig):
+
+- **a.** A* expands **all** nodes with $f(n) < C^*$. ✔
+- **b.** It expands **no** nodes with $f(n) > C^*$. Nodes with $f = C^*$ may or may not be expanded, so the "≥" wording is loose, but this is the intended statement. ✔
+- **c.** **Pruning** subtrees is integral to A*'s optimal efficiency. ✔
+
+The intended answer is **all three**, **option D**.
+=== 2.7.15
+The **delta (Widrow–Hoff) rule** changes weights in proportion to the error (desired − actual output) times the input. **Option B**.
+=== 2.7.16
+If every step costs **g = 1**, then g counts the steps. A* then minimises the number of steps (with h′ as the estimate of the steps left). **Option A**.
+=== 2.7.17
+- Expert systems: explanation facility → iv
+- Planning: means–end analysis → iii
+- Prolog: resolution → ii
+- NLP: pragmatics → i
+
+**Option D**.
+=== 2.7.18
+**Frames** are made of slots, and each slot has facets (value, default, if-needed, and so on). **Option B**.
+=== 2.7.19
+a: D
+The classic conflict-resolution strategies in production systems give preference based on:
+
+- the **rule** that matched
+- the **objects** that matched
+- the **action** the rule would perform
+
+"Based on the action that the matched **object** would perform" isn't one of them. **Option D**.
+=== 2.7.20
+a: A
+A good knowledge representation should have:
+
+- **representational** adequacy
+- inferential adequacy
+- inferential efficiency
+- acquisitional efficiency
+
+"Presentation adequacy" isn't one of these. **Option A**.
+=== 2.7.21
+a: D
+Natural language understanding goes through:
+
+1. morphological analysis
+2. syntactic analysis
+3. semantic analysis
+4. discourse analysis
+5. pragmatic analysis
+
+"Meaning analysis" isn't a separate standard stage. **Option D**.
+=== 2.7.22
+a: C
+- **A is true.** DENDRAL is a classic expert system, used for chemical structure analysis.
+- **R is false.** Rationality is defined by the agent's actions in response to its percepts of the environment.
+
+**Option C**.
+=== 2.7.23
+Prolog is **dynamically typed**, not strongly or statically typed. So B is the false statement.
+
+A, C and D are accepted facts: variables are single-assignment, and their scope is one clause (in the query sense). **Option B**.
+=== 2.7.24
+The correct matching is:
+
+- frames: record-like structures (iii)
+- conceptual dependency: primitives to represent sentences (iv)
+- associative networks: pictorial representation (i)
+- scripts: stereotyped events (ii)
+
+That's a-iii, b-iv, c-i, d-ii. It isn't printed exactly. The official key, **A**, matches on b, c and d, and has a typo on a.
+=== 2.7.25
+- Steepest-ascent hill climbing considers all moves and picks the best → iv
+- Branch-and-bound tracks all partial paths → i
+- Constraint satisfaction finds states that satisfy constraints → ii
+- Means–end analysis detects differences between states → iii
+
+**Option B**.
+=== 2.7.26
+A **utility-based** agent measures how "happy" a state is with a utility function. **Option D**.
+=== 2.7.27
+Greedy best-first search can keep every generated node in memory: $O(b^m)$ in the worst case. **Option C**.
+=== 2.7.28
+Classical planning assumes a **deterministic, fully observable** (static, discrete) environment. **Option A**.
+=== 2.7.29
+AI problem solving uses heuristics, the solution steps aren't explicit in advance, and the knowledge is imprecise. Implementing a mere "repetition mechanism" isn't a characteristic of it. **Option D**.

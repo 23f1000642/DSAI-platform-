@@ -1,0 +1,84 @@
+=== 2.7.30
+a: D
+Following Russell & Norvig:
+
+- **Ontological engineering**: representing general concepts such as events, time and physical objects across domains → IV
+- **Taxonomic hierarchy**: built from subclass relations → I
+- **Inheritance**: organising knowledge into categories and subcategories, so that properties pass down → II
+- **Probability model**: attaches a number to each possibility → III
+
+**Option D**.
+=== 2.7.31
+a: C
+**Genetic algorithms** imitate evolution: selection, crossover and mutation over generations. **Option C**.
+=== 2.8.1
+The neuron computes the weighted sum $\sum_i w_ix_i$ and passes it through φ. The printed option D, "$\sum w_i\cdot\sum x_i$", is the garbled form of this. **Option D** (the intended $\sum w_ix_i$).
+=== 2.9.1
+Backpropagation sends the error gradients **backward, from the output (sink) to the input (source)**. **Option B**.
+=== 2.10.1
+The blocks world is the classic domain for explaining **planning** (STRIPS, goal-stack planning). **Option B**.
+=== 2.11.1
+fix: C
+- **Forward chaining** starts from known facts: it's **data-driven**.
+- **Backward chaining** starts from the goal: it's **goal-driven**.
+
+**Option C**. (The official key's D, "goal-driven, goal-driven", is wrong.)
+=== 2.12.1
+a: A
+In Dempster–Shafer theory, belief is a lower bound, and some mass can stay uncommitted. So $Bel(A) + Bel(\lnot A)\le1$. **Option A**.
+=== 2.13.1
+An expert-system **shell** has the inference engine and interface but **no domain knowledge**. **Option A**.
+=== 2.13.2
+fix: A
+Expert systems reason with **forward chaining, backward chaining and problem reduction**. "Boundary mutation" is a genetic-algorithm operator. **Option A**.
+
+(The official key's B is a slip.)
+=== 2.14.1
+a: A
+- Statement I is the right definition of a grandparent.
+- Statement II correctly expresses it in first-order logic: $\forall g,c\;\; grandparent(g,c)\Leftrightarrow\exists p\;(parent(g,p)\land parent(p,c))$.
+
+**Both correct**, **option A**.
+=== 2.15.1
+a: D
+Kosko showed that Mamdani-type, TSK and SAM fuzzy systems can all be written as **additive** rule models: the rule outputs are summed or weight-averaged. **All three**, **option D**.
+=== 2.15.2
+A t-norm and t-conorm are dual (via De Morgan) when $t(x,y) = 1 - s(1-x,\,1-y)$. **Option C**.
+=== 2.16.1
+a: C
+The **crossover point** of a fuzzy set is where the membership equals 0.5. **Option C**.
+=== 2.16.2
+a: A
+A fuzzy system has a fuzzifier, a rule base, an **inference engine** and a defuzzifier. **Both statements are correct**, **option A**.
+=== 2.16.3
+The TSK output is the **weighted average** of the rule outputs:
+$$y = \frac{\sum\alpha_if_i}{\sum\alpha_i}$$
+**Option B**.
+=== 2.17.1
+a: C
+- Expert system: MYCIN → IV
+- Fuzzy system: inference engine → III
+- GA operator: scramble (mutation) → II
+- Supervised technique: decision tree → I
+
+**Option C**.
+=== 2.18.1
+a: C
+**Information-processing** models of teaching include:
+
+- **Gagné's** information model
+- **Bruner's** concept-attainment model
+- **Suchman's** (here "Schuman's") inquiry-training model
+
+The self-awareness and group-investigation models belong to the personal and social families. So **(b), (c) and (d)**, which is **option C**.
+=== 2.18.2
+**Howard Gardner** proposed the theory of multiple intelligences (1983). **Option D**.
+=== 2.19.1
+a: D
+Decode the chromosomes: 01101 = 13, 11000 = 24, 01000 = 8 and 10011 = 19.
+
+Their squares are 169, 576, 64 and 361, which add up to 1170.
+$$Sf(24) = \frac{576}{1170}\approx0.492 = \mathbf{49.2\%}$$
+**Option D**.
+=== 2.19.2
+Genetic algorithms use **evolution** (generations), **selection**, **reproduction** (crossover) and **mutation**. **All four**, **option C**.

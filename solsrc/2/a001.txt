@@ -1,0 +1,99 @@
+=== 2.1.1
+A* always expands the frontier node with the smallest $f = g + h$:
+
+| step | expand | new frontier entries (f = g + h) |
+|---|---|---|
+| 1 | S | A: 4+2 = **6**, E: 1+6 = 7 |
+| 2 | A (6) | B: 6+2 = 8 |
+| 3 | E (7) | C: 3+6 = 9 |
+| 4 | B (8) | C via B would cost 8+6 = 14, so it keeps 9 |
+| 5 | C (9) | D: 6+2 = 8 |
+| 6 | D (8) | G: 9+0 = 9 |
+| 7 | G | goal |
+
+The order is S, A, E, B, C, D, G. **Option C**.
+=== 2.2.1
+$|h_1 - h_2|\le\max(h_1, h_2)\le h^*$, so it never overestimates. **Option D**.
+
+The others can overestimate. $h_1 + h_2$ can be up to $2h^*$, and the product and quotient can be arbitrarily large.
+=== 2.3.1
+- α is the **highest** value found so far for MAX: the best MAX can guarantee.
+- β is the **lowest** value found so far for MIN.
+
+**Option C**.
+=== 2.4.1
+An agent improves its performance by **learning** from experience. **Option C**.
+=== 2.4.2
+a: A
+A simple reflex agent acts on the **current percept only**, using condition–action rules. It ignores the percept history. **Option A**.
+=== 2.5.1
+a: C
+In Russell & Norvig's AND–OR search:
+
+- A solution is a subtree with a goal at every leaf. **S1 is true.**
+- OR nodes are the agent's own choices, like branching in a deterministic environment. **S2 is true.**
+- AND nodes are the possible outcomes of the environment's non-determinism. **S3 is true.**
+
+**Option C**.
+=== 2.5.2
+a: C
+Alpha–beta pruning works at **any** depth of the game tree, so the root, level 6 and level 8 all qualify. It doesn't depend on a breadth-first utility ordering, since it's a depth-first method. **(A), (B) and (C)**, **option C**.
+=== 2.6.1
+**Tree 1.** A's first child gives α = 2. At MIN node B, the first leaf is x, so B ≤ x. B's right child can be pruned when $x\le2$: then B can't beat α = 2.
+
+**Tree 2.** $D = \min(5, y)$, so at C, $\alpha = \min(5, y)$. At E, the first leaf is 2. E's right child can be pruned when $2\le\alpha$, i.e. $y\ge2$.
+
+$x\in(-\infty, 2]$ and $y\in[2, \infty)$. **Option C**.
+=== 2.6.2
+- At a **maximizing** level, search is cut off once a value reaches **β** (a beta cutoff).
+- At a minimizing level, it's cut off once a value drops to α.
+
+So the answer is **beta, alpha**, **option B**.
+=== 2.7.1
+$S_1 = p\to q\equiv\lnot p\lor q = S_3$. **Option A**.
+=== 2.7.2
+$\frac{50\times40 + 142}{51} = \frac{2142}{51} = \mathbf{42}$.
+=== 2.7.3
+"All balls are round except rugby balls" means:
+
+- not rugby → round (s1)
+- rugby → not round (s3)
+
+s2 is the contrapositive of s1, and s4 is the contrapositive of s3. So **s1 ∧ s3** and **s2 ∧ s3** both express it.
+
+- B (s1 ∧ s2) is just s1.
+- D (s3 ∧ s4) is just s3.
+
+**A and C**.
+=== 2.7.4
+Choosing an operator, then setting up subgoals to make its preconditions true, is called **operator subgoaling**. **Option C**.
+=== 2.7.5
+- Supervised learning: instructive information from a teacher → i
+- Recording: a priori design information for storing → ii
+- Reinforcement learning: partial, right/wrong feedback → iii
+- Unsupervised learning: no information about desired responses → iv
+
+**Option A**.
+=== 2.7.6
+fix: A
+LISP is the classic **functional programming** language: programs are built from function application and recursion over lists. **Option A**.
+
+(The official key says C, object-oriented, probably thinking of CLOS. But that's an add-on, not LISP's core model.)
+=== 2.7.7
+fix: D
+The C1 points have $x_1 + x_2 = -2, 0, 0$, and the C2 point has $x_1 + x_2 = 2$. A line $x_1 + x_2 = t$ separates them for any $0 < t < 2$.
+
+**D**, $x_1 + x_2 - 0.5 = 0$, does this.
+
+Check the others:
+
+- **B** ($x_1 + x_2 = -0.5$) puts (−1, 1) on the same side as (1, 1).
+- **A** and **C** don't separate the classes either.
+
+So **D** is the correct boundary. (The official key says B, but B misclassifies (−1, 1) and (1, −1).)
+=== 2.7.8
+a: B
+In a **semi-dynamic** environment, the environment itself doesn't change over time, but the agent's performance score does (for example, a chess clock). **Option B**.
+=== 2.7.9
+a: C
+A multi-agent system has several agents with possibly different objectives, which interact and communicate. **Option C**.
