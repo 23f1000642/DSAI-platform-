@@ -1,0 +1,72 @@
+=== 13.30.7
+Level-order traversal visits nodes level by level using a queue. That's **breadth-first search**. **Option D**.
+=== 13.30.8
+There are $nk$ edges, so $nk + 1$ nodes in total. The leaves number $nk + 1 - n = n(k-1) + 1$. **Option C**.
+=== 13.30.9
+$L = (n-1)I + 1$:
+$$41 = 10(n-1) + 1 \Rightarrow n = \mathbf{5}$$
+**Option C**.
+=== 13.30.10
+For a general tree, the in-order traversal is: first child's subtree, then the node, then its remaining children's subtrees.
+
+- P: subtree(Q), then P, then subtree(R).
+- Q: subtree(S), then Q. That gives **S Q**.
+- R: subtree(T), then R, then subtree(U), then subtree(V). That gives **T R W U V** (U's in-order is W U).
+
+Result: **S Q P T R W U V**, **option A**.
+=== 13.30.11
+For a node with no children, the value is 1. Otherwise it's the count from its children's subtrees. Then the counts of the right siblings are added. So the function counts the **leaf nodes**. **Option D**.
+=== 13.30.12
+A tree with 10 vertices has 9 edges, and the degrees add up to twice the edges: $2\times9 = \mathbf{18}$.
+=== 13.30.13
+- **A is false.** The root is an articulation point when it has 2 or more children.
+- **B is true.** That's the standard rule.
+- **C is false.** Removing a leaf of the DFS tree leaves the rest connected.
+- **D is false.** Other paths may go around $u$ through back edges.
+
+**Only B**.
+=== 13.30.14
+A heap is a complete binary tree. With 32 keys, levels 0 to 4 hold 31 nodes and the 32nd starts level 5. The height is **5**.
+=== 13.30.15
+a: B
+In a splay tree, each inserted item is splayed to the **root**. So after inserting the last item, **2**, the root is 2. **Option B**.
+=== 13.30.16
+In an **AVL tree**, the heights of the two subtrees differ by at most 1 at every node. **Option B**.
+=== 13.30.17
+Think of a full 4-ary tree: the senders are internal nodes, and the readers who didn't send are leaves. With $L = 100$:
+$$100 = (4-1)I + 1 \Rightarrow I = 33$$
+The total who saw it is $100 + 33 = \mathbf{133}$, and **33** sent it out. **Option C**.
+=== 13.30.18
+Let there be $x$ vertices of degree 1. The degree sum is $2\cdot4 + 3 + 2 + x = 13 + x$, and the vertex count is $n = 4 + x$.
+
+Using $2(n-1) = 13 + x$: $2(3 + x) = 13 + x$, so $x = 7$ and $n = \mathbf{11}$. **Option D**.
+=== 13.30.19
+All three can be gracefully labelled:
+
+- (a) a path
+- (b) a caterpillar
+- (c) a small tree
+
+Every path and caterpillar is graceful, and (c) has an explicit graceful labelling. **a, b and c**, **option D**.
+=== 13.30.20
+Count edges two ways. Edges = (child count summed over nodes) $= 4\cdot1 + 3\cdot2 + 3\cdot3 = 19$. The node count is $4 + 3 + 3 + L$, and that equals edges + 1 = 20. So $L = \mathbf{10}$. **Option B**.
+=== 13.30.21
+a: D
+A 2-3-4 tree is **isometric** (equivalent) to a **red-black** tree: each 4-node is a black node with two red children. **Option D**.
+=== 13.30.22
+A full binary tree with $n$ nodes is tallest when it's a "caterpillar": one internal node per level. That's $\frac{n-1}{2}$ internal nodes, so the height is $(n-1)/2$. **Option C**.
+=== 13.30.23
+a: B
+$L = (5-1)\cdot8 + 1 = \mathbf{33}$. **Option B**.
+=== 13.30.24
+a: C
+Track the BST bounds for 98 along each sequence:
+
+| seq | trace | valid? |
+|---|---|---|
+| A | 100 (hi = 100), 50 (lo = 50), 75 (lo = 75), **60 < 75** | ✘ |
+| B | 100 (hi = 100), **120 > 100** | ✘ |
+| C | 200 (hi = 200), 70 (lo = 70), 100 (hi = 100), 95 (lo = 95), 98 | ✔ |
+| D | 75 (lo = 75), 150 (hi = 150), 90 (lo = 90), **80 < 90** | ✘ |
+
+**Option C**.

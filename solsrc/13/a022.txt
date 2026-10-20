@@ -1,0 +1,33 @@
+=== 13.30.25
+a: B
+A complete binary tree has height about $\log_2 n$. The two farthest nodes are leaves in opposite subtrees of the root: up $\log_2 n$ edges, then down $\log_2 n$. That's about **$2\log_2 n$**. **Option B**.
+=== 13.30.26
+a: A
+The root is \*, its left child is + (with children A and B), and its right child is C. The expression is **(A + B) \* C**. **Option A**.
+=== 13.30.27
+In a **B-tree**, every leaf is at the same level. **Option B**.
+=== 13.30.28
+A **tree** represents hierarchical relationships. **Option C**.
+=== 13.30.29
+The number of binary tree shapes on 5 nodes is the Catalan number $C_5 = \frac{1}{6}\binom{10}{5} = \mathbf{42}$. **Option D**.
+=== 13.30.30
+Insert 10, 1, 3, 5, 15, 12, 16. The longest path is 10 → 1 → 3 → 5, so the height is **3**. **Option A**.
+=== 13.31.1
+In-order is left, node, right:
+
+- Left subtree of 15: 4's subtree gives 2 4 3, then 13, then 7's subtree gives 7 6 (6 is 7's right child).
+- Then 15.
+- Right subtree: 17, 20, then 18's subtree gives 18 18 (the lower 18 is the left child of the upper 18).
+
+Result: **2 4 3 13 7 6 15 17 20 18 18**, **option D**.
+=== 13.31.2
+a: A
+Preorder is the order in which a **depth-first** search first visits the nodes. **Option A**.
+=== 13.31.3
+a: A
+Preorder is **depth-first order**. **Option A**.
+=== 13.31.4
+An in-order traversal of a BST is always the keys in **sorted order**: 3, 4, 5, 7, 9, 14, 15, 16, 17, 18, 20. **Option D**.
+=== 13.31.5
+a: D
+Rebuild the tree from preorder ABCEIFJDGHKL and inorder EICFJBGDKHLA. The postorder comes out as **IEJFCGKLHDBA**. **Option D**.
