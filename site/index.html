@@ -175,6 +175,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
   .expal.open{transform:none}}
 .palbtn{display:none}
 @media (max-width:900px){.palbtn{display:inline-block}}
+@media (max-width:640px){.exfoot .long{display:none}.exfoot{gap:8px}.exfoot .btn{padding:9px 12px;white-space:nowrap}.exfoot .sp{display:none}.exbar h2{font-size:15px}}
+@media (min-width:641px){.exfoot .short{display:none}}
 .pal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .pq{height:40px;border:1px solid var(--line);background:var(--sunk);font-family:var(--f-mono);font-weight:700;font-size:14px;position:relative;border-radius:6px}
 .pq.na{background:var(--bad);color:#fff;border-color:var(--bad);border-radius:6px 6px 16px 16px}
@@ -599,11 +601,11 @@ function examRender(){
       </aside>
     </div>
     <div class="exfoot">
-      <button class="btn" type="button" id="mark">Mark for review &amp; next</button>
-      <button class="btn" type="button" id="clear">Clear response</button>
+      <button class="btn" type="button" id="mark"><span class="long">Mark for review &amp; next</span><span class="short">Review</span></button>
+      <button class="btn" type="button" id="clear"><span class="long">Clear response</span><span class="short">Clear</span></button>
       <span class="sp"></span>
       <button class="btn" type="button" id="back" ${EX.i ? '' : 'disabled'}>Back</button>
-      <button class="btn primary" type="button" id="save">Save &amp; next</button>
+      <button class="btn primary" type="button" id="save" style="flex:1">Save &amp; next</button>
     </div></div>`;
   loadSub(q.sub).then(d => { const el = $('#exImg'); if (el && EX && EX.qs[EX.i].id === q.id) el.innerHTML = `<img alt="Question ${EX.i + 1}" src="data:image/webp;base64,${d[q.id]}">`; }).catch(() => { const el = $('#exImg'); if (el) el.innerHTML = '<div class="ph">Couldn\'t load this question image.</div>'; });
   const readResp = () => {
