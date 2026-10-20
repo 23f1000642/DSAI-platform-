@@ -1,0 +1,10 @@
+*.pdf
+pyq.txt
+raw*.json
+meta.json
+img/
+sheets/
+site/q/
+site/_local.html
+__pycache__/
+*.pyc
