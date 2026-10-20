@@ -1,0 +1,77 @@
+=== 3.21.1
+a: D
+Reading a value written by an **uncommitted** transaction is a dirty read. If the reader commits and the writer then aborts, the committed transaction depends on a value that never officially existed, and that can't be undone. The schedule is non-recoverable. **Option D**.
+=== 3.22.1
+a: C
+- A is true. 2PL can deadlock.
+- B is true. Timestamp protocols abort more transactions.
+- **C is wrong.** Basic 2PL **also** suffers from cascading rollbacks. Only *strict* 2PL avoids them.
+
+**Option C**.
+=== 3.22.2
+a: C
+This is the same as the previous question. Basic 2PL can also cause cascading rollbacks, so statement C is wrong. **Option C**.
+=== 3.23.1
+If an FD isn't preserved inside any single relation, checking it on an update means **joining** the decomposed relations to rebuild the attributes involved. **Option C**.
+=== 3.23.2
+The FDs are A → B and C → AB.
+
+- **I:** R1(C,A) and R2(A,B) share A, and A → B. So A is a key of R2, and the decomposition is **lossless**. True.
+- **II:** R1(A,B) and R2(B,C) share B, but B determines neither A nor C. So the decomposition is **lossy**. True.
+
+**Both**, **option C**.
+=== 3.23.3
+A binary decomposition is lossless exactly when $R_1\cap R_2\to R_1$ **or** $R_1\cap R_2\to R_2$. **Option A**.
+=== 3.23.4
+Decomposition (normalisation) removes redundancy, and with it the inconsistencies and update anomalies that redundancy causes. **All of the above**, **option D**.
+=== 3.23.5
+A decomposition is lossless if and only if the common attributes **multidetermine** one side: $R_1\cap R_2\twoheadrightarrow R_1 - R_2$. By the complementation rule, that's equivalent to $R_1\cap R_2\twoheadrightarrow R_2 - R_1$. That gives **i and iii**, **option C**.
+=== 3.24.1
+R1(MN) and R2(PQ) share **no attributes**, so joining them gives a cross product, which is lossy. Each FD lies entirely inside one relation, so dependencies are preserved. **Option A**.
+=== 3.25.1
+a: B
+The fragmentation correctness rules are:
+
+- **Completeness:** every data item of the global relation appears in some fragment.
+- **Reconstruction:** the global relation can be rebuilt from its fragments.
+- **Disjointness:** no item is in two fragments (for horizontal fragmentation).
+
+The question describes **completeness**, **option B**.
+=== 3.25.2
+With location transparency, the user doesn't need to know *where* data is stored. But without fragmentation transparency, the query still has to name the **fragments**. **Option B**.
+=== 3.26.1
+- **E1** and **E2** need one table each.
+- **R1 (one-to-many)** needs no table of its own: put E1's key as a foreign key in E2's table, on the "many" side.
+- **R2 (many-to-many)** needs its own table (E1-key, E2-key).
+
+The minimum is **3**, **option B**.
+=== 3.26.2
+From the diagram:
+
+- **M–R1–P:** M participates totally, and R1 is many-to-one from M to P. So R1 merges into M's table, adding P1 as a foreign key: **M(M1, M2, M3, P1)**.
+- **P:** **P(P1, P2)**.
+- **N** is a **weak** entity, identified through R2 by P. Its table includes the owner's key, and R2 merges into it: **N(P1, N1, N2)**.
+
+That's **3** tables, **option B**.
+=== 3.26.3
+From the 3-table design above, one of the tables is **M(M1, M2, M3, P1)**, **option A**.
+=== 3.26.4
+- In the ER model, attributes **can** be multivalued (A) or composite (B).
+- In a relational table, each cell holds **one atomic value or NULL** (1NF). So "an attribute can have more than one value" in a row is **incorrect**.
+
+**Option C**.
+=== 3.26.5
+1. **E1(a11, a12)**
+2. **E2(a21, a22)**
+3. **E3(a31, a32, a11)**: R13 is 1:n, so E1's key goes on E3's "many" side as a foreign key.
+4. **R12(a11, a21)**: m:n relationships always need their own table.
+
+All of these are in 3NF. The minimum is **4**.
+=== 3.26.6
+R's table can be merged into A's table when each A entity relates to **at most one** B, i.e. R is **many-to-one** from A to B. Then B's key becomes a foreign key column in A.
+
+With **total** participation of A, every A row has a non-null value there, so nothing is wasted. **Option C**.
+=== 3.26.7
+"Many-to-one from E1 to E2" means each E1 entity relates to **at most one** E2 entity. Total participation of E1 makes it **exactly one**.
+
+B contradicts many-to-one. C and D fail because |E1| > |E2|: some E2 entity must be shared by several E1 entities. **Option A**.

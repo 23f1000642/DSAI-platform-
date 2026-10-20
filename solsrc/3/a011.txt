@@ -1,0 +1,110 @@
+=== 3.20.44
+- **A: true.** 1NF only requires atomic values. Keys may be composite.
+- **B: false.** Foreign keys are allowed in any normal form.
+- **C: true.** A composite attribute isn't atomic, so 1NF requires it to be split into its parts.
+- **D: false.** A relation can have several candidate keys.
+
+**A and C**.
+=== 3.20.45
+- **A: false.** From $XY\to ZW$ you can't conclude $X\to ZW$. A left side can't be shrunk.
+- **B: true.** Decomposition: $XY\to ZW$ implies $XY\to Z$.
+- **C: true.** Pseudo-transitivity: $W\to Y$ gives $XW\to XY$, and $XY\to Z$, so $XW\to Z$.
+- **D: true.** Transitivity.
+
+**B, C and D**.
+=== 3.20.46
+We count ordered pairs $(X, Y)$ of **disjoint, non-empty** subsets of 4 attributes.
+
+Each attribute goes into X, into Y, or into neither: $3^4 = 81$ ways. Remove the cases where X is empty ($2^4 = 16$) or Y is empty (16), then add back the one case where both are empty:
+$$81 - 16 - 16 + 1 = \mathbf{50}$$
+=== 3.20.47
+**R1(A,B,C,D,E):** D → E, EA → B, EB → C. A and D never appear on a right side. $AD^+ = \{A,D,E,B,C\}$, so the only key is **AD**.
+
+D → E makes the non-prime attribute E depend on part of the key. That's a partial dependency, so R1 is **not in 3NF** (not even 2NF). C is true.
+
+**R2(A,B,C,D):** A → D, A → B, C → A. The key is **C**. A → D is a transitive dependency (C → A → D) of a non-prime attribute, so R2 is **not in 3NF**. D is true.
+
+**C and D**.
+=== 3.20.48
+Compute $VW^+$: V → X, and then WX → Y and WX → Z. So $VW^+ = \{V,W,X,Y,Z\}$.
+
+- **A: VW → YZ** ✔
+- **D: VW → Y** ✔
+- **C: VW → U** ✘ (U is never derived)
+- **B: WX → YZ** ✔, given directly
+
+**A, B and D**.
+=== 3.20.49
+a: B;C
+The rows (X, Y, Z) are (1,4,2), (1,5,3), (1,4,3), (1,5,2), (3,2,1).
+
+- **XY → Z fails:** (1,4) gives Z = 2 and Z = 3. So A is false.
+- **YZ → X holds:** every YZ pair is distinct.
+- **X →→ Y holds:** for X = 1, the Y values {4,5} and Z values {2,3} appear in all 4 combinations.
+
+So B is true.
+
+- **Y → X holds:** 4 → 1, 5 → 1, 2 → 3. And every FD is also an MVD, so Y →→ X holds too.
+
+So C is true.
+
+- **XZ → Y fails:** (1,2) gives Y = 4 and Y = 5. So D is false.
+
+**B and C** are true.
+=== 3.20.50
+The key is empcode, a single attribute, so there are no partial dependencies, and the relation is in 2NF. But empcode → pincode → city, state is a **transitive** dependency of non-prime attributes, so it's not in 3NF.
+
+**2NF**, **option B**.
+=== 3.20.51
+The key is $(F_1, F_2)$. $F_1\to F_3$ and $F_2\to F_4$ are **partial** dependencies, so the table is only in **1NF**. **Option A**.
+=== 3.20.52
+Check each option by computing closures from A → B, A → C, CD → E, B → D, E → A:
+
+- $CD^+ = \{C,D,E,A,B\}$, so CD → AC ✔
+- $BD^+ = \{B,D\}$, so **BD → CD is not implied** ✘
+- $BC^+ \ni D$ (B → D), so BC → CD ✔
+- $AC^+$ is everything, so AC → BC ✔
+
+**Option B**.
+=== 3.20.53
+X and Y never appear on a right side, so every key contains XY. $XY^+ = \{X, Y\}$, so add one more attribute:
+
+- $VXY^+$: VY → W, WX → Z. That's everything. ✔
+
+**VXY**, **option B**.
+=== 3.20.54
+**Lossless?**
+
+- (A,B) and (B,C) share B, and B → C, so that join is lossless.
+- Joining the result with (B,D): B → D (B → C → D), so that's lossless too.
+
+**Dependency-preserving?**
+
+- A → B lies in (A,B).
+- B → C lies in (B,C).
+- D → B lies in (B,D).
+- C → D: B, C and D all determine each other, so (B,C) gives C → B and (B,D) gives B → D. Together they give C → D.
+
+All FDs are preserved. **Option A**.
+=== 3.20.55
+A and B never appear on a right side. $AB^+$ = {A,B,C,D,G,E,P}, so the key is **AB**.
+
+B → G makes the non-prime attribute G depend on **part** of the key. That's a partial dependency, so R is **not in 2NF**. **Option D**.
+=== 3.20.56
+R1(A,B) and R2(C,D) have **no common attribute**, so the join is a cross product, which is lossy. Each FD lies entirely inside one relation, so dependencies are preserved.
+
+**Option C**.
+=== 3.20.57
+a: A
+Normalisation splits tables, which usually **increases** the number of joins a query needs. "Reducing the number of joins" is what *denormalisation* aims for. **Option A**.
+=== 3.20.58
+The correct matching is:
+
+- (i) **2NF**: no partial functional dependencies → (c)
+- (ii) **3NF**: transitive dependencies eliminated → (a)
+- (iii) (meant as **4NF**): multivalued dependencies removed → (b)
+- (iv) **5NF**: no join dependency → (d)
+
+That's i-c, ii-a, iii-b, iv-d. None of the printed options matches, and the question has a typo (two "3NF"s). That's why it has no official key.
+=== 3.20.59
+A decomposition is lossless exactly when the common attributes determine **at least one** of the two relations, i.e. $R_1\cap R_2$ is a superkey of $R_1$ or of $R_2$. **Option D**.

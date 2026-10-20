@@ -1,0 +1,84 @@
+=== 3.20.60
+- **Determinants**: the group of attributes on the left side of an FD → (d)
+- **Candidate key**: uniquely identifies a row → (b)
+- **Non-redundancy** (minimality of a key): no attribute can be added or removed without losing that property → (a)
+- **Functional dependency**: a constraint between two sets of attributes → (c)
+
+1-d, 2-b, 3-a, 4-c, **option A**.
+=== 3.20.61
+"No partial functional dependencies (of non-prime attributes on a key)" is exactly the definition of **2NF**. **Option B**.
+=== 3.20.62
+a: C
+A decomposition preserves dependencies if every FD in F either appears directly in some $R_i$ **or** can be inferred from the union of the FDs that hold on the individual $R_i$, i.e. $(\bigcup F_i)^+ = F^+$. **Both**, **option C**.
+=== 3.20.63
+BCNF ⊂ 3NF, so a relation in BCNF is always in 3NF. **Option A**.
+=== 3.20.64
+3NF removes **transitive dependencies** of non-prime attributes on the key. **Option B**.
+=== 3.20.65
+- **Decomposition:** $X\to YZ$ gives $X\to Y$ and $X\to Z$ → iv
+- **Union:** $X\to Y$ and $X\to Z$ give $X\to YZ$ → iii
+- **Composition:** $X\to Y$ and $Z\to W$ give $XZ\to YW$ → i
+- **Pseudo-transitivity:** $X\to Y$ and $YW\to Z$ give $XW\to Z$ → ii
+
+a-iv, b-iii, c-i, d-ii, **option D**.
+=== 3.20.66
+The FDs are AB → C, AB → D, C → A and D → B.
+
+The candidate keys are AB, CB, AD and CD (each closure is ABCD), so **every attribute is prime**. That puts R in 3NF.
+
+But C → A has a left side that isn't a superkey, so R is **not in BCNF**. The best normal form is **3NF**, **option B**.
+=== 3.20.67
+A and E never appear on a right side. $AE^+$: A → B, B → C, AC → D, which gives {A,B,C,D,E}.
+
+**AE** is the key, **option B**.
+=== 3.20.68
+- $A^+$: A → B, B → C, AC → D, which gives **ABCD**.
+- $E^+$: nothing applies, so it's just **E**.
+
+**Option B**.
+=== 3.20.69
+**A is false.** Every binary (two-attribute) relation **is** in BCNF.
+
+B and D are true. C, as stated, is the intended "true" one: 1NF is really about atomic values, but the key treats it loosely. **Option A**.
+=== 3.20.70
+A, B and D never appear on a right side, so every key contains ABD. $ABD^+$: B → C, AD → E, BE → F, AF → G, which gives everything.
+
+**ABD**, **option D**.
+=== 3.20.71
+a: D
+F never appears on any right side, so every key contains F. Without F, the keys of the other attributes (same FDs as GATE 2005 Q78) are AE, BE and DE.
+
+So the keys are **AEF, BEF and DEF**, **option D**.
+=== 3.20.72
+The key is AB. A → C and B → D are partial dependencies, so R is **in 1NF but not 2NF**. **Option A**.
+=== 3.20.73
+a: C
+Multivalued dependencies are dealt with by **4NF**. **Option C**.
+=== 3.20.74
+The correct matching is:
+
+- 2NF: no partial FDs → (iii)
+- 3NF: transitive dependencies eliminated → (i)
+- 4NF: multivalued dependencies removed → (ii)
+- 5NF: no join dependencies → (iv)
+
+That's a-iii, b-i, c-ii, d-iv. None of the printed codes matches it exactly, which is why the question has no official answer. The closest is D, which differs in two pairs.
+=== 3.20.75
+The key is ab. a → c and b → d are partial dependencies, so the relation is **in 1NF but not 2NF**. **Option A**.
+=== 3.20.76
+E and C never appear on a right side. $EC^+$: E → A, A → B, C → F, EC → D, which gives everything.
+
+**EC**, **option B**.
+=== 3.20.77
+This is the same as GATE 2008 Q69.
+
+- **Book:** Publisher, Title, Year → Price is a transitive dependency of the non-prime attribute Price, so Book is in 2NF but not 3NF.
+- **Collection:** in BCNF, and therefore in 3NF.
+
+**Option C**.
+=== 3.20.78
+BCNF ⊂ 3NF ⊂ 2NF, so a BCNF relation is in **2NF and 3NF**. It isn't necessarily in 4NF, because it may still have non-trivial MVDs. **Option D**.
+=== 3.20.79
+The official key is **A**, but the statement is muddled. If V_name depends on V_no, which is **part** of the composite key (V_no, V_ord_no), that's a **partial** dependency, and it would **violate** 2NF.
+
+The question means "the relation is (not) in 2NF *because* of this partial dependency". A is the only option that describes a real dependency relevant to 2NF. Options B to D talk about dependencies on non-key attributes or on "primary key unit_price", which don't make sense.

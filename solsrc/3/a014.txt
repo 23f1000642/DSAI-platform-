@@ -1,0 +1,60 @@
+=== 3.26.8
+In ER notation, a weak entity set is drawn as a double rectangle, and its **identifying (supporting) relationship** is drawn as a **diamond with a double border**. **Option A**.
+=== 3.26.9
+Map each sentence of the specification to the diagram:
+
+- Instructors **teach** courses: Instructor–Teaches–Course
+- Students **register** for courses: Student–Registration–Course, where Registration is a *relationship*
+- Courses are **allocated** classrooms: Course–Allocation–Classroom
+- Instructors **guide** students: Instructor–Guides–Student
+
+Diagram **(iv)** has exactly these four relationships, with Student as an entity.
+
+- (i) makes Student a relationship and Registration an entity.
+- (ii) has "Projects" instead of Student.
+- (iii) links Classroom directly to Course.
+
+**Option D**.
+=== 3.26.10
+A weak entity can't exist without its owner, so it **must** participate totally in the identifying relationship. The owner needn't: some owners may have no weak entities. **Option A**.
+=== 3.26.11
+1. **E1(A11, A12, A13)**
+2. **E2(A21, A22, A11)**: R is 1:m, so E1's key goes into E2, on the "many" side.
+3. **E2_A23(A21, A23)**: a multivalued attribute needs its own table to stay in 1NF/3NF.
+
+That's **3** tables, **option B**.
+=== 3.26.12
+The rent depends on the *combination* of person and room, i.e. on the particular stay. So it belongs to the many-to-many relationship **Lodging**, not to either entity. **Option C**.
+=== 3.26.13
+a: 6
+**Yes, the explanation is correct. The minimum is 6 tables.**
+
+- Every entity (A, B, C and D) needs its own table: 4.
+- The two **many-to-many** relationships (R₁ between A and B, and R₂ between A and C) each need a table: 2.
+- The **1:M** relationship and the **1:1** relationship (R₄, between B and D) need no table. Each becomes a foreign key on the appropriate side.
+
+$4 + 2 = 6$.
+
+(The "5.18 to 5.82" range shown as the correct answer in the screenshot is a mistake in that test's key.)
+=== 3.26.14
+a: A
+The "1" on S means: for a given combination of the *other* participants (P, Q, T), there is at most one S. Likewise, the "1" on T means that for a given (P, Q, S) there is at most one T.
+
+| set | check | valid? |
+|---|---|---|
+| I | (p1, q1, s1) appears with t1 **and** t2 | ✘ violates the 1 on T |
+| II | (p1,q1,s1)→t1, (p1,q1,s2)→t2, (p1,q1,t1)→s1, (p1,q1,t2)→s2 | ✔ |
+| III | the rows differ in Q, so no combination repeats | ✔ |
+
+Only **I** can't be a relationship set. **Option A**.
+=== 3.26.15
+a: D
+The E-R model is expressed in terms of **all three**: entities, relationships among entities, and attributes. No option lists all three, so **None of the above**, **option D**.
+=== 3.26.16
+a: C
+The sentence reads: "The entity type on which the **weak entity** type depends is called the identifying owner." The blank describes the dependent type, so the intended answer is **weak entity**, **option C**.
+
+(The owner itself is a strong entity.)
+=== 3.26.17
+a: D
+An entity is described by a set of properties (attributes) and their values. The values of **some** of those properties may **uniquely identify** the entity: that's a key. **(iv)**, **option D**.

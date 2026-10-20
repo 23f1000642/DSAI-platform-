@@ -1,0 +1,73 @@
+=== 3.26.18
+a: D
+The E-R model is built from **entities, relationships among entities, and attributes**. "Functional relationship" isn't one of its constructs. **I, II, III**, **option D**.
+=== 3.26.19
+a: A
+Specialisation starts from a general entity type and defines more specific subclasses: it's a **top-down** process. Generalisation is the bottom-up reverse. **Option A**.
+=== 3.26.20
+a: B
+Generalisation combines entity types that share features into a higher-level type. To do that, it **suppresses (minimises)** the differences between them and emphasises the similarities. **Option B**.
+=== 3.26.21
+An E-R model includes the **ER diagram** of entity types (I), **attributes** (II), **relationships** (III), and the **semantic integrity constraints** (business rules) that the diagram itself can't capture (IV). **Option A**.
+=== 3.26.22
+This is the same diagram as GATE 2008 Q82:
+
+- **M(M1, M2, M3, P1)**: R1 is many-to-one with total participation of M, so it merges into M.
+- **P(P1, P2)**
+- **N(P1, N1, N2)**: the weak entity, with the identifying relationship R2 merged in.
+
+**3** tables, **option B**.
+=== 3.26.23
+A conceptual model **is** meant to be an accurate representation of the "universe of interest", the part of the real world being modelled. So C is the false statement. **Option C**.
+=== 3.26.24
+A weak entity lacks a key of its own. Turning it into a strong entity means **adding suitable attributes**, so that it gets its own primary key (for example, adding the owner's key as a real attribute). **Option D**.
+=== 3.26.25
+In UML-style notation, the association name ("pet") is written near the line, and the multiplicity **0..\*** at the Animal end says a person keeps zero or more animals. Option A shows the association label "pet" at the Animal end, with 0..\* multiplicity. **Option A**.
+=== 3.26.26
+fix: D
+- **M** and **N**: one table each.
+- **R1 (one-to-many)**: merges into the "many" side as a foreign key, so no extra table.
+- **R2 (many-to-many)**: needs its own table.
+
+The minimum is **3**. The official key says 4, but that would only be right if R1 got a table of its own, and that isn't minimal. **Option D**.
+=== 3.26.27
+Mapping an ER model to tables gives atomic-valued columns (multivalued attributes go into their own tables), so the relations are always in **1NF**. Higher normal forms depend on the FDs, which the ER diagram doesn't guarantee. **Option A**.
+=== 3.26.28
+a: A
+An ER diagram represents the **data model**: entities, attributes and relationships. Process models are drawn with DFDs. **Option A**.
+=== 3.26.29
+a: A
+An entity instance is one occurrence of an **entity type**. For example, "Ravi" is an instance of the type STUDENT. **Option A**.
+=== 3.26.30
+**B is false.** A weak entity set **does** carry the owner's key, as part of its own key, through the identifying relationship. It doesn't avoid that duplication.
+
+The other statements are true or the accepted ones: weak entities are deleted along with their owner (A), and they have no primary key without the owner's key (C). **Option B**.
+=== 3.26.31
+- E1 and E2: 2 tables.
+- R1 (one-to-many): becomes a foreign key on the many side, with no table.
+- R2 (many-to-many): 1 table.
+
+**3**, **option B**.
+=== 3.26.32
+- CREATE is a **DDL** command → (iii)
+- SELECT is a **DML** command → (iv)
+- A rectangle is the entity symbol of the **ER model** → (i)
+- A record is the basic unit of the record-based **relational model** → (ii)
+
+a-iii, b-iv, c-i, d-ii, **option A**.
+=== 3.26.33
+- (a) A bare diamond is a **relationship** → ii
+- (b) Lines on both sides with no arrows: **many-to-many** → iii
+- (c) An arrow on one side only: **many-to-one** → iv
+- (d) Arrows on both sides: **one-to-one** → i
+
+**Option C**.
+=== 3.27.1
+In a specialisation **lattice**, an entity type (a shared subclass) can be a subclass in **more than one** specialisation, i.e. it can have several superclasses. In a hierarchy, it would have only one. **Option B**.
+=== 3.28.1
+- **Entity integrity:** the primary key is unique and not null, so there are no duplicate rows → (iv)
+- **Domain integrity:** only valid values in a column → (iii)
+- **Referential integrity:** rows referenced by other records can't be deleted → (ii)
+- **User-defined integrity:** specific business rules → (i)
+
+**Option B**.
