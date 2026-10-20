@@ -1,0 +1,65 @@
+=== 3.56.1
+a: B
+- **I is true.** Conservative 2PL locks everything a transaction needs **before** it starts, so it never waits while holding locks. No deadlock.
+- **II is false.** Thomas's write rule ignores obsolete writes. It gives **view** serialisability, not conflict serialisability.
+- **III is true.** Timestamp ordering serialises transactions in timestamp order.
+
+**Option B**.
+=== 3.57.1
+**Serialisability:**
+
+- T1's Read A comes before T2's Write A, giving T1→T2.
+- T2's Write B comes before T1's Read/Write B, giving T2→T1.
+
+That's a cycle, so the schedule is **not serialisable**.
+
+**2PL:** 2PL produces only conflict-serialisable schedules, so this schedule **can't occur** under 2PL.
+
+**Option D**.
+=== 3.57.2
+Suppose a transaction reads data written by an **uncommitted** transaction and then commits. If the writer later aborts, the committed reader can't be undone. That's an irrecoverable error. **Option D**.
+=== 3.57.3
+The conflicts:
+
+- T2 R(D2) and W(D2) come before T3 R(D2) and W(D2): **T2→T3**
+- T3 R(D2) and W(D2) come before T1 R(D2) and W(D2): **T3→T1**
+- T1 R(D1) and W(D1) come before T2 R(D1) and W(D1): **T1→T2**
+
+That's a cycle T1→T2→T3→T1, so the schedule is **not serialisable**. **Option D**.
+=== 3.57.4
+At the crash, T1 has committed (its commit is in the log), but **T2 hasn't** (record 7 is missing).
+
+- **Undo** T2's change: record 6, setting B back to 10000.
+- **Redo** T1's changes: records 2 and 3.
+
+**Option B**.
+=== 3.57.5
+- **S1:** r1(Y) before w2(Y) gives T1→T2. r2(X) before w1(X) gives T2→T1. That's a **cycle**.
+- **S2:** w2(Y) before r1(Y), and r2(X) before w1(X). Both edges are T2→T1, so it's acyclic and **serialisable**.
+
+**Option C**.
+=== 3.57.6
+Precedence graphs:
+
+| schedule | edges | conflict serialisable? |
+|---|---|---|
+| S1 | W1y before W2y gives T1→T2. R2x before W1x gives T2→T1 | ✘ cycle |
+| S2 | R2x before W1x, and W2y before W1y. Both edges are T2→T1 | ✔ (T2, T1) |
+| S3 | W1x before R2x, and W1y before R2y. Both edges are T1→T2 | ✔ (T1, T2) |
+| S4 | R2x before W1x gives T2→T1. W1y before W2y gives T1→T2 | ✘ cycle |
+
+**S2 and S3**, **option B**.
+=== 3.57.7
+- **2PL** guarantees conflict serialisability but **can deadlock**.
+- **Timestamp ordering** guarantees conflict serialisability and is **deadlock-free**, because transactions never wait.
+
+**II only**, **option B**.
+=== 3.57.8
+The conflicts:
+
+- T1 Read(X) and Write(X) come before T2 Read(X) and Write(X): **T1→T2**
+- T1 Write(X) comes before T3 Write(X): **T1→T3**
+- T3 Read(Y) comes before T2 Write(Y): **T3→T2**
+- T3 Write(X) comes before T2 Read(X) and Write(X): **T3→T2**
+
+The graph is acyclic, so the serial order is **T1 → T3 → T2**. **Option A**.

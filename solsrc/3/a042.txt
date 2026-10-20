@@ -1,0 +1,41 @@
+=== 3.57.9
+T1 reads P and writes Q. T2 reads Q and writes P. In **any** interleaving, both reads happen before the other transaction's write:
+
+- r1(P) before w2(P) gives T1→T2
+- r2(Q) before w1(Q) gives T2→T1
+
+That's always a cycle, so the schedule is **not conflict serialisable**. **Option B**.
+=== 3.57.10
+"The sum of x and y stays the same" is an integrity rule of the application. Keeping it is the **consistency** property. **Option B**.
+=== 3.57.11
+- **T4** committed before the checkpoint, so it's already safe and needs nothing.
+- **T2** committed after the checkpoint, so it goes on the **redo** list.
+- **T1** and **T3** never committed, so they go on the **undo** list.
+
+**Undo: T3, T1. Redo: T2.** **Option A**.
+=== 3.57.12
+T2 reads A at time 7, after T1 wrote A (time 2), and **commits** at time 8. When T1 then fails, T2 has already committed using a value that T1 must roll back. The commit can't be undone, so the schedule is **non-recoverable**. **Option B**.
+=== 3.57.13
+ACID stands for Atomicity, Consistency, Isolation and Durability. **Deadlock-freedom** isn't one of them. **Option D**.
+=== 3.57.14
+- **Serialisability:** all locks are taken before any operation and released only at the end. That's conservative (and strict) 2PL, which guarantees serialisability.
+- **Deadlock-freedom:** every transaction acquires locks in the **same global order** (increasing address), so a circular wait is impossible.
+
+**Both**, **option A**.
+=== 3.57.15
+For an acyclic precedence graph, a **topological order** respects every conflict edge, so it gives an equivalent serial schedule. **Option A**.
+=== 3.57.16
+The reads: r1(X) is the initial X, r1(Y) is the initial Y, and r2 reads initial values only.
+
+**No transaction reads data written by another transaction.** So an abort never forces another abort: there's **no cascading abort**.
+
+The schedule isn't strict, though: w2(X) overwrites X while T1, which wrote X earlier, is still uncommitted. **Option C**.
+=== 3.57.17
+- If $T_2$ (the requester) is **older** ($TS(T_2) < TS(T_1)$), the holder $T_1$ is killed. Otherwise the younger $T_2$ waits.
+
+This is the **wound–wait** scheme. Only younger transactions ever wait for older ones, so there are no cycles, and the system is **deadlock-free**. A killed transaction restarts with its **original** timestamp, so it eventually becomes the oldest and is never killed again. So the system is **starvation-free** too. **Option A**.
+=== 3.57.18
+- **I is true.** Strict 2PL gives conflict-serialisable schedules, and holding write locks until commit makes them strict, and therefore recoverable.
+- **II is true.** Thomas's write rule skips obsolete writes. That allows schedules that are view serialisable but not conflict serialisable (blind writes).
+
+**Both**, **option C**.

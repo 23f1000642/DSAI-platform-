@@ -1,0 +1,48 @@
+=== 3.57.41
+a: C
+The basic database access operations of a transaction are **read_item(X)** and **write_item(X)**. **Both**, **option C**.
+=== 3.57.42
+The transaction manager coordinates transactions: it keeps the **log**, the **before and after images** used for recovery, and **concurrency control**. **All of the above**, **option D**.
+=== 3.57.43
+Precedence graphs:
+
+- **S1:** r1 before w2 gives T1→T2. r2 before w1 gives T2→T1. Cycle. ✘
+- **S2:** r1 before w2 gives T1→T2. r2 before w1 gives T2→T1. Cycle. ✘
+- **S3:** r1 before w2 gives T1→T2. r2 before w1 gives T2→T1. Cycle. ✘
+- **S4:** r2 and w2 come before r1, r3 and w1. Edges T2→T3, T2→T1 and T3→T1. Acyclic ✔ (order T2, T3, T1).
+
+**Option D**.
+=== 3.57.44
+A **topological order** of an acyclic precedence graph respects every conflict edge, so it gives an equivalent serial schedule. **Option A**.
+=== 3.57.45
+Pre-empting a transaction and rolling it back (as in wait-die or wound-wait) breaks circular waits, which **prevents deadlock**. **Option B**.
+=== 3.57.46
+Thomas's write rule is a refinement of the **timestamp-ordering protocol**: obsolete writes are ignored instead of aborting the transaction. **Option B**.
+=== 3.58.1
+a: D
+ACID stands for Atomicity, Consistency, Isolation and Durability. **Deadlock-freedom** isn't one of them. **Option D**.
+=== 3.59.1
+Bind p to **players**. Then require a team t whose tid matches p's and whose tname is 'MI':
+$$\{p.pname \mid p\in players \wedge \exists t(t\in teams\wedge p.tid = t.tid \wedge t.tname='MI')\}$$
+- B and D range p over the wrong relation.
+- C never links p to t, so it returns every player whenever an MI team exists.
+
+**Option A**.
+=== 3.60.1
+a: B
+A **view** is a window onto part of the database: a virtual table that shows selected data. **Option B**.
+=== 3.61.1
+A weak entity set gets its meaning from the **identifying owner entity set**, together with its own discriminator (partial key). **Option C**.
+=== 3.62.1
+An XML document that follows the XML 1.0 syntax rules is **well-formed**. A *valid* document also conforms to a DTD or schema. **Option A**.
+=== 3.62.2
+a: D
+XML **namespaces** qualify element names with a URI, which makes them globally unique. **Option D**.
+=== 3.58.2
+Two operations **conflict** when all three of these hold:
+
+- (a) at least one of them is a **write**
+- (b) they act on the **same** data item
+- (c) they belong to **different** transactions
+
+(d) contradicts (b). **(a), (b) and (c)**, **option B**.

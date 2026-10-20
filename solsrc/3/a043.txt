@@ -1,0 +1,65 @@
+=== 3.57.19
+The conflicting pairs in the original schedule are:
+
+- **On B:** T2's RB and WB come before T1's WB, giving T2→T1.
+- **On C:** T1's RC comes before T2's WC, giving T1→T2.
+- **On D:** T2's RD comes before T1's WD, giving T2→T1.
+
+That's a **cycle**, but the question only asks for a schedule with **the same conflict order**. Option A keeps every pair:
+
+- T2's RB and WB before T1's WB ✔
+- T2's RD before T1's WD ✔
+- T1's RC before T2's WC ✔
+
+**Option A**.
+=== 3.57.20
+Undo and redo are **idempotent**. If recovery crashes, you simply run the **same** recovery again, with the same undo and redo lists from the log. A is correct.
+
+B and D are false: recovery can always be repeated. C is false: without checkpoints, everything is recovered again. **Option A**.
+=== 3.57.21
+- **A ✔.** 2PL guarantees conflict serialisability.
+- **B ✘.** That describes locking per operation, not 2PL.
+- **C ✔.** This is the definition: a growing phase followed by a shrinking phase.
+- **D ✔.** 2PL can deadlock.
+
+**A, C and D**.
+=== 3.57.22
+The effects of a committed transaction survive later crashes: that's **durability**. **Option A**.
+=== 3.57.23
+- **T2** reads Y after T1 wrote it (W1(Y) then R2(Y)). That's a dirty read, so T2 must roll back.
+- **T3** also reads Y written by T1 (R3(Y) after W1(Y)), so it must roll back too.
+
+**Both T2 and T3**, **option C**.
+=== 3.57.24
+Both transfers read 11000 and each wrote 1000. One debit was lost, a **lost update**. That's an **isolation** failure.
+
+The total money changed (B gained 20000 but A lost only 10000), so the database became **inconsistent**: consistency was violated.
+
+Each transaction did complete in full, so atomicity wasn't necessarily violated. Durability wasn't violated either. **B and C**.
+=== 3.57.25
+Smaller locking units allow more transactions to run at the same time. **Row**-level locking gives the highest concurrency. **Option C**.
+=== 3.57.26
+**Conflicts:**
+
+- On A: T1 reads A first, T2 writes A (T1→T2), then T1 writes A after T2's write (T2→T1).
+- On B: T2 reads B before T1 writes it (T2→T1), and T1 writes B before T2 writes it (T1→T2).
+
+That's a cycle, so the schedule is **not conflict serialisable**.
+
+**Result serialisability:** T1's update to A is overwritten in a way that loses T2's write. The final values match neither serial order. So S is **not serialisable as T1,T2 or as T2,T1**, which is option D.
+
+The official key gave **marks to all**, because the result depends on how the schedule is read (lost-update effects).
+=== 3.57.27
+**Durability** means committed changes persist **always**, even after any failure. Recovery from the logs or backups restores them. **Option D**.
+=== 3.57.28
+Each script must run **once** on each salesperson.
+
+If a lower slab runs first, it can push someone over a threshold. Then a higher-slab script raises them again. Example: 49,500 → 50,490, then T2 raises it a second time.
+
+So start with the **highest** slab, and go down:
+
+1. T3 (> 100000)
+2. T2 (50000–100000)
+3. T1 (≤ 50000)
+
+Each raise only moves a commission upward, so nobody is touched twice. **Option D**.
