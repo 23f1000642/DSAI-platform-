@@ -1,0 +1,102 @@
+=== 5.7.11
+Near 0, $1 - e^{2\sqrt x}\approx-2\sqrt x$. So the limit is $\frac{\sqrt x}{-2\sqrt x} = \mathbf{-0.5}$.
+=== 5.7.12
+Multiply by the conjugate:
+$$\sqrt{t^2+t} - t = \frac{t}{\sqrt{t^2+t} + t} = \frac{1}{\sqrt{1 + 1/t} + 1}\to\frac12 = \mathbf{0.5}$$
+=== 5.7.13
+Divide by $|x - y|$: $\left|\frac{f(x)-f(y)}{x-y}\right|\le|x-y|\to0$. So $f'\equiv0$, f is constant, and $f(1) - f(0) = \mathbf{0}$.
+=== 5.7.14
+Near 0, $\ln(1+x^2)\approx x^2$ and $\ln\cos x\approx-\tfrac{x^2}{2}$. Their sum is $\tfrac{x^2}{2}$, so the limit is **0.5**.
+=== 5.7.15
+This is the derivative of $\sqrt x$ at 2: $\frac{1}{2\sqrt2}$. **Option C**.
+=== 5.8.1
+If f is continuous, a sign change between $x_i$ and $x_{i+1}$ forces a root in between (intermediate value theorem). **Option A**.
+=== 5.8.2
+Let $g(x) = x - \cos x$. Then $g' = 1 + \sin x\ge0$, so g is increasing. $g(0) = -1$ and $g(\pi) = \pi + 1$. **Exactly one** solution, **option B**.
+=== 5.8.3
+$2x^2 - 4x + 3$ has its vertex at $x = 1$, with value $2 - 4 + 3 = \mathbf{1}$.
+=== 5.8.4
+The parabola opens upwards, so the maximum is at an endpoint: $f(0) = 6$ and $f(2) = 10$. The maximum is **10**, **option B**.
+=== 5.8.5
+$f' = 12x^3 - 48x^2 + 48x = 12x(x-2)^2$.
+
+- f′ changes sign only at $x = 0$, where there's a minimum.
+- At $x = 2$, f′ stays non-negative on both sides, so that's an inflection point, not an extremum.
+
+**One** extremum, **option B**.
+=== 5.8.6
+On $[\tfrac\pi4, \tfrac{7\pi}4]$, sin x has an interior minimum at $\tfrac{3\pi}{2}$. It also has a local minimum at the **left endpoint** $\tfrac\pi4$, because sin increases right after it.
+
+**Two**, at $\tfrac\pi4$ and $\tfrac{3\pi}2$. **Option D**.
+=== 5.8.7
+$1 - |x|$ is largest at $x = 0$, where it equals 1. **Option C**.
+=== 5.8.8
+- I: $e^{-x}$ is decreasing. ✘
+- II: the derivative $2x - \cos x$ is $-1$ at 0, so it isn't increasing everywhere. ✘
+- III: the derivative is $\frac{3x^2}{2\sqrt{x^3+1}}\ge0$. ✔
+
+**III only**, **option A**.
+=== 5.8.9
+$f' = 3x^2 + 30x - 33 = 3(x+11)(x-1)$ and $f'' = 6x + 30$.
+
+- At $x = -11$, $f'' < 0$: **local maximum**.
+- At $x = 1$, $f'' > 0$: **local minimum**.
+
+**B and D**.
+=== 5.8.10
+$f' = x^2 + 7x + 10 = (x+2)(x+5)$.
+
+| x | f(x) |
+|---|---|
+| −8 | ≈ 39.8 |
+| −5 | ≈ 62.3 (local maximum) |
+| −2 | ≈ 57.8 (local minimum) |
+| 0 | **66.5 = 133/2** |
+
+- The maximum is $\tfrac{133}{2}$, at $x = 0$. C ✔, A ✘.
+- The minimum is at $x = -8$, not −2. B ✘.
+- $f' = x^2 + 7x + 10$ is smallest at $x = -\tfrac72$. D ✔.
+
+**C and D**.
+=== 5.8.11
+$f' = x^3 - 2x^2 - 3x = x(x-3)(x+1)$ and $f'' = 3x^2 - 4x - 3$.
+
+| x | f″ | type |
+|---|---|---|
+| 0 | −3 | local maximum |
+| 3 | 12 | local minimum |
+| −1 | 4 | local minimum |
+
+**A and B**.
+=== 5.8.12
+$f'(x^*) = 0$ and $f''(x^*) > 0$ is the second-derivative test for a **local minimum**. **Option A**.
+=== 5.8.13
+- For $x\le\tfrac32$: $\frac{25}{8x}$ is decreasing, so its minimum is at $\tfrac32$: $\frac{25}{12} = 2\tfrac1{12}$.
+- For $x > \tfrac32$: $x + \tfrac1x$ is increasing, so it's always greater than $1.5 + 0.667 = 2.1\overline6$.
+
+The minimum is $2\tfrac{1}{12}$, **option B**.
+=== 5.9.1
+At the jump $x = \pi$, the Fourier series converges to the average of the left and right limits: $\frac{\pi + 0}{2} = \frac\pi2$.
+
+There, $\cos n\pi = (-1)^n$, so $(\cos n\pi - 1)\cos n\pi = 1 - (-1)^n$. That's 2 for odd n and 0 for even n. The sine terms vanish. So
+$$\frac\pi2 = \frac\pi4 + \frac2\pi\sum_{n\text{ odd}}\frac{1}{n^2} \Rightarrow \sum_{n\text{ odd}}\frac1{n^2} = \frac{\pi^2}{8}$$
+**Option C**.
+=== 5.9.2
+The critical points come from:
+
+- $f_x = 2xy - 3y + 1 = 0$
+- $f_y = x^2 - 3x + 2 = 0$, so $x = 1$ or $x = 2$
+
+They are (1, 1) and (2, −1). The Hessian determinant is
+$$f_{xx}f_{yy} - f_{xy}^2 = (2y)(0) - (2x-3)^2 < 0$$
+at both points, so both are **saddle points**. There's **no local extremum**. **Option A**.
+=== 5.9.3
+By the divergence theorem:
+$$\nabla\cdot\vec v = \cos^2y + 0 + \sin^2y = 1$$
+So the flux through the unit cube equals the cube's volume: **1**.
+=== 5.9.4
+The characteristic equation is $r^2 + 3r + 2 = 0$, so $r = -1, -2$. The solution is $C_1e^{-x} + C_2e^{-2x}$, **option C**.
+=== 5.10.1
+A real polynomial of **odd** degree (7) always has at least one real root. Complex roots come in pairs. **Option B**.
+=== 5.10.2
+$(x-1)^3 = -8$, so $x - 1 = -2$, $-2\omega$ or $-2\omega^2$. That gives $x = -1$, $1 - 2\omega$ and $1 - 2\omega^2$. **Option C**.

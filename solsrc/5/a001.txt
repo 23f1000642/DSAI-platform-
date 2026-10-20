@@ -1,0 +1,102 @@
+=== 5.1.1
+f must be continuous and differentiable at both $x = 1$ and $x = 2$.
+
+**At $x = 1$:**
+
+- continuity: $1 = a + b + c$
+- derivative: $2 = 2a + b$
+
+**At $x = 2$:**
+
+- continuity: $4a + 2b + c = 2 + d$
+- derivative: $4a + b = 1$
+
+From the two derivative equations, $2a = -1$, so $a = -\tfrac12$ and $b = 3$. Then:
+
+- $c = 1 - a - b = 1 + \tfrac12 - 3 = -\tfrac32$
+- $d = 4a + 2b + c - 2 = -2 + 6 - \tfrac32 - 2 = \tfrac12$
+
+**$a = -\tfrac12$, $b = 3$, $c = -\tfrac32$, $d = \tfrac12$**.
+=== 5.1.2
+$|x|$ is continuous everywhere, but at $x = 0$ the left derivative is −1 and the right derivative is +1. **Continuous but not differentiable**, **option B**.
+=== 5.1.3
+$|x|$ is continuous everywhere but not differentiable at 0. **P true, Q false**, **option A**.
+=== 5.1.4
+**A:** from the left, $(3+3)/3 = 2$. From the right, $3 - 1 = 2$. And $f(3) = 2$. **Continuous** ✔.
+
+- B: the limit is 5, but $f(3) = 4$. ✘
+- C: from the left 6, from the right −1. ✘
+- D: undefined at 3. ✘
+
+**Option A**.
+=== 5.1.5
+Let $g(y) = f(y) - f(y+1)$ on [0, 1]:
+
+- $g(0) = -1 - 1 = -2$
+- $g(1) = 1 - (-1) = 2$
+
+g is continuous, so by the intermediate value theorem $g(y) = 0$ for some $y\in(0,1)$. **Option A**.
+=== 5.1.6
+$f(x) = x^{-1/3}$ blows up at 0, so it's **not continuous** (I ✘) and **not bounded** (II ✔) on [−1, 1].
+
+The area is $\int_{-1}^1|x|^{-1/3}dx = 2\cdot\tfrac32 = 3$, which is **finite and non-zero** (III ✔). **II and III**, **option C**.
+=== 5.1.7
+By the mean value theorem, $f(3) - f(-3) = 6f'(c)\le12$. So $f(3)\le7 + 12 = \mathbf{19}$.
+=== 5.1.8
+**At $x = 2$:**
+
+- continuity: $4a + 2b + c = 2$
+- derivative: $4a + b = 1$
+
+**At $x = -2$:**
+
+- continuity: $4a - 2b + c = 2$
+- derivative: $-4a + b = -1$
+
+The derivative equations add to give $2b = 0$, so $b = 0$ and $a = \tfrac14$. Then $c = 2 - 1 = 1$. **Option A**.
+=== 5.1.9
+$|2 - 3x|$ is continuous everywhere, with a corner where $2 - 3x = 0$, i.e. $x = \tfrac23$. **Option C**.
+=== 5.2.1
+fix: B;D
+- **A:** near 0, $\frac{\sin x}{1-\cos x}\approx\frac{x}{x^2/2} = \frac2x$. **Diverges.**
+- **B:** $\int_0^\infty\frac{\cos x}{1+x}dx$ converges by Dirichlet's test ($\frac1{1+x}\downarrow0$, and $\int\cos x$ is bounded). ✔
+- **C:** $\frac{x}{1+x^2}\sim\frac1x$ at infinity. **Diverges.**
+- **D:** near 0, $\frac{1-\cos x}{x^{5/2}}\approx\frac{x^2/2}{x^{5/2}} = \frac{1}{2\sqrt x}$, which is integrable. ✔
+
+**B and D**. (The PDF's key lists only B, but D also converges. If D's denominator were $x^5/2$, it would diverge.)
+=== 5.2.2
+Ratio test, with $a_m = \frac{(3m)!}{(m!)^3}x^{3m}$:
+$$\left|\frac{a_{m+1}}{a_m}\right| = \frac{(3m+3)(3m+2)(3m+1)}{(m+1)^3}|x|^3 \to 27|x|^3$$
+It converges when $27|x|^3 < 1$, i.e. $|x| < \tfrac13$. The radius of convergence is **1/3**.
+=== 5.3.1
+- $\int_{-2}^{2}y\,dy = 0$ (an odd function on a symmetric interval), so the $4x^2y$ term integrates to 0.
+- $\int_{-1}^{1}z^3\,dz = 0$, so the $z^3$ term is 0 too.
+
+The integral is **0**.
+=== 5.3.2
+Integrate $f(x) + f(2-x) = 1$ over [0, 2]. Substituting $u = 2 - x$ shows that $\int_0^2 f(2-x)dx = \int_0^2 f$. So $2I = 2$ and **$I = 1$**. **Option B**.
+=== 5.3.3
+$$\int_1^x t\ln t\,dt = \frac{x^2\ln x}{2} - \frac{x^2}{4} + \frac14$$
+Setting this equal to $\tfrac14$ gives $\frac{x^2\ln x}{2} = \frac{x^2}{4}$, so $\ln x = \tfrac12$ and $x = \sqrt e$. **Option A**.
+=== 5.4.1
+fix: B
+The $\sin y$ term makes the equation **non-linear** in y. **Option B**.
+
+(The PDF's key lists A, but a linear ODE can only contain y and its derivatives to the first power. $\sin y$ breaks that.)
+=== 5.5.1
+The central difference formula is
+$$f''(x_0)\approx\frac{f(x_0+h) - 2f(x_0) + f(x_0-h)}{h^2}$$
+**Option D**.
+=== 5.5.2
+$f' = \sin x + x\cos x$, and $f'' = 2\cos x - x\sin x$. Then $f'' + f = 2\cos x$, so $t = \mathbf{-2}$.
+=== 5.5.3
+At $\theta = \tfrac\pi6$ and $\tfrac\pi3$, two rows of the determinant are equal, so $f = 0$ at both ends.
+
+- **I.** f is differentiable, so by Rolle's theorem $f'(\theta) = 0$ somewhere in between. ✔
+- **II.** f isn't identically 0, because row 1 varies independently. So $f'\ne0$ somewhere. ✔
+
+**Both**, **option C**.
+=== 5.5.4
+$f(x) + f(-x)$ is twice the **even part** of f, so the even part has degree 10.
+
+$g(x) - g(-x) = f'(x) - f'(-x)$ is twice the odd part of $f'$, which is the derivative of the even part of f. Its degree is **9**.

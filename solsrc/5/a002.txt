@@ -1,0 +1,103 @@
+=== 5.5.5
+- $f'(x) = R\tfrac\pi2\cos\tfrac{\pi x}{2}$. At $x = \tfrac12$: $R\tfrac\pi2\cdot\tfrac{\sqrt2}{2} = \sqrt2$, so $R = \tfrac4\pi$.
+- $\int_0^1 f = R\cdot\tfrac2\pi + S = \tfrac{8}{\pi^2} + S$. This must equal $\tfrac{2R}{\pi} = \tfrac{8}{\pi^2}$, so $S = 0$.
+
+**Option C**.
+=== 5.5.6
+$x = x^3$ at $x = -1, 0, 1$. At each of these points, f switches between two curves with different slopes, so it has corners there: **{−1, 0, 1}**. **Option D**.
+=== 5.5.7
+At $x = 1$:
+
+- continuity: $a + b = 3$
+- derivative: $a = 3(1)^2 + 2(1) = 5$
+
+So $b = \mathbf{-2}$.
+=== 5.5.8
+- **A, B ✔.** Sums, differences and products of differentiable functions are differentiable.
+- **C ✔.** A quotient is differentiable because $g > 1$ is never 0.
+- **D ✘.** $f\circ g$ needs f to be differentiable at $g(c)$, which isn't given.
+
+**A, B and C**.
+=== 5.5.9
+$f(x) = \sinh x$. Its even-order derivatives are $\sinh x$, and $\sinh0 = 0$. So $f^{(10)}(0) = \mathbf{0}$. **Option A**.
+=== 5.5.10
+$f'' > 0$ means f is strictly convex and $f'$ is strictly increasing.
+
+- **A ✘.** $e^x$ has no minimum at all.
+- **B ✔.** $f'$ is injective, so it can't be 0 at two different points.
+- **C ✔ and D ✔.** A strictly convex function has at most one minimiser.
+
+**B, C and D**.
+=== 5.6.1
+Read the integral as $\int_0^1\int_0^{1/x}\frac{x}{1+y^2}\,dy\,dx = \int_0^1 x\arctan\tfrac1x\,dx$.
+
+Use $\arctan\tfrac1x = \tfrac\pi2 - \arctan x$:
+$$\int_0^1\tfrac{\pi}{2}x\,dx - \int_0^1 x\arctan x\,dx = \frac\pi4 - \left(\frac\pi4 - \frac12\right) = \mathbf{\tfrac12}$$
+(Integrating by parts: $\int_0^1 x\arctan x = \frac\pi8 - \frac12\left(1 - \frac\pi4\right) = \frac\pi4 - \frac12$.)
+=== 5.6.2
+**(a)** $f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$ and $f''(x) = 6x - 12$.
+
+- $x = 1$: $f'' = -6 < 0$, so **local maximum**, $f(1) = 19$.
+- $x = 3$: $f'' = 6 > 0$, so **local minimum**, $f(3) = 15$.
+- Endpoints: $f(0) = 15$ and $f(6) = 69$. So the absolute maximum on [0, 6] is 69, at $x = 6$, and the absolute minimum is 15, at $x = 0$ and $x = 3$.
+
+**(b)** $x\cos x$ is odd, so $\int_{-\pi}^{\pi}x\cos x\,dx = \mathbf{0}$.
+=== 5.6.3
+$x\log_2x$ is increasing. So the right-endpoint sum $\sum_{i=3}^{100}f(i)$ is larger than $\int_2^{100}f$. That gives **S > T**, **option A**.
+=== 5.6.4
+$\frac{1-\tan x}{1+\tan x} = \tan(\tfrac\pi4 - x)$. Substitute $u = \tfrac\pi4 - x$:
+$$\int_0^{\pi/4}\tan u\,du = \ln\sec\tfrac\pi4 = \tfrac12\ln2$$
+**Option D**.
+=== 5.6.5
+$\frac{e^{ix}}{e^{-ix}} = e^{2ix}$, so
+$$\int_0^{\pi/2}e^{2ix}dx = \frac{e^{i\pi} - 1}{2i} = \frac{-2}{2i} = i$$
+**Option D**.
+=== 5.6.6
+Integrate by parts twice: $\int x^2\cos x = x^2\sin x + 2x\cos x - 2\sin x$. From 0 to π that's $2\pi\cos\pi = \mathbf{-2\pi}$. **Option A**.
+=== 5.6.7
+- $\int_0^\pi x\sin x = \pi$
+- $\int_\pi^{2\pi}(-x\sin x) = [x\cos x - \sin x]_\pi^{2\pi} = 2\pi + \pi = 3\pi$
+
+The total is $4\pi$, so $k = \mathbf{4}$.
+=== 5.6.8
+Substitute $u = 1/x$, so $du = -dx/x^2$. The limits $x: \tfrac1\pi\to\tfrac2\pi$ become $u: \pi\to\tfrac\pi2$:
+$$\int_{\pi/2}^{\pi}\cos u\,du = \sin\pi - \sin\tfrac\pi2 = \mathbf{-1}$$
+=== 5.6.9
+Replace x with 1/x: $af(1/x) + bf(x) = x - 25$. Solve the two equations together for f:
+$$(a^2 - b^2)f(x) = a\left(\tfrac1x - 25\right) - b(x - 25)$$
+Integrate from 1 to 2:
+$$\frac{a(\ln2 - 25) - b\left(\tfrac32 - 25\right)}{a^2-b^2} = \frac{a(\ln2-25) + \tfrac{47b}{2}}{a^2-b^2}$$
+**Option A**.
+=== 5.6.10
+Substitute $u = x^2$:
+$$\tfrac12\int_0^{\pi^2/16}\cos u\,du = \tfrac12\sin\frac{\pi^2}{16} = \tfrac12\sin(0.6162)\approx\mathbf{0.289}$$
+=== 5.6.11
+Substitute $t = x - \pi$: $\int_{-\pi}^{\pi}t^2\sin(t+\pi)\,dt = -\int_{-\pi}^{\pi}t^2\sin t\,dt = 0$, because the integrand is odd. **Option B**.
+=== 5.7.1
+Expand using $e^x - 1 = x + \tfrac{x^2}{2} + \dots$ and $\cos x - 1 = -\tfrac{x^2}{2} + \tfrac{x^4}{24}$:
+
+- numerator: $x^2 + \tfrac{x^3}{2} - x^2 + O(x^4) = \tfrac{x^3}{2} + \dots$
+- denominator: $x\cdot\tfrac{x^2}{2} = \tfrac{x^3}{2}$
+
+The limit is **1**.
+=== 5.7.2
+Compare areas on the unit circle, for $0 < x < \tfrac\pi2$: triangle < sector < tangent triangle, i.e. $\sin x < x < \tan x$. Dividing by $\sin x$ and flipping:
+$$\cos x < \frac{\sin x}{x} < 1$$
+As $x\to0$, $\cos x\to1$, so by the squeeze theorem the limit is **1**. (The same holds from the left, because the function is even.)
+=== 5.7.3
+Divide the top and bottom by x: $\frac{1 - \sin x/x}{1 + \cos x/x}\to1$. **Option A**.
+=== 5.7.4
+$\left(1 - \tfrac1n\right)^{2n} = \left[\left(1 - \tfrac1n\right)^n\right]^2\to e^{-2}$. **Option B**.
+=== 5.7.5
+$x^{1/x} = e^{\ln x/x}\to e^0 = 1$. **Option C**.
+=== 5.7.6
+$e^{-x}\ln(1+x^2)\to0$, because the exponential beats the logarithm. So the limit is $e^0 = 1$. **Option C**.
+=== 5.7.7
+Using the standard limit $\sin t/t\to1$ with $t = x - 4$, the answer is **1**.
+=== 5.7.8
+It's $\tfrac00$, so use L'Hôpital: $\frac{7x^6 - 10x^4}{3x^2 - 6x}$ at $x = 1$ gives $\frac{-3}{-3} = 1$. **Option C**.
+=== 5.7.9
+It's $\tfrac00$ at 3, so use L'Hôpital: $\frac{4x^3}{4x - 5} = \frac{108}{7}$. **Option C**.
+=== 5.7.10
+Rationalise the numerator:
+$$\frac{(2x + 22) - 16}{(x+3)(\sqrt{2x+22} + 4)} = \frac{2}{\sqrt{2x+22} + 4}\to\frac{2}{8} = \mathbf{0.25}$$
