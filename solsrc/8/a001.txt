@@ -1,0 +1,115 @@
+=== 8.1.1
+a: D
+Compute each fitness value:
+
+| x | f(x) = (x−2)² |
+|---|---|
+| 1.5 | 0.25 |
+| 2.0 | 0 |
+| 3.0 | 1 |
+| 4.5 | **6.25** |
+
+Assuming a **maximisation** problem, where the fittest individual is picked as parent, the selected fitness is **6.25**. **Option D**.
+
+(Under minimisation, it would be x = 2.0 with fitness 0. None of the options lists 0.25 or 1, so the question intends maximisation.)
+=== 8.2.1
+a: A
+Maximising $-2x_1 - 3x_2$ is the same as minimising $2x_1 + 3x_2$. Check the corner points of the feasible region:
+
+| point | feasible? | z |
+|---|---|---|
+| (2, 0) | yes | **−4** |
+| (0, 2) | yes | −6 |
+| (5, 0) | yes | −10 |
+
+$x_1 + x_2\ge2$ forces at least this much. The cheapest way to meet it uses only $x_1$, which costs 2 per unit compared with 3 for $x_2$.
+
+**$x_1 = 2$, $x_2 = 0$, $z = -4$**. **Option A**.
+=== 8.2.2
+a: B
+A basic feasible solution of an $m\times n$ transportation problem is non-degenerate when it has exactly **$m + n - 1$** allocations, in **independent** positions (no closed loop). **Option B**.
+=== 8.2.3
+a: C
+Check the corner points:
+
+| point | z |
+|---|---|
+| (1500, 0) | 1500 |
+| (1000, 500) | 1500 |
+
+Both satisfy all constraints, so the optimum $z = 1500$ is reached along the whole edge between them. Of the options, only (1000, 500) is feasible:
+
+- (750, 750) breaks $x_2\le600$.
+- (500, 1000) breaks it too.
+- (900, 600) breaks $x_1 + 2x_2\le2000$, since $900 + 1200 = 2100$.
+
+**Option C**.
+=== 8.2.4
+a: B
+- **(i) True.** The final simplex tableau also shows the dual's optimal values (in the row of the slack variables).
+- **(ii)** As usually stated it's true: if one has a finite optimum, so does the other (strong duality). But UGC's key treats it as false.
+- **(iii) True.** If one problem is unbounded, the other is infeasible.
+
+The official key is **only (i) and (iii)**, **option B**.
+=== 8.2.5
+a: C
+The cost is Rs 12 per gram of X and Rs 20 per gram of Y, so **$Z = 12x + 20y$**. That's choice **(3)**, option C.
+=== 8.2.6
+a: D
+Both vitamins have **minimum** requirements:
+
+- vitamin D: $6x + 8y\ge100$
+- vitamin E: $7x + 12y\ge120$
+
+with $x, y\ge0$. That's choice **(4)**.
+
+(Choice (3) mixes up the coefficients: X has 6 units of D and Y has 8.)
+=== 8.2.7
+a: B
+Minimise $12x + 20y$ subject to $6x + 8y\ge100$ and $7x + 12y\ge120$. The corner points are:
+
+| point | cost |
+|---|---|
+| (0, 12.5) | 250 |
+| **(15, 5/4)**, where the two constraints meet | **205** |
+| (120/7, 0) | ≈ 205.7 |
+
+The minimum is at **x = 15, y = 5/4**. That's choice **(2)**, option B.
+=== 8.2.8
+a: A
+**Primal:** minimise $12x + 20y$, subject to $6x + 8y\ge100$ and $7x + 12y\ge120$.
+
+**Dual:** maximise $100u + 120v$, subject to:
+
+- $6u + 7v\le12$ (the column for x)
+- $8u + 12v\le20$ (the column for y)
+- $u, v\ge0$
+
+That's choice **(1)**.
+=== 8.2.9
+a: A
+At $(15, \tfrac54)$, the cost is $12(15) + 20(1.25) = 180 + 25 = \mathbf{205}$. That's choice **(1)**.
+=== 8.2.10
+Check the corner points:
+
+| point | Z |
+|---|---|
+| (60, 0) | 900 |
+| **(60, 20)**, which meets $4x_1 + 6x_2 = 360$ | **1100** |
+| (30, 40) | 850 |
+| (0, 40) | 400 |
+
+The maximum is **$Z = 1100$** at (60, 20). **Option B**.
+=== 8.3.1
+Degeneracy happens when the number of allocations is **less than $m + n - 1$**. **Option C**.
+=== 8.3.2
+- (4, 0, 0) is feasible, with $Z = 8$.
+- From the first constraint, $x_1 + x_3\ge4 + 2x_2\ge4$.
+- $x_2$ only makes things worse, so set $x_2 = 0$. Then minimise $2x_1 + 3x_3$ with $x_1 + x_3\ge4$: $x_1$ is cheaper, so use $x_1 = 4$, $x_3 = 0$, giving 8.
+
+The optimum is **$x_1 = 4$, $x_2 = x_3 = 0$, $Z = 8$**. **Option C**.
+=== 8.4.1
+a: D
+The primal's constraints are **equalities**, so both dual variables are **unrestricted** in sign.
+
+None of the options says that exactly. D comes closest, "$y_1$ is unrestricted", but it adds "$y_2$ restricted". Strictly, **both $y_1$ and $y_2$ are unrestricted**.
