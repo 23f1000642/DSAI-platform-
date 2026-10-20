@@ -1,0 +1,60 @@
+=== 15.0.1
+The function swaps D[s1] and D[s2], then recurses inward on (s1+1, s2−1) until the indices meet. That **reverses** D[s1..s2]. **Option C**.
+=== 15.0.2
+S[i] is the length of the non-decreasing run ending at i:
+
+| i | X[i] | compared with X[i−1] | S[i] |
+|---|---|---|---|
+| 1 | 6 | — | 1 |
+| 2 | 3 | 6 > 3 | 1 |
+| 3 | 5 | 3 ≤ 5 | 2 |
+| 4 | 4 | 5 > 4 | 1 |
+| 5 | 10 | 4 ≤ 10 | 2 |
+
+The result is **[1, 1, 2, 1, 2]**. **Option C**.
+=== 15.0.3
+`count` returns the number of nodes in the subtree:
+
+- nodes 3–8 are leaves: 1 each
+- `count(1)` = 1 + 3 = 4
+- `count(2)` = 1 + 3 = 4
+- `count(0)` = 1 + 4 + 4 = **9**
+
+**Option D**.
+=== 15.1.1
+`A.extend(B)` appends each element of B, giving [1, 2, 3, 4, 5, 6]. (`append` would add the whole list as one element: [1, 2, 3, [4, 5, 6]].) **Option A**.
+=== 15.2.1
+**First pass**, "this" in A:
+
+- A − B = {this}
+- B − C = {that}
+- C − A = {other}
+
+Then "that" is in B:
+
+- A = C | A = {other, this}
+- B = A | B = {this, that}
+- C = B | C = {that, other}
+
+**Second pass**, "this" in A:
+
+- A − B = {other}
+- B − C = {this}
+- C − A = {that}
+
+"that" isn't in B, so nothing more happens. "other" isn't in C either, so the loop stops.
+
+The final sets are A = {other}, B = {this}, C = {that}. Only **B** contains "this". **Option B**.
+=== 15.2.2
+f(a, b) computes $a\times b$ using doubling:
+
+| call | result |
+|---|---|
+| f(15, 10) | 2·f(7, 10) |
+| f(7, 10) | 2·f(3, 10) |
+| f(3, 10) | 2·f(1, 10) |
+| f(1, 10) | 2·f(0, 10) = 2·10 = 20 |
+
+Working back up: f(3) = 40, f(7) = 80, f(15) = **160**.
+
+(It isn't 15 × 10, because an odd a returns 2·f((a−1)/2), dropping the extra b.)
