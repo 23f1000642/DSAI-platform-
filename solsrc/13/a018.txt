@@ -1,0 +1,118 @@
+=== 13.22.19
+a: A
+A level-order (breadth-first) traversal of a tree uses a **queue**. **Option A**.
+=== 13.22.20
+a: D
+A queue is **FIFO** (first in, first out). **Option D**.
+=== 13.22.21
+With a max-heap, both insertion and deletion take $\Theta(\log n)$. None of A–C says that. **None of the above**, **option D**.
+=== 13.22.22
+a: 1
+Keep one slot always empty:
+
+- **EMPTY:** REAR == FRONT
+- **FULL:** (REAR + 1) mod n == FRONT
+
+That's choice **1**.
+=== 13.22.23
+In a doubly linked list, once you have the node, inserting or deleting is $O(1)$ in both directions. That makes it the efficient choice here. **Option C**.
+=== 13.23.1
+The deepest branch always follows the **larger** fraction, $1-\beta$. Its size reaches 1 when $(1-\beta)^d n = 1$:
+$$d = \frac{\lg n}{\lg\frac{1}{1-\beta}} = -\frac{\lg n}{\lg(1-\beta)}$$
+**Option D**.
+=== 13.24.1
+There are $d$ passes. Each one is a counting sort over $k$ values, costing $O(n+k)$. The total is $O(d(n+k))$, **option B**.
+=== 13.24.2
+a: A
+Radix sort makes 5 passes (5 digits). Counting the work per pass as about $n = 9$ placements gives $5\times9 = \mathbf{45}$. **Option A**.
+
+(Radix sort doesn't really compare keys. This is the question's intended model.)
+=== 13.25.1
+a: C
+Each recursive call gets its own activation record on the **stack**, holding its automatic variables. **Option C**.
+=== 13.25.2
+a: B
+Recursion is implemented with a **stack** of activation records. **Option B**.
+=== 13.25.3
+Work forward from $h(0) = k$ and $h(1) = 1$:
+
+- $h(2) = 2(1) + 4k = 2 + 4k$
+- $h(3) = 2(2+4k) + 4(1) = 8 + 8k$
+- $h(4) = 2(8+8k) + 4(2+4k) = 24 + 32k$
+
+Setting $24 + 32k = 88$ gives $k = 2$. **Option C**.
+=== 13.26.1
+a: C
+"At least three children" only has to hold for internal nodes. The fewest nodes at level $i$ comes from a tree where only one node per level has children. That node has exactly 3, and the rest are leaves. So level $i$ has **3** nodes. **Option C**.
+=== 13.27.1
+a: A
+- An AVL tree is balanced, so a search is $\Theta(\log n)$.
+- A plain BST can degrade to $O(n)$.
+
+**Option A**.
+=== 13.28.1
+| operation | stack (bottom first) | popped |
+|---|---|---|
+| PUSH 10, PUSH 20, POP | [10] | 20 |
+| PUSH 10, PUSH 20, POP | [10, 10] | 20 |
+| POP | [10] | 10 |
+| POP | [] | 10 |
+| PUSH 20, POP | [] | 20 |
+
+The popped sequence is **20, 20, 10, 10, 20**, **option B**.
+=== 13.28.2
+**B: 3, 4, 5, 2, 1.**
+
+1. Push 1, 2, 3, then pop 3.
+2. Push 4, pop 4.
+3. Push 5, pop 5.
+4. Pop 2, then pop 1.
+
+✔
+
+The others fail:
+
+- **A:** after 3, 4, 5, the top of the stack is 2, so 1 can't come out next.
+- **C:** 1, 5 is fine, but then the top is 4, so 2 can't come out.
+- **D:** after 5, 4, 3, the top is 2, so 1 can't come out.
+
+**Option B**.
+=== 13.28.3
+$A + \big((B * (C+D)) / F\big) + (D * E)$.
+
+The postfix form is **A B C D + \* F / + D E \* +**.
+
+Option B, ABCD+\*F/DE\*++, is the right-grouped version, $A + (\dots/F + D*E)$. Addition is associative, so it gives the same value, and it's the only valid choice. **Option B**.
+=== 13.28.4
+**(a)** Keep the queue's **rear at the top** of the stack.
+
+- **ENQUEUE(x)** = PUSH(x), which is 1 operation.
+- **DEQUEUE** = REVERSE, POP, REVERSE, which is 3 operations. The front comes to the top, gets popped, and the order is restored.
+
+**(b)** Evaluate 5 2 \* 3 4 + 5 2 \* \* +:
+
+- (i) After `5 2 * 3 4 +`, the stack is **[10, 7]**.
+- (ii) After `… 5 2`, the stack is **[10, 7, 5, 2]**.
+- (iii) Then \* gives [10, 7, 10], \* gives [10, 70], and + gives **[80]**. The final value is 80.
+=== 13.28.5
+Element $m$ is pushed $m$-th and popped $(n-m+1)$-th among the pops. Between the end of Push($m$) and the start of its pop, there are:
+
+- $n - m$ later pushes
+- $n - m$ earlier pops
+
+So there are $2(n-m)$ operations, each taking $X$, plus $2(n-m)+1$ gaps of $Y$:
+$$\text{life}(m) = 2(n-m)(X+Y) + Y$$
+Averaging over $m = 1..n$, the mean of $(n-m)$ is $\frac{n-1}{2}$:
+$$(n-1)(X+Y) + Y = n(X+Y) - X$$
+**Option C**.
+=== 13.28.6
+The two stacks grow toward each other. The array is full when they **meet**: $top1 = top2 - 1$. **Option D**.
+=== 13.28.7
+Push each '(' and pop on each ')'. A **stack** checks balanced parentheses. **Option B**.
+=== 13.28.8
+Keep the **front of the queue at the top** of the stack.
+
+- **DEQUEUE** = POP, which is 1 instruction.
+- **ENQUEUE** = REVERSE, PUSH, REVERSE, which is 3 instructions.
+
+**Option C**.

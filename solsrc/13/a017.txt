@@ -1,0 +1,72 @@
+=== 13.22.7
+Every element is dequeued at most once after being enqueued. So across $n$ operations, the total number of dequeues (including those inside MultiDequeue) is at most the number of enqueues, which is $\le n$.
+
+The total work is **$\Theta(n)$** (amortised analysis). **Option A**.
+=== 13.22.8
+With a circular array (front and rear indices advancing mod size), **both** enqueue and dequeue are $O(1)$. **Option A**.
+=== 13.22.9
+Each iteration either pushes the queue's head onto S (when S is empty or Top(S) ≤ Head(Q)), or pops S and re-enqueues that element at the back of Q. The loop ends with all 16 numbers on S in increasing order, smallest at the bottom.
+
+**Best case: Q already increasing.** Each element is pushed once, which is 16 iterations.
+
+**Worst case: Q decreasing** (16, 15, …, 1 from the head). Every new head is smaller than the top of S, so everything on S has to be popped and recycled through Q before the next element can be pushed. Simulating this gives exactly
+$$\mathbf{256} = 16^2 \text{ iterations}$$
+
+(A brute-force run over random orderings never goes above 256.)
+=== 13.22.10
+Deletion removes FRONT. Insertion adds after REAR. For a circular list, **rear->next = front** lets us:
+
+- insert: new->next = front, rear->next = new
+- delete: rear->next = front->next
+
+Both are $O(1)$. Statement I isn't needed. **II only**, **option B**.
+=== 13.22.11
+- **Enqueue at the head:** $O(1)$.
+- **Dequeue from the tail:** you need the node *before* the tail to update the tail pointer. A singly linked list only gets there by walking from the head, which is $\Theta(n)$.
+
+**Option B**.
+=== 13.22.12
+Look at what each queue does to order:
+
+- **Q2's final state** is 4, 3, 2, 1 from its head. So the first element enqueued into Q2 must be 4, then 3, then 2, then 1.
+- **Q1** only lets you dequeue from its head, in the order 1, 2, 3, 4.
+
+To get 4 into Q2 first, the elements in front of it have to go somewhere. **Q2 can act as that temporary space:**
+
+1. Dequeue 1, 2, 3, 4 from Q1 and enqueue each one into Q2. Q2 holds 1, 2, 3, 4. *(These are enqueues on Q2, not Q1.)*
+2. Rotate Q2 by dequeuing and re-enqueuing its own elements. Each time, move the element that belongs last back to the rear, so the order becomes 4, 3, 2, 1.
+
+The problem asks only for enqueue operations **on Q1**, and this method never enqueues anything onto Q1. The minimum is **0**.
+=== 13.22.13
+| operation | deque | a |
+|---|---|---|
+| insertFirst(10) | [10] | |
+| insertLast(32) | [10, 32] | |
+| removeFirst() | [32] | 10 |
+| insertLast(28) | [32, 28] | |
+| insertLast(17) | [32, 28, 17] | |
+| removeFirst() | [28, 17] | 32 |
+| removeLast() | [28] | **17** |
+
+$a = \mathbf{17}$.
+=== 13.22.14
+f takes off the front element, recursively processes the rest, and then puts that element at the **rear**. So the first element ends up last, the second second-to-last, and so on: the queue is **reversed**. **Option B**.
+=== 13.22.15
+a: C
+- A queue can be built from two stacks (input and output).
+- A stack can be built from two queues (move $n-1$ elements across on each pop).
+
+**Both correct**, **option C**.
+=== 13.22.16
+a: D
+Starting from a, b, c, d (front first):
+
+1. Delete a, b and c, and re-insert them as c, b, a. That's 3 deletions and 3 additions.
+
+The queue becomes **d, c, b, a**. **Option D**.
+=== 13.22.17
+a: B
+The last car in has to leave first, which is **LIFO**. That's a **stack**. **Option B**.
+=== 13.22.18
+a: A
+A level-order (breadth-first) traversal of a tree uses a **queue**. **Option A**.

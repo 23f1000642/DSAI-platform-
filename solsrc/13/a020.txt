@@ -1,0 +1,115 @@
+=== 13.28.22
+The stack holds at most 3 elements. Simulate each permutation:
+
+- **A: 3, 2, 1, 5, 4.** Push 1, 2, 3 and pop 3, 2, 1. Push 4, 5 and pop 5, 4. ✔
+- **B: 5, 4, 3, 2, 1.** It needs 1 to 5 on the stack at once, which is 5 elements. ✘
+- **C: 3, 4, 5, 2, 1.** Push 1, 2, 3 and pop 3. Push 4, pop 4. Push 5, pop 5. Pop 2, pop 1. The stack never exceeds 3. ✔
+- **D: 3, 4, 5, 1, 2.** After 5, the top of the stack is 2, so 1 can't come out. ✘
+
+**A and C**.
+=== 13.28.23
+The RPN form is A B \* C D E / \* +.
+
+- **PUSH** once per operand: A, B, C, D, E. That's **5**.
+- **POP** with each operator, which pops two and pushes one result. This machine's convention counts one POP per operator: \*, /, \*, +. That's **4**.
+
+**5 PUSH and 4 POP**, **option B**.
+=== 13.28.24
+$(A + B\hat{}D)/(E - F) + G$:
+
+- numerator: $A\ B\ D\ \hat{}\ +$
+- denominator: $E\ F\ -$
+- then: $/\ G\ +$
+
+**A B D ^ + E F − / G +**, **option A**.
+=== 13.28.25
+Evaluate 6 2 3 \* / 4 2 \* + 6 8 \* −:
+
+1. $2 \times 3 = 6$
+2. $6 / 6 = 1$
+3. Push 4 and 2, then \*. The stack is [1, 8].
+
+After the second \*, the top two elements are **8, 1**. **Option B**.
+=== 13.28.26
+1. Push G first, so A ends up on top: the stack is G F E D C B A (bottom to top).
+2. Pop 5 times into the queue: A, B, C, D, E. The stack is G F.
+3. Dequeue A and B and push them back. The stack is G F A B.
+4. Pop: **B**.
+
+**Option B**.
+=== 13.28.27
+The pushes and pops interleave without ever popping an empty stack, and at most 2 elements are stacked at once. No underflow or overflow happens: the operations run **smoothly**. **Option B**.
+=== 13.28.28
+Job scheduling uses **queues**, not stacks. **Option C**.
+=== 13.28.29
+a: D
+Pushing onto a linked-list stack inserts at the head: **$O(1)$**. **Option D**.
+=== 13.28.30
+a: B
+Push every character, then pop them all. A **stack** reverses a string naturally in $O(n)$. **Option B**.
+=== 13.28.31
+a: D
+**C A B** is impossible. To pop C first, A and B must already be pushed, with B above A. So B has to come out before A.
+
+The other orders are all possible. **Option D**.
+=== 13.28.32
+Evaluate 8 2 3 ^ / 2 3 \* + 5 1 \* −:
+
+1. $2^3 = 8$
+2. $8 / 8 = 1$
+3. Push 2 and 3, then \* gives 6.
+
+After the first \*, the top two elements are **6, 1**. **Option A**.
+=== 13.28.33
+Scan "(() (()) (()))": push on '(' and pop on ')'. The deepest point is inside "(())" within the outer pair: outer + middle + inner = **3**. **Option B**.
+=== 13.28.34
+$((A+B)*C + D) / (E + F + G)$:
+
+- numerator: $A\ B\ +\ C\ *\ D\ +$
+- denominator: $E\ F\ +\ G\ +$ (left-associative)
+- then: $/$
+
+**A B + C \* D + E F + G + /**, **option A**.
+=== 13.29.1
+- **P (unsorted doubly linked list):** link one list's tail to the other's head: $\Theta(1)$.
+- **Q (array min-heap):** concatenate the arrays and BUILD-HEAP: $\Theta(n)$.
+- **R (BST):** inorder traversals of both, merge the sorted lists, and build a balanced BST: $\Theta(n)$.
+
+**Option A**.
+=== 13.30.1
+**(i)** $T_1$ has height 3 and $T_2$ has height 2, and all of $T_2$'s keys (6, 7, 8) are larger than $T_1$'s (1–5).
+
+Merge by making $T_2$ a sibling of D's subtree, using D as the join point: replace D's right child (leaf 5) with a new internal node whose left child is 5 and whose right child is $T_2$'s root F. Then rebalance with rotations if needed.
+
+Equivalently, create a new node joining D's subtree (height 2) and $T_2$ (height 2) at the same level. That keeps every height difference ≤ 1.
+
+**(ii)** Walk down the taller tree's right spine to a node whose height equals the shorter tree's height (or differs by 1). Attach it there, and rebalance on the way back up with at most one rotation per level. The cost is **$O(|h_1 - h_2| + 1)$**, which is $O(\max(h_1, h_2)) = O(\log n)$.
+=== 13.30.2
+With $I$ internal nodes, each with 2 or 3 children, and 9 leaves:
+
+- **All 3-children:** 9 leaves under 3 internal nodes, under 1 root. That's $I = 4$.
+- **Using 2-children nodes:** 9 leaves can sit under 3 nodes (3+3+3) or 4 nodes (3+2+2+2). Then those nodes need parents: 4 nodes under 2 parents (2+2), and the 2 parents under 1 root. That's $4 + 2 + 1 = 7$.
+
+Both $I = 4$ and $I = 7$ are possible. The level counts don't allow 5 or 6.
+
+**A and D**.
+=== 13.30.3
+**Claim:** $L(n) = 2n + 1$ for a 3-ary tree with $n$ internal nodes.
+
+- **Base case** ($n = 0$): a single node, which is one leaf. $2(0) + 1 = 1$ ✔.
+- **Inductive step.** Take an internal node $v$ whose 3 children are all leaves (one exists in any finite such tree). Removing those children makes $v$ a leaf. That tree has $n - 1$ internal nodes, so by induction it has $2(n-1) + 1 = 2n - 1$ leaves. Putting the children back loses 1 leaf ($v$) and gains 3: $2n - 1 - 1 + 3 = 2n + 1$ ✔.
+
+(The question's "2(n+1)" is a typo. The standard result is $2n + 1$, from $L = (k-1)I + 1$ with $k = 3$.)
+=== 13.30.4
+- **A is true.** A tree with $n$ nodes has $n - 1$ edges.
+- **B is false.** Preorder plus postorder isn't unique for a general binary tree.
+- **C is false.** "Complete" isn't the same as "full", so the $n + 1$ leaves formula doesn't hold.
+- **D is true** (with height counted in edges).
+
+The false statements are **B and C**.
+=== 13.30.5
+Each internal node has $n$ children, so there are $xn$ edges and $xn + 1$ nodes. The leaves number $xn + 1 - x = x(n-1) + 1$. **Option A**.
+=== 13.30.6
+From $L = 2I + 1$ and $n = L + I$: $I = \frac{n-1}{3}$, so
+$$L = \frac{2(n-1)}{3} + 1 = \frac{2n+1}{3}$$
+**Option D**.

@@ -1,0 +1,96 @@
+=== 13.28.9
+The global stkTop isn't used; the function has its own **static** stkTop.
+
+1. `stkFunc(-1, 10)` sets size = 10.
+2. `stkFunc(0, 5)` pushes 5, and `stkFunc(0, 10)` pushes 10.
+3. `stkFunc(1, 0)` hits the default case and pops. It's called twice, popping 10 and then 5.
+
+The output is $10 + 5 = \mathbf{15}$ (the order of evaluation doesn't change the sum).
+=== 13.28.10
+Evaluate 10 5 + 60 6 / \* 8 −:
+
+1. $10 + 5 = 15$
+2. $60 / 6 = 10$
+3. $15 \times 10 = 150$
+4. $150 - 8 = 142$
+
+**142**, **option C**.
+=== 13.28.11
+- **Stack:** push 54, push 52, pop (52), push 55, push 62, pop gives $s = 62$.
+- **Queue:** enqueue 21, enqueue 24, dequeue (21), enqueue 28, enqueue 32, dequeue gives $q = 24$.
+
+$s + q = \mathbf{86}$.
+=== 13.28.12
+1. After I and II: S = [1, 5, 7, 8, 9, 2] (top = 2), and Q = 1, 5, 7, 8, 9, 2 (front = 1).
+2. III pops 2. IV dequeues 1. V pops 9. VI dequeues 5. Now S = [1, 5, 7, 8], and Q = 7, 8, 9, 2.
+3. VII and VIII move 4 elements from Q to S: push 7, 8, 9, 2. S = [1, 5, 7, 8, 7, 8, 9, 2].
+4. IX pops 2, and X pops 9.
+
+The top is **8**.
+=== 13.28.13
+Check each sequence by simulating, since S2 can hold only 2:
+
+- **A (100, 200, 400, 300): impossible.** To output 100 first, the 3 elements above it must be moved off S1, but S2 only holds 2.
+- **B (200, 300, 400, 100): possible.** Move 400 and 300 to S2, output 200, then move them back and pop as needed.
+- **C (400, 200, 100, 300): possible.**
+- **D (300, 200, 400, 100): possible.**
+
+A breadth-first search over all states confirms this. **B, C and D**.
+=== 13.28.14
+- **A ✔.** Store with each record the min-pointer of the stack below it. MIN is $O(1)$, and push/pop stay $O(1)$.
+- **B ✘.** A single pointer can't be restored after the min is popped without searching.
+- **C ✘.** Maintaining a sorted array makes push and pop $O(n)$.
+- **D ✘.** A heap makes push and pop $O(\log n)$, which is slower than the standard operations.
+
+**Only A**.
+=== 13.28.15
+**Phase 1:** push 0, 1, 2, …, 8 until x = 8, then set flag = 1. (In that same iteration, the flag-1 branch pops 8 and adds it: sum = 8.)
+
+**Phase 2:** each iteration pops x and adds it. If x is odd, it pops one more element, which isn't added.
+
+| pop x | odd? | extra pop | sum |
+|---|---|---|---|
+| 8 | – | – | 8 |
+| 7 | yes | 6 discarded | 15 |
+| 5 | yes | 4 discarded | 20 |
+| 3 | yes | 2 discarded | 23 |
+| 1 | yes | 0 discarded | 24 |
+
+The output is **24**.
+=== 13.28.16
+**c a b d** can't be generated. After pushing a, b, c and popping c, the top of the stack is **b**, so a can't come out next. **Option D**.
+=== 13.28.17
+Apply $f = \max(f, 0) + i$ for 2, −3, 2, −1, 2, starting from $f = 0$:
+
+| push | f |
+|---|---|
+| 2 | 2 |
+| −3 | −1 |
+| 2 | max(−1, 0) + 2 = 2 |
+| −1 | 1 |
+| 2 | 3 |
+
+$f(S) = \mathbf{3}$, **option C**.
+=== 13.28.18
+`getchar` reads single characters, so the digits are separate operands. Evaluate 5 2 \* 3 3 2 + \* +:
+
+1. $5 \times 2 = 10$
+2. $3 + 2 = 5$
+3. $3 \times 5 = 15$
+4. $10 + 15 = 25$
+
+The program prints **25**, **option B**.
+=== 13.28.19
+a: D
+A linked-list stack inserts at the head: **$O(1)$**. **Option D**.
+=== 13.28.20
+a: A
+An **array** is a physical data structure: it maps directly onto contiguous memory. Stacks and tables are logical structures. **Option A**.
+=== 13.28.21
+| operation | stack | popped |
+|---|---|---|
+| push 1, push 2, pop | [1] | 2 |
+| push 3, push 4, pop, pop | [1] | 4, 3 |
+| push 5, pop | [1] | 5 |
+
+The top is **1**, **option D**.
