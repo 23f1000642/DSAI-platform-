@@ -1,0 +1,90 @@
+=== 1.65.19
+Both functions compute the same recurrence: $X[i] = Y[i-1] + Z[i-2] = 2X[i-1] + 3X[i-2]$, with values 0 and 1 at $n = 0$ and $n = 1$.
+
+| n | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|---|
+| f | 0 | 1 | 2 | 7 | 20 | 61 | 182 | 547 | **1640** |
+
+Both return **1640**, **option C**.
+=== 1.65.20
+B is preferred when $10n\log_{10}n < 0.0001n^2$, i.e. $n > 10^5\log_{10}n$. With $n = 10^k$, that's $10^k > 10^5 k$.
+
+- $k = 5$: $10^5 > 5\times10^5$? No.
+- $k = 6$: $10^6 > 6\times10^5$? Yes.
+
+The smallest $k$ is **6**, **option C**.
+=== 1.65.21
+Count the triples $(i, j, k)$ with $1 \le i \le j < k \le n$:
+$$\sum_{j=1}^{n} j\,(n-j) = \frac{(n-1)n(n+1)}{6}$$
+That's **one-sixth of the product of 3 consecutive integers**, **option C**.
+=== 1.65.22
+Compare the total cost of $\sqrt{\log N}$ finds, $N$ inserts, $\sqrt{\log N}$ deletes and $\sqrt{\log N}$ decrease-keys:
+
+| structure | find | insert | delete (with pointer) | decrease-key | total |
+|---|---|---|---|---|---|
+| **unsorted array** | $O(N)$ | $O(1)$ | $O(1)$ | $O(1)$ | $O(N\sqrt{\log N})$ |
+| min-heap | $O(N)$ | $O(\log N)$ | $O(\log N)$ | $O(\log N)$ | $O(N\log N)$ |
+| sorted array | $O(\log N)$ | $O(N)$ | $O(N)$ | $O(N)$ | $O(N^2)$ |
+| sorted doubly linked list | $O(N)$ | $O(N)$ | $O(1)$ | $O(N)$ | $O(N^2)$ |
+
+The unsorted array is best, **option A**.
+=== 1.65.23
+Take **any 3 elements** and return the middle one. It's neither the maximum nor the minimum of the whole list. That's at most 3 comparisons: **$\Theta(1)$**, **option D**.
+=== 1.65.24
+- Tower of Hanoi: $\Theta(2^n)$ → iii
+- Binary search: $\Theta(\log n)$ → iv
+- Heapsort, worst case: $\Theta(n\log n)$ → ii
+- Adding two $n\times n$ matrices: $\Theta(n^2)$ → i
+
+**Option C**.
+=== 1.65.25
+For each $i$, the inner loop runs about $n/i$ times:
+$$\sum_{i=1}^{n}\frac ni = nH_n = \Theta(n\log n)$$
+**Option C**.
+=== 1.65.26
+1. Find the median of each array with linear-time selection: $n$ arrays × $O(n)$ = $O(n^2)$.
+2. Find the median of the $n$ medians: $O(n)$.
+
+The total is **$O(n^2)$**, **option C**.
+=== 1.65.27
+A single pass compares adjacent pairs: $N-1$ comparisons in the worst case, when the array really is sorted. So the time is both $O(N)$ and $\Omega(N)$, **option A**.
+=== 1.65.28
+Square and multiply over the bits of $n$ takes $O(\log n)$ multiplications. **Option A**.
+=== 1.65.29
+**Key fact:** the steepest line is always between two points that are **adjacent when sorted by x**.
+
+Sort the points by x-coordinate, which takes $O(n\log n)$. Then check the slopes of the $n-1$ adjacent pairs. The total is $\Theta(n\log n)$, **option B**.
+=== 1.65.30
+Finding the maximum always scans every element, making $n-1$ comparisons. Best, average and worst case are all $\Theta(n)$. **Option B**.
+=== 1.65.31
+Bottom-up BUILD-HEAP runs in **$O(n)$**. Most nodes are near the bottom and sift down only a short way, and the sum $\sum h\cdot n/2^{h+1}$ is $O(n)$. **Option C**.
+=== 1.65.32
+- Bellman–Ford: $O(mn)$ → iii
+- Kruskal: $O(m\log n)$ → i
+- Floyd–Warshall: $O(n^3)$ → ii
+- Topological sort: $O(n+m)$ → iv
+
+**Option A**.
+=== 1.65.33
+- Bucket sort: $O(n)$ → iv
+- Matrix-chain multiplication: $O(n^3)$ → ii
+- Huffman codes: $O(n\lg n)$ → iii
+- All-pairs shortest paths (repeated squaring): $O(n^3\lg n)$ → i
+
+**Option C**.
+=== 1.65.34
+$\lg^* n$ is the iterated logarithm, and it grows extremely slowly. Compare:
+
+- $\lg^*(\lg n) = \lg^* n - 1$
+- $\lg^*(n!) \approx \lg^*(n\lg n) \approx \lg^* n$ (+1 at most)
+- $\lg(n!) = \Theta(n\lg n)$, which is huge
+- $\lg(\lg^* n)$ is the logarithm of an already tiny value, so it's the smallest
+
+**Option A**.
+=== 1.65.35
+One second is $10^6$ microseconds.
+
+- A: $\log_2 n = 10^6$, so $n = 2^{10^6}$.
+- B: $\sqrt n = 10^6$, so $n = 10^{12}$.
+
+**Option B**.

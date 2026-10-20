@@ -1,0 +1,103 @@
+=== 1.61.27
+$c$ is the sorted merge of $a$ and $b$. Assume $a[i] \ge b[i]$.
+
+**III: $c[2i] \le a[i]$.** The elements $a[0..i-1]$, $b[0..i]$ and $a[i]$ itself are all at most $a[i]$. That's $2i+2$ elements, so $a[i]$ sits at index $2i+1$ or later in $c$. Hence $c[2i] \le a[i]$. ✔
+
+**II: $c[2i] \ge b[i]$.** The elements $b[i..n-1]$ and $a[i..n-1]$ are all at least $b[i]$, which is $2(n-i)$ elements. So at most $2i$ elements of $c$ are smaller than $b[i]$, which gives $c[2i] \ge b[i]$. ✔
+
+**I and IV fail.** Take $a = [3, 4]$, $b = [1, 2]$ and $i = 1$. Then $a[1] = 4 \ge b[1] = 2$ and $c = [1, 2, 3, 4]$, so $c[2] = 3$.
+
+- I would need $3 \ge 4$, which is false.
+- IV would need $3 \le 2$, which is false.
+
+**II and III**, **option C**.
+=== 1.61.28
+The official answer is **C, $\Theta(n\log n)$**, and it assumes radix sort with a **fixed base** $b$, such as binary or decimal:
+
+- the largest key is $n^k$, so a key has $d = \log_b n^k = k\log_b n = \Theta(\log n)$ digits
+- each digit pass is a counting sort costing $\Theta(n + b) = \Theta(n)$
+- the total is $\Theta(d\cdot n) = \Theta(n\log n)$
+
+(If you're allowed to choose the base as $b = n$, a key has only $k$ digits, and the time drops to $\Theta(kn) = \Theta(n)$. GATE's intended reading is the fixed-base one.) **Option C**.
+=== 1.61.29
+Bubble sort makes $(n-1) + (n-2) + \dots + 1 = \frac{n(n-1)}{2}$ comparisons, which is $O(n^2)$. That isn't listed, so **None of the above**, **option D**.
+=== 1.61.30
+Bucket sort with $m$ buckets (one per key value) takes $O(n)$ to distribute the keys and $O(m)$ to walk the buckets: **$O(n+m)$**. **Option D**.
+=== 1.61.31
+Insertion sort takes $O(n + I)$, where $I$ is the number of inversions. A sorted list plus a few random elements has only $O(n)$ inversions, so insertion sort finishes in near-linear time. **Option D**.
+=== 1.61.32
+Radix sort makes $d$ passes. Each pass is a counting sort over $k$ possible digit values, costing $O(n+k)$. The total is $O(d(n+k))$, **option D**.
+=== 1.61.33
+Run a knockout tournament to find the minimum: $n-1$ comparisons. The second smallest must be one of the $\lceil\lg n\rceil$ elements that lost directly to the winner. Finding the smallest of those takes $\lceil\lg n\rceil - 1$ more.
+
+The total is $n + \lceil\lg n\rceil - 2$, **option C**.
+=== 1.61.34
+Radix sort in base $n$: each number in $[0, n^2-1]$ has 2 digits, so 2 counting-sort passes of $O(n)$ each. That's **$O(n)$**, **option B**.
+=== 1.61.35
+**Radix sort** in base $n$ sorts them in two linear passes, so $O(n)$. The other options are comparison sorts with $O(n^2)$ worst case. **Option C**.
+=== 1.62.1
+The recursion goes at most $n$ calls deep, from foo(n) down to foo(0), and each frame uses $O(1)$ space. The calls inside the loop run one after another, so only one chain is on the stack at a time. The stack space is **$O(n)$**, **option B**.
+=== 1.62.2
+An in-place sort, by definition, uses only a constant amount of extra memory: **$O(1)$**. **Option C**.
+=== 1.62.3
+- **Greedy best-first search** is incomplete, even in a finite space, because it can loop → II
+- **A\*** keeps every generated node in memory, so its computation and space complexity are too high → IV
+- **RBFS** uses linear space, $O(d)$ → I
+- **SMA\*** is optimal if the optimal solution is reachable within its memory; otherwise it returns the best reachable solution → III
+
+A-II, B-IV, C-I, D-III, **option A**.
+=== 1.63.1
+a: D
+The string is **a b a b c d a b b a** (positions 1–10).
+
+| option | subsequence? | palindrome? |
+|---|---|---|
+| abcba | a1 b2 c5 b8 a10 ✔ | ✔ |
+| abba | a1 b2 b8 a10 ✔ | ✔ |
+| abbbba | a1 b2 b4 b8 b9 a10 ✔ | ✔ |
+| **adba** | a1 d6 b8 a10 ✔ | ✘ (reversed it's "abda") |
+
+"adba" is a subsequence but not a palindrome, so it's **not** a palindromic subsequence. **Option D**.
+=== 1.64.1
+Run DFS or BFS from each unvisited vertex and count how many searches you start. With adjacency lists, each vertex and edge is processed once: **$\Theta(m+n)$**. **Option C**.
+=== 1.64.2
+A permutation of 100 numbers has 99 adjacent pairs that can be swapped, and each swap gives a different neighbour. So every vertex has degree $y = 99$.
+
+Adjacent transpositions generate every permutation (bubble sort can reach any arrangement), so the graph is connected: $z = 1$.
+
+$y + 10z = 99 + 10 = \mathbf{109}$.
+=== 1.64.3
+From the figure, U has edges coming **in** (from T and S) but none going out. Nothing can be reached from U, so it's an SCC on its own.
+
+Every other vertex is on a cycle through P:
+
+- P → Q → V → T → S → P
+- Q → R → T → S → P → Q
+
+So P, Q, R, S, T and V are all mutually reachable.
+
+The SCCs are **{P, Q, R, S, T, V}** and **{U}**, **option B**.
+=== 1.65.1
+**How it works.** This is the **minimax** algorithm, written as a recursive depth-first search of the game tree.
+
+- At a leaf, it returns the static payoff.
+- At a MAX node (player 1 to move), it starts from −INF and takes the **maximum** over all children, each evaluated with mode MIN.
+- At a MIN node, it starts from +INF and takes the **minimum**, evaluating children with mode MAX.
+
+The active procedure calls always form the current root-to-node path. The value returned at the root is the best payoff player 1 can guarantee against optimal play by player 2. It examines **every** node, so it takes $O(b^d)$ time.
+
+**Reducing the search: alpha–beta pruning.** Pass two bounds down the recursion:
+
+- $\alpha$: the best value MAX can already guarantee
+- $\beta$: the best value MIN can already guarantee
+
+At a MAX node, stop looking at children once value ≥ β, because MIN will never let play reach here. At a MIN node, stop once value ≤ α. The result is identical to minimax. With good move ordering (best moves first), the number of nodes examined drops to about $O(b^{d/2})$, so you can search about twice as deep in the same time.
+
+Other options: depth cut-offs with a heuristic evaluation function, and move ordering or iterative deepening.
+=== 1.65.2
+- (A) $O(\log n)$: **binary search** (r)
+- (B) $O(n)$: **selection of the $k$-th smallest element** (s), using linear-time select
+- (C) $O(n\log n)$: **heapsort** (p)
+- (D) $O(n^2)$: **depth-first search** (q), with an adjacency matrix
+
+A-r, B-s, C-p, D-q.

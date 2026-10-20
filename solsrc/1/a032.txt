@@ -1,0 +1,88 @@
+=== 1.65.36
+By definition, "the running time is $O(g(n))$" means the **worst-case** running time is $O(g(n))$. That's because $O$ is an upper bound, so it only has to cover the worst input.
+
+- (a) "worst case $O(g)$ and best case $\Omega(g)$" is the characterisation of **$\Theta(g(n))$** (CLRS Theorem 3.1 applied to running times), not $O$.
+- (b) and (c) don't make sense as definitions.
+- (d) is false: $O(g)\cap\omega(g)$ is always empty.
+
+None of the options states the right condition, so the official key gave **marks to all**.
+=== 1.65.37
+a: C
+- BFS: $\Theta(V+E)$ → (I)
+- Rabin–Karp, worst case: $\Theta((n-m+1)m)$ → (III)
+- DFS: $O(V+E)$ → (II)
+- Heap sort, worst case: $O(n\lg n)$ → (V)
+- Quick sort, worst case: $O(n^2)$ → (IV)
+
+None of the options has exactly this. Among them, **option C** (A-II, B-III, C-I, D-V, E-IV) gets every pairing right, because BFS and DFS share the same bound and can be swapped. **Option C**.
+=== 1.65.38
+Splay trees achieve amortised $O(\lg n)$ for **all** of search, insert and delete, because every operation splays the accessed node to the root. **Option D**.
+=== 1.65.39
+Patience sorting finds the longest increasing subsequence in $O(n\lg n)$. Keep an array where `tail[k]` is the smallest possible last value of an increasing subsequence of length $k$, and binary-search it for each new element. **Option B**.
+=== 1.66.1
+The edges are 1→2, 1→3, 2→4, 2→5, 3→4, 3→6, 4→5 and 4→6.
+
+Vertex 1 has no incoming edges, so it must come before 2 and 3. Option **D (3 2 4 1 6 5)** puts 3 and 2 before 1, so it is **not** a topological order.
+
+A, B and C all respect every edge. **Option D**.
+=== 1.66.2
+The edges are P→Q, P→R, S→R, S→Q and R→Q.
+
+- P and S have no incoming edges, so they come first, in either order.
+- R comes next (it needs P and S).
+- Q comes last (it needs P, S and R).
+
+Both **PSRQ** and **SPRQ** are valid, and there are no others. **Option C**.
+=== 1.66.3
+a must be first and f must be last. In between, the chains b→c and d→e can be interleaved in any order that keeps each chain's internal order. That's choosing 2 positions out of 4 for b and c:
+$$\binom42 = \mathbf{6}$$
+=== 1.66.4
+The edges are P→Q, R→Q, Q→S, Q→V, S→U and V→T. So P and R must come before Q, Q before S and V, S before U, and V before T.
+
+- A. P Q R S T U V ✘ (Q comes before R)
+- B. P R Q V S U T ✔
+- C. P Q R S V U T ✘ (Q comes before R)
+- D. P R Q S V T U ✔
+
+Answer: **B and D**.
+=== 1.66.5
+The edges are A→D, A→B, B→D, B→C and D→C. A has no incoming edges. B depends only on A. D depends on A and B. C depends on B and D.
+
+The unique topological order is **A B D C**, **option D**.
+=== 1.67.1
+In a B-tree of minimum degree $t$, the height is $h \le \log_t\frac{n+1}{2}$. A search reads one page per level, so it accesses $\Theta(h) = \Theta(\log_t n)$ pages. **Option D**.
+=== 1.67.2
+A decision tree that sorts $n$ elements needs at least $n!$ leaves, so its height is at least $\lg n! = \Omega(n\lg n)$. **Option C**.
+=== 1.67.3
+a: D
+"Different trees with 8 nodes" can mean several things:
+
+- **binary trees** (unlabelled shapes): the Catalan number $C_8 = 1430$
+- **unlabelled free trees**: 23
+- **labelled trees** (Cayley's formula): $8^{6} = 262144$
+
+None of these is 256, 255 or 248. So **None of these**, **option D**.
+=== 1.68.1
+In branch and bound with dynamic programming (as in Winston's AI text):
+
+- If two partial paths reach the same node, only the cheaper one needs to be kept. That's the **dynamic programming principle**, and it discards redundant paths. So C is true.
+- A is false: underestimates (admissible heuristics) don't cause deviation from the optimal path.
+- B is false: overestimates *can* cause the right path to be overlooked.
+
+**Option C**.
+=== 1.68.2
+**Alpha–beta cutoffs** prune the game tree explored by **minimax search**. **Option C**.
+=== 1.69.1
+All four statements are true, as they appear in Rosen's discrete mathematics text:
+
+- (i) DFS can traverse a rooted tree.
+- (ii) Preorder, inorder and postorder list the vertices of an ordered rooted tree.
+- (iii) Huffman's algorithm builds an optimal binary tree for given weights.
+- (iv) A topological sort labels the vertices so that each edge goes from a smaller to a larger label, or the reverse depending on convention. Here, parents get larger labels than their children.
+
+**Option D**.
+=== 1.70.1
+- **Statement I is true.** Take both endpoints of every edge in a maximal matching. That gives a vertex cover at most twice the optimum (APPROX-VERTEX-COVER).
+- **Statement II, as intended, is false.** With the triangle inequality, APPROX-TSP-TOUR (an MST plus a preorder walk) is a **2**-approximation, not 3. The question treats "3-approximation" as the wrong factor.
+
+I true and II false, **option A**.

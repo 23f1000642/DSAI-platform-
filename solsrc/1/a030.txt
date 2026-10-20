@@ -1,0 +1,64 @@
+=== 1.65.3
+$\sum_{k=1}^{n} O(n)$ is $n$ terms, each $O(n)$, so the sum is $O(n^2)$. Big-O is an **upper** bound, so it also belongs to every larger class:
+
+- $O(n^2)$ ✔
+- $O(3n^2) = O(n^2)$ ✔
+- $O(1.5n^2) = O(n^2)$ ✔
+- $O(n^3)$ ✔ (looser, but true)
+- $O(n)$ ✘
+
+Answer: **B, C, D and E**.
+=== 1.65.4
+Use two pointers. Scan from the left for a positive number and from the right for a negative number, then swap them. Each swap puts two elements in place, so the worst case (all positives first, then all negatives) needs $\lfloor n/2\rfloor$ exchanges.
+
+That's not $n-1$, $n$ or $n+1$, so **None of the above**, **option D**.
+=== 1.65.5
+Square repeatedly: $a \to a^2 \to a^4 \to \dots \to a^n$. Reaching $a^{2^k}$ takes $k = \log_2 n$ multiplications. **Option A**.
+=== 1.65.6
+Count everything. Each call to `what(k)` for $k > 1$ does $O(1)$ work of its own (the test and the call), plus one call to $B(k)$, which costs $O(1/k)$. At the bottom, `what(1)` calls A, which costs $O(1)$.
+$$T(n) = T(n-1) + O(1) + O(1/n), \qquad T(1) = O(1)$$
+$$T(n) = O(n) + O\left(\frac12 + \frac13 + \dots + \frac1n\right) = O(n) + O(\log n) = O(n)$$
+If you count only the time spent inside A and B (the usual reading of this question), the total is $O(1) + O(H_n) = O(\log n)$.
+=== 1.65.7
+The array is sorted, so the smallest possible pair sum is $S[1] + S[2]$. There are two elements with sum below 1000 if and only if $S[1] + S[2] < 1000$. That's one addition and one comparison: $T(n) = O(1)$. **Option A**.
+=== 1.65.8
+The input size is the number of bits, $b = \log n$. Binary search for $m$ in $[0, n]$ takes $O(\log n)$ steps. Each step computes $m^3$ on $O(\log n)$-bit numbers, which costs $O(\log^2 n)$ by schoolbook multiplication. So the total is $O((\log n)^3)$, which is polynomial in $\log n$.
+
+It can't be $O((\log\log n)^m)$: just reading the input takes $\Omega(\log n)$. **Option C**.
+=== 1.65.9
+Computing $M_1\times M_2$ takes $\Theta(n^3)$ arithmetic operations however the arrays are laid out. Storage order affects cache behaviour, but not the asymptotic **time complexity**. **Option D**.
+=== 1.65.10
+`f(counter)` is called at the end of each run of 1s and costs Θ(length of that run). All the runs together hold at most $n$ ones, so the total cost of the f calls is $O(n)$. The loop itself is $\Theta(n)$. **$\Theta(n)$**, **option C**.
+=== 1.65.11
+$i$ takes the values $n, n/2, n/4, \dots, 1$, and $j$ adds each of them:
+$$j = n + \frac n2 + \frac n4 + \dots + 1 < 2n$$
+So $val(j) = \Theta(n)$, **option C**.
+=== 1.65.12
+$j$ takes the values $1, 2, 4, \dots, 2^k$ while $2^k \le n$. That's $\lfloor\log_2 n\rfloor + 1$ successful tests, plus one final failing test.
+
+The intended answer is **$\lfloor\log_2 n\rfloor + 1$**, **option D**. (Strictly, the comparisons including the last failing one number $\lfloor\log_2 n\rfloor + 2$. GATE's key is D.)
+=== 1.65.13
+The question asks for running time, not the value returned. Each call does $O(1)$ work and recurses on $\sqrt n$:
+$$T(n) = T(\sqrt n) + O(1) = \Theta(\log\log n)$$
+**Option D**.
+=== 1.65.14
+Process the elements in pairs:
+
+1. Compare the two elements in each pair: $n/2$ comparisons.
+2. Compare the larger one with the current max, and the smaller with the current min: 2 per pair.
+
+The total is $\frac{3n}{2} - 2$ comparisons, so at most $1.5n - 2$ are needed. **Option B**.
+=== 1.65.15
+- If $n$ is even, the loop stops at $i = 2$ after one iteration: $\Omega(1)$.
+- If $n$ is prime, it runs all the way to $\sqrt n$: $O(\sqrt n)$.
+
+So $T(n) = O(\sqrt n)$ and $\Omega(1)$, **option B**.
+=== 1.65.16
+A majority element, if one exists, must be $A[\lceil n/2\rceil]$, the middle element. Binary search for its first and last occurrence takes $O(\log n)$, and then check whether the count exceeds $n/2$. That's **$\Theta(\log n)$**, **option B**.
+=== 1.65.17
+The elements don't have to be inserted one at a time. Append all $n$ new elements, then run BUILD-HEAP on all $2n$ elements in **$\Theta(n)$**. **Option B**.
+=== 1.65.18
+- **f1** makes two recursive calls with no memoization: $T(n) = T(n-1) + T(n-2) + O(1)$, which is exponential, $\Theta(2^n)$ (more precisely $\Theta(\phi^n)$).
+- **f2** fills arrays in one loop: $\Theta(n)$.
+
+**Option B**.
