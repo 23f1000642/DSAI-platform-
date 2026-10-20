@@ -1,0 +1,78 @@
+=== 1.32.25
+`func` counts how many right-shifts it takes to reach 0. That's the number of bits in the binary representation.
+
+$435 = 256+128+32+16+2+1 = 110110011_2$, which has 9 bits. The function returns **9**.
+=== 1.32.26
+The loops visit every pair $(i,j)$, **including** both $(i,j)$ and $(j,i)$. Each swap-through-Temp is done once for $(i,j)$ and undone for $(j,i)$, and adding then subtracting $C$ cancels out.
+
+The matrix ends up unchanged: **$A$ itself**, **option A**.
+=== 1.32.27
+For each of the $n$ outer iterations:
+
+- the first inner loop halves $j$, so $p = \log n$
+- the second inner loop doubles $k$ up to $p$, so it adds $\log p = \log\log n$ to $q$
+
+So $q \approx n\log\log n$, **option D**.
+=== 1.32.28
+$\text{fun}(n) = 1 + \sum_{k=1}^{n-1}\text{fun}(k)\,\text{fun}(n-k)$, with $\text{fun}(1) = 1$:
+
+| n | computation | fun(n) |
+|---|---|---|
+| 1 | — | 1 |
+| 2 | 1 + 1·1 | 2 |
+| 3 | 1 + 1·2 + 2·1 | 5 |
+| 4 | 1 + 1·5 + 2·2 + 5·1 | 15 |
+| 5 | 1 + 1·15 + 2·5 + 5·2 + 15·1 | **51** |
+=== 1.32.29
+This is modular exponentiation (square and multiply), computing $a^{(c)_2} \bmod n$, with $c = 1011_2 = 11$.
+
+| i | c[i] | z after squaring | after multiply |
+|---|---|---|---|
+| 0 | 1 | 1 | 2 |
+| 1 | 0 | 4 | 4 |
+| 2 | 1 | 16 mod 8 = 0 | 0 |
+| 3 | 1 | 0 | 0 |
+
+Output **0**. Check: $2^{11} = 2048$, and $2048 \bmod 8 = 0$.
+=== 1.32.30
+The `n<0` branch never runs for positive $n$. The recursion is called **before** printing, and it keeps calling convert(n/2) until n reaches 0. Then convert(0) checks `0 < 0`, which is false, so it calls convert(0) again, forever.
+
+Nothing is ever printed, and the program doesn't terminate (in practice it ends with a stack overflow). **Option D**.
+=== 1.32.31
+`tob(4, arr)` writes the bits of 4 least-significant first: arr = [0, 0, 1], len = 3.
+
+`pp(3, 4)` computes $3^4$ by square-and-multiply:
+
+| i | arr[i] | tot | ex after squaring |
+|---|---|---|---|
+| 0 | 0 | 1 | 9 |
+| 1 | 0 | 1 | 81 |
+| 2 | 1 | 1·81 = 81 | 6561 |
+
+It returns **81**.
+=== 1.32.32
+SimpleFunction evaluates the polynomial $Y[0]x^{n-1} + \dots + Y[n-1]$ using Horner's rule.
+
+With every $Y[i] = 1$ and $x = 2$:
+$$2^9 + 2^8 + \dots + 1 = 2^{10} - 1 = \mathbf{1023}$$
+=== 1.32.33
+This is Euclid's subtraction algorithm, which returns $\gcd(x,y)$. Since $255 = 15\times17$, $\gcd(15, 255) = \mathbf{15}$.
+=== 1.32.34
+In each step, count the character from `a` up and the one from `b` down, and advance $j$ **once**:
+
+- A: `count[a[j]]++`
+- B: `count[b[j++]]--`
+
+At the end, all counts are 0 exactly when the two strings are anagrams.
+
+- Option C advances $j$ twice in one iteration.
+- Option A never advances $j$, so it loops forever.
+- Option B counts both strings up.
+
+**Option D**.
+=== 1.32.35
+$f$ walks through the binary digits of $n$ with weights 1, 2, 4, …: a 1 bit **adds** the weight $k$, and a 0 bit **subtracts** it.
+
+$20 = 10100_2$. From the least significant bit, the bits are 0, 0, 1, 0, 1 with weights 1, 2, 4, 8, 16:
+$$-1 - 2 + 4 - 8 + 16 = \mathbf{9}$$
+**Option C**.

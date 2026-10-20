@@ -1,0 +1,148 @@
+=== 1.30.8
+For open addressing with uniform hashing and load factor $\alpha<1$ (CLRS Theorem 11.8):
+
+- unsuccessful search: at most $\frac1{1-\alpha}$ probes
+- successful search: **at most $\frac1\alpha\ln\frac1{1-\alpha}$** probes
+
+**Option B**.
+=== 1.31.1
+Build a Huffman code by repeatedly merging the two least frequent nodes:
+
+1. b 0.05 + d 0.08 → 0.13
+2. f 0.11 + 0.13 → 0.24
+3. c 0.17 + a 0.19 → 0.36
+4. 0.24 + 0.36 → 0.60
+5. e 0.40 + 0.60 → 1.00
+
+One resulting prefix code:
+
+| letter | code | length |
+|---|---|---|
+| e | 0 | 1 |
+| f | 100 | 3 |
+| b | 1010 | 4 |
+| d | 1011 | 4 |
+| c | 110 | 3 |
+| a | 111 | 3 |
+
+Average length:
+$$0.40(1) + (0.19+0.17+0.11)(3) + (0.05+0.08)(4) = 0.40 + 1.41 + 0.52 = \mathbf{2.33}$$
+bits per letter.
+=== 1.31.2
+Each probability is at least the sum of all the smaller ones, so Huffman's tree is completely skewed:
+
+- e and f (1/32 each) merge into 1/16
+- that merges with d (1/16) into 1/8
+- that merges with c into 1/4, then with b into 1/2, then with a
+
+The codes are a = 0, b = 10, c = 110, d = 1110, e = 11110, f = 11111. **Option A**.
+=== 1.31.3
+Using the code lengths 1, 2, 3, 4, 5, 5:
+$$\tfrac12(1) + \tfrac14(2) + \tfrac18(3) + \tfrac1{16}(4) + \tfrac1{32}(5) + \tfrac1{32}(5) = 0.5 + 0.5 + 0.375 + 0.25 + 0.3125 = 1.9375$$
+**Option D**.
+=== 1.31.4
+Huffman merges:
+
+1. T 0.08 + R 0.17 → 0.25
+2. S 0.19 + P 0.22 → 0.41
+3. 0.25 + Q 0.34 → 0.59
+4. 0.41 + 0.59 → 1
+
+Code lengths: P, Q, S = 2 and R, T = 3.
+
+Average length: $2(0.22+0.34+0.19) + 3(0.17+0.08) = 1.50 + 0.75 = 2.25$ bits.
+
+For 100 characters, that's $100 \times 2.25 = \mathbf{225}$ bits.
+=== 1.31.5
+The string is **abbccddeee**, with frequencies a = 1, b = 2, c = 2, d = 2, e = 3.
+
+Property 1 means it must be a prefix code. The minimum cost comes from Huffman merges:
+
+1. 1 + 2 → 3
+2. 2 + 2 → 4
+3. 3 + 3 → 6
+4. 4 + 6 → 10
+
+Each merge adds its total to the encoded length: $3+4+6+10 = 23$.
+
+Property 2 needs b ≤ c ≤ d in code length. Choose the merges to respect it: pair a with **d** (depth 3), make b and c a pair (depth 2), and put e at depth 2. Then b = c = 2 ≤ d = 3 ✔.
+
+The length is $1\cdot3 + 2\cdot2 + 2\cdot2 + 2\cdot3 + 3\cdot2 = 23$. **Option B**.
+=== 1.31.6
+With Fibonacci frequencies, every merge combines the running subtree with the next letter. The tree is a chain:
+
+- h = 0
+- g = 10
+- f = 110
+- e = 1110
+- d = 11110
+- c = 111110
+- b = 1111110
+- a = 1111111
+
+Decoding **110111100111010** with the prefix code:
+
+| bits | letter |
+|---|---|
+| 110 | f |
+| 11110 | d |
+| 0 | h |
+| 1110 | e |
+| 10 | g |
+
+The result is **fdheg**, **option A**.
+=== 1.31.7
+- Huffman coding with a heap: $O(n\lg n)$ → iii
+- Optimal polygon triangulation (DP table): matched with $\Theta(n^2)$ in this key → ii
+- Activity selection, with activities sorted by finish time: one greedy pass, $\Theta(n)$ → iv
+- Quicksort, worst case: $O(n^2)$ → i
+
+(a)-(iii), (b)-(ii), (c)-(iv), (d)-(i), **option C**.
+=== 1.31.8
+Huffman gives A = 1 bit, B = 2 bits, C = 3 bits, D = 3 bits.
+
+Average: $\frac12(1) + \frac14(2) + \frac18(3) + \frac18(3) = 0.5 + 0.5 + 0.375 + 0.375 = 1.75$ bits per symbol. **Option B**.
+=== 1.31.9
+Work with numerators over 30: 1, 1, 1, 2, 3, 5, 5, 12.
+
+| merge | new node |
+|---|---|
+| 1 + 1 | 2 |
+| 1 + 2 | 3 |
+| 2 + 3 | 5 |
+| 3 + 5 | 8 |
+| 5 + 5 | 10 |
+| 8 + 10 | 18 |
+| 12 + 18 | 30 |
+
+The average code length is the sum of the internal node weights divided by the total:
+$$\frac{2+3+5+8+10+18+30}{30} = \frac{76}{30}$$
+**Option C**.
+=== 1.32.1
+`what(s)` returns `what(s[2..n])` followed by the first character `s[1]`. So it moves the first character to the end, after reversing the rest. That's **string reversal**.
+
+| call | result |
+|---|---|
+| what("HTGATE") | what("TGATE") + "H" |
+| what("TGATE") | what("GATE") + "T" |
+| … | … |
+| what("E") | "E" |
+
+Output: **"ETAGTH"**.
+=== 1.32.2
+Track $t$ after each iteration with $m = 1, 2, \dots$:
+
+- $m=1$: $t = 1\cdot(-x/1) = -x$
+- $m=2$: $t = (-x)\cdot(-x/2) = \frac{x^2}{2!}$
+- $m=3$: $t = -\frac{x^3}{3!}$, and so on, so $t_m = \frac{(-x)^m}{m!}$
+
+The `do … while (m++ < n)` loop runs for $m = 1..n$, and $y$ adds up the terms:
+$$f(x) = y = \sum_{m=1}^{n}\frac{(-x)^m}{m!} = -x + \frac{x^2}{2!} - \frac{x^3}{3!} + \dots$$
+This is the Taylor series of $e^{-x} - 1$, truncated after $n$ terms.
+=== 1.32.3
+The loop stops at the **smallest** $i$ with $i^2 \ge M$, which is $\lceil\sqrt M\rceil$.
+
+- $M = 9$: $i = 3 = \lceil 3\rceil$
+- $M = 10$: $3^2 = 9 < 10$, so $i = 4 = \lceil 3.16\rceil$
+
+**Option C**.
