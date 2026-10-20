@@ -1,0 +1,18 @@
+=== 3.55.91
+AVG is an aggregate function. SELECT and CREATE are statements, and MODIFY isn't standard SQL. **Option C**.
+=== 3.55.92
+The key's answer is **MODIFY**, option C. In standard SQL, fields are changed with UPDATE … SET. The question is from an older syllabus that uses MODIFY.
+=== 3.55.93
+`FROM R1, R2` is a cross product. Projecting R1's columns returns R1 only if **R2 is non-empty**. With DISTINCT, it equals R1 only if **R1 has no duplicates**. **Option B**.
+=== 3.55.94
+- **(i)** is a correct UPDATE with a subquery on DEPARTMENT. (The "DEPT NO." spacing is a typo for DEPTNO.)
+- **(ii)** isn't valid SQL: there's no `UPDATE TABLE`, and EMPLOYEE has no DNAME column.
+- **(iii)** uses ALTER TABLE, which changes the schema, not data. It also selects DNAME and compares it with DEPTNO.
+
+**(a) only**, **option B**.
+=== 3.55.95
+Use IN with a list, and DISTINCT to avoid repeated EMPIDs:
+```sql
+SELECT DISTINCT EMPID FROM PROJECTWORK WHERE PROJNO IN (20,30,40);
+```
+**Option C**.

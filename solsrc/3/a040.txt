@@ -1,0 +1,14 @@
+=== 3.55.96
+- **Statement I** joins EMPLOYEE and DEPARTMENT on DEPTNO = DID and filters English. That's the intended correct query (ignoring the missing commas in the printed version).
+- **Statement II** has **no join condition**, so it's a cross product. Every employee is paired with the English department row, so the aggregates cover **all** employees. That's wrong.
+
+**Option C**.
+=== 3.55.97
+- **(i) and (ii)** use `>` against a subquery that returns **many** salaries. That's an error unless department 20 has exactly one employee. (ii) also lacks ORDER BY.
+- **(iii)** uses `> ALL` and ORDER BY EID, which is correct.
+
+**iii only**, **option D**.
+=== 3.55.98
+`ALTER TABLE EMPLOYEE DROP SALARY CASCADE` and `… RESTRICT` are both valid SQL-standard syntax. (iii) is missing the TABLE keyword. **a and b only**, **option A**.
+=== 3.55.99
+The query keeps any branch T with more assets than **at least one** Mumbai branch S. That's "greater assets than some branch located in Mumbai". **Option A**.

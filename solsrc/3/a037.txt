@@ -1,0 +1,63 @@
+=== 3.55.58
+The query selects **sch-name**, but it groups by **school-id**. sch-name isn't in the GROUP BY list and isn't aggregated, so in standard SQL this is a **syntax error**. (The outer query also has no join condition tying R to C beyond E.) **Option D**.
+=== 3.55.59
+`SELECT A, COUNT(*) FROM R` mixes a non-aggregated column with an aggregate **without GROUP BY**. That's illegal. **Option B**.
+=== 3.55.60
+One has the rows ⟨2,5⟩ ×1, ⟨1,6⟩ ×3 and ⟨4,8⟩ ×2. Two contains ⟨1,6⟩ ×2 and ⟨4,8⟩ ×2, but no ⟨2,5⟩.
+
+- **EXCEPT** (set semantics, duplicates removed): {⟨2,5⟩, ⟨1,6⟩, ⟨4,8⟩} − Two leaves {⟨2,5⟩}, which is **1** row.
+- **EXCEPT ALL** (subtract multiplicities): ⟨2,5⟩: 1−0 = 1, ⟨1,6⟩: 3−2 = 1, ⟨4,8⟩: 2−2 = 0. That's **2** rows.
+
+**1 and 2**, **option B**.
+=== 3.55.61
+a: B
+SUM, COUNT and AVG are aggregate functions: they compute one value from a set of rows. The others are scalar functions. **Option B**.
+=== 3.55.62
+a: D
+An SQL statement is terminated with a **semicolon (;)**. **Option D**.
+=== 3.55.63
+a: C
+In dBASE, **ZAP** deletes every record in the file but keeps its structure. **Option C**.
+=== 3.55.64
+a: C
+In dBASE, `SET ALTERNATE TO <file>` starts echoing output to a text file, and **CLOSE ALTERNATE** closes that file. **Option C**.
+=== 3.55.65
+This is a dBASE question. After MODIFY STRUCTURE, the record pointer is placed at the **first record** of the (non-empty) file. So both BOF() and EOF() return **.F.**. That means options B and D both print F. There's no official key, and the question is ambiguous between them.
+=== 3.55.66
+a: A
+The query pairs each branch T with every Delhi branch S, and keeps T when T.assets > S.assets. So it returns every branch whose assets are greater than **at least one** Delhi branch, i.e. "greater than some (any) branch in Delhi". **Option A**.
+=== 3.55.67
+Self-join POSITION as p1 and p2 on equal skill. Use **p1.posting_no < p2.posting_no**, so each pair appears once and a posting isn't paired with itself. **Option C**.
+=== 3.55.68
+The official key is **B (Q.2)**. Strictly, both queries are flawed:
+
+- **Q.1** compares every student s against course-5 students e with e.marks ≥ s.marks, and s itself is one of them. So no course-5 student is ever returned.
+- **Q.2**'s `> ANY` returns everyone who beat at least one course-5 mark.
+
+The intended correct form is `s.marks >= ALL (SELECT marks FROM student WHERE course = 5)`, restricted to course 5.
+=== 3.55.69
+Division answers "for all" queries: customers who have an account at **every** Delhi branch. **Option B**.
+=== 3.55.70
+- **I is true.** A self-join is written using table aliases.
+- **II is false.** Outer join is an *extended* operator, not a basic one.
+- **III is false.** Natural join drops unmatched rows. Outer join keeps them.
+
+**Only I**, **option D**.
+=== 3.55.71
+Pattern matching uses `LIKE`, and `%` matches any sequence of characters: `city LIKE '%GAR%'`. **Option C**.
+=== 3.55.72
+`one` is the primary key and must be 1–10, so there can be at most **10** rows.
+
+`two` is UNIQUE, with 1–5 allowed. But UNIQUE allows **NULLs**, and a CHECK on NULL evaluates to unknown, which passes. So 5 rows can use 1–5 for `two`, and the other 5 can have NULL.
+
+The maximum is **10**, **option B**.
+=== 3.55.73
+fix: D
+Join on R.B = S.B:
+
+- **Matches:** (1,2)–(2,5) and (3,4)–(4,6). That's **2** rows.
+- **Unmatched R:** (1,3). **Unmatched S:** (7,8).
+
+The full join gives $2 + 1 + 1 = 4$ rows, and the inner join gives 2. **4 and 2**, **option D**.
+
+(The listed key, B, says 6 for the full join. That would only happen without the join condition.)

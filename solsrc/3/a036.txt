@@ -1,0 +1,16 @@
+=== 3.55.55
+For each supplier, the subquery lists that supplier's id once for **every** item they supply that's stocked in Nagpur. `NOT UNIQUE` is true when the list has a **duplicate**, i.e. the supplier supplies **two or more** such items. **Option D**.
+=== 3.55.56
+**Red cars** (102, 104) were reserved by did 22, 31 and 64. **Green cars** (103) were reserved by did 22, 31 and 74.
+
+The intersection is {22, 31}: **Karthikeyan, Boris**. **Option A**.
+=== 3.55.57
+Count the comparisons for an optimal plan, using linear search on primary keys:
+
+1. **Find each reserved car's colour.** Scan Reserves once (10 tuples) and locate each cid in Cars by linear search. cid 101 takes 1 comparison, 102 takes 2, 103 takes 3, 104 takes 4. The cids in Reserves are 101, 102, 103, 104, 102, 103, 104, 101, 102, 103:
+$$1+2+3+4+2+3+4+1+2+3 = 25$$
+2. **Colour tests** on those 10 car tuples (red, else green): about **10–15** comparisons.
+3. **Intersect** {22, 31, 64} with {22, 31, 74} by merging sorted lists: about **4–5** comparisons.
+4. **Look up** the drivers 22 and 31 in Drivers by linear search: 1 + 3 = **4** comparisons.
+
+The total is about **44–48**, **option B**.

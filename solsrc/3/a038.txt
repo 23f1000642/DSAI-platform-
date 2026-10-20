@@ -1,0 +1,61 @@
+=== 3.55.74
+Query (c) is the **union** of (a) and (b). It has at least max(10, 7) = 10 rows and at most 10 + 7 = 17. **10** is possible: it happens when every person with height > 180 is also older than 21. **Option C**.
+=== 3.55.75
+a: C
+- `VARCHAR(20)` stores only the characters given, so 'xyz' uses **3**.
+- `CHAR(20)` is padded with blanks to the full length, **20**.
+
+**Option C**.
+=== 3.55.76
+a: A
+**DROP TABLE** removes a relation's data and its schema. DELETE removes only rows. **Option A**.
+=== 3.55.77
+a: C
+The query joins the tables and groups by **Name**. The two Rameshes (18CS101 and 18CS103) go into one group, and Mukesh forms another.
+
+That's **2** rows, **option C**.
+=== 3.55.78
+- **(a) True.** A primary key can't be NULL.
+- **(b) True.** A unique constraint on Aadhaar.
+- **(c) False.** It's not a sensible integrity constraint (budgets aren't required to be zero).
+
+**a and b true, c false**, **option C**.
+=== 3.55.79
+The correlated subquery computes the average salary of the **same company** as T. Each employee earning above their own company's average is returned. **Option D**.
+=== 3.55.80
+- **DROP TABLE** removes the tuples **and** the schema.
+- **DELETE FROM** removes all tuples but keeps the relation.
+
+II and III are true, and I is false. **Option C**.
+=== 3.55.81
+**SQ1:** join on R.A = S.C with S.D < 7, then group by R.B. The groups formed are B = 2, 3, 4 and 1, so **M = 4**.
+
+**SQ2:** group S by B and keep the groups with more than one distinct D:
+
+- B = 2: D values 7 and 4 ✔
+- B = 1: D values 5 and 3 ✔
+- B = 3: only 4 ✘
+
+So **N = 2**. **Option A**.
+=== 3.55.82
+a: B
+The basic SQL query block maps attributes from relations through **SELECT–FROM–WHERE**. **Option B**.
+=== 3.55.83
+a: B
+**EXISTS** returns true when the subquery returns at least one tuple. **Option B**.
+=== 3.55.84
+a: C
+The DBA defines the schema with the **schema DDL**. **Option C**.
+=== 3.55.85
+a: D
+PROJECT keeps a subset of the columns, so it never has **more** fields. Duplicates are removed, so it never has more rows either. **None of these**, **option D**.
+=== 3.55.86
+WHERE keeps only **male** employees, and the groups are formed per department. HAVING compares that department's male average against the organisation-wide average. **Option D**.
+=== 3.55.87
+UPDATE, DELETE and SELECT are all DML statements (they manipulate or query data). **a, b and c**, **option C**.
+=== 3.55.88
+The syntax is `CREATE ASSERTION <name> CHECK (<predicate>)`. **Option A**.
+=== 3.55.89
+A table that is referenced by another table's **foreign key** can't be dropped (unless you use CASCADE CONSTRAINTS). **Option C**.
+=== 3.55.90
+WHERE SEX = 'M' restricts the data to males, so each department's group average is the **male** average in that department. The subquery has no filter, so it's the average marks of **all students** in the university. **Option B**.
