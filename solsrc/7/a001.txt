@@ -1,0 +1,65 @@
+=== 7.0.1
+a: 12
+Let the rank be $r$. Then the nullity is $n - r = 6$.
+
+$M^2 = 0$ means every column of $M$ lies in the null space of $M$. So $\text{col}(M)\subseteq\text{null}(M)$, which gives $r\le n-r = 6$.
+
+So $n = r + 6 \le 12$. This is achievable: take $M = \begin{pmatrix}0&I_6\\0&0\end{pmatrix}$, which has rank 6 and nullity 6. The maximum is **n = 12**.
+=== 7.1.1
+a: C
+$A\lor A = A$ (and $A\land A = A$) is the **idempotent law**. **Option C**.
+=== 7.1.2
+In a Boolean product, row $i$ of the result is the OR of the rows of B selected by the 1s in row $i$ of A.
+
+| A's row | selects B's rows | result |
+|---|---|---|
+| [1 1 0] | rows 1, 2 | [1 1 1 0] |
+| [0 1 0] | row 2 | [0 1 1 0] |
+| [1 1 0] | rows 1, 2 | [1 1 1 0] |
+| [0 0 1] | row 3 | [1 0 1 1] |
+
+**Option A**.
+=== 7.2.1
+Sort the points by x-coordinate. Take any three points $P_1, P_2, P_3$ in x-order. The slope of $P_1P_3$ is a weighted average of the slopes of $P_1P_2$ and $P_2P_3$, so it can't be steeper than both.
+
+So the steepest line always joins two points that are **adjacent in x-order**. **Option A**.
+=== 7.3.1
+a: B
+Read the corresponding points from the figures:
+
+| figure (a) | figure (b) |
+|---|---|
+| apex (1, 3) | tip (0, 2) |
+| (0, 2) | (2, 1) |
+| (2, 2) | (2, 3) |
+| (2, 0) | (6, 3) |
+| (0, 0) | (6, 1) |
+
+Try option B: $x' = -2y + 6$ and $y' = x + 1$.
+
+- (1,3) → (0, 2) ✔
+- (0,2) → (2, 1) ✔
+- (2,2) → (2, 3) ✔
+- (2,0) → (6, 3) ✔
+- (0,0) → (6, 1) ✔
+
+**Option B**: $\begin{pmatrix}0&-2&6\\1&0&1\\0&0&1\end{pmatrix}$.
+=== 7.4.1
+The matrix is upper triangular, so the determinant is the product of the diagonal: $6\cdot2\cdot4\cdot(-1) = \mathbf{-48}$. **Option B**.
+=== 7.4.2
+Expand along row 1, which has only one non-zero entry:
+$$2\cdot\begin{vmatrix}1&7&2\\0&2&0\\0&6&1\end{vmatrix} = 2\cdot1\cdot(2\cdot1 - 0\cdot6) = 4$$
+**Option A**.
+=== 7.4.3
+The given determinant is the Vandermonde determinant $V$. Compare each option with it using column and row operations:
+
+- **B:** $C_2 + C_1$ and $C_3 + C_1$, which doesn't change the determinant. It equals V.
+- **C:** $R_1 - R_2$ and $R_2 - R_3$, which doesn't change it. Equals V.
+- **D:** $R_1 + R_2$ and $R_2 + R_3$, which doesn't change it. Equals V.
+- **A:** its columns are $(C_1,\; C_2 + C_3,\; C_1 + C_2)$ in terms of $(1, x, x^2)$. That reduces to $\det(C_1, C_3, C_2) = -V$.
+
+**A** is the one that's **not** equal. **Option A**.
+=== 7.4.4
+$A = uv^T$ is an outer product, so it has rank 1 (every row is a multiple of $[1\ 9\ 5]$). A $3\times3$ matrix of rank 1 is singular, so $\det A = \mathbf{0}$.
+=== 7.4.5
+A square matrix is invertible **if and only if** its determinant is non-zero. **Option D**.

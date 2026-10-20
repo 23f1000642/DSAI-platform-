@@ -1,0 +1,102 @@
+=== 7.5.27
+$A$ has trace 0 and determinant −2, so its eigenvalues are $\pm\sqrt2$. The eigenvalues of $A^{13}$ are $(\pm\sqrt2)^{13} = \pm2^{6.5} = \pm64\sqrt2$. **Option D**.
+=== 7.5.28
+$A = I + xx^T$ with $x^Tx = 1$:
+
+- $Ax = x + x(x^Tx) = 2x$, so 2 is an eigenvalue.
+- For any $v\perp x$, $Av = v$, so 1 is an eigenvalue ($n-1$ times).
+
+All eigenvalues are 2 or 1, none zero. So A has **rank n** (A ✔) and is **invertible** (B ✔). 0 isn't an eigenvalue (C ✘), and $A^{-1}$ has eigenvalues $\tfrac12$ and 1, all positive (D ✘).
+
+**A and B**.
+=== 7.5.29
+Trace = 3 and determinant = $2 + 3 = 5$. So $\lambda^2 - 3\lambda + 5 = 0$, with discriminant $9 - 20 < 0$.
+
+The eigenvalues are a **complex conjugate pair**, $\frac{3\pm i\sqrt{11}}{2}$. **Option B**.
+=== 7.5.30
+The eigenvalues add up to the trace: $9 + 6 = 15$. So the other eigenvalue is $15 - 5 = \mathbf{10}$. **Option B**.
+
+(Check: the determinant is $54 - 4 = 50 = 5\times10$ ✔.)
+=== 7.5.31
+Write $P = aI + T$, where $T = \begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}$.
+
+T has characteristic polynomial $-\lambda^3 + 2\lambda$, so its eigenvalues are $0, \pm\sqrt2$. Adding $aI$ shifts each eigenvalue by $a$:
+
+$P$'s eigenvalues are $a,\; a-\sqrt2,\; a+\sqrt2$. **Option A**.
+=== 7.5.32
+If $x$ is a unit eigenvector with eigenvalue $\lambda$, then $x^TAx = \lambda x^Tx = \lambda$.
+
+A has trace 5 and determinant 5, so its eigenvalues are $\frac{5\pm\sqrt5}{2}$. The maximum is $\frac{5+\sqrt5}{2}$. **Option B**.
+=== 7.6.1
+An upper triangular matrix is already in echelon form. All that's left is back-substitution: row $i$ needs about $n-i$ multiplications and additions. The total is $\sum(n-i) = O(n^2)$. **Option B**.
+=== 7.7.1
+A linear inequality has each variable to the first power only, with constant coefficients. In $abx + a^2y \ge 15$ the coefficients $ab$ and $a^2$ are constants, so it's linear. **Option C**.
+
+(A and B are equations, and B and D contain non-linear terms.)
+=== 7.8.1
+- **A ✔.** Since $PX = L(UX) = Q$, solve $LY = Q$ by forward substitution, then $UX = Y$ by back-substitution.
+- **B ✔.** $\det P = \det L\det U = 1\cdot\prod u_{ii}$, which is non-zero. So both L and U are invertible.
+- **C ✔.** $\det P = \prod u_{ii} = 0$ forces some $u_{ii} = 0$.
+- **D ✘.** Triangular matrices aren't symmetric in general. A symmetric P gives $P = LDL^T$, not symmetric factors.
+
+**A, B and C**.
+=== 7.9.1
+A square matrix is singular exactly when its rows (or columns) are **linearly dependent**. **Option C**.
+=== 7.9.2
+**Step 1.** Pivot on the largest entry in column 1, which is 8 in row 3. Swap rows 1 and 3:
+$$\begin{pmatrix}8&2&3\\4&6&5\\2&5&9\end{pmatrix}$$
+The multipliers are $l_{21} = 4/8 = 0.5$ and $l_{31} = 2/8 = 0.25$:
+
+- R2 − 0.5·R1 = (0, 5, 3.5)
+- R3 − 0.25·R1 = (0, 4.5, 8.25)
+
+**Step 2.** In column 2, the largest is 5 in row 2, so no swap is needed. $l_{32} = 4.5/5 = 0.9$:
+
+- R3 − 0.9·R2 = (0, 0, 8.25 − 3.15) = (0, 0, 5.1)
+
+**Result:**
+$$P = \begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix},\quad L = \begin{pmatrix}1&0&0\\0.5&1&0\\0.25&0.9&1\end{pmatrix},\quad U = \begin{pmatrix}8&2&3\\0&5&3.5\\0&0&5.1\end{pmatrix}$$
+Check: $\det A = -\det U = -(8\cdot5\cdot5.1) = -204$, because there was one row swap.
+=== 7.9.3
+A is upper triangular with eigenvalues $1, -1, i, -i$. Its characteristic polynomial is
+$$(\lambda - 1)(\lambda + 1)(\lambda - i)(\lambda + i) = (\lambda^2 - 1)(\lambda^2 + 1) = \lambda^4 - 1$$
+By Cayley–Hamilton, $A^4 - I = 0$, so **$A^4 = I$**, the $4\times4$ identity.
+=== 7.9.4
+For symmetric A and B: $(AB)' = B'A' = BA$. **Option D**.
+
+The others need extra conditions (orthogonality, or commuting).
+=== 7.9.5
+Let $M = \begin{pmatrix}1&0&1\\-1&1&1\\0&1&0\end{pmatrix}$. Then $\det M = 1(0 - 1) - 0 + 1(-1 - 0) = -2$.
+
+The cofactors give the adjugate:
+$$\operatorname{adj}M = \begin{pmatrix}-1&1&-1\\0&0&-2\\-1&-1&1\end{pmatrix}$$
+So
+$$M^{-1} = \frac{\operatorname{adj}M}{\det M} = \begin{pmatrix}\tfrac12&-\tfrac12&\tfrac12\\0&0&1\\\tfrac12&\tfrac12&-\tfrac12\end{pmatrix}$$
+Check: $M M^{-1} = I$ ✔.
+=== 7.9.6
+$AB = I$ means $B = A^{-1}$. Let $E = \begin{pmatrix}1&0\\1&1\end{pmatrix}$, so $C = AE$.
+
+Since $CD = I$, $D = C^{-1} = E^{-1}A^{-1} = E^{-1}B$, where $E^{-1} = \begin{pmatrix}1&0\\-1&1\end{pmatrix}$:
+$$D = \begin{pmatrix}b_{11}&b_{12}\\b_{21}-b_{11}&b_{22}-b_{12}\end{pmatrix}$$
+=== 7.9.7
+Multiply out $RD$ and $DR$, where R is the rotation and D the diagonal matrix. The off-diagonal entries are:
+
+- RD: $-b\sin\theta$ (top right) and $a\sin\theta$ (bottom left)
+- DR: $-a\sin\theta$ and $b\sin\theta$
+
+They're equal exactly when $(a-b)\sin\theta = 0$, i.e. **$a = b$ or $\theta = n\pi$**. **Option A**.
+=== 7.9.8
+Right-multiplying by $I_{12}$ swaps **columns** 1 and 2 of A. So the first column of $AI_{12}$ is A's second column. **Option C**.
+=== 7.9.9
+Subtract row 1 from rows 2 and 3:
+$$\begin{vmatrix}1&a&bc\\0&b-a&c(a-b)\\0&c-a&b(a-c)\end{vmatrix} = (b-a)(c-a)\begin{vmatrix}1&-c\\1&-b\end{vmatrix} = (a-b)(b-c)(c-a)$$
+So $a - b$ is a factor. **Option B**.
+=== 7.9.10
+- **S1 true.** $\begin{pmatrix}1&0\\0&0\end{pmatrix} + \begin{pmatrix}0&0\\0&1\end{pmatrix} = I$.
+- **S2 true.** $I + (-I) = 0$.
+
+**Both**, **option A**.
+=== 7.9.11
+A symmetric matrix is determined by its diagonal and upper triangle: $n + \frac{n(n-1)}{2} = \frac{n^2+n}{2}$ free entries, each 0 or 1. That gives $2^{(n^2+n)/2}$ matrices. **Option C**.
+=== 7.9.12
+$ABCD = I$ gives $A^{-1} = BCD$. Multiply on the right by A: $BCDA = I$. So $B^{-1} = CDA$. **Option B**.
