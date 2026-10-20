@@ -1,0 +1,87 @@
+=== 4.4.2
+The four conjuncts say that R is:
+
+- **serial:** every $x$ has some $y$ with $R(x,y)$
+- **asymmetric**
+- **transitive**
+- **irreflexive**
+
+So R is a **strict partial order with no maximal element**.
+
+**Finite models? No.** Start at any $x_0$. Seriality gives a chain $x_0 R x_1 R x_2 \dots$. By transitivity, $x_i R x_j$ for all $i < j$. If two of the elements were equal, $x_i = x_j$ with $i < j$, we'd get $x_i R x_i$, which contradicts irreflexivity. So the chain has infinitely many distinct elements, and there's **no finite model**.
+
+**Satisfiable? Yes.** A countable model: the domain is $\mathbb N = \{0, 1, 2, \dots\}$ with $R(x,y) \iff x < y$. Check each condition:
+
+- serial: $x < x+1$
+- asymmetric: $x < y \Rightarrow \neg(y < x)$
+- transitive
+- irreflexive
+=== 4.4.3
+**A is valid.** If $P(x)$ holds for all $x$, then so does $P(x)\vee Q(x)$, and similarly for $Q$.
+
+The others fail:
+
+- **B:** $P$ might hold for one element and $Q$ for another, but not both on the same one.
+- **C:** half the domain may satisfy $P$ and the other half $Q$.
+- **D** isn't valid either.
+
+**Option A**.
+=== 4.4.4
+**D:** if $\forall x(\alpha\Rightarrow\beta)$ and $\forall x\,\alpha$, then for each $x$ both $\alpha$ and $\alpha\Rightarrow\beta$ hold, so $\beta$ holds. So $\forall x\,\beta$. This is **valid**.
+
+- A is the converse direction, which isn't valid.
+- B fails when $\beta$ is false everywhere.
+- C isn't valid.
+
+**Option D**.
+=== 4.4.5
+Inside the brackets: $\forall y[Q_{xy}\Leftrightarrow\neg Q_{yy}]$. Take $y = x$: this gives $Q_{xx}\Leftrightarrow\neg Q_{xx}$, which is always **false**.
+
+So the antecedent becomes $\forall x[P_x\Leftrightarrow\text{false}] = \forall x\,\neg P_x$, and $\alpha$ is
+$$\forall x\neg P_x\Rightarrow\forall x\neg P_x$$
+That's a **tautology**, true in **every** interpretation. **Both I₁ and I₂ satisfy α**, **option D**.
+=== 4.4.6
+"Some boy **and** that boy is taller than every girl":
+$$\exists x\,(boy(x)\wedge\forall y\,(girl(y)\to taller(x,y)))$$
+**Option D**.
+=== 4.4.7
+For every teacher $x$, there's **some** student $y$ who likes $x$:
+$$\forall x\,[teacher(x)\to\exists y\,(student(y)\wedge likes(y,x))]$$
+**Option B**.
+=== 4.4.8
+"Tigers **and** lions" means anything that is a tiger **or** a lion. If such an animal is hungry or threatened, it attacks:
+$$\forall x[(tiger(x)\vee lion(x))\to((hungry(x)\vee threatened(x))\to attacks(x))]$$
+**Option D**.
+=== 4.4.9
+"Not every graph is connected" means some graph is not connected.
+
+- A, B and C all express this.
+- **D** says **every** graph is disconnected, which is much stronger.
+
+**Option D**.
+=== 4.4.10
+The intended reading is that **for every** fsa $x$, there exists a pda $y$ equivalent to it:
+$$\forall x\,(fsa(x)\to\exists y\,(pda(y)\wedge equivalent(x,y)))$$
+- A's $\forall x\,fsa(x)$ claims everything is an fsa.
+- C and D use ∧ where → is needed.
+- B, after simplification, says something different again.
+
+None of the options is exactly right, so the key gave **marks to all**.
+=== 4.4.11
+"Gold and silver ornaments are precious" means anything that is gold **or** silver is precious:
+$$\forall x\,((G(x)\vee S(x))\to P(x))$$
+**Option D**.
+=== 4.4.12
+$\neg\forall x\,P(x) \equiv \exists x\,\neg P(x)$, so **I ≡ IV**. **Option B**.
+=== 4.4.13
+$\forall x\,\exists y\,\exists t\,\neg F(x,y,t)$: for every $x$, there is some person and some time that $x$ can't fool. That means **no one can fool everyone all the time**. **Option B**.
+=== 4.4.14
+$P(x)$ says $x \ne 1$, and every divisor $y$ of $x$ is either $x$ or 1. That's exactly the definition of a **prime**. **Option A**.
+=== 4.4.15
+"Some real numbers are rational": there exists an $x$ that is real **and** rational:
+$$\exists x\,(real(x)\wedge rational(x))$$
+**Option C**.
+=== 4.4.16
+"None of my friends are perfect": there doesn't exist an $x$ that is a friend **and** perfect:
+$$\neg\exists x\,(F(x)\wedge P(x))$$
+**Option D**.

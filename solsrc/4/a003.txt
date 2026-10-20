@@ -1,0 +1,105 @@
+=== 4.4.17
+Push the negation through:
+$$\neg\exists x(\forall y\alpha\wedge\forall z\beta) \equiv \forall x(\neg\forall y\alpha\vee\neg\forall z\beta)$$
+This is equivalent to:
+
+- $\forall x(\forall y\alpha\to\exists z\neg\beta)$, which is **C**
+- $\forall x(\forall z\beta\to\exists y\neg\alpha)$, which is **B**
+
+**A** ($\forall x(\exists z\neg\beta\to\forall y\alpha)$) and **D** ($\forall x(\exists y\neg\alpha\to\exists z\neg\beta)$) are **not** equivalent.
+
+Two options are "not equivalent", so GATE gave **marks to all**.
+=== 4.4.18
+"Not all that glitters is gold" means some glittering thing is not gold:
+$$\exists x\,(glitters(x)\wedge\neg gold(x))$$
+**Option D**.
+=== 4.4.19
+"Not all rainy days are cold" means some rainy day is not cold:
+$$\exists d\,(Rainy(d)\wedge\neg Cold(d))$$
+**Option D**.
+=== 4.4.20
+$P\to R \equiv \neg P\vee R$. Substituting equivalents inside the quantifiers keeps the two sides equivalent, so C is a **tautology**.
+
+- A: the ∀∃ ↔ ∃∀ swap isn't valid.
+- B and D fail on simple counterexamples.
+
+**Option C**.
+=== 4.4.21
+$\forall x(p\vee q) \Rightarrow \forall x\,p\vee\forall x\,q$ is **not valid**. For example, on the integers with $p$ = even and $q$ = odd, the left side is true and the right side is false.
+
+A, B and C are all valid. **Option D**.
+=== 4.4.22
+$\varphi$ is in $\exists^*\forall^*$ form (Bernays–Schönfinkel) and has no function symbols. Take any model, and keep only the elements chosen as $s, t, u$. That sub-universe still satisfies every ∀ instance, so it's a model of size **≤ 3**. **Option A**.
+=== 4.4.23
+$\varphi$ says: for every $x$ whose only divisors are $x$ and 1 (a prime), there's a larger such $w$. In other words, every prime has a larger prime.
+
+- **$S_1$ (1–100) fails.** 97 is prime, but no larger prime exists in $S_1$.
+- **$S_2$ (positive integers) satisfies it:** there are infinitely many primes.
+- **$S_3$ (all integers) satisfies it vacuously.** Every $x$ is divisible by −1, so the condition "the only divisors are $x$ and 1" is never true. The implication holds for every $x$.
+
+**$S_2$ and $S_3$**, **option C**.
+=== 4.4.24
+**D is valid:** $\exists x(p(x)\to W) \equiv \exists x(\neg p(x)\vee W) \equiv \neg\forall x\,p(x)\vee W \equiv \forall x\,p(x)\to W$.
+
+**C is not valid:** $\forall x(p(x)\to W) \equiv (\exists x\,p(x))\to W$, which is **not** the same as $(\forall x\,p(x))\to W$.
+
+A and B are standard valid equivalences, since $W$ has no free $x$. **Option C**.
+=== 4.4.25
+- **B:** if $Q(x,y)$ holds for all $x$ and $y$, then every $x$ has a $y$. ✔
+- **C:** a single $y$ that works for every $x$ with $P(x)$ certainly gives "for each $x$, some $y$". ✔
+- A and D are only about **one** $x$, so they can't imply a statement about all $x$.
+
+**B and C**.
+=== 4.4.26
+"Exactly one mother" means: some $y$ is $x$'s mother, and nobody other than $y$ is.
+
+- **B ✔:** $\exists y[\text{mother}(y,x)\wedge\forall z(z\ne y\to\neg\text{mother}(z,x))]$
+- **D ✔:** $\exists y[\text{mother}(y,x)\wedge\neg\exists z(z\ne y\wedge\text{mother}(z,x))]$
+- A only says someone isn't the mother.
+- C is wrongly structured.
+
+**B and D**.
+=== 4.4.27
+**A** is the principle of **mathematical induction** on the natural numbers: $P(0)$ plus the step $P(x)\Rightarrow P(x+1)$ give $\forall x\,P(x)$.
+
+- B steps down from 0.
+- C starts at 1000 and steps down, so it misses everything above 1000.
+- D starts at 1000 and steps up, so it misses everything below 1000.
+
+**Option A**.
+=== 4.4.28
+$$\exists x\forall y[(a\wedge b)\wedge\neg c] \equiv \neg\forall x\exists y\,\neg[(a\wedge b)\wedge\neg c] \equiv \neg\forall x\exists y[(a\wedge b)\to c]$$
+**Option C**.
+=== 4.4.29
+**B is valid.** If $P\to Q$ for every $x$, and $P$ holds for every $x$, then $Q$ holds for every $x$.
+
+The others have counterexamples. For C: the left side holds vacuously when $P$ isn't universal, but $\forall x(P\to Q)$ can still fail. **Option B**.
+=== 4.4.30
+The formula says R is **symmetric**.
+
+- It's **satisfiable**: take the equality relation.
+- Its **negation** (R isn't symmetric) is satisfiable too: take $<$ on the integers.
+
+**Option B**.
+=== 4.4.31
+**A is valid:** $\forall x(P\Rightarrow Q)$ and $\forall x\,P$ give $\forall x\,Q$.
+
+The others fail:
+
+- B: $P$ true somewhere and $Q$ false everywhere.
+- C: the ⇐ direction fails.
+- D: the ∀∃ ⇒ ∃∀ swap is invalid.
+
+**Option A**.
+=== 4.4.32
+Since $\beta$ has no free $x$: $(\exists x\,\alpha(x))\to\beta \equiv \forall x(\alpha(x)\to\beta)$. So **C** is valid.
+
+D would need $\forall$ to distribute in the wrong direction. **Option C**.
+=== 4.4.33
+Negate $\forall x[\alpha\to(\exists y[\beta\to(\forall u\,\exists v\,y)])]$ step by step:
+
+1. $\exists x[\alpha\wedge\neg\exists y(\beta\to\forall u\exists v\,y)]$
+2. $\exists x[\alpha\wedge\forall y(\beta\wedge\neg\forall u\exists v\,y)]$
+3. $\exists x[\alpha\wedge\forall y(\beta\wedge\exists u\forall v\neg y)]$
+
+**Option D**.

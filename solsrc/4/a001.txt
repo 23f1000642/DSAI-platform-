@@ -1,0 +1,87 @@
+=== 4.0.1
+- **i is valid.** From $(J\wedge W)\to P$, $P\to H$ and $\neg H$: by modus tollens twice, $\neg P$ and then $\neg(J\wedge W) = \neg J\vee\neg W$.
+- **ii is valid.** From $\neg G\vee T$ and $\neg T$, disjunctive syllogism gives $\neg G$.
+- **iii is invalid.** It's the fallacy of affirming the consequent: $n = -2$ gives $n^2 > 1$, but $n \not> 1$.
+
+Strictly, **only iii** is invalid, and no option says exactly that. The official key is **B (ii and iii)**. Treat ii as valid when you study.
+=== 4.0.2
+**First-order** logic quantifies only over individual objects of the domain. Second-order logic also quantifies over predicates and functions. **Option B**.
+=== 4.0.3
+- "Computations correct **and** pay the bill → run out of money": $(c\wedge b)\to r$
+- "Don't pay → power off": $\neg b\to\neg p$
+- Conclusion: "Don't run out **and** power on → computations incorrect": $(\neg r\wedge p)\to\neg c$
+
+**Option A**.
+=== 4.0.4
+Resolve $\neg A\vee D$ with $A\vee B$ on A, giving $B\vee D$. Resolve that with $C\vee\neg B$ on B, giving $\mathbf{C\vee D}$. **Option B**.
+=== 4.0.5
+$\neg A\vee\neg B\vee\neg C\vee D \equiv \neg(A\wedge B\wedge C)\vee D \equiv (A\wedge B\wedge C)\Rightarrow D$. **Option A**.
+=== 4.0.6
+- **i.** $\forall m\forall n\ P(m,n)$ is false: 2 doesn't divide 3.
+- **ii.** $\forall n\ P(1,n)$ is true: 1 divides everything.
+- **iii.** $\exists m\forall n\ P(m,n)$ is true: take $m = 1$.
+
+So i is false, and ii and iii are true. None of the options matches exactly. The official key is A, which treats (i) as true. Strictly, **(i) is False**.
+=== 4.0.7
+- **i.** $p\vee\neg(p\wedge q) = p\vee\neg p\vee\neg q$, which is a **tautology**. ✔
+- **ii.** $(p\wedge\neg q)\vee\neg(p\wedge q)$ is false when $p = q = T$. ✘
+- **iii.** $p\wedge(q\vee r)$ is false when $p = F$. ✘
+
+Only **i** is a tautology, and no option says that. That's why the key gave **marks to all**.
+=== 4.0.8
+$\neg p\vee q \equiv p\to q$. **Option A**.
+=== 4.0.9
+$\neg(P\leftrightarrow Q)$ is XOR. It equals $P\leftrightarrow\neg Q$ and also $\neg P\leftrightarrow Q$. **A and B**.
+=== 4.0.10
+- **Absurd:** clearly impossible, contrary to evident truth (i)
+- **Ambiguous:** more than one meaning (ii)
+- **Axiom:** accepted without proof (iii)
+- **Conjecture:** an opinion based on experience (iv)
+
+**Option A**.
+=== 4.0.11
+- i. Trees are 2-colourable. ✔
+- **ii.** "Bipartite has **no even** cycles" is wrong: bipartite graphs have no **odd** cycles. ✘
+- iii. Bipartite ⇔ 2-colourable. ✔
+- iv. Greedy colouring uses at most $\Delta + 1$ colours. ✔
+- **v.** $O(|V|)$ edges doesn't bound the chromatic number by $O(\log |V|)$. For example, $K_{\sqrt n}$ has $O(n)$ edges but needs $\sqrt n$ colours. ✘
+
+**ii and v** are incorrect, **option C**.
+=== 4.1.1
+The formula: $\exists x\forall y[\neg\exists z(p(y,z)\wedge p(z,y)) \equiv p(x,y)]$.
+
+1. **Eliminate ≡:** $(A\to B)\wedge(B\to A)$, where $A = \neg\exists z(p(y,z)\wedge p(z,y))$ and $B = p(x,y)$.
+2. **Skolemise $\exists x$** with a constant $a$. Push the negation inward: $A = \forall z\,\neg(p(y,z)\wedge p(z,y))$.
+   - $A\to B$: $\neg A\vee B = \exists z(p(y,z)\wedge p(z,y))\vee p(a,y)$. Skolemise this $z$ as $f(y)$.
+   - $B\to A$: $\neg p(a,y)\vee\forall z(\neg p(y,z)\vee\neg p(z,y))$.
+
+**Clausal form** (all variables universally quantified):
+
+1. $p(y, f(y))\vee p(a,y)$
+2. $p(f(y), y)\vee p(a,y)$
+3. $\neg p(a,y)\vee\neg p(y,z)\vee\neg p(z,y)$
+=== 4.1.2
+Use the clauses from (i).
+
+1. **Set $y = a$ in clause 3:** $\neg p(a,a)\vee\neg p(a,z)\vee\neg p(z,a)$. With $z = a$, this becomes **$\neg p(a,a)$** (C4).
+2. **Clause 1 with $y = a$:** $p(a,f(a))\vee p(a,a)$. Resolve with C4: **$p(a,f(a))$** (C5).
+3. **Clause 2 with $y = a$:** $p(f(a),a)\vee p(a,a)$. Resolve with C4: **$p(f(a),a)$** (C6).
+4. **Clause 3 with $y = a$, $z = f(a)$:** $\neg p(a,a)\vee\neg p(a,f(a))\vee\neg p(f(a),a)$. Resolve with C5 and C6: $\neg p(a,a)$. That's consistent with C4 so far, so take a different instance.
+5. **Clause 3 with $y = f(a)$:** $\neg p(a,f(a))\vee\neg p(f(a),z)\vee\neg p(z,f(a))$. With $z = a$: $\neg p(a,f(a))\vee\neg p(f(a),a)\vee\neg p(a,f(a))$. Resolve with C5 and C6: **□ (the empty clause)**.
+
+The empty clause is derived, so the formula is **unsatisfiable**.
+=== 4.2.1
+The negative integers, the multiples of 7 and the even integers are all countably infinite.
+
+The **reals between 0 and 1/2** are uncountable (Cantor's diagonal argument). So **iv only** is not true. **Option D**.
+=== 4.3.1
+a: B
+- (A) $P\wedge(P\to Q) = P\wedge(\neg P\vee Q) = (P\wedge\neg P)\vee(P\wedge Q)$ → **II**
+- (B) $\neg(P\vee Q)\to(P\wedge Q) = (P\vee Q)\vee(P\wedge Q) = P\vee Q$ → **I**
+- (C) $P\to Q = \neg P\vee Q$ → **III**
+- (D) $P\vee(Q\wedge R)$ → **IV** (the expanded DNF)
+
+A-II, B-I, C-III, D-IV. That's choice **(2)**, **option B**.
+=== 4.4.1
+Read "Every mother loves her children" as: for every $x$ and $y$, if $x$ is the mother of $y$, then $x$ loves $y$.
+$$\forall x\,\forall y\,(\text{Mother}(x,y)\to\text{Loves}(x,y))$$
