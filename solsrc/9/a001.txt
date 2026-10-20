@@ -1,0 +1,57 @@
+=== 9.1.1
+Use Bayes' theorem. For each box, multiply the probability of choosing it by the probability of drawing white from it:
+
+- Box 1: $\tfrac12\cdot\tfrac13 = \tfrac16$
+- Box 2: $\tfrac16\cdot\tfrac23 = \tfrac19$
+- Box 3: $\tfrac13\cdot\tfrac12 = \tfrac16$
+
+$P(\text{white}) = \tfrac16 + \tfrac19 + \tfrac16 = \tfrac49$, so
+$$P(\text{Box 2}\mid\text{white}) = \frac{1/9}{4/9} = \mathbf{0.25}$$
+=== 9.2.1
+The factorisation is the Bayesian network U → W ← V, W → X and W → Y.
+
+- **A ✔.** Y depends on V only through W.
+- **B ✔.** X depends on U only through W.
+- **D ✔.** X and Y are both children of W, and conditionally independent given it.
+- **C ✘.** U and V are independent on their own, but conditioning on their common child W makes them **dependent** ("explaining away", a v-structure).
+
+**Option C**.
+=== 9.2.2
+Use the network's factorisation:
+$$P(U{=}1)\,P(V{=}1\mid U{=}1)\,P(W{=}1\mid U{=}1)\,P(Z{=}1\mid V{=}1,W{=}1) = 0.5\times0.5\times1\times0.5 = \mathbf{0.125}$$
+=== 9.3.1
+$Y\sim\text{Bin}(300, 0.25)$, so the mean is $300\cdot0.25 = 75$, the variance is $75\cdot0.75 = 56.25$, and the standard deviation is 7.5.
+
+Standardise: 60 → $\frac{60-75}{7.5} = -2$, and 90 → $+2$. So the probability is $\phi(2) - \phi(-2)$. **Option A**.
+=== 9.4.1
+a: D
+Build a Huffman code:
+
+1. A 0.08 + E 0.12 → 0.20
+2. D 0.15 + 0.20 → 0.35
+3. C 0.25 + 0.35 → 0.60
+4. B 0.40 + 0.60 → 1
+
+Code lengths: B 1, C 2, D 3, A 4, E 4.
+
+Average: $0.40 + 0.50 + 0.45 + 0.32 + 0.48 = 2.15$. **Option D**.
+=== 9.5.1
+$1 - P(\text{all heads}) - P(\text{all tails}) = 1 - \tfrac{2}{16} = \tfrac78$. **Option C**.
+=== 9.5.2
+Fix the first string. The second matches it bit-for-bit with probability $\frac{1}{2^n}$. So they differ with probability $1 - \frac{1}{2^n}$. **Option D**.
+=== 9.5.3
+The number of heads is $\text{Bin}(2n, \tfrac12)$:
+$$P(\text{exactly }n) = \binom{2n}{n}\frac{1}{2^{2n}} = \frac{\binom{2n}{n}}{4^n}$$
+**Option A**.
+=== 9.5.4
+After the first toss, each new toss matches the previous one with probability $\tfrac12$. So the number of tosses after the first is geometric with mean 2. The expected total is $1 + 2 = \mathbf{3}$. **Option A**.
+=== 9.5.5
+N is geometric with success probability p, so $E[N] = \frac1p$. **Option A**.
+=== 9.5.6
+$\tfrac12\cdot\tfrac58 + \tfrac12\cdot\tfrac14 = \tfrac{5}{16} + \tfrac{2}{16} = \tfrac{7}{16}$. **Option C**.
+=== 9.6.1
+a: A
+$$\frac{\binom62\binom42}{\binom{10}{4}} = \frac{15\cdot6}{210} = \frac{90}{210} = \frac37$$
+**Option A**.
+=== 9.7.1
+$P(A\cup B) = P(A) + P(B) - P(A\cap B)\le P(A) + P(B)$, which always holds (Boole's inequality). The other options need independence or disjointness. **Option D**.

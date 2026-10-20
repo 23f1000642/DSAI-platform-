@@ -1,0 +1,78 @@
+=== 9.7.2
+$A$ is the disjoint union of $A\cap B$ and $A\cap\bar B$. So
+$$P(A) = P(A\cap B) + P(A\cap\bar B) = P_2 + P_3$$
+($P_1$ isn't needed.)
+=== 9.7.3
+$P(A) = 1$, so A is (almost) certain:
+
+- $P(A\cap B) = P(B)$
+- $P(A\mid B) = \frac{P(B)}{P(B)} = 1$
+- $P(B\mid A) = \frac{P(B)}{1} = \frac12$
+
+**Option D**.
+=== 9.7.4
+- $P(\text{red}\cap P) = \tfrac13\cdot\tfrac25 = \tfrac{2}{15}$
+- $P(\text{red}\cap Q) = \tfrac23\cdot\tfrac34 = \tfrac12$
+
+$$P(P\mid\text{red}) = \frac{2/15}{2/15 + 1/2} = \frac{4/30}{19/30} = \frac{4}{19}$$
+**Option A**.
+=== 9.7.5
+This is a Markov chain. From CS, she studies CS next day with probability 0.4 and Maths with 0.6. From Maths, she studies CS with 0.4.
+
+$P(\text{CS on Wednesday}) = 0.4\cdot0.4 + 0.6\cdot0.4 = 0.16 + 0.24 = \mathbf{0.4}$. **Option C**.
+=== 9.7.6
+Let each even face have probability $e$. Then the odd faces together have $0.9\times3e = 2.7e$. The total is $5.7e = 1$, so $e = 1/5.7$.
+
+$P(\text{even}\mid >3) = \frac{P(4) + P(6)}{P(>3)} = 0.75$, so
+$$P(>3) = \frac{2e}{0.75} = \frac{2}{5.7\times0.75}\approx\mathbf{0.468}$$
+**Option B**.
+=== 9.7.7
+The outcomes with at least one head are HH, HT and TH, all equally likely. Only HH has both heads: $\tfrac13$. **Option A**.
+=== 9.7.8
+- First roll 1, 2 or 3: a second roll is needed to reach at least 6. Count case by case:
+  - 1 needs ≥5: 2 outcomes
+  - 2 needs ≥4: 3 outcomes
+  - 3 needs ≥3: 4 outcomes
+
+  That's $\tfrac16\cdot\tfrac{2+3+4}{6} = \tfrac{9}{36}$.
+- First roll 4 or 5: the total is below 6, and there's no second roll, so 0.
+- First roll 6: success, $\tfrac16$.
+
+Total: $\tfrac{9}{36} + \tfrac{6}{36} = \tfrac{15}{36} = \tfrac{5}{12}$. **Option B**.
+=== 9.7.9
+$\tfrac12(0.7) + \tfrac12(0.4) = \mathbf{0.55}$.
+=== 9.7.10
+- $P(P\cap Q) = P(Q\mid P)P(P) = \tfrac13\cdot\tfrac14 = \tfrac1{12}$
+- $P(Q) = \frac{P(P\cap Q)}{P(P\mid Q)} = \frac{1/12}{1/2} = \tfrac16$
+- $P(P'\cap Q') = 1 - P(P\cup Q) = 1 - \left(\tfrac14 + \tfrac16 - \tfrac1{12}\right) = \tfrac23$
+
+$$P(P'\mid Q') = \frac{2/3}{5/6} = \frac45$$
+**Option A**.
+=== 9.7.11
+$P(H_D) = 0.2(0.40) + 0.5(0.10) + 0.3(0.01) = 0.08 + 0.05 + 0.003 = 0.133$.
+$$P(H_G\mid H_D) = \frac{0.08}{0.133}\approx\mathbf{0.60}$$
+=== 9.7.12
+- $P(\text{receive }H) = 0.1(0.3) + 0.9(0.8) = 0.03 + 0.72 = 0.75$
+- $P(\text{sent }H\mid\text{receive }H) = \frac{0.03}{0.75} = \mathbf{0.04}$
+=== 9.7.13
+Given that the first ball is red, there are 9 red balls left out of 24. $P = \tfrac{9}{24} = \mathbf{0.375}$.
+=== 9.7.14
+Use total probability: $0.6 = 0.5(0.4) + 0.5\,x$, so $x = \mathbf{0.8}$. **Option C**.
+=== 9.8.1
+$$\int_a^1\frac{dx}{x^2} = \frac1a - 1 = 1 \;\Rightarrow\; a = \mathbf{0.5}$$
+=== 9.9.1
+If X were always below 5, then E[X] would be below 5. So some outcome has $X\ge5$. (X needn't ever equal 5 exactly, or exceed it: X = 5 always is one case, and X ∈ {4, 6} is another.) **Option C**.
+=== 9.9.2
+Per question, the expected mark is $\tfrac14(1) + \tfrac34(-0.25) = 0.25 - 0.1875 = 0.0625$.
+
+Total: $0.0625\times150\times1000 = \mathbf{9375}$. **Option D**.
+=== 9.9.3
+The smallest element is $2^i$ exactly when $X_1..X_{i-1}$ are left out and $X_i$ is included. That has probability $2^{-i}$:
+$$E = \sum_{i=1}^{n}2^i\cdot2^{-i} = n$$
+(The empty sample is ignored.) **Option D**.
+=== 9.9.4
+$R = E[X^2] - (E[X])^2 = \operatorname{Var}(X)\ge0$. **Option C**.
+=== 9.9.5
+Each of the $\binom83 = 56$ triples is a triangle with probability $(\tfrac12)^3 = \tfrac18$. Expected number: $56/8 = \mathbf{7}$. **Option C**.
+=== 9.9.6
+The word lengths are 3, 5, 5, 3, 5, 4, 3, 4, 3, which add up to 35. The expected length is $35/9\approx\mathbf{3.9}$.

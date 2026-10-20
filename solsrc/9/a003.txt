@@ -1,0 +1,60 @@
+=== 9.9.7
+The expectation is the derivative of the probability generating function at $z = 1$:
+$$g_Y'(z) = N\beta(1-\beta+\beta z)^{N-1} \Rightarrow E[Y] = g_Y'(1) = N\beta$$
+($Y$ is Binomial($N, \beta$).) **Option B**.
+=== 9.9.8
+- **S1 false.** By Cauchy–Schwarz, $\operatorname{Cov}(X,Y)^2\le\operatorname{Var}X\operatorname{Var}Y$ always.
+- **S2 false.** Covariance can be negative, but $E[|X-EX||Y-EY|]\ge0$. For example, $Y = -X$.
+
+**Both false**, **option D**.
+=== 9.9.9
+- **A first:** $0.8\,(10 + 0.5\cdot20) = 0.8\times20 = 16$.
+- **B first:** $0.5\,(20 + 0.8\cdot10) = 0.5\times28 = 14$.
+
+**A then B, expected marks 16**. **Option D**.
+=== 9.9.10
+By the law of total expectation (the tower property), $E[E[X\mid Y]] = E[X]$. **Option C**.
+=== 9.9.11
+- $E[X] = b = 1$
+- $E[(X-1)Z] = E[aZ^2] = a = -2$
+- Check: $\operatorname{Var}(X) = a^2 = 4$ ✔
+
+$a = -2$, $b = 1$. **Option A**.
+=== 9.9.12
+Each draw is black with probability $\tfrac{10}{15} = \tfrac23$. Then $E[S_{100}] = 100\cdot\tfrac23\approx\mathbf{66.7}$.
+=== 9.9.13
+Each throw is even with probability $p = \tfrac12$. The expected number of trials to get 2 consecutive successes is
+$$\frac1p + \frac1{p^2} = 2 + 4 = \mathbf{6}$$
+**Option C**.
+=== 9.10.1
+For an exponential distribution, $P(X > E[X]) = P(X > 1/\lambda) = e^{-1}\approx\mathbf{0.37}$, whatever the rate.
+=== 9.10.2
+$P(X\ge2) = e^{-2\lambda} = 0.25 = e^{-2\ln2}$, so $\lambda = \ln2$. **Option A**.
+=== 9.10.3
+The rate is $\lambda = \ln10$.
+$$P(Y = \ell) = P(\ell\le X < \ell+1) = e^{-\lambda\ell}(1 - e^{-\lambda}) = q^\ell(1-q)$$
+with $q = e^{-\ln10} = \mathbf{0.1}$. **Option A**.
+=== 9.10.4
+$E = 1/\lambda$ and $\operatorname{Var} = 1/\lambda^2$. So $5/\lambda = 1/\lambda^2$, which gives $\lambda = \tfrac15 = \mathbf{0.2}$.
+=== 9.10.5
+The minimum of independent exponentials is exponential, with rate equal to the sum of the rates: $\frac1\alpha + \frac1\beta$. So
+$$E[Z] = \frac{1}{1/\alpha + 1/\beta} = \frac{\alpha\beta}{\alpha+\beta}$$
+**Option C**.
+=== 9.11.1
+$1 - P(\text{none}) = 1 - 0.2\cdot0.5\cdot0.7 = 1 - 0.07 = \mathbf{0.93}$.
+=== 9.11.2
+- A: $P(E_1\cup E_2) = \tfrac12 + \tfrac13 - \tfrac15 = \tfrac{19}{30}$, not $\tfrac23$. ✘
+- $P(E_1)P(E_2) = \tfrac16\ne\tfrac15$, so they're **not independent**. C ✔, B ✘.
+- D: $P(E_1\mid E_2) = \frac{1/5}{1/3} = \tfrac35$, not $\tfrac45$. ✘
+
+**Option C**.
+=== 9.11.3
+Let $p = P(E_1) = P(E_2)$. By independence, $P(E_1\cup E_2) = 2p - p^2 = 1$, so $(1-p)^2 = 0$ and **$p = 1$**. **Option D**.
+=== 9.11.4
+- $P(A) = \tfrac14$ and $P(B) = P(C) = \tfrac12$.
+- **A, B:** $P(A\cap B) = \tfrac14\ne\tfrac18$. Not independent. ✘
+- **A, C:** likewise. ✘
+- **B, C:** $\tfrac14 = \tfrac12\cdot\tfrac12$. Independent. ✔
+- **D:** follows from C. ✔
+
+**C and D**.
