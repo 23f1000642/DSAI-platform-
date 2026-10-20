@@ -1,0 +1,111 @@
+=== 10.1.1
+a: C
+The options were run together in the PDF. Untangled, the four DBSCAN steps are:
+
+- **A.** Recursively find all density-connected points and assign them to the core point's cluster.
+- **B.** Find all neighbours within eps, and mark core points (those with at least MinPts neighbours).
+- **C.** Iterate through the remaining unvisited points.
+- **D.** For each core point not yet assigned, start a new cluster.
+
+The correct order is **B, D, A, C**: find neighbours and core points, start a cluster at a core point, grow it through density-connected points, then move on to the remaining points. **Option C**.
+=== 10.2.1
+The logistic sigmoid is $f(t) = \frac{1}{1 + e^{-t}}$. **Option D**.
+=== 10.3.1
+- Variable elimination is an **exact** inference algorithm. A ✘, C ✔ (it computes conditional probabilities).
+- Gibbs sampling is approximate (MCMC). B ✘.
+- Rejection sampling is approximate. D ✔.
+
+**C and D**.
+=== 10.4.1
+a: A
+- Logistic regression is a classifier.
+- Backpropagation trains neural networks, which are typically used as classifiers.
+- Linear regression is regression, not classification.
+
+**(a) and (b)**, **option A**.
+=== 10.5.1
+a: C
+Logistic regression and backpropagation (neural-network classifiers) are classification algorithms. Linear regression isn't, and forward propagation is just inference, not a learning algorithm. **A & B**, **option C**.
+=== 10.6.1
+- **Single linkage** uses the **minimum** pairwise distance (DIS-2).
+- **Complete linkage** uses the **maximum** (DIS-1).
+
+**B and D**.
+=== 10.6.2
+a: A
+K-means steps:
+
+1. (D) choose K
+2. (A) randomly initialise the centroids
+3. (B) assign each point to its nearest centroid
+4. (C) recompute the centroids
+5. (E) repeat B and C until convergence
+
+That's **D, A, B, C, E**, choice (1), which is **option A** in the garbled layout.
+=== 10.7.1
+**Target:** Green 4 (matches 1, 5, 7, 10) and Blue 6. Entropy $H = -0.4\log_20.4 - 0.6\log_20.6 = 0.971$.
+
+**Pitch = S** (matches 1, 2, 4, 7, 10): Green 3, Blue 2, so $H = 0.971$.
+
+**Pitch = F** (matches 3, 5, 6, 8, 9): Green 1, Blue 4, so $H = 0.722$.
+
+The weighted entropy is $0.5(0.971) + 0.5(0.722) = 0.846$.
+$$IG = 0.971 - 0.846 = \mathbf{0.125}\approx0.12\text{–}0.13$$
+=== 10.8.1
+Set $\nabla J = 0$. That gives $S_Bu = J(u)\,S_Wu$, i.e. $S_W^{-1}S_Bu^* = \lambda u^*$. **Option A**.
+=== 10.9.1
+a: B
+Gradient descent moves **against** the gradient:
+$$W_{ij}(t+1) = W_{ij}(t) - \alpha\frac{\partial E}{\partial W_{ij}}$$
+**Option B**.
+=== 10.10.1
+The k-means clusters are Voronoi cells, which are **convex**. Both (1, 1) and (−1, 1) are in cluster 3, so their midpoint **(0, 1)** must be too. **Option D**.
+=== 10.11.1
+Distances from the diamond at (2, 1):
+
+| point | class | distance |
+|---|---|---|
+| (1, 1) | circle | 1 |
+| (1, 2) | circle | √2 |
+| (3, 2) | square | √2 |
+| (2, 3) | square | 2 |
+| (3, 3) | square | √5 |
+
+- k = 1: circle
+- k = 3: 2 circles vs 1 square, so circle
+- **k = 5**: 3 squares vs 2 circles, so **square**
+
+The answer is **5**.
+=== 10.12.1
+The maximum-margin separator between (0, 0) and the class-1 points is $x_1 + x_2 = 1$. With canonical scaling, $w = (1, 1)$ and $b = -1$:
+
+- (2, 0) and (0, 2) give $+1$
+- (0, 0) gives $-1$
+- (2, 2) gives 3
+
+The support vectors are (2, 0), (0, 2) and (0, 0): **3** of them. B ✔.
+
+The margin is $\frac{2}{\|w\|} = \frac{2}{\sqrt2} = \sqrt2$. C ✔.
+
+A is wrong, since it has the wrong w and b. D is wrong, since training accuracy is 100%.
+
+**B and C**.
+=== 10.13.1
+$$f_{new}(x_n) = (w + x_n)^\top x_n + b + 1 = f_{old}(x_n) + \|x_n\|^2 + 1 > f_{old}(x_n)$$
+**Option A**.
+=== 10.14.1
+$$w = \frac{\sum xy}{\sum x^2} = \frac{-1 - 10 + 15}{1 + 4 + 9} = \frac{4}{14}\approx\mathbf{0.286}$$
+=== 10.15.1
+From the figures:
+
+- **(i):** circles on the upper left, squares on the lower right. A diagonal line separates them. ✔
+- **(ii):** a cross pattern, with a square surrounded by circles. ✘
+- **(iii):** an XOR-like layout of diagonal pairs. ✘
+- **(iv):** squares on the upper left, circles on the lower right. Separable. ✔
+
+**A and D**.
+=== 10.16.1
+- $P(y_1)P(x\mid y_1) = \tfrac13\cdot\tfrac34 = \tfrac14$
+- $P(y_2)P(x\mid y_2) = \tfrac23\cdot\tfrac14 = \tfrac16$
+
+So the classifier picks $y_1$. The probability of error is $P(y_2\mid x) = \frac{1/6}{1/4 + 1/6} = \frac25 = \mathbf{0.4}$.

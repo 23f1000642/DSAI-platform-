@@ -1,0 +1,84 @@
+=== 10.16.2
+Naive Bayes with binary attributes needs:
+
+- 1 class prior (P(class 1); the other is 1 minus it)
+- for each of the K attributes and each of the 2 classes, $P(x_k = 1\mid c)$: $2K$ values
+
+Total: **$2K + 1$**. **Option B**.
+=== 10.17.1
+Forward pass with u = 2 and v = 3:
+
+- top hidden unit: $R(au + bv) = R(2 + 3) = 5$, which is active
+- bottom hidden unit: $R(cu + dv) = R(2 - 3) = 0$, which is inactive
+- output: $y = R(4\cdot5 + (-1)\cdot0) = 20$, which is active
+
+Gradients:
+
+- $\frac{\partial y}{\partial a} = e\cdot u = 4\cdot2 = 8$
+- $\frac{\partial y}{\partial f} = h_2 = 0$
+
+**Option A**.
+=== 10.17.2
+ReLU is continuous everywhere (A ✔). It has a corner at 0, so it isn't differentiable there (C ✔, B ✘). $\text{ReLU}(ax)\ne\text{ReLU}(x)$ in general (D ✘). **A and C**.
+=== 10.17.3
+With positive inputs, every ReLU stays active, so Figure 1 is linear. Multiply the weights along each path:
+
+- input → hidden: 1
+- hidden → layer 2: 2
+- layer 2 → output: 3
+
+From the figure:
+
+- $X_1$ feeds all **3** hidden units
+- $X_2$ and $X_3$ feed **2** hidden units each
+
+Each hidden unit reaches the output through both layer-2 units, contributing $2\cdot3 + 2\cdot3 = 12$.
+
+So $p = 3\cdot12 = 36$, $q = 2\cdot12 = 24$ and $r = 2\cdot12 = 24$. **Option A**.
+=== 10.17.4
+$0.2(0.2) - 0.1(0.4) + 0.1(0.2) = 0.04 - 0.04 + 0.02 = \mathbf{0.02}$. **Option C**.
+=== 10.17.5
+a: D
+Net input: $1(5) + 2(7) + 3(10) + 4(30) = 5 + 14 + 30 + 120 = 169$. The output is $3\times169 = \mathbf{507}$. **Option D**.
+=== 10.18.1
+a: B
+Overfitting shows up when training error keeps **falling** while test error starts **rising**. **Option B**.
+=== 10.19.1
+Net input: $0.4(0.2) - 0.3(0.6) + 0.1(0.5) = 0.08 - 0.18 + 0.05 = -0.05$, so the sign is **−1**. **Option D**.
+=== 10.20.1
+The data has mean 0, so $\frac1n\sum(u^\top x)^2 = u^\top\Sigma u$. For the first principal direction, this equals the **largest eigenvalue**: $\lambda_1 = 100^{2-1} = \mathbf{100}$.
+=== 10.21.1
+$f'(x) = f(x)(1 - f(x)) = 0.4\times0.6 = \mathbf{0.24}$.
+=== 10.22.1
+- PCA: dimensionality reduction → ii
+- Naive Bayes: generative → iii
+- Logistic regression: discriminative → i
+
+**Option C**.
+=== 10.23.1
+The positive points are (1, 0), (0, 1) and (2, 2). The negative points are (0, −1), (−1, 0) and (−2, −2).
+
+The maximum-margin separator is $x_1 + x_2 = 0$. The points closest to it, all at distance $\tfrac{1}{\sqrt2}$, are $x_1, x_2, x_3, x_4$. So the support vectors are **{x₁, x₂, x₃, x₄}**, **option D**.
+=== 10.24.1
+$$f(x) = \|\mu_r\|^2 - \|\mu_g\|^2 - 2(\mu_r - \mu_g)^\top x$$
+The $\|x\|^2$ terms cancel, so f is **linear**, of the form $w^\top x + b$. **B and C** ✔. D ✘.
+
+A: at x = 0, $f = \|\mu_r\|^2 - \|\mu_g\|^2 < 0$, so the label is **red**, not green. A ✘.
+=== 10.25.1
+a: B
+- A is false: fuzzy C-means is **unsupervised**.
+- B is true: PCA reduces dimension.
+- C is true: Apriori is unsupervised (association rules).
+- D is false: that describes **overfitting**.
+
+**B and C**, **option B**.
+=== 10.26.1
+Single-linkage merges, step by step:
+
+| step | distance | merge |
+|---|---|---|
+| 1 | 1 | {x₁, x₂} and {x₄, x₅} |
+| 2 | 2 | x₃ joins {x₄, x₅} (d(x₃, x₄) = 2) |
+| 3 | 3 | {x₁, x₂} joins {x₃, x₄, x₅} (e.g. d(x₂, x₃) = 3) |
+
+The dendrogram is ((x₁ x₂)(x₃ (x₄ x₅))). **Option A**.
