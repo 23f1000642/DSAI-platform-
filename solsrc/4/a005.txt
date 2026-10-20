@@ -1,0 +1,77 @@
+=== 4.7.1
+Let R = "it rains" and P = "the match is played". The premise is $R\to\lnot P$.
+
+- **I1:** the match was played ($P$). By **modus tollens**, $\lnot\lnot P$ gives $\lnot R$: there was no rain. This is valid.
+- **I2:** it did not rain ($\lnot R$), and the conclusion is P. That's **denying the antecedent**, a fallacy: the match might be cancelled for some other reason.
+
+**Option B**.
+=== 4.7.2
+The premises are $S_1$: corrupt → ¬elected, and $S_2$: kind → elected.
+
+The contrapositive of $S_1$ is elected → ¬corrupt. Chain it with $S_2$: kind → elected → **not corrupt**.
+
+"If a person is kind, he is not known to be corrupt", **option C**.
+=== 4.7.3
+Let T = "the speaker is truthful" and H = "the toss is head". The speaker claims $H\leftrightarrow T$.
+
+- **Truth-teller (T true):** the claim is true, so $H\leftrightarrow\text{true}$, which means H.
+- **Liar (T false):** the claim is false, so $\lnot(H\leftrightarrow\text{false}) = \lnot\lnot H$, which means H.
+
+Either way, **the result is head**. **Option A**.
+=== 4.7.4
+A statement (proposition) is a declarative sentence that is either true or false.
+
+- (i) "There will be snow in January" is declarative. ✔
+- (iii) "Today is Sunday" is declarative. ✔
+- (ii) is a question. ✘
+- (iv) is a command. ✘
+
+**i and iii**, **option A**.
+=== 4.7.5
+The five-membered Nyāya syllogism (*pañcāvayava*) has these steps:
+
+1. **Pratijñā**: the thesis
+2. **Hetu**: the reason
+3. **Udāharaṇa**: the example
+4. **Upanaya**: the application
+5. **Nigamana**: the conclusion
+
+**Option D**.
+=== 4.7.6
+a: C
+- **I is correct.** Truth and falsehood belong to individual propositions.
+- **II is incorrect.** Validity belongs to **arguments**, i.e. to how premises relate to a conclusion. It never applies to a single proposition on its own.
+
+**Option C**.
+=== 4.7.7
+a: D
+The argument goes from "every part is spherical" to "the whole is spherical". That wrongly carries a property of the parts over to the whole: the **fallacy of composition**. **Option D**.
+=== 4.7.8
+a: C
+- **(A)** $P\to(P\land Q) \equiv P\to Q$, so the formula is $X\to X$. **Tautology.**
+- **(B)** $(P\to Q)\to Q \equiv \lnot(\lnot P\lor Q)\lor Q \equiv (P\land\lnot Q)\lor Q \equiv P\lor Q$, so again $X\to X$. **Tautology.**
+- **(C)** $P\lor\lnot P$ is always true, so it reduces to $Q\to R$. Not a tautology.
+- **(D)** $P\land\lnot P$ is always false, so it reduces to $\lnot Q\to\lnot R$. Not a tautology.
+
+**(A) and (B) only** is choice (3), which is **option C** here.
+=== 4.7.9
+$$(p\to q)\land(\lnot q\lor p) = (p\to q)\land(q\to p) = p\leftrightarrow q$$
+
+None of the options equals $p\leftrightarrow q$:
+
+- A gives $q\to p$ only.
+- B gives $p\to q$ only.
+- C and D, $(p\to q)\lor(q\to p)$, are **tautologies**, so they're true even when p and q differ.
+
+This item has no official answer. The correct simplification is $p\leftrightarrow q$.
+=== 4.7.10
+$x\lor\lnot x$ is true whatever $x$ is. That's the law of excluded middle. **Option C**.
+=== 4.7.11
+Read the tree from the bottom up:
+
+- left subtree: $\lnot x_1\lor x_2$
+- right subtree: $\lnot x_1\lor x_2$
+- root: their conjunction
+
+$$(\lnot x_1\lor x_2)\land(\lnot x_1\lor x_2)$$
+**Option C**.

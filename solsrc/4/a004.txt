@@ -1,0 +1,67 @@
+=== 4.4.34
+- **S1 is true.** ∀ distributes over ∧, but not over ∨. On the integers with P = even and Q = odd, $\forall x(P\vee Q)$ is true, but $\forall x P\vee\forall x Q$ is false.
+- **S2 is true.** ∃ distributes over ∨, but not over ∧. In the same example, $\exists x P\wedge\exists x Q$ is true, but $\exists x(P\wedge Q)$ is false.
+
+**Both**, **option C**.
+=== 4.4.35
+a: D
+Over the reals:
+
+- **(A)** $x = 0$ satisfies $0 + y = y$ for every $y$. **True.**
+- **(B)** If $x \ge 0$ and $y < 0$, then $x - y > 0$. **True.**
+- **(C)** $x = 0$, $y = -1$ gives $0 - (-1) = 1 > 0$. **True.**
+- **(D)** $xy \ne 0$ exactly when both are non-zero. **True.**
+
+All four are true, which is choice **(4)**, **option D**.
+=== 4.4.36
+Over the integers:
+
+- **(A)** $\forall n\,\exists m\,(n^2 < m)$: take $m = n^2 + 1$. **True.**
+- **(B)** $\exists n\,\forall m\,(n < m^2)$: $m = 0$ needs $n < 0$, so take $n = -1$. Then every $m^2 \ge 0 > -1$. **True.**
+- **(C)** $n = 1$ gives $1\cdot m = m$. **True.**
+- **(D)** $n^2 + m^2 = 6$ has no integer solutions. **False.**
+- **(E)** $n + m = 4$ and $n - m = 1$ give $n = 2.5$, which isn't an integer. **False.**
+
+So **(A), (B) and (C)** are true. That's choice **(1)**, **option A**.
+=== 4.4.37
+a: D
+Over the integers:
+
+- **(A)** $n^2 \ge 0$. **True.**
+- **(B)** $n^2 = 2$ has no integer solution. **False.**
+- **(C)** $n^2 \ge n$ for every integer: it's true for 0 and 1, and $n^2 > n$ for all others. **True.**
+- **(D)** $n^2 < 0$. **False.**
+
+**(A) and (C)** are true. That's choice **(4)**, **option D**.
+=== 4.4.38
+Resolving $(R\vee Q)$ with $(P\vee\neg Q)$ gives $R\vee P$, which is already implied. Adding an implied clause doesn't change the meaning:
+$$(R\vee Q)\wedge(P\vee\neg Q) \equiv (R\vee Q)\wedge(P\vee\neg Q)\wedge(R\vee P)$$
+**Option B**.
+=== 4.4.39
+"Both in India" needs **∧**. The ∨ version is syntactically valid, but it means something different. **Option A**.
+=== 4.4.40
+- If there's a unique $x$ with $P(x)$, then certainly some $x$ has $P(x)$. **True.**
+- If there's a unique $x$ with $\neg P(x)$, then $P$ fails somewhere, so $\neg\forall x\,P(x)$. **True.**
+
+**True and True**, **option D**.
+=== 4.4.41
+Replacing existentially quantified variables with Skolem functions or constants is called **Skolemization**. **Option C**.
+=== 4.4.42
+- **I:** a unique $x$ is still an $x$. **True.**
+- **II:** some $x$ makes $P$ false, so $P$ isn't true for all $x$. **True.**
+
+**Both true**, **option A**.
+=== 4.4.43
+$\neg\exists x\,H(x) \equiv \forall x\,\neg H(x)$. **Option B**.
+=== 4.4.44
+"Exactly one successor": for every $x$ there's a $y$ that is its successor, and any successor $z$ equals $y$. **Option A**.
+=== 4.4.45
+"Some students like hockey" is $\exists x\,L(x)$. Its negation is $\forall x\,\neg L(x)$: **every student dislikes hockey**. **Option B**.
+=== 4.5.1
+- (a) $f(x) = f(y)\to x = y$ is **injective** (ii).
+- (b) Every $y$ has a preimage, so it's **surjective** (iii).
+- (c) $f(x) = k$ for all $x$ is **constant** (i).
+
+**Option D**.
+=== 4.6.1
+An Abelian group is a group that also satisfies the **commutative** property. **ii only**, **option D**.

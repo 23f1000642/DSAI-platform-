@@ -1,0 +1,127 @@
+=== 4.7.12
+- **I is correct.** A *sound* argument is a valid deductive argument whose premises are all true.
+- **II is correct.** A *cogent* argument is a strong inductive argument whose premises are all true.
+
+**Option A**.
+=== 4.7.13
+$P\Leftrightarrow(Q\lor\lnot Q)$, so P is always **true**. Also $R\equiv Q$. Substitute both:
+$$(T\land Q)\Rightarrow((T\land Q)\lor S) = Q\Rightarrow(Q\lor S)$$
+That's always true, because if Q is true then $Q\lor S$ is true. So the formula is **always true**. **Option A**.
+=== 4.7.14
+a: A
+The premises are $r\to\lnot q$, $r\lor s$, $s\to\lnot q$ and $p\to q$.
+
+1. **Constructive dilemma:** $r\lor s$, with both $r\to\lnot q$ and $s\to\lnot q$, gives $\lnot q$.
+2. **Modus tollens:** $p\to q$ and $\lnot q$ give **$\lnot p$**.
+
+So A follows from R, and R is exactly the reasoning that explains it. **Option A**.
+=== 4.7.15
+- **(A)** $\alpha\land(\beta\lor\gamma)\equiv(\alpha\land\beta)\lor(\alpha\land\gamma)$ is the distributive law. ✔
+- **(B)** $\alpha\lor\beta\not\equiv\lnot\alpha\lor\beta$. Try α = T, β = F. ✘
+- **(C)** $\alpha\Rightarrow\beta\equiv\lnot\beta\Rightarrow\lnot\alpha$ is the contrapositive. ✔
+- **(D)** $\lnot\alpha\Rightarrow\lnot\beta\equiv\alpha\lor\lnot\beta$, which isn't $\lnot(\alpha\lor\beta)$. ✘
+
+**(A) and (C)**, **option C**.
+=== 4.8.1
+**A's monthly income.** Salary is 92000, and the incentive is 15% of salary, 13800. Income = **105800**.
+
+**A's expenditure.** A saves 40%, so spends 60% of income: 63480.
+
+- Food: 10960
+- Accommodation: 10% of income, 10580
+- Shopping: 15% of income, 15870
+
+Travel = $63480 - 10960 - 10580 - 15870 = 26070$.
+
+**F's salary.** F's incentive of 11400 is 15% of salary, so salary $= 11400 / 0.15 = 76000$.
+
+$$\frac{26070}{76000}\approx 34.3\%$$
+**Option D**.
+=== 4.9.1
+To prove `father(X, Jane)`, Prolog first proves `parent(X, Jane)`.
+
+- `parent(Sally, Bob)` and `parent(Jim, Bob)` don't unify, because the second argument Bob ≠ Jane.
+- Only `parent(Alice, Jane)` unifies, binding **X = Alice**.
+
+Then `male(Alice)` fails, and there's nothing left to try, so the query fails. Exactly **1** atom (Alice) was ever bound to X. **Option A**.
+=== 4.9.2
+Byrd's box model of Prolog execution has four ports: **call, exit, redo and fail**. **Option D**.
+=== 4.10.1
+The premises are $p$ and $(p\to q)\lor(p\land(r\to q))$. Since $p$ is true:
+
+- $p\to q$ reduces to $q$
+- $p\land(r\to q)$ reduces to $r\to q$
+
+So the second premise becomes $q\lor(r\to q) = q\lor\lnot r\lor q = \lnot r\lor q$, which is $r\to q$. ∎
+
+**As a derivation:** take the two cases of the disjunction.
+
+- **Case 1**, $p\to q$: with $p$, we get $q$, and then $r\to q$ holds for any $r$.
+- **Case 2**, $p\land(r\to q)$: simplification gives $r\to q$ directly.
+
+Either way, $r\to q$.
+=== 4.10.2
+A wff is **valid** (a tautology) if it's **true under every interpretation**, i.e. for every assignment of truth values to its variables (or every structure and assignment, in predicate logic). Equivalently, its negation is unsatisfiable. Example: $P\lor\lnot P$.
+=== 4.10.3
+- $P\to Q\equiv\lnot P\lor Q$ (A ≡ C)
+- Its contrapositive is $\lnot Q\to\lnot P$ (B)
+- $\lnot Q\to P\equiv Q\lor P$ (D) is different
+
+**A, B and C**.
+=== 4.10.4
+- **A:** $(P\Rightarrow Q)\land(Q\Rightarrow R)\Rightarrow(P\Rightarrow R)$ is the hypothetical syllogism. **Valid.**
+- **B:** this is denying the antecedent. P = F, Q = T makes it false. ✘
+- **C:** $P\land(\lnot P\lor\lnot Q) = P\land\lnot Q$, which doesn't imply Q. ✘
+- **D:** P = T, Q = F, R = F makes the left side true (via Q ⇒ R) and the right side false. ✘
+
+**Only A**.
+=== 4.10.5
+If $F_1\land F_2\to F_3$ and $F_1\land F_2\to\lnot F_3$ are both tautologies, then whenever $F_1\land F_2$ is true, both $F_3$ and $\lnot F_3$ hold. That's impossible. So $F_1\land F_2$ is **never** true, i.e. it's **unsatisfiable**. **Option B**.
+=== 4.10.6
+- **B:** $a\land b\to b\lor c$. If the left side is true, then b is true, so the right side is true. **Tautology.**
+- **A** fails when a = T, b = F.
+- **C** fails when a = T, b = T, c = F.
+- **D** fails when a = T, b = T, c = F.
+
+**Only B**.
+=== 4.10.7
+Write each statement in clause form:
+
+1. $\lnot Q(x)\lor P(x)\lor\lnot R(a)$
+2. $R(a)\lor\lnot Q(a)$
+3. $Q(a)$
+4. $\lnot P(y)$
+
+**Resolution:**
+
+- 3 with 2 gives **$R(a)$**.
+- 1 with $x := a$, resolved with 3, gives **$P(a)\lor\lnot R(a)$**.
+- That with $R(a)$ gives **$P(a)$**.
+- That with 4 ($y := a$) gives the **empty clause □**.
+
+So the set is **inconsistent**. (With modus ponens: Q(a) gives R(a), and Q(a) ∧ R(a) gives P(a), which contradicts ∀y ¬P(y).)
+=== 4.10.8
+Let $F = A\land(A\to(B\lor C))\land(B\to\lnot A)$. We show that F → C is a tautology, i.e. C is true in every row where F is true.
+
+| A | B | C | A→(B∨C) | B→¬A | F |
+|---|---|---|---|---|---|
+| T | T | T | T | F | F |
+| T | T | F | T | F | F |
+| **T** | **F** | **T** | T | T | **T** |
+| T | F | F | F | T | F |
+| F | – | – | – | – | F (A false) |
+
+F is true **only** in the row A = T, B = F, C = T, and **C is true there**. So C is a logical consequence of F. ∎
+=== 4.10.9
+$p\land(\lnot p\lor q) = (p\land\lnot p)\lor(p\land q) = p\land q$. **Option B**.
+=== 4.10.10
+**True.**
+
+| p | q | p⇔q | p→¬q |
+|---|---|---|---|
+| T | T | **T** | **F** |
+| T | F | F | T |
+| F | T | F | T |
+| F | F | T | T |
+
+In the first row, $p\Leftrightarrow q$ is true but $p\to\lnot q$ is false. So $p\Leftrightarrow q$ does **not** imply $p\to\lnot q$, and the statement is true.
