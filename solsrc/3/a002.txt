@@ -1,0 +1,196 @@
+=== 3.0.20
+a: A
+This comes from Korth's discussion of using operating-system file permissions instead of the database's own authorisation. That approach has these limitations:
+
+- the administrator has **less** control over the grant option, not more
+- it's **difficult** to tell update, delete and insert authorisations apart
+- you **can't** store more than one relation in a file
+
+So statement A ("the administrator enjoys **more** control on the grant option") is **false**. **Option A**.
+=== 3.0.21
+a: A
+**Specialisation** starts from a general entity set and defines more specific sub-entity sets. That's a **top-down** process. Generalisation is the bottom-up reverse. **Option A**.
+=== 3.0.22
+a: B
+**CODASYL** (Conference on Data Systems Languages) produced the DBTG report, which standardised the network data model and how data is stored and accessed. **Option B**.
+=== 3.0.23
+a: A
+In EER modelling, a subclass that draws its members from **more than one** superclass (a union type) is called a **category**. **Option A**.
+=== 3.0.24
+a: A
+The **primary key** is the candidate key the designer chooses as the main way to identify entities. Every primary key is a candidate key, which in turn is a minimal superkey. **Option A**.
+=== 3.0.25
+a: A
+**WOS** is **Web of Science**, Clarivate's citation-indexing database. **Option A**.
+=== 3.0.26
+a: D
+A **trigger** is a statement (procedure) that the DBMS runs **automatically** as a side effect of a change to the database, such as INSERT, UPDATE or DELETE on a table. It follows the event–condition–action model. **Option D**.
+=== 3.1.1
+a: D
+- **(i) True.** This is the definition: a design is in BCNF when every relation schema in it is in BCNF.
+- **(ii) False.** BCNF implies 3NF, so a BCNF schema can't have a transitive dependency of a non-key attribute on the key.
+- **(iii) True.** 3NF synthesis always gives a design that is lossless-join and also dependency-preserving.
+- **(iv) True, as intended.** 4NF still allows multivalued dependencies, but only *trivial* ones, or ones whose left side is a superkey.
+
+**i, iii and iv**, **option D**.
+=== 3.2.1
+a: B
+**Aggregation** treats a relationship set (with its participating entities) as a **higher-level entity**, so it can take part in other relationships. **Option B**.
+=== 3.2.2
+In UML/OO modelling:
+
+- **Composition** is the *strong* "whole–part" association: the whole fully owns the part, and the part can't exist without it.
+- **Aggregation** is the *weak* version: the part can exist on its own, so ownership is only **partial** (shared).
+
+**Option C**.
+=== 3.3.1
+a: A
+- **Authentication** checks *who* the user is.
+- **Authorisation** decides *what privileges* that user has.
+
+So the process that establishes a user's privileges is **authorisation**, **option A**.
+=== 3.4.1
+Each node holds at most 3 keys in a leaf, and at most 2 keys (3 pointers) in an internal node.
+
+**Step 1: insert into the leaf.** 34 belongs in leaf [32 50 72], which becomes 32 34 50 72. That's too many, so split it into **[32 34]** and **[50 72]**, and copy **50** up into the parent.
+
+**Step 2: the parent overflows.** The parent [32 81] becomes [32 50 81], which is too many keys. Split it into **[32]** and **[81]**, and move **50** up into the root.
+
+**Step 3: the root overflows.** The root [120 250] becomes [50 120 250]. Split it into **[50]** and **[250]**, and move **120** up into a new root.
+
+The resulting tree (the height grows by one):
+```
+                          [120]
+                 /                    \
+             [50]                      [250]
+            /    \                    /      \
+        [32]      [81]          [150 205]     [520]
+       /    \     /   \         /   |   \     /    \
+ [2 8 18][32 34][50 72][81 106][120 140][150 160 200][205 235 240][250 340 420][520 601]
+```
+The leaves are still linked left to right.
+=== 3.4.2
+The root holds 4 keys, so $2d = 4$ and $d = 2$. Every node has 2 to 4 keys.
+
+**Step 1: insert into the leaf.** 100 belongs in leaf [93 99 101 105], which becomes 93 99 100 101 105 (5 keys, too many). Split it into **[93 99]** and **[100 101 105]**, and copy **100** up.
+
+**Step 2: the root overflows.** The root [25 38 69 93] becomes [25 38 69 93 100] (5 keys). Split it around the middle key **69**:
+
+- left internal node [25 38]
+- right internal node [93 100]
+- new root [69]
+
+```
+                         [69]
+                /                  \
+          [25 38]                  [93 100]
+         /   |    \               /    |     \
+ [10 15] [25 36] [38 41 47]  [69 71 75 83] [93 99] [100 101 105]
+```
+=== 3.4.3
+Every root-to-leaf path has the same length. Each internal node has at least $d$ children (more precisely $d+1$, but at least 2 at the root), so the height is at most about $\log_d n$.
+
+A search visits one node per level: **$O(\log_d n)$** nodes.
+=== 3.4.4
+**(a)** In a B+-tree, each internal node with $k$ children has $k-1$ keys. Add this up over all internal nodes:
+$$\sum(\text{children} - 1) = (\text{total child pointers}) - (\#\text{internal}) = (\#\text{nodes} - 1) - \#\text{internal} = l - 1$$
+So the internal nodes hold **$l - 1$** keys in total.
+
+**(b)** With order 4, each internal node has 5 to 9 children (the root has 2 to 9). To get the **most** internal nodes, give every node as few children as possible:
+
+| level | nodes |
+|---|---|
+| leaves | 52 |
+| above the leaves | $\lfloor 52/5\rfloor = 10$ |
+| next level | $\lfloor 10/5\rfloor = 2$ |
+| root | 1 (2 children, which is allowed) |
+
+The maximum is $10 + 2 + 1 = \mathbf{13}$.
+
+**(c)** The root has at least 2 children, and every other internal node has at least $d+1$:
+$$\text{minimum leaves} = 2(d+1)^{h-1}$$
+=== 3.4.5
+In a B+-tree all records sit in the leaves, which are **linked in key order**. A range query finds the first key in $O(\log n)$, then just walks the leaf chain. In a B-tree, the keys are spread over every level, so a range query needs an in-order traversal that keeps jumping between levels. **Option B**.
+=== 3.4.6
+Every internal node except the root has $m$ to $2m-1$ children. The root has 2 to $2m-1$. Each node holds one fewer key than it has children, so a leaf holds $m-1$ to $2m-2$ records.
+
+**Maximum:** every node is full. There are $(2m-1)^h$ leaves, each with $2m-2$ records:
+$$\text{max records} = (2m-1)^h(2m-2)$$
+
+**Minimum:** the root has 2 children, and every other node has $m$. There are $2m^{h-1}$ leaves, each with $m-1$ records:
+$$\text{min records} = 2m^{h-1}(m-1)$$
+=== 3.4.7
+A disk access costs milliseconds, while a memory access costs nanoseconds. A B+-tree node fills a whole disk block and has a large fan-out, so the tree is very shallow, and a lookup needs only a few block reads. A binary tree would need about $\log_2 n$ separate disk reads. **Option B**.
+=== 3.4.8
+Each node holds at most 5 keys. A leaf split keeps the first 3 keys on the left, and the first key of the right leaf is copied up.
+
+**(a)(i) After 6 insertions.** [1 2 3 4 5] overflows when 6 arrives:
+```
+          [4]
+        /     \
+   [1 2 3]   [4 5 6]
+```
+
+**(a)(ii) After 10 insertions.** Inserting 9 makes the right leaf [4 5 6 7 8 9] overflow. It splits into [4 5 6] and [7 8 9], copying 7 up. Then 10 joins the last leaf:
+```
+            [4 7]
+        /     |      \
+   [1 2 3] [4 5 6] [7 8 9 10]
+```
+
+**(b) Move to the left sibling instead of splitting.**
+
+- Inserting 6: there's no left sibling, so split as before.
+- Inserting 7 and 8: they fill the right leaf to [4 5 6 7 8].
+- Inserting 9: the right leaf overflows. Its left sibling [1 2 3] has room, so shift **4** into it, and update the separator to 5.
+```
+          [5]
+        /     \
+  [1 2 3 4]  [5 6 7 8 9]
+```
+
+**(c)** Keys arrive in increasing order.
+
+- **(i) Normal splitting.** Every split leaves a half-full left leaf that never receives another key. On average a leaf holds about **$m/2$** keys (50% utilisation).
+- **(ii) Shifting to the left sibling first.** Left leaves are filled to capacity before a split happens, so a leaf holds about **$m$** keys (close to 100% utilisation).
+=== 3.4.9
+Fan-out 3 means a node has at most 3 pointers, so at most **2 keys**. A full leaf of 3 keys splits as 1 + 2, and the right leaf's first key is copied up.
+
+**(a)**
+
+- **Inserting 80, 50, 10.** Leaf [10 50 80] overflows and splits into [10] and [50 80]. The root is [50].
+- **Inserting 70.** [50 70 80] splits into [50] and [70 80]. The root becomes [50 70].
+- **Inserting 30.** It goes into [10]. **The tree after 30:**
+```
+           [50 70]
+         /    |    \
+   [10 30]  [50]  [70 80]
+```
+- **Inserting 100.** [70 80 100] splits into [70] and [80 100], and 80 goes up. The root [50 70 80] now overflows, so it splits and 70 moves up.
+- **Inserting 90.** [80 90 100] splits into [80] and [90 100], and 90 goes up into [80 90]. **The tree after 90:**
+```
+                 [70]
+             /          \
+          [50]          [80 90]
+         /    \        /   |    \
+   [10 30]   [50]   [70] [80] [90 100]
+```
+
+**(b) Deletions.**
+
+- **Delete 30.** The leaf becomes [10], which still meets the minimum of 1 key. Nothing else changes.
+```
+                 [70]
+             /          \
+          [50]          [80 90]
+         /    \        /   |    \
+      [10]   [50]   [70] [80] [90 100]
+```
+- **Delete 10.** The leaf becomes empty. Its sibling [50] can't lend a key, so the two merge. That leaves the internal node [50] with one child, which is an underflow. Its sibling [80 90] can lend a key, so redistribute through the root: 70 comes down, leaf [70] moves across, and 80 goes up.
+```
+                 [80]
+             /          \
+          [70]           [90]
+         /    \         /     \
+      [50]   [70]    [80]   [90 100]
+```

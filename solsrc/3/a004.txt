@@ -1,0 +1,107 @@
+=== 3.4.25
+23 belongs in leaf [20 21 22], which is already full (3 keys).
+
+- **The leaf splits:** [20 21 22 23] becomes [20 21] and [22 23], and a separator moves up.
+- **The root splits:** the root [6 12 19] is also full, so it splits too, and a new root is created.
+
+So at least one node splits and redistributes (B ✔), and the tree gets one level taller (D ✔). The number of nodes grows, so C is false. **Answer: B and D**.
+=== 3.4.26
+The keys run 20–26, so leaf C hangs under B, between 19 and 33.
+
+**Inserting 23** makes C overflow: 20, 22, 23, 25, 26. It splits into [20 22 23] and [25 26], and **25** is copied up into B.
+
+**B overflows:** it becomes 7, 19, 25, 33, 44, which is 5 keys. It splits, and the middle key **25** moves up into A. That leaves [7 19] and **[33 44]**.
+
+The leaf holding 25 is now the leftmost child of [33 44], under the pointer for keys in $[25, 33)$. So its parent's smallest key is **33**.
+=== 3.4.27
+A B-tree node with $p$ tree pointers holds $p-1$ keys, and each key comes with a data pointer:
+$$5p + (p-1)(10+8) \le 512 \Rightarrow 23p \le 530 \Rightarrow p = \mathbf{23}$$
+**Option C**.
+=== 3.4.28
+In the worst case, the insert splits a node at **every** level. With 4 levels, that's 4 new sibling nodes, plus a new root when the old root splits. That's at most $4 + 1 = \mathbf{5}$ new nodes. **Option A**.
+=== 3.4.29
+A non-leaf node with $p$ block pointers holds $p-1$ keys:
+$$6p + 9(p-1) \le 512 \Rightarrow 15p \le 521 \Rightarrow p = \mathbf{34}$$
+**Option C**.
+=== 3.4.30
+Each leaf holds at most 2 keys. On a split, the left leaf keeps 2 keys and the right leaf's first key is copied up.
+
+- **Insert K15:** the leaf becomes [K10 K15 K20] and splits into **[K10 K15]** and **[K20]**. K20 moves up, so the parent becomes **[K20 K30]**.
+- **Insert K25:** it goes into leaf [K20], giving **[K20 K25]**.
+
+Of the four nodes listed, only **[K20 K25]** is in the tree:
+
+- [K30 K50]: no, the root is still [K40]
+- [K25 K30]: no
+- [K15 K20]: no
+
+**1** node, **option A**.
+=== 3.4.31
+After the two insertions, the tree is:
+
+- root [K40]
+- left internal [K20 K30], with leaves [K10 K15] [K20 K25] [K30]
+- right internal [K50], with leaves [K40] [K50]
+
+**Delete K50.** Its leaf becomes empty. The sibling [K40] has only 1 key, so it can't lend one, and the two leaves merge. That leaves the right internal node with a single child, which is an underflow. It borrows from the left internal node through the root: K30 goes up, K40 comes down, and leaf [K30] moves across.
+
+| node | after deletion |
+|---|---|
+| root | [K30] |
+| left internal | **[K20]**, with leaves [K10 K15] [K20 K25] |
+| right internal | [K40], with leaves [K30] [K40] |
+
+- (i) The height is unchanged. ✔
+- (ii) Node [K20] is present. ✔
+- (iii) The root changed from K40 to K30. ✘
+
+**Option A**.
+=== 3.4.32
+Each node has 3 pointers, so it holds 2 keys. Use separators that are the largest key of the left part. Insert 8, 5, 1, 7, 3, 12, 9, 6:
+
+| insert | result |
+|---|---|
+| 8, 5 | [5 8] |
+| 1 | [1 5 8] splits into [1 5] [8], root [5] |
+| 7 | [7 8] |
+| 3 | [1 3 5] splits into [1 3] [5], root [3 5] |
+| 12 | [7 8 12] splits into [7 8] [12]. The root [3 5 8] splits too, giving root **[5]** with children [3] and [8] |
+| 9 | [9 12] |
+| 6 | [6 7 8] splits into [6 7] [8], so the right internal node becomes **[7 8]** |
+
+```
+              [5]
+          /         \
+       [3]           [7 8]
+      /   \        /   |    \
+  [1 3]  [5]   [6 7]  [8]  [9 12]
+```
+This matches **option A**.
+=== 3.4.33
+A B-tree of degree $K$ and height $h$:
+
+- **Most leaves:** every node has $K$ children, giving $K^h$.
+- **Fewest leaves:** the root has 2 children and every other node has $\lceil K/2\rceil$, giving $2\lceil K/2\rceil^{h-1}$.
+
+**Option A**.
+=== 3.5.1
+A leaf holds $n$ (key, record-pointer) pairs plus one next-leaf pointer:
+$$n(14 + 7) + 7 \le 1024 \Rightarrow 21n \le 1017 \Rightarrow n = 48$$
+48 isn't among the options. If you treat the leaf like an internal node instead ($7p + 14(p-1) \le 1024$), you get $p = 49$, which isn't listed either. So the official key gave **marks to all**.
+=== 3.6.1
+**No.** A key is a constraint on **every** legal instance of the schema, not a property of one instance. A single instance where A happens to have distinct values only shows that A is **not ruled out**. A future insertion could repeat an A value. Whether A is a key has to come from the semantics (the functional dependencies) of the schema.
+
+What you *can* conclude is the opposite direction: if an instance had **duplicate** A values, A would definitely not be a key.
+=== 3.6.2
+- A student can hold **joint** accounts, so two students can share the same primary account number. BankAccount_Num isn't unique, so it is **not** a candidate key. **A is incorrect.**
+- B is fine: Registration_Num is unique.
+- C is fine: UID is unique within one country.
+- D is fine: adding attributes to a superkey always gives a superkey.
+
+**Option A**.
+=== 3.6.3
+Any superset of the key E is a superkey. E can be combined with any subset of {F, G, H}, so there are $2^3 = \mathbf{8}$ superkeys.
+=== 3.6.4
+Shankar appears twice, with ages X and 19. For (StudentName, StudentAge) to be a key, those two rows must differ, so X must **not be 19**.
+=== 3.6.5
+A **prime attribute** is one that belongs to **at least one** candidate key. **Option B**.

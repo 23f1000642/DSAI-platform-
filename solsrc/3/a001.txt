@@ -1,0 +1,88 @@
+=== 3.0.1
+The three-schema architecture has three levels:
+
+- **Internal (physical)**: how the data is stored.
+- **Conceptual**: the whole logical database.
+- **External**: the individual *views* given to each user.
+
+Hiding the salary column from employees means giving them an external view without that column. This is **external-level data hiding**, **option C**.
+=== 3.0.2
+- **DDL**: the key pairs it with REVOKE (iv). REVOKE is strictly a DCL command, but it's grouped with schema-definition statements here.
+- **DML**: LOCK TABLE (i), which Oracle classes as a DML statement.
+- **TCL**: COMMIT (ii).
+- **Binary operation**: natural difference (iii). Set difference is a binary relational operation.
+
+a-iv, b-i, c-ii, d-iii, **option D**.
+=== 3.0.3
+Concurrent updates to the same record are serialised by **locking**. While one transaction holds an exclusive (write) lock on the record, the other must wait. **Option D**.
+=== 3.0.4
+Suppose T1 updates an item and then fails (rolls back), but T2 has already read the uncommitted value. T2 is now working with "dirty" data. This is the **dirty read problem**, also called the temporary update problem. **Option C**.
+=== 3.0.5
+In the CODASYL/network model, the **User Work Area (UWA)** is a set of program variables declared in the host program. Records move between the **host program and the DBMS** through it: GET loads a record into the UWA, and STORE writes it from the UWA. **Option C**.
+=== 3.0.6
+The three classic DBMS data models are **hierarchical, network and relational** (plus object-oriented). "Sequential" is a file organisation, not a type of DBMS. **Option D**.
+=== 3.0.7
+Hiding salary details from employees is done by giving them a restricted **view**. Views belong to the external schema, so this is **external-level data hiding**. **Option C**.
+=== 3.0.8
+- **Foreign keys** enforce referential integrity (ii).
+- **Private key**: the key pairs it with domain constraint (i).
+- **Event–condition–action model**: this is how triggers work (iv).
+- **Data security**: encryption (iii).
+
+a-ii, b-i, c-iv, d-iii, **option B**.
+=== 3.0.9
+In dBASE, **GO BOTTOM** moves to the last record, which is record 30. **SKIP -3** then moves back 3 records, to record **27**. **Option B**.
+=== 3.0.10
+- **Secondary index** is typically implemented as a B-tree (ii).
+- **Non-procedural query language**: domain calculus (iv).
+- **Closure of a set of attributes** is computed from functional dependencies (i).
+- **Natural join** is a relational algebra operation (iii).
+
+a-ii, b-iv, c-i, d-iii, **option D**.
+=== 3.0.11
+- **Normalisation** reduces data redundancy (ii).
+- The **data dictionary** holds metadata describing the database structure (iv).
+- **Referential integrity** makes every foreign key match a primary key (i).
+- The **external schema** defines the views for particular users (iii).
+
+**Option B**.
+=== 3.0.12
+An **entity type** is a template (a schema) describing a group of entities that share the same attributes. An entity *instance* is one specific real-world object of that type. **Option D**.
+=== 3.0.13
+**Indexes** are extra structures that speed up access to the data. They improve performance and accessibility without changing the data itself. **Option A**.
+=== 3.0.14
+- **I is true.** Views give access control by exposing only a subset of the data.
+- **II is false**, according to the key. E-R diagrams are for *conceptual* modelling, not *logical* modelling.
+- **III is false.** Being unable to store information without storing other, unrelated information is an **insertion** anomaly, not an update anomaly.
+- **IV is false.** SQL is *declarative* (non-procedural).
+
+II, III and IV are false, **option D**.
+=== 3.0.15
+- **D1 is false.** Decomposing $R(A,B,C)$ into $(A,B)$ and $(A,C)$ is lossless only if $A\to B$ or $A\to C$. That isn't true in general.
+- **D2 is true.** $R_1\cap R_2 = \{A,D\}$, and $AD\to B$ is given. So $AD$ determines all of $R_1 = \{A,B,D\}$, i.e. the common attributes are a superkey of $R_1$. The decomposition is lossless.
+
+**Only D2**, **option D**.
+=== 3.0.16
+- **Privacy invasion** (A), **hardware failure** (B) and **fraudulent manipulation of data** (C) are all genuine threats to data security.
+- **Encryption and decryption** (D) is a *protection* mechanism, not a threat.
+
+The original paper's single intended option isn't recoverable, and the official key was never published. Treat A, B and C as threats, and D as the odd one out.
+=== 3.0.17
+a: C
+This is from compiler design (lexical analysis). The compiler keeps a **permanent** table with one entry for each terminal symbol of the language: keywords, operators and delimiters. That's the **terminal table**.
+
+The literal table and identifier table are built fresh for each program being compiled. **Option C**.
+=== 3.0.18
+- (i) is false. A stored procedure that runs when an event occurs is a **trigger**, not a view.
+- (ii) is true. A view is a **virtual table**, defined by a stored query that runs when the view is used.
+
+**Only (ii)**, **option B**.
+=== 3.0.19
+$a$ in $R_1$ is a foreign key referencing $R_2$'s primary key.
+
+- **(a) Insert into $R_1$** can violate referential integrity: the new $a$ value may not exist in $R_2$.
+- **(b) Insert into $R_2$** is always safe.
+- **(c) Delete from $R_1$** is always safe.
+- **(d) Delete from $R_2$** can violate it: a row of $R_1$ may still refer to the deleted key.
+
+**(a) and (d)**, **option D**.

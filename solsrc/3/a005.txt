@@ -1,0 +1,99 @@
+=== 3.6.6
+a: C
+Compute the closure of $A$: $A\to BC$, $A\to D$, then $D\to E$. So $A^+ = \{A,B,C,D,E\}$.
+
+A determines everything, and it's a single attribute, so it's minimal. **A** is the primary key. BC isn't a key, because $BC^+ = \{B,C,D,E\}$ is missing A. **Option C**.
+=== 3.6.7
+- A **superkey** uniquely identifies tuples.
+- A **candidate key** is a *minimal* superkey.
+- The **primary key** is one chosen candidate key.
+
+So primary key ⊆ candidate key ⊆ superkey, **option B**.
+=== 3.6.8
+An instance can't prove that a key holds, but it can rule one out (duplicate values). So check uniqueness in the table, then minimality.
+
+| set | values in the 3 rows | unique? |
+|---|---|---|
+| {B} | b1, b3, b2 | ✔ |
+| {B, C} | (b1,c1), (b3,c3), (b2,c1) | ✔, but it contains {B} |
+| {A, D} | (a1,d1), (a2,d1), (a1,d2) | ✔ |
+| {C, D} | (c1,d1), (c3,d1), (c1,d2) | ✔ |
+
+Every set is unique in this instance. But {B,C} has a proper subset, {B}, that already identifies the rows. A candidate key must be **minimal**, so {B,C} can't be one. **II only**, **option C**.
+=== 3.6.9
+a: C
+- $A^+ = \{A,B,E,F\}$, which is missing C and D.
+- D appears on no right-hand side, so every key must contain D.
+- $AD^+ = \{A,D,B,E,F,C\}$, which is everything.
+
+**AD** is the candidate key, **option C**.
+=== 3.6.10
+a: C
+This is the same as the previous question. D appears on no right-hand side, so it's in every key, and $AD^+ = \{A,B,C,D,E,F\}$. The candidate key is **AD**, **option C**.
+=== 3.6.11
+a: D
+A superkey is **any** set of attributes that uniquely identifies an entity, so it can have one or more attributes. A single-attribute key is still a superkey. **Option D**.
+=== 3.6.12
+A foreign key must reference the **primary key**, or more generally a unique or candidate key, of the parent table. The standard answer is primary key, **option B**.
+=== 3.6.13
+A candidate key is **unique** (no two tuples share it) and **irreducible**, also called minimal (no proper subset is unique). **Both P and Q**, **option C**.
+=== 3.7.1
+When mapping an ER relationship to tables, the cardinality ratio (1:1, 1:N, M:N) and participation (total or partial) are the structural **constraints** that decide which design to use: a foreign key, cross-referencing, or mutual referencing. **Option B**.
+=== 3.8.1
+`if (rear == maxsize-1) rear = 0; else rear = rear + 1;` wraps `rear` back to the start of the array. That's how a **circular queue** advances its index, equivalent to `rear = (rear+1) % maxsize`. **Option A**.
+=== 3.9.1
+a: D
+- **Two-phase locking** guarantees conflict serialisability, but it **can deadlock**: transactions can wait on each other's locks. Statement I is incorrect.
+- **Timestamp ordering** guarantees conflict serialisability, and it's **deadlock-free**: transactions never wait, they abort and restart instead. Statement II is correct.
+
+**Option D**.
+=== 3.10.1
+a: C
+- **I is correct.** Basic 2PL can deadlock.
+- **II is correct.** Timestamp protocols abort and restart transactions more often.
+- **III is wrong.** A **black hole** in a DFD is a *process* with only inbound flows, not a data store.
+- **IV is wrong.** Multivalued dependencies are dealt with at **4NF**, not 3NF.
+- **V is wrong.** An ER diagram models **data** (entities and relationships), not events.
+
+The wrong statements are III, IV and V, **option C**.
+=== 3.11.1
+Build the precedence graph for each schedule:
+
+- **A:** edges T1→T2 and T2→T1 (r1 before w2, and r2 before w1). That's a cycle. ✘
+- **B:** r2 before w1 gives T2→T1, and r1 before w2 gives T1→T2. Cycle. ✘
+- **C:** r1 before w2 gives T1→T2, and r2 before w1 gives T2→T1. Cycle. ✘
+- **D:** r2 w2 r3 r1 w1 gives T2→T3, T2→T1 and T3→T1. Acyclic, with serial order **T2, T3, T1**. ✔
+
+**Option D**.
+=== 3.11.2
+**Conflicts on X:** T2's r(X) comes before T3's w(X) and before T1's w(X). T3's w(X) comes before T1's w(X). T1's w(X) comes before T4's r(X). So the edges are T2→T3, T2→T1, T3→T1, T1→T4 and T3→T4.
+
+**Conflicts on Y:** T2's w(Y) comes before T4's r(Y), giving T2→T4.
+
+The graph is acyclic, with order T2, T3, T1, T4. So S is **conflict serialisable**.
+
+**Recoverability:** T4 reads X (last written by T1) and Y (written by T2). Both T1 and T2 commit **before** T4 commits, and no other reads-from relationships exist. So S is **recoverable**.
+
+**Option C**.
+=== 3.11.3
+Precedence graphs:
+
+- **S1:** edges T2→T1 (r2(Z) before w1(Z)), T2→T3 (r2(Y) before w3(Y)), T3→T1 (r3(X) before w1(X)), and T2→T1 again on Z. It's acyclic, giving T2, T3, T1. ✔
+- **S2:** T1→T2 (r1(Z) before w2(Z)) and T2→T1 (r2(Z) before w1(Z)) form a cycle. ✘
+
+**Only S1**, **option A**.
+=== 3.11.4
+Write T1 as $a_1a_2a_3a_4$ = r1(X) w1(X) r1(Y) w1(Y), and T2 as $b_1b_2b_3b_4$ = r2(Y) w2(Y) r2(Z) w2(Z).
+
+The only item both transactions touch is **Y**. A schedule is conflict serialisable exactly when every Y-conflict points the same way.
+
+**Case 1: equivalent to T1 → T2.** $w_1(Y) = a_4$ must come before $r_2(Y) = b_1$. So all of T1 comes first, which is the serial schedule: **1** way.
+
+**Case 2: equivalent to T2 → T1.** $w_2(Y) = b_2$ must come before $r_1(Y) = a_3$. Count by $j$, the number of T1 operations placed before $b_2$ ($j = 0, 1, 2$):
+
+- before $b_2$: $b_1$ plus $j$ a's, which can be arranged in $j+1$ ways
+- after $b_2$: the remaining $4-j$ a's and $b_3, b_4$, giving $\binom{6-j}{2}$ ways
+
+$$1\cdot\binom62 + 2\cdot\binom52 + 3\cdot\binom42 = 15 + 20 + 18 = 53$$
+
+Total: $53 + 1 = \mathbf{54}$, out of 70 possible interleavings.
