@@ -1,0 +1,49 @@
+=== 3.52.11
+All four express "names of students with percent > 90 in course 107":
+
+- I: SQL join with DISTINCT
+- II: relational algebra
+- III: tuple calculus
+- IV: domain calculus
+
+They're all correct and equivalent. **Option A**.
+=== 3.52.12
+A query is **safe** if its result can only contain values from the database. In all three queries, $t$ is tied to an EMP tuple $u$ through EmpName, so the result is drawn from EMP's names. The quantifiers over DEPT only filter it.
+
+All three are safe. **Option D**.
+=== 3.52.13
+Relational algebra, safe tuple relational calculus and safe domain relational calculus all have the **same** expressive power (Codd's theorem). **Option D**.
+=== 3.52.14
+The values are uniform on [0, 500], so the fraction below 100 is $100/500 = 0.2$. That gives $1000\times0.2 = \mathbf{200}$ tuples. **Option D**.
+=== 3.52.15
+For each school $t$, the query compares two counts: the enrolments of that school with a passing result (marks > 35) against 35% of all that school's enrolments. Schools where passes exceed 35% of the total are returned.
+
+That's the **pass percentage above 35% over all exams taken together**. **Option C**.
+=== 3.52.16
+Relational algebra matches the **safe** forms of both calculi. Unrestricted calculus can express unsafe queries. **iii and iv only**, **option B**.
+=== 3.52.17
+The correct TRC form uses a tuple $s$ from borrow that matches $t$'s customer_name and has amount > 12000:
+$$\{t \mid \exists s\in borrow\,(t[customer\_name] = s[customer\_name] \wedge s[amount] > 12000)\}$$
+The garbled option C has this structure. **Option C**.
+=== 3.53.1
+The **degree** (arity) of a relation is its number of attributes. The cardinality is its number of tuples. **Option A**.
+=== 3.53.2
+- **A ✘.** In Customer, aadhaar is only a foreign key, with no UNIQUE constraint, so it's not a candidate key.
+- **B ✔.** phone has no NOT NULL constraint, so it can be NULL.
+- **C ✔.** aadhaar is Person's primary key, so it's a candidate key.
+- **D ✘.** A primary key can't be NULL.
+
+**B and C**.
+=== 3.53.3
+a: D
+A schema describes the logical structure of the database: the **data elements**, the **records and files**, and the **relationships** between records. **All of the above**, **option D**.
+=== 3.53.4
+a: C
+1. **R1(A, C)**, with its key
+2. **R1_B(key of R1, B)**: B is **multivalued** (double oval), so it needs its own table
+3. **R2(X, Y, key of R1)**: R12 is 1:M, so R1's key goes into R2 as a foreign key
+
+The minimum is **3**, **option C**.
+=== 3.53.5
+a: C
+CREATE TABLE defines schema objects, so it's a **DDL** statement. **Option C**.

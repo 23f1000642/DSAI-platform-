@@ -1,0 +1,101 @@
+=== 3.55.6
+```sql
+SELECT DISTINCT F.student
+FROM FREQUENTS F, SERVES S, LIKES L
+WHERE F.parlor = S.parlor
+  AND S.ice_cream = L.ice_cream
+  AND F.student = L.student;
+```
+=== 3.55.7
+- **A is false.** SQL keeps duplicates unless you write DISTINCT.
+- **B is false.** Indexes only speed things up. Queries work without them.
+- **C is false.** Attribute names must be unique within a relation.
+
+**None of the above**, **option D**.
+=== 3.55.8
+**(a)**
+```sql
+SELECT E.Employee_name
+FROM EMP E, DEPT D
+WHERE E.Dept_no = D.Dept_no
+  AND D.Location = 'Calcutta'
+  AND E.Salary > 50000;
+```
+
+**(b)**
+```sql
+SELECT Dept_no, COUNT(*)
+FROM EMP
+WHERE Salary > 100000
+GROUP BY Dept_no;
+```
+=== 3.55.9
+```sql
+SELECT Dept_no, COUNT(*) AS num_employees
+FROM EMP
+WHERE Salary > 100000
+GROUP BY Dept_no;
+```
+(Departments with no such employee won't appear. To list them with 0, use a LEFT OUTER JOIN from DEPT.)
+=== 3.55.10
+`FROM r, s` is a cross product. Projecting onto r's columns with DISTINCT gives back the distinct tuples of r, as long as **s isn't empty**. If s is empty, the product is empty.
+
+For the result to equal r exactly, r must also have **no duplicates**. **Option A**.
+=== 3.55.11
+Treat every comparison with NULL as false, and let x be NULL:
+
+- **A:** x = 5 is false. not(not(x = 5)) is not(not(false)), which is false. Equivalent.
+- **B:** x = 5 is false, and x > 4 and x < 6 is false. Equivalent (for integers).
+- **C:** x ≠ 5 is **false**, but not(x = 5) = not(false) = **true**. **Not equivalent.**
+
+**Option C**.
+=== 3.55.12
+**(a)**
+```sql
+CREATE VIEW TP (acctno, date, amount) AS
+SELECT T1.acctno, T1.date, T2.amount
+FROM transaction T1, transaction T2
+WHERE T1.acctno = T2.acctno
+  AND T2.date <= T1.date;
+```
+
+**(b)** First compute the balance after each transaction date (the running sum), then take the minimum per account:
+```sql
+CREATE VIEW V (acctno, date, balance) AS
+SELECT acctno, date, SUM(amount)
+FROM TP
+GROUP BY acctno, date;
+
+SELECT acctno, MIN(balance)
+FROM V
+GROUP BY acctno;
+```
+=== 3.55.13
+ub references ib with ON DELETE CASCADE. Deleting (x, y) deletes every tuple whose **ub = x**. Each such tuple (z, x) has $x \ge z$. That in turn deletes tuples with ub = z, where z ≤ x, and so on down the chain.
+
+All the cascaded tuples have ub values ≤ x. A deleted tuple (z, w) can therefore have **w < x**. **Option C**.
+=== 3.55.14
+Pair up examinees with the same name and different regno, then project the name:
+$$\Pi_{e1.name}\Big(\sigma_{e1.name=e2.name\ \wedge\ e1.regno\ne e2.regno}\big(\rho_{e1}(examinee)\times\rho_{e2}(examinee)\big)\Big)$$
+=== 3.55.15
+```sql
+SELECT regno
+FROM examinee
+WHERE score > (SELECT AVG(score) FROM examinee);
+```
+=== 3.55.16
+```sql
+SELECT DISTINCT A.centr_code
+FROM appears A, examinee E
+WHERE A.regno = E.regno
+  AND E.score > 80;
+```
+=== 3.55.17
+The WHERE clause joins the tables and keeps any grade row with A in **some** course taught by Korth. Nothing forces "all courses", so it lists students with an A in **at least one** of Korth's courses. **Option C**.
+=== 3.55.18
+- The WHERE clause filters to **male** employees before grouping, so each group's average is the male average for that department.
+- The subquery computes the average over **all** employees in the company.
+
+**Option D**.
+=== 3.55.19
+For each book, the subquery counts the books more expensive than it. The condition `< 5` keeps books with 0 to 4 pricier books, i.e. the **five most expensive books**. **Option D**.

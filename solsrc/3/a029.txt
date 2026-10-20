@@ -1,0 +1,71 @@
+=== 3.53.6
+- **BCNF** iff every FD is implied by the candidate keys → (IV)
+- **5NF** iff every join dependency is implied by the candidate keys → (I)
+- **1NF** iff all domains contain only scalar (atomic) values → (II)
+- **4NF** iff every MVD is implied by the candidate keys → (III)
+
+(A)-(IV), (B)-(I), (C)-(II), (D)-(III). That's choice **(2)**. The options here are garbled; B is the second one.
+=== 3.53.7
+a: C
+A recursive (self-referencing) foreign key refers to **its own relation**, e.g. Employee.manager_id → Employee.emp_id. **Option C**.
+=== 3.53.8
+In the network (CODASYL) model, records are linked by owner-member sets, so a record can have many owners. That allows **many-to-many** relationships (through link records), unlike the hierarchical model. **Option B**.
+=== 3.53.9
+A relation over domains $D_1,\dots,D_n$ is a subset of their **Cartesian product** $D_1\times D_2\times\dots\times D_n$. **Option B**.
+=== 3.53.10
+The basic relational model represents **associations with multiplicities** (1:1, 1:N, M:N) through keys and foreign keys. It doesn't directly support complex data types, multivalued attributes or generalisation hierarchies. **Option C**.
+=== 3.53.11
+a: C
+In a relational table each cell holds **one atomic value or NULL** (1NF). So "an attribute can have more than one value in a row" is incorrect. **Option C**.
+=== 3.53.12
+- (A) Double rectangle → **weak entity type** (II)
+- (B) Oval with the name underlined → **key attribute** (I)
+- (C) Double oval → **multivalued attribute** (IV)
+- (D) Double line between E2 and R → **total participation** (III)
+
+**Option C**.
+=== 3.54.1
+This is the same as the earlier question.
+
+- **Lossless:** B → C and B → D (via C), so each binary join on B is lossless.
+- **Dependency-preserving:** A → B, B → C and D → B lie in the relations. C → D follows from C → B (inside R2, since B ↔ C) and B → D (R3).
+
+**Option A**.
+=== 3.55.1
+The query finds the suppliers who supply at least one blue part:
+$$\Pi_{SNAME}\Big(S \bowtie \Pi_{SNO}\big(SP \bowtie \Pi_{PNO}(\sigma_{COLOUR='BLUE'}(P))\big)\Big)$$
+=== 3.55.2
+Three relations are used:
+
+- **S** (supplier): at least SNO and SNAME
+- **SP** (supplier–part shipments): at least SNO and PNO
+- **P** (parts): at least PNO and COLOUR
+=== 3.55.3
+**(i)** The names of employees who work on **every** project. Their number of working rows equals the total number of projects, assuming an employee works on a project at most once.
+
+**(ii)** The names of projects that **no employee is working on**.
+=== 3.55.4
+**(i)**
+$$\Pi_{SCODE}(\sigma_{PRCODE='PR1'}SPPR)\ \cap\ \Pi_{SCODE}(\sigma_{PRCODE='PR2'}SPPR)$$
+
+**(ii)** Projects with at least one supplier in a different city:
+$$\Pi_{PRCODE}\Big(\sigma_{CITY\ne PRCITY}\big(SUPPLIER\bowtie SPPR\bowtie PROJECTS\big)\Big)$$
+=== 3.55.5
+**(i)**
+```sql
+SELECT DISTINCT SPPR.PCODE
+FROM SPPR, SUPPLIER, PROJECTS
+WHERE SPPR.SCODE = SUPPLIER.SCODE
+  AND SPPR.PRCODE = PROJECTS.PRCODE
+  AND SUPPLIER.CITY = 'DELHI'
+  AND PROJECTS.PRCITY = 'DELHI';
+```
+
+**(ii)**
+```sql
+SELECT DISTINCT SUPPLIER.CITY, SPPR.PCODE, PROJECTS.PRCITY
+FROM SUPPLIER, SPPR, PROJECTS
+WHERE SUPPLIER.SCODE = SPPR.SCODE
+  AND SPPR.PRCODE = PROJECTS.PRCODE
+  AND SUPPLIER.CITY <> PROJECTS.PRCITY;
+```

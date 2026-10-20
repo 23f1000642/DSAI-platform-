@@ -1,0 +1,24 @@
+=== 3.51.41
+a: B
+- **Q1:** $\sigma_{bid=103}(Boats)\bowtie Sailors$. Boats and Sailors have no common attribute, so this is a cross product. It never uses Reserves, so it returns **every** sailor. ✘
+- **Q2:** $\sigma_{bid=103}(Reserves\bowtie Sailors)$, then project sname. ✔
+- **Q3:** $(\sigma_{bid=103}Reserves)\bowtie Sailors$, then project sname. ✔ (Same as Q2, with the selection pushed down.)
+
+With the data, the reservations of boat 103 are by sids 31 and 74: **Lubber** and **Horatio**. **Option B**.
+=== 3.51.42
+- **Q1:** $\pi_{sname}(\sigma_{color=red}Boats \bowtie Reserves \bowtie Sailors)$ is correct. ✔
+- **Q2:** the inner $\pi_{bid}(\dots\bowtie Reserves)$ throws away **sid** before the join with Sailors. That join becomes a cross product and returns every sailor. ✘
+- **Q3:** applies color = red to **Reserves**, which has no color attribute. ✘
+
+**Only Q1**, choice **3**.
+
+With the data, the red boats are 102 and 104, reserved by sids 22, 31 and 64: **Dustin, Lubber, Horatio**.
+=== 3.51.43
+a: A
+Sailors older than 20, minus the sailors who reserved a red boat:
+$$\pi_{sid}(\sigma_{age>20}Sailors) - \pi_{sid}\big((\sigma_{color=red}Boats)\bowtie Reserves\bowtie Sailors\big)$$
+- B selects tuples with a *non-red* reservation. A sailor who reserved both red and non-red boats would wrongly be included, and sailors with no reservation would be missed.
+- C uses age < 20.
+- D uses ∧ on sets, which isn't a set operation.
+
+**Option A**.
