@@ -1,0 +1,104 @@
+=== 7.17.9
+The coefficient matrix is circulant. A non-trivial solution needs
+$$\det = 3pqr - (p^3 + q^3 + r^3) = -(p+q+r)(p^2+q^2+r^2-pq-qr-rp) = 0$$
+The second factor equals $\tfrac12[(p-q)^2 + (q-r)^2 + (r-p)^2]$, which is 0 only when $p = q = r$.
+
+So **$p+q+r = 0$ or $p = q = r$**. **Option C**.
+=== 7.17.10
+- I is false: $x + y = 1$ and $x + y = 2$ has $m < n$ and no solution.
+- II is false: an overdetermined system can still be consistent, e.g. three copies of $x = 1$.
+- III is true: e.g. the homogeneous system always has the solution 0.
+
+**Only III**, **option C**.
+=== 7.17.11
+$b = \sum a_i = AJ_n$, so $x = J_n$ is a solution. The columns are dependent ($Ac = 0$ with $c\ne0$), so $J_n + tc$ is a solution for every $t$. **Infinitely many solutions**, **option C**.
+=== 7.17.12
+Use Doolittle's form, with a unit diagonal on L. (The values in the options match this.)
+
+**Row 1 of U:** $U = (1, 1, -2)$, and $L_{21} = 1$, $L_{31} = 2$.
+
+**Row 2:** $U_{22} = 3 - 1 = 2$ and $U_{23} = -1 - (-2) = 1$.
+
+**Row 3:** $L_{32} = (1 - 2\cdot1)/2 = -\tfrac12$, and
+$$U_{33} = -5 - 2(-2) - (-\tfrac12)(1) = -\tfrac12$$
+
+**Solve.** Forward substitution in $Ly = b$:
+
+- $y_1 = 4$
+- $y_2 = 7 - 4 = 3$
+- $y_3 = 7 - 2(4) - (-\tfrac12)(3) = \tfrac12$
+
+Back substitution in $Ux = y$:
+
+- $x_3 = \tfrac12/(-\tfrac12) = -1$
+- $x_2 = (3 - 1\cdot(-1))/2 = 2$
+- $x_1 = 4 - 2 + 2(-1) = 0$
+
+Check: $0 + 2 + 2 = 4$ ✔, $0 + 6 + 1 = 7$ ✔, $0 + 2 + 5 = 7$ ✔.
+
+So $L_{32} = -\tfrac12$, $U_{33} = -\tfrac12$ and $x_1 = 0$. **Option D**.
+=== 7.17.13
+A is $n\times m$ with $m > n$, so its rank is at most $n$ and the null space has dimension at least $m - n$.
+
+- **A ✔.** There are at least $m - n$ independent solutions.
+- **B ✘.** The null space might be bigger than $m - n$, so $m - n$ vectors may not span it.
+- **C ✘.** Not guaranteed in general.
+- **D ✘.** Not guaranteed in general.
+
+The official key is **A**.
+=== 7.17.14
+$\det = 1 - k^2$.
+
+- For $k\ne\pm1$: exactly one solution.
+- **$k = 1$:** $x + y = 1$ and $x + y = -1$, so **no solution**.
+- **$k = -1$:** $x - y = 1$ and $-x + y = -1$, the same equation, so **infinitely many** solutions.
+
+So exactly one value of $k$ gives no solution (A ✔), and exactly one gives infinitely many (D ✔).
+
+**A and D**.
+=== 7.17.15
+Every row of A sums to 1, so $A\mathbf1 = \mathbf1$. Then
+$$B\mathbf1 = (1 - 2 + 1)\mathbf1 = 0$$
+So $Bx = 0$ has a non-zero solution, and every multiple of it is also a solution: **infinitely many**. **Option C**.
+=== 7.17.16
+- **A ✘.** For a square M, a unique solution means M is invertible, so every right-hand side has a unique solution.
+- **B ✔.** Take a singular M. A $p$ outside the column space has no solution, and a $q$ inside it has infinitely many.
+- **C ✘.** A $2\times3$ system has at least one free variable, so it's never unique.
+- **D ✔.** Take a tall $3\times2$ M with full column rank. A $p$ in the column space has a unique solution, and a $q$ outside it has none.
+
+**B and D**.
+=== 7.17.17
+Substitute each option into the system:
+
+- **C:** $x = 6, y = 6, z = -4$:
+  - $6 + 12 - 12 = 6$ ✔
+  - $6 + 18 - 16 = 8$ ✔
+  - $12 + 12 - 12 = 12$ ✔
+
+**Option C**.
+=== 7.18.1
+$$a\times b = \begin{vmatrix}i&j&k\\2&-3&1\\1&1&-2\end{vmatrix} = (6-1)i - (-4-1)j + (2+3)k = 5i + 5j + 5k$$
+Normalising gives $\frac{1}{\sqrt3}(i + j + k)$. **Option A**.
+=== 7.18.2
+X is the plane $x_1 + x_2 + x_3 = 0$, which is a 2-dimensional subspace.
+
+$(1,-1,0)$ and $(1,0,-1)$ both lie in X, and they're independent. Two independent vectors in a 2-dimensional space form a **basis**. **Option A**.
+=== 7.18.3
+$$\dim(V_1\cap V_2) = \dim V_1 + \dim V_2 - \dim(V_1 + V_2) \ge 4 + 4 - 6 = \mathbf{2}$$
+=== 7.18.4
+The angle bisector points along the sum of the **unit** vectors: $\frac{u}{\|u\|} + \frac{v}{\|v\|}$.
+
+Since $\|u\| = 2\|v\|$, that's $\frac{1}{2\|v\|}(u + 2v)$, so $w = u + 2v$ and **$\alpha = 2$**. **Option A**.
+=== 7.18.5
+A is the **Gram matrix** of the $x_i$, i.e. $A = X^TX$. Since the $x_i$ are independent, X is invertible, so $\det A = (\det X)^2 > 0$.
+
+A is invertible (A ✔). It's positive definite, so all singular values are positive (B ✘), $\det A\ne0$ (C ✘), and $z^TAz = \|Xz\|^2 > 0$ for $z\ne0$ (D ✘). **Option A**.
+=== 7.18.6
+M is an orthogonal projection onto U.
+
+- **C ✔ and D ✔.** Projecting twice is the same as projecting once: $M^2 = M$, and so $M^3 = M$.
+- The null space is $U^\perp$, with dimension $3 - \dim U$:
+  - U 1-dimensional gives a null space of dimension 2 (A ✘).
+  - U 2-dimensional gives a null space of dimension 1 (B ✔).
+
+**B, C and D**.
