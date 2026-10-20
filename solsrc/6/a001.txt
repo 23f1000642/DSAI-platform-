@@ -1,0 +1,135 @@
+=== 6.0.1
+- **I:** a single y with $x + y = 0$ for **every** x? No. **False.**
+- **II:** for each x, take $y = -x$. **True.**
+
+**Option B**.
+=== 6.0.2
+- **Symmetric:** you choose the n diagonal pairs and the $\binom n2$ unordered off-diagonal pairs freely, giving $2^{n + n(n-1)/2} = 2^{n(n+1)/2}$.
+- **Reflexive and symmetric:** the diagonal is fixed, giving $2^{n(n-1)/2}$.
+
+**Option D**.
+=== 6.0.3
+By inclusion–exclusion: $333 + 200 - 66 = \mathbf{467}$. **Option C**.
+=== 6.0.4
+Unification looks for a **substitution** that makes two literals identical. **Option B**.
+=== 6.0.5
+A Horn clause has at most one positive literal. Resolving two Horn clauses removes a complementary pair, and the result still has at most one positive literal. So the **resolvent is a Horn clause**. **Option B**.
+=== 6.0.6
+$\bigcup_i\{-i,\dots,i\}$ contains every integer, so it's $\mathbb Z$. **Option A**.
+=== 6.0.7
+- **I is true.** In an undirected DFS, every non-tree edge is a back edge.
+- **II is false.** A BFS edge may join two vertices at the same depth, giving $|i - j| = 0$.
+
+**Option C**.
+=== 6.0.8
+CNF is a conjunction of clauses, and each clause is a **disjunction of literals**. **Option A**.
+=== 6.0.9
+"Some of my friends are not perfect" is $\exists x(f(x)\land\lnot p(x))$. **Option B**.
+=== 6.0.10
+Work backwards from 100. 100 isn't a multiple of 3, so it must come from 99:
+
+- 99 = 3·33
+- 33 = 3·11
+- 11 ← 10 ← 9
+- 9 = 3·3
+- 3 = 3·1
+
+The path is 1 → 3 → 9 → 10 → 11 → 33 → 99 → 100: **7** edges. **Option D**.
+=== 6.0.11
+$(p\land q)\to r\equiv\lnot p\lor\lnot q\lor r$, while $(p\to r)\land(q\to r)\equiv(p\lor q)\to r$. These **differ**, e.g. at p = T, q = F, r = F. A, B and C are equivalent pairs. **Option D**.
+=== 6.1.1
+- $\lnot(\lnot p\land q) = p\lor\lnot q$
+- $\lnot(\lnot p\land\lnot q) = p\lor q$
+- Their conjunction is $p\lor(\lnot q\land q) = p$
+- $p\lor(p\land r) = p$
+
+**Option D**.
+=== 6.2.1
+Substitute $y_1 = x_1 - 1$, $y_2 = x_2 - 2$, $y_3 = x_3 - 3$, all at least 0. Then $y_1 + y_2 + y_3 = 5$, which has $\binom{7}{2} = \binom75 = 21$ solutions. **Option D**.
+=== 6.2.2
+Shift each variable down by its minimum: the new variables add up to $29 - 6 = 23$, with 4 variables at least 0:
+$$\binom{26}{3} = \mathbf{2600}$$
+**Option B**.
+=== 6.3.1
+"$f - g$ is constant" is:
+
+- reflexive (k = 0)
+- symmetric (−k)
+- transitive ($k_1 + k_2$)
+
+The others fail: A isn't reflexive, B isn't transitive, and C isn't reflexive. **Option D**.
+=== 6.4.1
+Skolemization **removes existential quantifiers** by replacing them with Skolem constants or functions. **Option C**.
+=== 6.4.2
+Step (C), and likewise (E), infers $P(c)$ from $P(c)\lor Q(c)$. That's **not** valid: simplification only works on conjunctions. So the argument fails at those steps. **Option B**.
+=== 6.5.1
+The square root needs $-2x + 3\ge0$, i.e. $x\le\tfrac32$. The square root is at least 0, so $y = -\sqrt{\cdot}\le0$. **Option D**.
+=== 6.5.2
+$\frac{1}{1 + e^{-(xV + Y)}}$ is the logistic **sigmoid** (shifted by Z). **Option C**.
+=== 6.6.1
+Two cosets are either **disjoint or identical**. So "I or II is true". **Option C**.
+=== 6.7.1
+The negation of "$x\in[-2,-1]\cup[1,2]$" is "$x < -2$ or $x > 2$ or $-1 < x < 1$". **Option A**.
+=== 6.8.1
+Sign-magnitude, 1's complement and 2's complement can **all** represent negative numbers. **None of the above**, **option D**.
+=== 6.9.1
+A lattice is a poset where every pair of elements has both a least upper bound (join) and a greatest lower bound (meet). **Option C**.
+=== 6.9.2
+⊆ on a power set is reflexive, antisymmetric and transitive, so it's a **partial order**. **Option B**.
+
+(A is false: (ℤ, ≤) is total. C is false: ≠ isn't reflexive.)
+=== 6.10.1
+The expression tree has root ↔, with left child $\lnot(p\land q)$ and right child $(\lnot p)\lor(\lnot q)$.
+
+- **Prefix:** ↔ ~ ∧ p q ∨ ~ p ~ q
+- **Postfix:** p q ∧ ~ p ~ q ~ ∨ ↔
+
+**Option B**.
+=== 6.10.2
+a: D
+Read v(x) as "x is a vegetarian". All three say that a vegetarian is exactly someone who eats no meat:
+
+- I: x is vegetarian iff everything x eats is non-meat.
+- II: x is vegetarian iff there's no meat that x eats.
+- III: x eats some meat iff x isn't vegetarian (the contrapositive form of the same biconditional).
+
+They're logically **equivalent**. **Option D**.
+=== 6.10.3
+- **I1** is modus tollens, which is valid.
+- **I2** is denying the antecedent, which is invalid.
+
+**Option B**.
+=== 6.10.4
+- **I:** for every x and y, take z = x + y. **True.**
+- **II:** no single z equals $x + y$ for every x and y. **False.**
+
+**Option B**.
+=== 6.10.5
+- Vacuous proof: p is false → (i)
+- Trivial proof: q is true → (ii)
+- Direct proof: assume p, show q → (iii)
+- Indirect proof: the contrapositive → (iv)
+
+**Option A**.
+=== 6.10.6
+- **a.** False entails everything. ✔
+- **b.** If α entails β ∧ γ, it entails γ. ✔
+
+**Both true**, **option D**.
+=== 6.10.7
+$P\leftrightarrow Q\equiv(P\to Q)\land(Q\to P) = (\lnot P\lor Q)\land(\lnot Q\lor P)$. **Option B**.
+=== 6.11.1
+For a reflexive relation, the 4 diagonal pairs are forced. The other $16 - 4 = 12$ pairs are free, giving $2^{12}$. **Option B**.
+=== 6.11.2
+None of the four relations is an equivalence relation on {0, 1, 2, 3}:
+
+- **A** lacks (1,1), so it isn't reflexive. It also has (0,2) and (2,3) but not (0,3), so it isn't transitive.
+- **B** lacks (1,1), and has (1,2) without (2,1).
+- **C** lacks (2,2) and (3,3).
+- **D** lacks (3,3), and has (0,2) without (2,0).
+
+No official key exists. The nearest intended answer is A, which would be correct with (1,1) added and the 0–3 pairs adjusted.
+=== 6.12.1
+In general: $|A - B|\le|A\oplus B|\le|A\cup B|\le|A| + |B|$. **Option D**.
+=== 6.12.2
+$A\cup B = \{2,3,5,7,8,9\}$ has 6 elements, so its power set has $2^6 = 64$ elements. **Option B**.
