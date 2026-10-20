@@ -261,9 +261,10 @@ async function loadSol(subj){
   return solCache[subj];
 }
 const subjOf = id => id.split('.')[0];
-async function keyOf(q){ // official key, else answer from solution file
-  if (q.k) return q.k;
+async function keyOf(q){ // corrected key if the official one is wrong, else official key, else worked-out answer
   const s = (await loadSol(subjOf(q.id)))[q.id];
+  if (s && s.fix) return s.fix;
+  if (q.k) return q.k;
   return s && s.a ? s.a : '';
 }
 function effType(q, key){
