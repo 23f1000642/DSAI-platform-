@@ -267,6 +267,7 @@ async function keyOf(q){ // official key, else answer from solution file
   return s && s.a ? s.a : '';
 }
 function effType(q, key){
+  if (q.t === 'NAT' && !key) return 'DESC';
   if (q.t !== 'DESC') return q.t;
   if (/^[A-E](;[A-E])*$/.test(key)) return key.includes(';') ? 'MSQ' : 'MCQ';
   if (/^-?\d/.test(key)) return 'NAT';
