@@ -1,0 +1,89 @@
+=== 13.6.39
+Rebuild the tree using **postorder** 8 9 6 7 4 5 2 3 1 and **inorder** 8 6 9 4 7 2 5 1 3:
+
+- The root is **1**. Inorder left is {8, 6, 9, 4, 7, 2, 5}, and right is {3}.
+- The left part has root **2** (last in its postorder), with left {8, 6, 9, 4, 7} and right {5}.
+- Next comes root **4**, with left {8, 6, 9} and right {7}.
+- Then root **6**, with children 8 and 9.
+
+The longest path is 1 → 2 → 4 → 6 → 8, so the height is **4**.
+=== 13.6.40
+A full tree with 8 leaves has height 3. Pick leaves $a$ and $b$ independently, so $a = b$ is allowed. Fix $a$; then $b$ is:
+
+| b relative to a | probability | distance |
+|---|---|---|
+| same leaf | 1/8 | 0 |
+| sibling | 1/8 | 2 |
+| same quarter, other pair | 2/8 | 4 |
+| other half | 4/8 | 6 |
+
+$$E = \frac{0 + 2 + 8 + 24}{8} = \frac{34}{8} = \mathbf{4.25}$$
+=== 13.6.41
+- **BFS** first 3: the root and its two children.
+- **DFS** first 3: the root, its left child, and that child's left child.
+
+$A - B$ = {the right child}, so $|A-B| = \mathbf{1}$.
+=== 13.6.42
+foo prints each subtree's sum in **postorder**:
+
+| node | 3 | 8 | 5 | 13 | 11 | 10 |
+|---|---|---|---|---|---|---|
+| printed | 3 | 8 | 5+3+8 = 16 | 13 | 11+13 = 24 | 10+16+24 = 50 |
+
+**3 8 16 13 24 50**, **option C**.
+=== 13.6.43
+In a full binary tree, leaves = internal + 1. Since $n = 2I + 1$, the internal count is $I = \frac{n-1}{2}$. **Option B**.
+=== 13.6.44
+For a **full** binary tree, every node has 0 or 2 children, so even preorder + postorder fix the tree. Pairs that include inorder also work.
+
+**(i)+(ii), (ii)+(iii) and (i)+(iii)**, so **A, B and C**.
+=== 13.6.45
+- **A: $L \le I + 1$.** It's an equality when every internal node has 2 children, and smaller otherwise. ✔
+- **B: $H + 1 \le N \le 2^{H+1}-1$.** A chain gives the minimum, and a perfect tree the maximum. ✔
+- **C: $H \le I \le 2^H - 1$.** The longest path has $H$ internal nodes, and at most a perfect tree's worth. ✔
+- **D** fails: a chain has $L = 1 < H$.
+
+**A, B and C**.
+=== 13.6.46
+Inorder B C A D, preorder A B C D:
+
+- The root is **A**. Its left subtree is {B, C}, and its right is {D}.
+- In the left subtree, the preorder starts with B, so B is the root, and C is B's **right** child (C comes after B in inorder).
+
+That's tree **D**.
+=== 13.6.47
+Let $N(h)$ be the minimum. One subtree has height $h-1$ (at least $N(h-1)$ nodes), and the other may have up to 2 fewer nodes:
+$$N(h) = 2N(h-1) - 1,\qquad N(1) = 2$$
+So $N(h) - 1 = 2^{h-1}$, which gives **$N(h) = 2^{h-1} + 1$**.
+
+Check: $N(2) = 3$ (a chain is allowed), and $N(3) = 5$. **Option B**.
+=== 13.6.48
+With 0-based indexing, the children of $j$ are $2j+1$ and $2j+2$. So the parent of $i$ is $\lfloor (i-1)/2\rfloor = \lceil i/2\rceil - 1$. **Option D**.
+=== 13.6.49
+Level $k$ holds indices $2^k - 1$ to $2^{k+1} - 2$. So the level of $i$ is $\lfloor\log_2(i+1)\rfloor$. **Option C**.
+=== 13.6.50
+Leaves = (nodes of degree 2) + 1 = 10 + 1 = **11**. Degree-1 nodes don't affect this. **Option B**.
+=== 13.6.51
+Preorder starts with the root, and postorder ends with it.
+
+- II starts with K, and I ends with K. So the root is K, **II is preorder** and **I is postorder**.
+- That leaves **III as inorder**.
+
+**Option D**.
+=== 13.6.52
+Here "degree" counts neighbours. The degrees add up to twice the number of edges, and a tree has $n - 1$ edges:
+$$n_1 + 2n_2 + 3n_3 = 2(n_1 + n_2 + n_3 - 1) \Rightarrow n_3 = n_1 - 2$$
+**Option B**.
+=== 13.6.53
+Removing every degree-2 node (and joining its two neighbours) leaves a tree on $n_1 + n_3$ nodes. Its edge count is
+$$n_1 + n_3 - 1 = n_1 + (n_1 - 2) - 1 = 2n_1 - 3$$
+**Option A**.
+=== 13.6.54
+a: B
+The question means "differ by **at most** one", which is the defining property of an **AVL tree**. **Option B**.
+=== 13.6.55
+a: B
+In the worst case the tree is a chain, so its height is $O(n)$. **Option B**.
+=== 13.6.56
+a: A
+A strictly (full) binary tree with $L$ leaves has $L - 1$ internal nodes, so $2L - 1$ nodes in total. That's always **odd**. **Option A**.

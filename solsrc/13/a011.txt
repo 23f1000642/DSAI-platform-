@@ -1,0 +1,126 @@
+=== 13.9.11
+To delete the name **before** 'Vivek', you need to reach its predecessor directly. A **doubly linked list** has a prev pointer, so the predecessor is $O(1)$ away once Vivek is found. **Option B**.
+=== 13.9.12
+- **i is false.** Minimax is a depth-first search.
+- **ii is true.** Good move ordering is what makes alpha–beta prune a lot.
+- **iii is true.** Alpha–beta returns the same move as minimax.
+- **iv is false.** Imperfect-information games *do* require reasoning about belief states.
+
+**ii and iii**, **option C**.
+=== 13.9.13
+Check all 24 assignments (or use the Hungarian method). The minimum is:
+
+- I → B (3)
+- II → C (2)
+- III → D (7)
+- IV → A (5)
+
+The total is $3 + 2 + 7 + 5 = \mathbf{17}$, **option C**.
+=== 13.10.1
+a: 3
+$d/(e+f) + b*c$. First $e+f$, then $d/(\dots)$, then $b*c$, then the final +:
+$$d\ e\ f + /\ b\ c * +$$
+That's choice **3**.
+=== 13.10.2
+a: B
+Read the expression as 4 3 \* 2 5 \* + 8 −, where the printed "b" is a scanned **8**:
+
+- $4\times3 = 12$
+- $2\times5 = 10$
+- $12 + 10 = 22$
+- $22 - 8 = 14$
+
+**14**, **option B**.
+=== 13.10.3
+a: A
+Evaluate ABC+−D\* with a stack:
+
+1. B+C
+2. A−(B+C)
+3. (A−(B+C))·D
+
+**Option A**.
+=== 13.10.4
+a: A
+This is the same as the previous question: $(A-(B+C))*D$. **Option A**.
+=== 13.10.5
+Evaluate with a stack ($ means power):
+
+| step | result |
+|---|---|
+| 8 3 4 + − | 8 − 7 = 1 |
+| 3 8 2 / + | 3 + 4 = 7 |
+| \* | 1 × 7 = 7 |
+| 2 $ | $7^2 = 49$ |
+| 3 + | 52 |
+
+**52**, **option D**.
+=== 13.11.1
+a: D
+**Dijkstra's algorithm** solves single-source shortest paths. Prim builds an MST, and Floyd–Warshall and Johnson solve all-pairs. **Option D**.
+=== 13.12.1
+- **I is true.** A unique path between every pair means connected and acyclic, i.e. a tree.
+- **II is true.** A connected graph with $v - 1$ edges is a tree.
+- **III is true.** It's the same condition, with "no circuit" added redundantly.
+
+**All of the above**, **option D**.
+=== 13.13.1
+With chaining, deleting just unlinks the node. Open addressing needs "deleted" markers so later searches don't stop early. **Deletion is easier**, **option C**.
+=== 13.13.2
+Using lowercase positions with a = 1, $h(x) = \text{pos}(x) \bmod 10$:
+
+| letter | K | R | P | C | S | N | Y | T | J | M |
+|---|---|---|---|---|---|---|---|---|---|---|
+| hash | 1 | 8 | 6 | 3 | 9 | 4 | 5 | 0 | 0 | 3 |
+| placed at | 1 | 8 | 6 | 3 | 9 | 4 | 5 | 0 | **2** | **7** |
+
+**(a) Collisions:** J (slot 0 is taken by T, so it goes to 1, then 2) and M (slots 3, 4, 5, 6 are taken, so it goes to 7).
+
+**(b) Final table:**
+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|
+| T | K | J | C | N | Y | P | M | R | S |
+=== 13.13.3
+**(a)** Each insertion misses bucket 1 with probability $\frac{n-1}{n}$, independently:
+$$\left(\frac{n-1}{n}\right)^K$$
+
+**(b)** No collision means all $K$ keys land in distinct buckets:
+$$\frac{n(n-1)(n-2)\cdots(n-K+1)}{n^K}$$
+
+**(c)** The first $K-1$ keys are in distinct buckets, and the $K$-th hits one of those $K-1$ occupied buckets:
+$$\frac{n(n-1)\cdots(n-K+2)}{n^{K-1}}\cdot\frac{K-1}{n}$$
+=== 13.13.4
+The values mod 10 are 2, 4, 1, 9, 9, 1, 3, 9.
+
+- **I is true:** 9679, 1989 and 4199 all map to 9.
+- **II is true:** 1471 and 6171 both map to 1.
+- III and IV are false.
+
+**I and II only**, **option C**.
+=== 13.13.5
+$h(x) = (3x+4) \bmod 7$:
+
+| key | hash | placed at |
+|---|---|---|
+| 1 | 0 | 0 |
+| 3 | 6 | 6 |
+| 8 | 0 (full) | 1 |
+| 10 | 6 (full), then 0, 1 (full) | 2 |
+
+The table is **1, 8, 10, –, –, –, 3**, **option B**.
+=== 13.13.6
+Insert with $h(k) = k \bmod 10$ and linear probing:
+
+| key | home | placed at |
+|---|---|---|
+| 12 | 2 | 2 |
+| 18 | 8 | 8 |
+| 13 | 3 | 3 |
+| 2 | 2 | 4 |
+| 3 | 3 | 5 |
+| 23 | 3 | 6 |
+| 5 | 5 | 7 |
+| 15 | 5 | 9 |
+
+That's table **C**.

@@ -1,0 +1,101 @@
+=== 13.6.57
+a: B
+This is the same tree as GATE 1996. Inserting under g unbalances **c, b and a**, so **3** nodes. **Option B**.
+=== 13.6.58
+a: B
+"Depth 10" here means 10 levels. A full tree with 10 levels has $2^{10} - 1$ nodes. **Option B**.
+
+(If depth is counted in edges from a root at depth 0, the answer would be $2^{11} - 1$, which isn't listed.)
+=== 13.6.59
+a: A
+A perfect (full) binary tree of height $k$ has $2^k$ leaves and $2^k - 1$ internal nodes. Options A and B both print as "2k-1", which is the garbled form of **$2^k - 1$**. **Option A**.
+=== 13.6.60
+a: D
+In a (max-)heap, every parent is ≥ its children. So along any path from **root to leaf**, the values are **non-increasing**. **Option D**.
+
+(B, "leaf to root non-decreasing", says the same thing read the other way.)
+=== 13.6.61
+An inorder traversal of a **binary search tree** gives the keys in sorted order. **Option B**.
+=== 13.6.62
+A BST has all three properties: left items < root, right items ≥ root, and every subtree is itself a BST. **All of the above**, **option D**.
+=== 13.6.63
+In a full $n$-ary tree, $L = (n-1)I + 1$:
+$$41 = 10(n-1) + 1 \Rightarrow n = \mathbf{5}$$
+**Option C**.
+=== 13.6.64
+fix: D
+The fewest nodes for depth $d$ is a chain from the root down to depth $d$. That has **$d + 1$** nodes. **Option D**.
+
+(The listed key C, "$d$", is off by one.)
+=== 13.6.65
+Rebuilding the tree as a **binary** tree from this inorder/postorder pair gives the preorder a b e j k n p o f d g l c m i h. That matches none of the options exactly.
+
+The question treats it as a general tree. The intended answer is the option that starts **a b e j k n … f** and then continues with the d subtree. The key gives **option C**: a b e j k n o p f c d g l m h i.
+=== 13.7.1
+a: B
+Order 5 means at most 4 keys per node, and a node splits at its median when it overflows.
+
+| insert | effect |
+|---|---|
+| 7, 8, 1, 4 | [1 4 7 8] |
+| 13 | [1 4 7 8 13] splits at 7, giving root [7] with children [1 4] and [8 13] |
+| 20, 2, 6 | [1 2 4 6] and [8 13 20] |
+| 5 | [1 2 4 5 6] splits at 4, giving root [4 7] |
+
+The root holds **2** keys, **option B**.
+=== 13.8.1
+With universal hashing, the expected number of other keys colliding with $x$ is at most $\frac{n-1}{m} < \frac nm \le 1$. So it's less than **1**, **option A**.
+=== 13.9.1
+Moves of ±8 and ±12 can only change a vertex number by multiples of $\gcd(8,12) = 4$. With 100 vertices there's plenty of room, so every vertex can reach every other vertex with the same remainder mod 4.
+
+That gives **4** components, **option B**.
+=== 13.9.2
+An ADT is defined only by its operations. Users can do only what those operations allow, and the representation is hidden. **Option C**.
+=== 13.9.3
+Reversing **every** edge keeps all mutual reachability: a path $u\leadsto v$ becomes $v\leadsto u$. So the strongly connected components are the same. **Option B**.
+=== 13.9.4
+The edge {3, 4}, with weight $x$, is on a shortest 3–4 path when $x$ is no larger than every other 3–4 route:
+
+- 3–2–4: 5 + 8 = 13
+- 3–1–4: 8 + 5 = 13
+- 3–2–1–4: 5 + 2 + 5 = **12**
+
+So $x \le 12$, and the largest value is **12**.
+=== 13.9.5
+- FIFO → **queues**
+- Lookup → **hash tables**
+- LIFO → **stacks**
+
+p-ii, q-iii, r-i, **option A**.
+=== 13.9.6
+a: D
+Strings, lists and stacks are all **linear** structures. **None of the above**, **option D**.
+=== 13.9.7
+- $K_4$: by Cayley's formula, $4^{4-2} = 16$.
+- $K_{2,2}$ (a 4-cycle): 4 spanning trees (remove any one edge).
+
+**16 and 4**, **option C**.
+=== 13.9.8
+The edges are:
+
+- the rectangle edges
+- b–e
+- the left diagonals a–e and d–b, which pass through g
+- the right diagonals b–f and c–e, which cross without a vertex
+
+The maximal cliques are:
+
+1. {a, b, g}
+2. {a, d, g}
+3. {d, e, g}
+4. {b, e, g}
+5. {b, c, e, f}, a $K_4$
+
+That's **5**, **option C**.
+=== 13.9.9
+Strings, lists and queues are all linear. **All of the above**, **option D**.
+=== 13.9.10
+- **S1 is true.** A priority queue's ordering (by priority) determines the result of its operations, e.g. which element is removed next.
+- **S2 is true.** The elements can be records, ordered by one or more fields.
+
+**Both correct**, **option D**.
