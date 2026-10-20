@@ -1,0 +1,48 @@
+=== 3.51.26
+Join R and S on A:
+
+| A | B | C | B < C? |
+|---|---|---|---|
+| 10 | 20 | 90 | ✔ |
+| 30 | 40 | 45 | ✔ |
+| 30 | 50 | 45 | ✘ |
+
+A = 20 and A = 50 have no match in S. The result has **2** tuples.
+=== 3.51.27
+A city qualifies if it has three **distinct** persons. Take three copies of Person (with renaming) and use **two cross products**:
+$$\Pi_{p1.city}\Big(\sigma_{p1.city=p2.city=p3.city\ \wedge\ p1.pid\ne p2.pid\ \wedge\ p1.pid\ne p3.pid\ \wedge\ p2.pid\ne p3.pid}(P_1\times P_2\times P_3)\Big)$$
+There's no counting operator, so you have to compare three tuples at once, which needs at least two products. **Option B**.
+=== 3.51.28
+Joining on the loan number gives these (branch, customer) pairs:
+
+| branch | customers |
+|---|---|
+| Banjara Hills | Anand, Karteek |
+| Kondapur | Karteek (L14), Sunil (L25) |
+| SR Nagar | Ankita (L15), Karteek (L22), Gopal (L19) |
+| Balanagar | Karteek (L23), Sunil (L23) |
+
+Dividing by all 4 branches returns the customers who have a loan at **every** branch. Only **Karteek** does. That's **1** tuple.
+=== 3.51.29
+1. Make: the models made by ABC.
+2. Join with Car, keep the red ones: the **red cars made by ABC**.
+3. Join with Own and project: the **owners of those cars**.
+
+**Option C**.
+=== 3.51.30
+Every Team name must be in Defender **or** Forward. So the Team names minus the union of those names must be empty:
+$$\Pi_{name}(Team)\setminus\big(\Pi_{name}(Defender)\cup\Pi_{name}(Forward)\big)=\phi$$
+**Option C**.
+=== 3.51.31
+**SQL result.** Students with roll between 2000 and 3000 and marks ≥ 75 are 2369, 2581, 2643, 2872, 2926 and 2959. Their hobby rows: 2643 has 2, the others 1 each. So the query returns **7 rows** (SQL keeps duplicates).
+
+**S′.** The same students qualify (2643 has 78 > 75). Relational algebra removes duplicates, so the hostels are {7, 6, 5}, which is **3 tuples**.
+
+The difference is $7 - 3 = \mathbf{4}$, **option B**.
+=== 3.51.32
+Balances are in **Deposit**. Select balance > 10000, then **project** customer-name:
+$$\pi_{customer\text{-}name}(\sigma_{balance>10000}(Deposit))$$
+**Option A**.
+=== 3.51.33
+a: D
+Without key constraints, every R1 tuple could share the same y value with every R2 tuple. Then the natural join is effectively a cross product: $50\times30 = \mathbf{1500}$. **Option D**.

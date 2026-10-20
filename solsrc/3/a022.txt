@@ -1,0 +1,56 @@
+=== 3.51.14
+`FROM r1, …, rm` is a **cross product**, `WHERE P` is a selection, and `SELECT DISTINCT` is a projection with duplicates removed. **Option A**.
+
+(A natural join would quietly add equality conditions on the common attributes.)
+=== 3.51.15
+The join pairs each girl with every boy who has marks **≥** hers. The projection gives the girls for whom such a boy exists. Subtracting them from all girls leaves the girls whose marks are **greater than every boy's**. **Option D**.
+=== 3.51.16
+$\Pi_{studId}(\text{females})\times\Pi_{courseId}(enroll)$ is every (female, course) pair. Subtracting `enroll` leaves the pairs where that female did **not** take that course. Projecting courseId gives the courses that **at least one female didn't take**, i.e. courses where only a proper subset of the female students enrolled. **Option B**.
+=== 3.51.17
+- **I:** the P values of (P,Q) keys that appear in **both** R and S.
+- **III:** $\Pi_{P,Q}(R)\cap\Pi_{P,Q}(S)$, then project P. Same as I.
+- **IV:** $X - (X - Y) = X\cap Y$, so it's also the same as I.
+- **II** matches P values only. A P value with **different** Q values in R and S would be included, so II isn't equivalent.
+
+**I, III and IV**, **option D**.
+=== 3.51.18
+Two selections in a row combine into one selection on $F_1\wedge F_2$. And since $A_1\subset A_2$, projecting $A_2$ then $A_1$ is the same as projecting $A_1$ directly:
+$$\pi_{A1}(\sigma_{F1\wedge F2}(r))$$
+**Option A**.
+=== 3.51.19
+The join pairs each employee with any dependent whose age is **≥** the employee's. Removing those employees leaves the employees who are **older than all of their own dependents** (every employee has at least one). **Option D**.
+=== 3.51.20
+SQL's SELECT clause picks columns, like projection, but it **keeps duplicates** unless you write DISTINCT. **Option D**.
+=== 3.51.21
+$T1 = \{CA, CB, CC\}$, the courses taken by SA. $T2 = CR\div T1$ is the students who took **all three**:
+
+- SA ✔
+- SB ✘ (missing CA)
+- SC ✔
+- SD ✔
+- SE ✘ (missing CC)
+- SF ✔
+
+That's **4** rows.
+=== 3.51.22
+r.B is a foreign key to s.B, so every r tuple has a match in s.
+
+- A, B and D all keep exactly the r tuples with B < 5, together with their s values, which is the same as Q.
+- **C**, $r\ LOJ\ \sigma_{B<5}(s)$, also keeps the r tuples with **B ≥ 5**, padded with NULLs. That's different from Q.
+
+**Option C**.
+=== 3.51.23
+**First part:** $\sigma_{P.Y=R.Y\wedge R.V=V2}(P\times R)$. The R tuples with V2 are (Y3, V2) and (Y2, V2). P has no Y3, and for Y2 it has (X2, Y2, Z2). So the result is **{X2}**.
+
+**Second part:** $\sigma_{Q.Y=R.Y\wedge Q.T>2}(Q\times R)$. The Q tuples with T > 2 are (X1, Y2, 5) and (X1, Y1, 6). Y2 and Y1 both appear in R. So the result is **{X1}**.
+
+$\{X2\} - \{X1\} = \{X2\}$, which is **1** tuple.
+=== 3.51.24
+The theta join pairs each employee with every employee who is **strictly younger**. An employee appears in the result if someone is younger than them, i.e. their age is **not the minimum**. **Option C**.
+=== 3.51.25
+- **A:** $\Pi_{eId,bId}(Own)\div\Pi_{bId}(Brand)$ is the textbook division. ✔
+- **B:** the standard expansion of division using × and −. ✔
+- **C:** divides by the brands that are *owned*, not all brands. A brand nobody owns would be ignored. ✘
+- **D:** the cross product destroys the pairing between eId and bId. ✘
+
+**A and B**.

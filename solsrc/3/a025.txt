@@ -1,0 +1,23 @@
+=== 3.51.37
+a: 4
+A right outer join keeps **every** tuple of Y (4 tuples). J, B and R match a tuple of X, and A gets NULLs for Si and C. The result has **4** tuples, which is choice **(4)**.
+=== 3.51.38
+Each of these returns the R tuples whose B value appears in S:
+
+- **I:** $\pi_{A,B}(R\bowtie S)$
+- **II:** $R\bowtie\pi_B(S)$
+- **III:** $R\cap(\pi_A(R)\times\pi_B(S))$. An R tuple $(a,b)$ is in the product exactly when $b\in\pi_B(S)$.
+
+**IV**, $\pi_{A,R.B}(R\times S)$, returns **all** of R whenever S is non-empty, so it's different.
+
+**I, II and III**, **option D**.
+=== 3.51.39
+Relational algebra borrows union, intersection, set difference and **Cartesian product** from set theory. Join and project are relational-specific. **ii and iii**, **option B**.
+=== 3.51.40
+a: A
+Find the sids that reserved a red boat, and the sids that reserved a green boat. **Intersect** the two sets (intersecting boats wouldn't work, since a boat can't be both colours). Then join with Sailors to get the names:
+$$\rho(TempRed, \pi_{sid}(\sigma_{color='red'}Boats\bowtie Reserves)),\ \rho(TempGreen, \pi_{sid}(\sigma_{color='green'}Boats\bowtie Reserves))$$
+$$\pi_{sname}((TempRed\cap TempGreen)\bowtie Sailors)$$
+With the data: red boats 102 and 104 give sids {22, 31, 64}, and the green boat 103 gives {31, 74}. The intersection is {31}, so the answer is **Lubber**.
+
+Options B to D intersect the *boat* selections, which is always empty. **Option A**.

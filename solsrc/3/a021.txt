@@ -1,0 +1,80 @@
+=== 3.50.7
+Deleting employee 20 cascades to everyone whose manager_id is 20, and then recursively:
+
+1. Manager 20 leads to **(35, 20)** being deleted.
+2. Manager 35 leads to **(30, 35)** being deleted.
+3. Manager 30: nobody reports to 30.
+
+So (30, 35) and (35, 20) only, **option B**.
+=== 3.50.8
+**Referential integrity** constraints make sure that a value appearing in one relation (the foreign key) also appears in the referenced attributes of another relation. **Option B**.
+=== 3.51.1
+Find the snacks Rama likes, then the hotels that serve any of them:
+$$\Pi_{HOTEL}\Big(SERVES \bowtie \Pi_{SNACKS}\big(\sigma_{CUSTOMER='Rama'}(LIKES)\big)\Big)$$
+=== 3.51.2
+**(a)**
+$$\Pi_{rollno}\big(\sigma_{cno=322}(REGISTERED\_FOR)\big)$$
+
+**(b)** For each year, find the youngest age, then list the students in that year with that age:
+```sql
+SELECT S.age, S.year
+FROM STUDENTS S
+WHERE S.age = (SELECT MIN(T.age)
+               FROM STUDENTS T
+               WHERE T.year = S.year);
+```
+(If you only need the age and year, `SELECT year, MIN(age) FROM STUDENTS GROUP BY year;` is enough.)
+=== 3.51.3
+Two set-differences are enough:
+$$R\cap S = R - (R - S)$$
+=== 3.51.4
+**(a)** $\Pi_{PNAME}(PUBLISHER)$
+
+**(b)** $\Pi_{ANAME, INSTITUTION, ACITY, AGE}\big(AUTHOR \bowtie \sigma_{PNAME='TECHNICAL\ PUBLISHERS'}(BOOK)\big)$
+
+**(c)** $\Pi_{ANAME}\big(BOOK \bowtie \sigma_{PCITY='Madras'}(PUBLISHER)\big)$
+=== 3.51.5
+**(a)** The user number and titles of all books issued to the user with User# 6.
+
+**(b)** The names of the authors of the books issued to users whose home town is Delhi.
+=== 3.51.6
+$$\Pi_{eno}\big(\sigma_{EMP.eno=INVOLVED.eno\ \wedge\ INVOLVED.pno=3}(EMP\times INVOLVED)\big)$$
+This gives the employees involved in project 3. Since INVOLVED.eno already refers to EMP, $\Pi_{eno}(\sigma_{pno=3}(INVOLVED))$ gives the same result.
+=== 3.51.7
+The join condition $A=C\wedge B=D$ keeps exactly the tuples that appear in **both** relations (they're union compatible). That's $R_1\cap R_2$, **option D**.
+=== 3.51.8
+For each course, the student must have completed every one of its prerequisites. Use **division**:
+$$\Pi_{Cno,\,Pre\_Cno}(PRE\_REQ)\ \div\ \rho_{Pre\_Cno}\Big(\Pi_{Cno}\big(\sigma_{Student\_no=2310}(COMPLETED)\big)\Big)$$
+The division returns the courses whose prerequisite set is contained in the courses 2310 has completed.
+
+(It returns only courses that have at least one prerequisite. To include courses with none, union with $\Pi_{Cno}(COURSES) - \Pi_{Cno}(PRE\_REQ)$.)
+=== 3.51.9
+- **Maximum:** every pair matches, as in a cross product: $mn$.
+- **Minimum:** no pair matches: $0$.
+
+**Option B**.
+=== 3.51.10
+Basic relational algebra has **no aggregation**. "The sum of all employees' salaries" needs an aggregate function. **Option C**.
+=== 3.51.11
+Reachability means following paths of **unbounded** length, i.e. the transitive closure. A fixed-length relational algebra expression can only follow a fixed number of hops. **Option D**.
+=== 3.51.12
+A is an attribute of R, so the selection can be pushed down to R before the join:
+$$\sigma_{A=a}(r\bowtie s) = \sigma_{A=a}(r)\bowtie s$$
+**Option C**.
+=== 3.51.13
+**(a)(i)** Students interviewed, minus students who got any offer:
+$$\Pi_{srollno,sname}\Big(STUDENT \bowtie \big(\Pi_{srollno}(INTERVIEW) - \Pi_{srollno}(OFFER)\big)\Big)$$
+
+**(a)(ii)** Students interviewed by some company that didn't make them an offer:
+$$X = \Pi_{srollno}\big(\Pi_{cname,srollno}(INTERVIEW) - \Pi_{cname,srollno}(OFFER)\big)$$
+Remove those students from the ones who were interviewed:
+$$\Pi_{srollno,sname}\Big(STUDENT \bowtie \big(\Pi_{srollno}(INTERVIEW) - X\big)\Big)$$
+
+**(b)**
+```sql
+SELECT S.sdegree, AVG(O.osalary)
+FROM STUDENT S, OFFER O
+WHERE S.srollno = O.srollno
+GROUP BY S.sdegree
+HAVING COUNT(DISTINCT S.srollno) > 5;
+```
