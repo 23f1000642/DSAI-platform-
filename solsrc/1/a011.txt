@@ -1,0 +1,97 @@
+=== 1.28.7
+The edges are M–N, N–O, M–R, M–Q, N–Q, O–P and Q–P.
+
+BFS from Q puts all of Q's neighbours in the queue first: M, N, P (in some order). Their unvisited neighbours come next: R (from M) and O (from N or P).
+
+**Q M N P R O** fits this. **Option C**.
+
+The others fail. A starts at M, so its next vertices must be N, R, Q, but O appears 3rd. B starts at N, so Q, M, O must come next, but P appears before O. D lists O before R, but R (enqueued from M) must come before O (enqueued from N).
+=== 1.28.8
+With an adjacency matrix, finding the neighbours of a vertex means scanning its whole row of $n$ entries. Each of the $n$ vertices is processed once, so the total is $n\cdot n = \Theta(n^2)$, whatever $m$ is. **Option C**.
+=== 1.28.9
+In an unweighted graph, BFS from $W$ reaches each vertex first along a shortest path. So the BFS tree's path from $W$ to any vertex $x$ is a shortest $W$–$x$ path, for **every** vertex, not just the leaves. It says nothing about paths between other pairs. **Option B**.
+=== 1.28.10
+Vertices: a left $3\times3$ grid (9), a right $3\times3$ grid (9), a bottom connector vertex between them, a pendant vertex above the connector, and a pendant to the right of the right grid's middle row. That's 21 in total.
+
+Maximum recursion depth is the length of the longest simple path DFS can follow.
+
+- A $3\times3$ grid is bipartite, with 5 "corner/centre" vertices and 4 "edge-middle" vertices. A Hamiltonian path through all 9 must **start and end at corner/centre** vertices.
+- Cover all 9 of the left grid, ending at its bottom-right corner, which joins the connector: 9 + 1.
+- Enter the right grid at its bottom-left corner. The right pendant hangs off an **edge-middle** vertex, so you can't cover all 9 and then exit to it. Either cover 9 and stop, or cover 8 and add the pendant. Both give 9.
+- The top pendant can't also be included, because it's a dead end off the connector.
+
+The maximum depth is $9 + 1 + 9 = \mathbf{19}$.
+=== 1.28.11
+In BFS, for any edge $(u,v)$, $|d(u) - d(v)| \le 1$. If $v$ were 2 or more levels deeper than $u$, it would have been discovered from $u$ one level sooner.
+
+So a non-tree edge can join vertices in the same level (difference 0) or adjacent levels ($\pm1$), but never vertices **2** levels apart. **Option D**.
+=== 1.28.12
+BFS visits level by level. Vertex $t$ at depth 4 gets the largest possible index when every earlier level is full, and $t$ is the **last** vertex of a full level 4.
+
+- Levels 0–3 of a full binary tree: $1+2+4+8 = 15$ vertices
+- Level 4: 16 vertices
+
+The maximum is $n = 15 + 16 = \mathbf{31}$.
+=== 1.28.13
+The edges are M–N, N–O, M–R, M–Q, N–Q, O–Q, O–P and Q–P.
+
+Check **D: P O Q N M R**.
+
+- From P, enqueue O and Q.
+- From O, enqueue N.
+- From Q, enqueue M (N is already queued).
+- From N, nothing new.
+- From M, enqueue R.
+
+The visit order is P, O, Q, N, M, R ✔.
+
+C fails: from Q, all of M, N, O, P are enqueued before R, but C lists R before O and P. **Option D**.
+=== 1.28.14
+- **I is true.** In a DFS of an *undirected* graph, every non-tree edge joins a vertex to an ancestor or descendant (it's a back edge). There are no cross edges.
+- **II is false.** A BFS non-tree edge may join two vertices on the **same** level, for example the third edge of a triangle, so $|i-j| = 0$ is possible.
+
+**I only**, **option A**.
+=== 1.28.15
+There are $2^3 = 8$ vertices. $\emptyset$ is a proper subset of every non-empty set, so it's adjacent to all **7** other vertices.
+
+BFS from $\emptyset$ puts all 7 into the first level, and they can be visited in any order. After that nothing is left, so the order within the level is the only choice.
+
+$|\mathcal B(\emptyset)| = 7! = \mathbf{5040}$.
+=== 1.28.16
+$T$ is both a DFS tree and a BFS tree. Since it's a BFS tree, any edge $u\to w$ has $\text{depth}(w) \le \text{depth}(u)+1$.
+
+- **Forward edge:** this would go to a descendant at depth at least $\text{depth}(u)+2$, which is impossible. So there are **no forward edges**. ✔
+- **Back edges** are possible: an edge from a node to the root keeps both tree properties.
+- **Cross edges** are possible: take $v\to a$, $v\to b$, $b\to a$. DFS visits $a$ then $b$, and $b\to a$ is a cross edge. $T$ is also the BFS tree.
+- D is therefore false.
+
+Answer: **C only**.
+=== 1.28.17
+A DFS forest has one tree per connected component, and a tree on $k$ vertices has $k-1$ edges. So
+$$\#\text{edges} = n - \#\text{components} \;\Rightarrow\; 40 = 100 - c \;\Rightarrow\; c = \mathbf{60}$$
+=== 1.28.18
+For a tree, two BFS passes find a **longest path** (the diameter). The first BFS ends at an endpoint $u$ of some diameter, and the second finds the farthest vertex $z$ from $u$.
+
+In the figure, the longest path runs from the bottom-left leaf, through the left hub, the middle hub and the right branch, to the rightmost leaf. It uses **6 edges**, and no other leaf pair is farther apart.
+
+Output: **6**.
+=== 1.28.19
+The official answer is **A (tree edge)**. The intended reasoning: $v$ is farther from $s$ than $u$. When the edge is first explored from $u$, $v$ is expected to be still unvisited, so DFS goes to $v$ and the edge becomes a tree edge.
+
+In an undirected DFS, an edge explored first from $u$ is either a tree edge (v unvisited) or a back edge ($v$ a gray ancestor that hasn't yet scanned this edge). It can't be a cross edge, and "gray" is a vertex colour, not an edge type. Strictly speaking, a back edge can occur too. For example, $u$ adjacent to $s$ and $v$ reached by a longer route. GATE's key took the tree-edge case.
+=== 1.28.20
+Each DFS tree on $n_i$ vertices has $n_i - 1$ tree edges. Summing over $c$ components gives $k = n - c$, so $c = n - k$. **Option D**.
+=== 1.28.21
+The intervals are P [5, 12], Q [6, 10] and R [14, 18].
+
+- Q's interval is nested inside P's, so Q is a descendant of P in the **same** DFS tree. P and Q are connected.
+- R starts after P has finished. In an undirected graph, a fresh DFS root means R wasn't reachable from P, so it's a **separate component**.
+
+Two components, with P and Q connected. **Option D**.
+=== 1.28.22
+In a DAG there are no back edges. For any edge $(u,v)$:
+
+- $v$ unvisited (tree edge): $v$ finishes before $u$.
+- $v$ already finished (forward or cross edge): it finished earlier still.
+
+Either way, **$f[u] > f[v]$**. This is why decreasing finish time gives a topological order. The discovery-time options can fail, for example with a cross edge where $d[v] < d[u]$. **Option D**.

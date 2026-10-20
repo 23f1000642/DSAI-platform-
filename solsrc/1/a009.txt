@@ -1,0 +1,91 @@
+=== 1.27.1
+**How Explore works.** `Visit(u)` takes an unused edge $(u,v)$, deletes it, and moves to $v$. It keeps walking along unused edges until it reaches a vertex with none left, which it marks finished. The main loop restarts from any vertex still in LIST. So the edges get split into **edge-disjoint trails**, and every edge is used exactly once.
+
+**(a)**
+
+- **$G_1$ (Fig. 6):** every vertex has even degree (A 2, B 4, C 4, D 4, E 4, F 2, G 2, H 2). A walk can only get stuck at its starting vertex, so each call chain traces a **closed trail (cycle/circuit)**. The algorithm splits $G_1$ into edge-disjoint **cycles**.
+- **$G_2$ (Fig. 7):** B and C have odd degree (3), and A and D have even degree (2). A walk can get stuck at an odd vertex, so the pieces are an **open trail (path)** between B and C, plus possibly a cycle.
+
+**(b)** Splice these trails together at shared vertices (Hierholzer's method). That gives an **Euler circuit** of $G_1$ and an **Euler path** of $G_2$. Explore is essentially the Euler-tour traversal.
+
+**(c) Complexity.** Every call to `Visit` does one of two things:
+
+- deletes one edge, which can happen at most $e$ times, each in $O(1)$; or
+- removes one vertex from LIST, which can happen at most $v$ times, each in $O(1)$.
+
+So there are at most $v + e$ calls, each taking $O(1)$, for $O(v+e)$ in total.
+
+**All edges get traversed.** A vertex leaves LIST only when its Adj is empty, and the main loop runs until LIST is empty. So it ends only once every adjacency list is empty, i.e. every edge has been traversed and removed.
+=== 1.27.2
+- A: Optimal BST construction is a standard dynamic programming problem. True.
+- B: **False.** Each BFS started from an unvisited vertex finds one connected component, just as DFS does.
+- C: Preorder and postorder together can't tell a lone left child from a lone right child. True.
+- D: True.
+
+**Option B**.
+=== 1.27.3
+The loop is Floyd–Warshall with (max, +) in place of (min, +). Starting from $A[j,k] = 1$ for each edge, it combines paths through intermediate vertex $i$ and keeps the **larger** length.
+
+**Claim:** for every simple path from $j$ to $k$, $A[j,k] \ge$ its length. By induction on the intermediate vertices allowed, like Floyd's proof, every simple path is assembled at some stage, and taking max never lowers a value. So **D** holds.
+
+The others fail:
+
+- **A** fails with cycles: values come from walks that may repeat vertices, so they can exceed $n$.
+- **C** fails for the same reason: $A[j,k]$ may exceed the longest *simple* path.
+- **B** fails because a large $A[j,j]$ may come from repeatedly going round a short cycle, which says nothing about a Hamiltonian cycle.
+
+**Option D**.
+=== 1.27.4
+This is the **cut property**. For any cut $(X, Y)$, the unique lightest crossing edge belongs to **every** minimum spanning tree. With distinct weights there's exactly one MST, and $e$ is in it.
+
+It needn't lie on the shortest $s$–$t$ path: a direct heavier $s$–$t$ edge might still beat a path through $e$. **Option A**.
+=== 1.27.5
+We want the path whose **largest edge weight is as small as possible**, a minimum bottleneck path.
+
+The path between $s$ and $t$ in the **MST** has this property. Suppose some other path had a smaller maximum edge. Then swapping the MST path's heaviest edge for an edge of that path would produce a lighter spanning tree, which is impossible (cycle property).
+
+Shortest-weight paths can have a large bottleneck. **Option A**.
+=== 1.27.6
+This can be done in **linear time**.
+
+1. **Sort every adjacency list by vertex number in $O(n+m)$.** Scan $u = 1..n$, and for each entry $[v]$ in Adj($u$), append $u$ to a new list for $v$. Each new list comes out in increasing order. Keep pointers between each entry and its copy as you go.
+2. **Match twins with one pointer per vertex.** Give each vertex $v$ a pointer `cur[v]` to the first entry of its sorted list. Process $u = 1, 2, \dots, n$. For each entry $[v]$ in Adj($u$) with $v > u$: in Adj($v$), the entries with value smaller than $v$ appear in increasing order, and we meet the vertices $u$ in that same order. So the twin $[u]$ is exactly at `cur[v]`. Link the two entries and advance `cur[v]`.
+
+Each of the $2m$ entries is handled $O(1)$ times, plus $O(n)$ for the vertices. That's $\Theta(n+m)$, which is optimal because every entry must be touched anyway. **Option B**.
+=== 1.27.7
+- **I is true.** With distinct edge weights, the cut property picks a unique lightest edge across every cut, so the MST is unique.
+- **II is false.** Take a triangle with $w(a,b) = 1$, $w(b,c) = 4$, $w(a,c) = 5$. Both paths from $a$ to $c$ cost 5.
+
+**I only**, **option A**.
+=== 1.27.8
+- **A is true.** The grid contains directed cycles (some adjacent rows and columns point in opposite directions and close loops). A graph with a cycle has no topological order.
+- **B is true.** Run DFS from $s$, which reaches every vertex. Each of the three independent directed cycles in the grid yields exactly one edge back to an ancestor on the DFS stack. So three edges are classified as back edges.
+- **C is false.** Every vertex forms a strongly connected component, at least a trivial one, and each cycle forms a non-trivial one.
+- **D is false.** For example, $s$ has no incoming edges, so no other vertex can reach $s$.
+
+Answer: **A and B**.
+=== 1.27.9
+Edges and weights: s→a 9, s→c 1, a→b 1, a→d 1, c→d 1, c→f 9, b→e 1, d→e 9, d→g 9, f→g 1, e→t 9, g→t 1.
+
+Work in topological order. Each score is the maximum product over incoming edges:
+
+| vertex | best predecessor | score |
+|---|---|---|
+| s | — | 1 |
+| a | s·9 | 9 |
+| c | s·1 | 1 |
+| b | a·1 | 9 |
+| d | max(c·1, a·1) | 9 |
+| f | c·9 | 9 |
+| e | max(b·1, d·9) | 81 |
+| g | max(f·1, d·9) | 81 |
+| t | max(g·1, e·9) | 729 |
+
+The sum is $1+9+1+9+9+9+81+81+729 = \mathbf{929}$.
+=== 1.27.10
+- Bellman–Ford relaxes all $m$ edges $n-1$ times: $O(nm)$ → C
+- Kruskal is dominated by sorting the edges: $O(m\log m) = O(m\log n)$ → A
+- Floyd–Warshall: $O(n^3)$ → B
+- Topological sort (DFS based): $O(n+m)$ → D
+
+1→C, 2→A, 3→B, 4→D, **option A**.

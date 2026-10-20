@@ -1,0 +1,84 @@
+=== 1.27.11
+The first loop eliminates candidates. Keep a candidate $i$, and scan $j > i$:
+
+- If $A[i][j] = 0$, then $j$ can't be a sink, since $i$ doesn't point to it. Skip $j$: **E1 = `!A[i][j]`**.
+- If $A[i][j] = 1$, then $i$ has an outgoing edge, so $i$ can't be a sink. Make $j$ the new candidate: **E2 = `i = j`**.
+
+Every vertex other than the final $i$ gets eliminated, so only $i$ can possibly be a sink. **Option C**.
+=== 1.27.12
+The second loop checks that the candidate $i$ really is a sink. For every $j\ne i$, two things must hold: no edge $i\to j$, so `A[i][j] == 0`, and an edge $j\to i$, so `A[j][i] == 1`.
+
+The flag must be cleared if **either** condition fails:
+$$E_3 = A[i][j] \;\|\; !A[j][i]$$
+**Option D**.
+=== 1.27.13
+fix: C
+Floyd–Warshall fills a table $d^{(k)}_{ij}$ from $d^{(k-1)}$. That's **dynamic programming**. It uses three nested loops over the vertices, so it runs in **$\Theta(V^3)$**.
+
+The correct choice is **C**. (Floyd–Warshall is not greedy. Some answer keys list A for this question, but the technique is DP.)
+=== 1.27.14
+- Dijkstra with an array or adjacency matrix: $O(V^2)$ → iii
+- Kruskal, dominated by sorting the edges: $O(E\lg E)$ → i
+- Floyd–Warshall: $\Theta(V^3)$ → ii
+- Topological sort: $\Theta(V+E)$ → iv
+
+(a)-(iii), (b)-(i), (c)-(ii), (d)-(iv), **option B**.
+=== 1.27.15
+- Prim with a binary heap: $O(E\lg V)$ → iii
+- Dijkstra with an array: $O(V^2)$ → iv
+- "Faster all-pairs shortest path" (repeated squaring of the min-plus matrix product): $O(V^3\log V)$ → i
+- Edmonds–Karp max-flow: $O(VE^2)$ → ii
+
+(a)-(iii), (b)-(iv), (c)-(i), (d)-(ii), **option B**.
+=== 1.28.1
+**Tree edges (T):** 1→2, 2→5, 5→3, 5→4, 5→6, 6→7, 7→8.
+
+So the DFS tree is 1 – 2 – 5, and 5 has children 3, 4 and 6. Below 6 hangs the chain 6 – 7 – 8.
+
+**Non-tree edges.** Classify each one by the tree relationship between its endpoints:
+
+| edge | relation in the DFS tree | type |
+|---|---|---|
+| 1→3 | 3 is a descendant of 1 | **forward** |
+| 2→4 | 4 is a descendant of 2 | **forward** |
+| 4→5 | 5 is an ancestor of 4 | **back** |
+| 4→6 | 6 is in a different (earlier) subtree | **cross** |
+| 4→8 | 8 is in 6's subtree | **cross** |
+| 3→7 | 7 is in 6's subtree | **cross** |
+| 3→8 | 8 is in 6's subtree | **cross** |
+
+**Forward edges:** 1→3, 2→4. **Back edge:** 4→5. **Cross edges:** 4→6, 4→8, 3→7, 3→8.
+
+(Cross edges always point from a later-discovered subtree to an earlier one, so 6's subtree was explored before 3 and 4.)
+=== 1.28.2
+- **DFS** uses a **stack**, either explicit or the recursion stack: X-3.
+- **BFS** uses a FIFO **queue**: Y-2.
+- **Sorting** uses a **heap** in heapsort: Z-1.
+
+**Option C**.
+=== 1.28.3
+Suppose $v$ is the next new vertex after $u$.
+
+- If $u$ has an unvisited neighbour, DFS goes to it directly. Then $\{u,v\}$ is an edge and $v$ is $u$'s child.
+- If $\{u,v\}$ is **not** an edge, $u$ had no unvisited neighbours when it was visited. So $u$ gets no children: **$u$ is a leaf** of $T$. DFS backtracks to some ancestor that discovers $v$.
+
+C is always true. A and B fail when $u$ is a leaf. D fails because $v$ may hang off any ancestor of $u$, not necessarily $u$'s parent. **Option C**.
+=== 1.28.4
+BFS visits vertices in non-decreasing order of distance from $r$: the whole of layer $k$ comes before layer $k+1$. So if $u$ is visited before $v$, then $d(r,u) \le d(r,v)$. They can be equal when both are in the same layer, so strict "<" isn't guaranteed. **Option C**.
+=== 1.28.5
+The edges are a–b, a–e, a–f, b–e, b–f, b–h, e–g, f–h, f–g, g–h.
+
+- I. **a b e g h f**: a→b→e→g→h→f. Each step follows an edge from the deepest vertex that still has an unvisited neighbour. ✔
+- II. **a b f e h g**: after a→b→f, the next vertex should come from f's neighbours (h or g). e isn't adjacent to f. Backtracking to b is allowed only when f has no unvisited neighbours, but h and g are unvisited. ✘
+- III. **a b f h g e**: a→b→f→h→g→e (g–e is an edge). ✔
+- IV. **a f g h b e**: a→f→g→h→b (h–b is an edge) →e (b–e). ✔
+
+I, III and IV, **option D**.
+=== 1.28.6
+In a DFS tree of an undirected graph, every non-tree edge is a back edge. It joins a vertex to one of its ancestors.
+
+$u$ is a leaf, so all its non-tree neighbours are **ancestors** of $u$. Since $\deg u \ge 2$, it has at least one back edge besides the edge to its parent. Let $w$ be the ancestor of $u$ that is highest in the tree (closest to the root). The back edge $u$–$w$ plus the tree path $w \to \dots \to u$ forms a cycle. That path passes through **every** ancestor between $w$ and $u$, which includes all of $u$'s neighbours.
+
+So there's a cycle containing $u$ and all its neighbours: **D** must hold.
+
+A, B and C can fail: the two leaves may lie in unrelated parts of the graph.

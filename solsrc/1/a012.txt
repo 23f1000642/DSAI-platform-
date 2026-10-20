@@ -1,0 +1,129 @@
+=== 1.28.23
+The edges are a–b, a–d, b–c, b–e, d–e, d–g, c–e, c–f, e–f, e–g and f–g.
+
+1. **a b e f d g c** ✘. After f, DFS must go to an unvisited neighbour of f (c or g). d is not adjacent to f.
+2. **a b e f c g d** ✔. a→b→e→f→c. c has no new neighbours, so back up to f→g→d.
+3. **a d g e b c f** ✔. a→d→g→e→b→c→f, and every step is an edge.
+4. **a d b c g e f** ✘. b is not adjacent to d, and d still has unvisited neighbours (e, g).
+
+**2 and 3 only**, **option B**.
+=== 1.28.24
+**Alpha–beta pruning** cuts game-tree branches that can't change the minimax value. That reduces both the number of branches explored and the number of static evaluations at the leaves. **Option B**.
+=== 1.29.1
+Optimal merge pattern (greedy, like Huffman): always merge the two smallest files.
+
+| merge | new file | cost |
+|---|---|---|
+| 5 + 10 | 15 | 15 |
+| 15 + 15 | 30 | 30 |
+| 20 + 25 | 45 | 45 |
+| 30 + 45 | 75 | 75 |
+
+The total number of record movements is $15+30+45+75 = \mathbf{165}$, **option A**.
+=== 1.29.2
+The minimum number of rooms equals the **maximum number of activities running at the same time**. Scan the events, adding 1 at each start and subtracting 1 at each end:
+
+| event | aₛ | bₛ | cₛ | aₑ | dₛ | cₑ | eₛ | fₛ | bₑ | dₑ | gₛ | eₑ | fₑ | hₛ | gₑ | hₑ |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| active | 1 | 2 | 3 | 2 | 3 | 2 | 3 | **4** | 3 | 2 | 3 | 2 | 1 | 2 | 1 | 0 |
+
+The peak is 4 (b, d, e and f overlap), so **4 rooms** are needed. **Option B**.
+=== 1.29.3
+Greedy job sequencing: sort by profit, and place each job in the latest free slot at or before its deadline.
+
+| job (profit, deadline) | slot |
+|---|---|
+| T3 (30, 5) | 5 |
+| T9 (25, 3) | 3 |
+| T7 (23, 2) | 2 |
+| T2 (20, 2) | 1 |
+| T4 (18, 3) | slots 3, 2, 1 full → **rejected** |
+| T5 (18, 4) | 4 |
+| T8 (16, 7) | 7 |
+| T1 (15, 7) | 6 |
+| T6 (10, 5) | slots ≤ 5 full → **rejected** |
+
+**T4 and T6 are left out**, **option D**.
+=== 1.29.4
+Using the schedule from the greedy job sequencing (T4 and T6 rejected), the profit is
+$$30 + 25 + 23 + 20 + 18 + 16 + 15 = \mathbf{147}$$
+**Option A**.
+=== 1.29.5
+The value/weight ratios are: item 4 = 12, item 1 = 6, item 3 = 5, item 2 = 4.
+
+**Greedy** (capacity 11):
+
+- Take item 4 (w 2, v 24). Total weight is 2.
+- Item 1 (w 10) would make 12 > 11, so skip it.
+- Take item 3 (w 4, v 20). Total weight is 6, value 44.
+- Item 2 (w 7) would make 13, so skip it.
+
+$V_{greedy} = 44$.
+
+**Optimal:** item 1 alone gives 60. The alternatives are {2, 3} = 48 and {2, 4} = 52, and nothing else fits with item 1. So $V_{opt} = 60$.
+
+$V_{opt} - V_{greedy} = \mathbf{16}$.
+=== 1.30.1
+Occupied slots: 0, 1, 3, 4, 6, 8, 9. Empty slots: 2, 5, 7.
+
+An unsuccessful search starts at the hashed slot and probes until it hits an empty slot (comparisons include the empty slot). The worst start is **slot 8**: 8, 9, 0, 1, then 2, which is empty. That's **5** comparisons. **Option B**.
+=== 1.30.2
+**(i)** Each new element must be checked against its chain, to avoid duplicates or to keep the chain sorted. The $i$-th insertion may scan a chain of length $i-1$. The worst case is
+$$\sum_{i=1}^{n}(i-1) = O(n^2)$$
+(If you always insert at the head without checking, each insert is $O(1)$ and the total is $O(n)$.)
+
+**(ii)** The worst case happens when **every key hashes to the same bucket**, so all $n$ elements form one chain, effectively a linked list.
+=== 1.30.3
+- $h_1(90) = 90 \bmod 23 = 21$
+- $h_2(90) = 1 + (90 \bmod 19) = 1 + 14 = 15$
+
+Probe $i$ is $(h_1 + i\cdot h_2) \bmod 23$. Probe 1 is $(21 + 15) \bmod 23 = 36 \bmod 23 = \mathbf{13}$.
+=== 1.30.4
+The figure's required state:
+
+- bucket **00** is empty
+- bucket **01** is split on bit 3: one key on the 0 side, and the 1 side split again on bit 4 (two keys)
+- bucket **10** is split on bit 3 into two keys
+- bucket **11** has one key
+
+Check **C: 10, 9, 6, 7, 5, 13**. Bits are written $b_4b_3b_2b_1$.
+
+| key | binary | bucket ($b_2b_1$) | $b_3$ | $b_4$ |
+|---|---|---|---|---|
+| 10 | 1010 | 10 | 0 | 1 |
+| 9 | 1001 | 01 | 0 | 1 |
+| 6 | 0110 | 10 | 1 | 0 |
+| 7 | 0111 | 11 | 1 | 0 |
+| 5 | 0101 | 01 | 1 | 0 |
+| 13 | 1101 | 01 | 1 | 1 |
+
+- Bucket 01 holds {9 | 5, 13}. 5 and 13 differ in bit 4, so that side splits again. ✔
+- Bucket 10 holds {10 | 6}. ✔
+- Bucket 11 holds {7}. ✔
+- Bucket 00 is empty. ✔
+
+The other options fail:
+
+- A inserts 4 (0100), which goes into bucket 00.
+- B's key 1 (0001) would put two keys on bucket 01's 0 side.
+- D has nothing in bucket 11.
+
+**Option C**.
+=== 1.30.5
+Under simple uniform hashing, each key lands in any given slot with probability $1/m$. That holds whether $h_1$ (odd keys) or $h_2$ (even keys) is used. By linearity, the expected number of keys in a slot is $n\cdot\frac1m = \frac nm$. **Option B**.
+=== 1.30.6
+Any **fixed** hash function, whether division or multiplication, can be defeated. An adversary who knows it can pick $k$ keys that all collide.
+
+**Universal hashing** chooses the hash function at random from a universal family at run time. Whatever keys the adversary picks, the expected number of collisions stays small. **Option C**.
+=== 1.30.7
+$h(k) = k \bmod 10$, with linear probing.
+
+| key | home slot | placed at |
+|---|---|---|
+| 43 | 3 | 3 |
+| 165 | 5 | 5 |
+| 62 | 2 | 2 |
+| 123 | 3 (full) | 4 |
+| 142 | 2 (full) | 2 → 3 → 4 → 5 are full, so **6** |
+
+**Option D**.
