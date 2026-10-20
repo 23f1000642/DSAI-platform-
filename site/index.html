@@ -530,7 +530,7 @@ async function renderPractice(A){
 }
 async function showSolution(el, q, type, key){
   const sol = (await loadSol(subjOf(q.id)))[q.id];
-  el.innerHTML = `<h4>Solution</h4><div class="keyline">Correct answer: <b>${esc(fmtKey(type, key))}</b>${q.ks === 'X' ? ' <span class="muted">(marks to all)</span>' : ''}${!q.k && sol?.a ? ' <span class="muted">(worked out; no official key)</span>' : ''}</div>
+  el.innerHTML = `<h4>Solution</h4><div class="keyline">${key ? `Correct answer: <b>${esc(fmtKey(type, key))}</b>` : (q.ks === 'X' ? 'Marks were given to all candidates. See the explanation below.' : 'Descriptive answer, worked out below.')}${q.ks === 'X' && key ? ' <span class="muted">(marks to all)</span>' : ''}${!q.k && sol?.a && !sol?.fix ? ' <span class="muted">(worked out; no official key)</span>' : ''}${sol?.fix && q.k ? ` <span class="muted">(official key says ${esc(q.k.replace(/;/g, ', '))}, which is incorrect)</span>` : ''}</div>
     <div class="body">${sol?.s ? md(sol.s) : '<p class="muted">The worked solution for this question is still being written. The correct answer above is from the official key.</p>'}</div>`;
   typeset(el);
 }
