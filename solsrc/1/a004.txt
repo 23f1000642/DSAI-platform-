@@ -1,0 +1,124 @@
+=== 1.7.6
+- **I:** $(n+k)^m = n^m + \binom m1 k n^{m-1} + \dots$. The leading term is $n^m$, so this is $\Theta(n^m)$. ✔
+- **II:** $2^{n+1} = 2\cdot 2^n = O(2^n)$. ✔
+- **III:** $2^{2n+1} = 2\cdot 4^n$, and $4^n/2^n = 2^n \to\infty$. So it is **not** $O(2^n)$. ✘
+
+I and II, **option A**.
+=== 1.7.7
+A comparison sort is a binary decision tree with at least $n!$ leaves, one for each possible ordering. Its height is at least
+$$\lg(n!) = \Theta(n\log n)$$
+by Stirling's approximation. Merge sort achieves this bound, so it's tight: **$n\log n$**, **option C**.
+=== 1.7.8
+$T(n) = 2T(n/2) + n$ is the merge-sort recurrence, so $T(n) = \Theta(n\log n)$.
+
+- A: $O(n^2)$ is a valid (loose) upper bound. ✔
+- B, D: ✔
+- C: $\Omega(n^2)$ would need $n\log n$ to grow at least as fast as $n^2$, which it doesn't. ✘
+
+The false statement is **C**.
+=== 1.7.9
+Compare the functions as powers of 2:
+
+- $h(n) = n^{\log n} = 2^{\log^2 n}$
+- $f(n) = 2^n$
+- $g(n) = n! \approx 2^{n\log n}$
+
+Since $\log^2 n < n < n\log n$ for large $n$: $h \ll f \ll g$.
+
+So $h = O(f)$ and $g = \Omega(f)$, **option D**.
+=== 1.7.10
+- $f_3 = n\log n$
+- $f_2 = n^{1.5}$, which grows faster than $n\log n$ because $n^{0.5} \gg \log n$
+- $f_4 = n^{\log n} = 2^{\log^2 n}$, which is super-polynomial
+- $f_1 = 2^n$, which beats $2^{\log^2 n}$
+
+Increasing order: $f_3, f_2, f_4, f_1$, **option A**.
+=== 1.7.11
+The average over all inputs of size $n$ can never exceed the maximum over those inputs. So $A(n) \le W(n)$ for every $n$, i.e. **$A(n) = O(W(n))$** always holds.
+
+The others can fail. For quicksort, $A = n\log n$ and $W = n^2$, so A and B fail. For linear search, $A = W = \Theta(n)$, so D fails. **Option C**.
+=== 1.7.12
+$$\sum_{i=0}^{n} i^3 = \left(\frac{n(n+1)}{2}\right)^2 = \Theta(n^4)$$
+
+- I: $\Theta(n^4)$ is correct.
+- II: $\Theta(n^5)$ is wrong, because it isn't a tight bound.
+- III: $O(n^5)$ is a valid upper bound.
+- IV: $\Omega(n^3)$ is a valid lower bound.
+
+So I or III or IV, but not II, **option C**.
+=== 1.7.13
+$g(n) = n^{1+\sin n}$. Since $\sin n$ keeps swinging between about $-1$ and $1$ (over integers too), $g(n)$ swings between about $n^0 = 1$ and $n^2$.
+
+- When $\sin n \approx -1$, $g(n) \approx 1$, so $f = n$ is not bounded by $c\cdot g$. I fails.
+- When $\sin n \approx 1$, $g(n) \approx n^2$, so $f$ is not $\ge c\cdot g$. II fails.
+
+**Neither**, **option D**.
+=== 1.7.14
+- $\frac{100}{n} \to 0$, so it's the smallest.
+- $10$ is a constant.
+- $\log_2 n$ grows, but slower than any power of $n$.
+- $\sqrt n$ is next, then $n$.
+
+Order: $\frac{100}n, 10, \log_2 n, \sqrt n, n$, **option B**.
+=== 1.7.15
+Write each function as a power of 2:
+
+- $f_2 = n^{\log n} = 2^{(\log n)^2}$
+- $f_3 = n^{\sqrt n} = 2^{\sqrt n\log n}$
+- $f_1 = 10^n = 2^{n\log_2 10}$
+
+Compare the exponents: $(\log n)^2 < \sqrt n\log n < 3.32\,n$.
+
+Order: $f_2, f_3, f_1$, **option D**.
+=== 1.7.16
+- **A:** let $f(n) = a_kn^k + \dots$. Then $f(n^2) \sim a_kn^{2k}$ and $f(n)^2 \sim a_k^2n^{2k}$. Same order, so $\Theta$ holds. ✔
+- **B:** fails for polynomials, by A.
+- **C:** take $f = 2^n$. Then $f(n^2) = 2^{n^2}$, but $f(n)^2 = 2^{2n}$. Not $O$. ✘
+- **D:** take $f(n) = 2^{-n}$. Then $f(n^2) = 2^{-n^2}$, which is much smaller than $f(n)^2 = 2^{-2n}$. Not $\Omega$. ✘
+
+**Option A**.
+=== 1.7.17
+$f(n) = n$, $g(n) = n^2$, and $n/n^2 \to 0$.
+
+- $f\in O(g)$ ✔
+- $f\in o(g)$ ✔ (strictly smaller growth)
+- $f\in\Omega(g)$ ✘
+- $f\in\Theta(g)$ ✘
+
+Answer: **A and C**.
+=== 1.7.18
+**Function_1:** the inner loop runs $n$ times, then $n$ halves:
+$$f_1(n) = n + \frac n2 + \frac n4 + \dots < 2n \;\Rightarrow\; f_1 = \Theta(n)$$
+
+**Function_2:** $f_2(n) = 100n = \Theta(n)$.
+
+So $f_1 \in \Theta(f_2)$ (A ✔) and $f_1\in O(n)$ (D ✔). B ($o$) and C ($\omega$) need strictly different growth, so they're false.
+
+Answer: **A and D**.
+=== 1.7.19
+The characteristic equation is $r^2 - 5r + 6 = 0$, so $r = 2, 3$. That gives $T(n) = a\,2^n + b\,3^n$.
+
+- $T(0) = a + b = 1$
+- $T(1) = 2a + 3b = 2$
+
+Subtracting twice the first from the second gives $b = 0$, so $a = 1$.
+
+Therefore $T(n) = 2^n$, so $T(n) = \Theta(2^n)$, **option A**.
+=== 1.7.20
+From the given facts, $g = O(h)$ and $h = O(g)$, so $g = \Theta(h)$. Also $f = O(g)$ but $g \ne O(f)$, so $f$ grows strictly slower.
+
+- A: $f + g = O(g) = O(h) = O(2h)$. True.
+- B: $f = O(g) = O(h)$. True.
+- C: if $h = O(f)$, then $g = O(h) = O(f)$, which contradicts the given. So $h \ne O(f)$. True.
+- D: since $f = O(g)$, multiplying by $h$ gives $fh = O(gh)$. So "$fh \ne O(gh)$" is **FALSE**.
+
+**Option D**.
+=== 1.7.21
+- Polynomial-type terms: $n^{1/3} < n\log^9 n < n^{7/4}$. Note $n\log^9 n = o(n^{1+\epsilon})$ for any $\epsilon > 0$, so it sits below $n^{7/4}$.
+- Exponentials beat every polynomial, and a larger base wins: $1.0000001^n < e^n$.
+
+Order: a, d, c, e, b, **option A**.
+=== 1.7.22
+$\log(x^2+1) \approx 2\log x$, so the first term is about $2x\log x$. That is $o(x^2)$.
+
+The dominant term is $3x^2$, so $f(x) = O(x^2)$, **option B**.

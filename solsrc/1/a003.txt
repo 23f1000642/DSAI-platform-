@@ -1,0 +1,95 @@
+=== 1.3.6
+All-pairs shortest paths is solved by Floyd–Warshall. It builds $d^{(k)}_{ij}$, the best path using only intermediate vertices $1..k$, from the $(k-1)$ table. That's overlapping subproblems with optimal substructure, i.e. **dynamic programming**, **option A**.
+=== 1.3.7
+- Prim's MST picks the cheapest edge leaving the tree each time → **greedy (ii)**
+- Floyd–Warshall builds up a table of sub-results → **dynamic programming (iii)**
+- Merge sort splits, recurses and merges → **divide and conquer (iv)**
+- Hamiltonian circuit extends a partial path and backs up on failure → **backtracking (i)**
+
+P-ii, Q-iii, R-iv, S-i, **option C**.
+=== 1.3.8
+- Dijkstra always finalises the closest vertex → **greedy (iii)**
+- Floyd–Warshall → **dynamic programming (ii)**
+- Binary search halves the problem each step → **divide and conquer (i)**
+- Backtracking search on a graph goes deep first and retreats on failure → **depth-first search (iv)**
+
+1-iii, 2-ii, 3-i, 4-iv, **option C**.
+=== 1.3.9
+Kruskal is **greedy** (ii), Quicksort is **divide and conquer** (i), and Floyd–Warshall is **dynamic programming** (iii).
+
+That's P↔ii, Q↔i, R↔iii, **option C**.
+=== 1.3.10
+Searching a binary search tree compares the key with the root, then continues in only one subtree. Each step throws away part of the problem, like binary search. The official answer treats this as **divide and conquer**, **option A**.
+=== 1.4.1
+Wall-clock time (microseconds) depends on the machine, the compiler and the load. Counting statements depends on coding style. So efficiency is measured machine-independently, by counting the **key (basic) operations**, such as comparisons in sorting, as a function of input size. **Option B**.
+=== 1.5.1
+In a sorted array:
+
+- **Minimum** is `A[0]` and **maximum** is `A[n-1]`, so both are $O(1)$.
+- **Insertion** may need to shift up to $n$ elements to keep the order: $O(n)$.
+- **Deletion** must close the gap by shifting: $O(n)$.
+
+**Option C**.
+=== 1.5.2
+For each pair $(i,j)$ with $i<j$, a random permutation puts the larger value first with probability $1/2$.
+
+By linearity of expectation:
+$$E[\text{inversions}] = \binom n2\cdot\frac12 = \frac{n(n-1)}4 = \Theta(n^2)$$
+
+**Option D**.
+=== 1.6.1
+Standard AI search space complexities:
+
+- **BFS** stores the whole frontier at depth $d$: $O(b^d)$ → ii
+- **DFS** stores one path plus siblings: $O(bm)$ → iii
+- **Depth-limited** is DFS cut off at depth $l$: $O(bl)$ → iv
+- **Iterative deepening** runs DFS up to depth $d$: $O(bd)$ → i
+
+(a)-(ii), (b)-(iii), (c)-(iv), (d)-(i), **option B**.
+=== 1.6.2
+- $A^*$ uses $f = g + h$.
+- Uniform-cost search uses $f = g$.
+- **Greedy best-first search** ignores the cost so far and expands the node that looks closest to the goal: $f(N) = h(N)$.
+
+**Option C**.
+=== 1.6.3
+**Alpha–beta pruning** skips branches of a minimax game tree that cannot affect the final decision. A branch is skipped when its value is already known to be worse than an alternative. The result is identical to full minimax, but fewer nodes are searched. **Option C**.
+=== 1.7.1
+For large $n$, $g_1(n) = n^2$ and $g_2(n) = n^3$. Behaviour on small $n$ doesn't matter for $O$.
+
+- A: $n^2 = O(n^3)$, so $g_1 = O(g_2)$. ✔
+- B: $g_1 = O(n^3)$. ✔
+- C: $n^3 \ne O(n^2)$. ✘
+- D: $n^3 \ne O(n)$. ✘
+
+Answer: **A and B**.
+=== 1.7.2
+- A: $100n\log n$ and $\frac{n\log n}{100}$ differ only by a constant factor, so this is true.
+- B: let $m = \log n$. Then $\sqrt m$ grows faster than $\log m$, so $\sqrt{\log n}$ is **not** $O(\log\log n)$. **False.**
+- C: for $x<y$, $n^x \le n^y$. True.
+- D: $2^n$ grows faster than any $nk$. True.
+
+The false statement is **B**.
+=== 1.7.3
+Solve each recurrence (with $T_1 = O(1)$):
+
+- **M:** $T_n = T_{n-1} + n = 1+2+\dots+n = O(n^2)$ → W
+- **N:** $T_n = T_{n/2} + n = n + n/2 + n/4 + \dots \le 2n = O(n)$ → U
+- **O:** $T_n = T_{n/2} + n\log n$. The top term dominates the geometric sum, so $O(n\log n)$ → V
+- **P:** $T_n = T_{n-1} + \log n = \log(n!) = O(n\log n)$ → V
+
+The correct matching is **M-W, N-U, O-V, P-V**. None of the four options matches it exactly: option D has P-X, but $\log n!$ is $\Theta(n\log n)$, not $\log^2 n$. That's why GATE awarded **marks to all** for this question.
+=== 1.7.4
+Rewrite all three functions as powers of 2:
+
+- $f(n) = 3n^{\sqrt n} = 3\cdot 2^{\sqrt n\log_2 n}$
+- $g(n) = 2^{\sqrt n\log_2 n}$
+- $h(n) = n! \approx 2^{n\log_2 n}$, by Stirling
+
+So $f = 3g$, which means $f = O(g)$ and $g = O(f)$. $h$ grows much faster than both.
+
+Only **D: $f(n)$ is $O(g(n))$** is true.
+=== 1.7.5
+$$\frac{g(n)}{f(n)} = \frac{n(\log n)^{10}}{n^2\log n} = \frac{(\log n)^9}{n} \to 0$$
+
+Any power of $\log n$ grows slower than $n$. So $g = O(f)$, but $f \ne O(g)$. **Option B**.
