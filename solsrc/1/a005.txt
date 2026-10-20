@@ -1,0 +1,144 @@
+=== 1.7.23
+The schoolbook method takes $O(n^3)$. **Strassen's algorithm** uses 7 recursive multiplications of $n/2\times n/2$ blocks instead of 8:
+$$T(n) = 7T(n/2) + O(n^2) \Rightarrow T(n) = O(n^{\log_2 7}) = O(n^{2.81})$$
+Among the options, this is the efficient algorithm, **option B**.
+=== 1.7.24
+Treat $\tan^2$ as a constant term $c$ (it doesn't depend on $n$ the way a growing function would). Then $T(n) = mT(n/2) + c$.
+
+For $m > 1$, the Master theorem (case 1) gives $T(n) = \Theta(n^{\log_2 m})$, which matches **option B**, $O(n^{\lg m})$.
+
+The question is ambiguous ($\tan^2$ of what?), so the official key gave **marks to all**.
+=== 1.7.25
+$T(n) = 2T(n/2) + \frac{n}{\lg n}$. The Master theorem doesn't apply, because $n/\lg n$ is smaller than $n$ by only a log factor. So expand the recursion tree.
+
+At depth $i$ there are $2^i$ nodes, each costing $\frac{n/2^i}{\lg(n/2^i)}$. So level $i$ costs $\frac{n}{\lg n - i}$. Summing over $i = 0..\lg n-1$:
+$$n\sum_{j=1}^{\lg n}\frac1j = n\cdot H_{\lg n} = \Theta(n\lg\lg n)$$
+**Option C**.
+=== 1.7.26
+- $n! = 1\cdot2\cdots n \le n\cdot n\cdots n = n^n$, so $n! = O(n^n)$.
+- $\log n! \le \log n^n = n\log n$, so $\log n! = O(n\log n)$. In fact it's $\Theta(n\log n)$ by Stirling.
+
+**Option B**. (Options A and C are trivially true but aren't useful estimates. The intended answer gives each one in simpler terms.)
+=== 1.7.27
+The algorithm runs $M_1$ then $M_2$, one after the other. The total is $h(n) + g(n)$, and asymptotically
+$$h(n)+g(n) = \Theta(\max(h(n), g(n)))$$
+because $\max \le h+g \le 2\max$. The expected answer is **max**, **option B**.
+=== 1.7.28
+- **$E_1$:** $n^K\lg n = o(n^{K+\epsilon})$ for any $\epsilon > 0$, because $\lg n$ grows slower than $n^\epsilon$. So the sum is $\Theta(n^{K+\epsilon})$. Correct.
+- **$E_2$:** $6n^2 3^n$ dominates $n^3 2^n$, because $(3/2)^n$ beats any polynomial. So the sum is $\Theta(n^2 3^n)$, which is **not** $O(n^32^n)$. Incorrect.
+
+$E_1$ is correct and $E_2$ is not, which is option 2, **B**.
+=== 1.7.29
+For non-negative functions:
+$$\max(f,g) \le f+g \le 2\max(f,g)$$
+So $\Theta(f+g) = \Theta(\max(f,g))$, **option D**.
+
+The product $f\cdot g$ is unrelated to max or min. For example, $n\cdot n = n^2$.
+=== 1.8.1
+In a B-tree of order 10, each node has at most 10 children. Counting nodes per level, with the root at depth 0:
+
+$$1 + 10 + 10^2 + 10^3 = 1111$$
+
+1111 isn't among A–C, so the answer is **None of the above**, **D**.
+=== 1.8.2
+With minimum degree $t$ (CLRS definition):
+
+- every node except the root has at least $t-1$ keys (at least $t$ children)
+- every node has at most $2t-1$ keys (at most $2t$ children)
+
+**Option C**: $t-1$, $2t-1$.
+=== 1.9.1
+Bellman–Ford relaxes edges reachable from the source. After $V-1$ rounds, a further successful relaxation means there's a negative cycle **reachable from the source**.
+
+A negative cycle in an unreachable part of the graph is never touched, so P is false. Q is true. **Option B**.
+=== 1.9.2
+Bellman–Ford runs $V-1$ rounds, relaxing all $E$ edges each round: $\Theta(VE)$.
+
+A complete graph has $E = \frac{n(n-1)}{2} = \Theta(n^2)$, so the time is $\Theta(n\cdot n^2) = \Theta(n^3)$, **option C**.
+=== 1.9.3
+The standard running times:
+
+- Topological sort (DFS based): $\Theta(V+E)$
+- Kruskal: $O(E\log E)$, which isn't in List II
+- Bellman–Ford: $O(VE)$ → II
+- Floyd–Warshall: $\Theta(V^3)$ → IV
+
+Kruskal has no correct match in List II, so none of the options is fully correct. The official key awarded **marks to all**. The closest option is C (A-III, C-II, D-IV).
+=== 1.10.1
+Read it as: $\log n$ sorted lists, each with $n/\log n$ elements, so $n$ elements in total.
+
+Use a min-heap holding the current head of each list, so the heap has size $k = \log n$. Each of the $n$ outputs costs one extract-min and one insert, $O(\log k)$ each:
+$$O(n\log k) = O(n\log\log n)$$
+**Option A**.
+=== 1.10.2
+- A: MAX-HEAPIFY runs in $O(\lg n)$ and is the key to maintaining the heap property. True.
+- B: BUILD-MAX-HEAP runs in $O(n)$, not $O(\lg n)$. False.
+- C: MAX-HEAP-INSERT runs in $O(\lg n)$. True.
+- D: HEAP-INCREASE-KEY runs in $O(\lg n)$, not $O(n\lg n)$. False.
+
+A and C only, **option B**.
+=== 1.11.1
+Each recursive call does a constant number of arithmetic operations, like computing `mid = (lo+hi)/2` and a comparison, and halves the range. There are at most about $\log_2 n$ calls, so the total is $\Theta(\log_2 n)$, **option B**.
+=== 1.11.2
+Binary search needs two things: **sorted** data, so that discarding half is correct, and **random access**, so that reaching the middle element takes $O(1)$.
+
+- Unsorted data (A, B): binary search can give wrong answers.
+- A sorted linked list (D): reaching the middle takes $O(n)$ per step, so $O(n)$ in total.
+
+Only **C**, a sorted array, gives $O(\log n)$.
+=== 1.11.3
+One comparison with the middle element leaves at most $\lfloor n/2\rfloor$ elements to search in the worst case:
+$$F(n) = F(\lfloor n/2\rfloor) + 1$$
+This solves to $\lfloor\log_2 n\rfloor + 1$. **Option A**.
+=== 1.12.1
+- A: Optimal BST construction is a classic DP problem, $O(n^3)$ or $O(n^2)$ with Knuth's trick. True.
+- B: **False.** BFS from each unvisited vertex finds exactly one connected component, just as DFS does.
+- C: Preorder and postorder together can't distinguish a node with only a left child from one with only a right child. So reconstruction isn't unique. True.
+- D: True.
+
+The false statement is **B**.
+=== 1.13.1
+A binary tree with $n$ nodes has $2n$ child pointers. $n-1$ of them point to real nodes, because every node except the root has exactly one parent. So the number of null pointers is
+$$2n - (n-1) = n+1 = 28$$
+28 isn't listed, so **None of the above**, **D**.
+=== 1.13.2
+The last symbol in postorder is the root: **A**. The question intends this tree:
+
+```
+      A
+     / \
+    B   C
+   / \  /
+  D  E F
+```
+
+Its postorder is D E B F C A ✔.
+
+Its preorder (root, left, right) is **A B D E C F**, **option C**.
+
+(Strictly, postorder alone doesn't fix the tree uniquely. This is the shape the options assume.)
+=== 1.13.3
+A complete (perfect) binary tree of height $h$, with the root at level 0, has $2^i$ nodes at level $i$. The total is
+$$2^0 + 2^1 + \dots + 2^h = 2^{h+1}-1$$
+**Option A**.
+=== 1.13.4
+In a full binary tree every internal node has exactly 2 children, so leaves $=$ internal nodes $+1$. With $n$ leaves there are $n-1$ internal nodes.
+
+The total is $n + (n-1) = 2n-1$, **option C**.
+=== 1.13.5
+**Preorder** BCEIFDGHJK has root **B**. Inorder EICF | B | GDJHK splits off the left and right subtrees.
+
+- **Left subtree.** Preorder CEIF has root C, inorder EI | C | F. Then E is the root of {E, I} with I as its right child, and F is C's right child.
+- **Right subtree.** Preorder DGHJK has root D, inorder G | D | JHK. G is D's left child. H is D's right child, with J on its left and K on its right.
+
+**Postorder** (left, right, root):
+
+- left subtree: I E F C
+- right subtree: G J K H D
+- root: B
+
+That gives **I E F C G J K H D B**, **option A**.
+=== 1.13.6
+This is the same as the earlier question. Postorder DEBFCA gives root A, with left subtree B (children D, E) and right subtree C (left child F).
+
+The preorder is **ABDECF**, **option C**.

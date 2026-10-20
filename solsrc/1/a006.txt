@@ -1,0 +1,150 @@
+=== 1.13.7
+When every key and every gap (unsuccessful search) is equally likely, the expected search cost is minimised by the tree with the **smallest total depth**: the most balanced one.
+
+With 3 keys, the balanced tree puts the middle key at the root, one key on each side, and all four external (failure) nodes at depth 2. Trees A, B and C are skewed, with some failure nodes at depth 3, which raises the average cost.
+
+**Option D**.
+=== 1.14.1
+Search in a bitonic array in three phases:
+
+1. **Find the peak** with a modified binary search. If `A[mid] < A[mid+1]`, the peak is to the right; otherwise it's at `mid` or to the left. Cost: $O(\log n)$.
+2. **Binary search** the increasing part $A[1..peak]$: $O(\log n)$.
+3. **Binary search** (in reverse) the decreasing part: $O(\log n)$.
+
+The total is $\Theta(\log n)$. That's optimal, because even a sorted array needs $\Omega(\log n)$. **Option D**.
+=== 1.15.1
+**(i) Bounding method.** Order the items by profit/weight ratio: $6/4 = 1.5 > 11/8 > 16/12 > 21/16 > 26/20$, which is already the given order. For a partial solution, the **upper bound** is its profit plus the greedy **fractional knapsack** (LP relaxation) value of the remaining capacity, using the undecided items. Prune any node whose bound is at most the best complete solution found so far.
+
+**Key observation.** All weights are multiples of 4, so a weight below 32 means a weight of at most 28. Also every profit is $p_i = \frac54 w_i + 1$. So
+$$\text{profit} = \tfrac54 W + (\text{number of items})$$
+which is maximised by $W = 28$ using as many items as possible.
+
+**(ii) Search** (best-first; branch on $x_1, x_2, \dots$, trying $x_i = 1$ first; capacity is effectively 28).
+
+| # | partial assignment $(x_1..)$ | weight | profit | upper bound | action |
+|---|---|---|---|---|---|
+| 1 | — | 0 | 0 | 33 + (4/16)·21 = 38.25 | branch |
+| 2 | 1 | 4 | 6 | 38.25 | branch |
+| 3 | 1 1 | 12 | 17 | 38.25 | branch |
+| 4 | 1 1 1 | 24 | 33 | 33 (nothing else fits) | record 33 |
+| 5 | 1 1 0 | 12 | 17 | 17+21 = 38 | branch |
+| 6 | 1 1 0 1 | 28 | **38** | 38 | **record 38** |
+| 7 | 1 1 0 0 | 12 | 17 | 17 + (16/20)·26 = 37.8 | prune |
+| 8 | 1 0 | 4 | 6 | 6+16+(12/16)·21 = 37.75 | prune |
+| 9 | 0 | 0 | 0 | 11+16+(8/16)·21 = 37.5 | prune |
+
+(The bound for a node is its profit plus the fractional-knapsack value of the remaining items in the remaining capacity, with capacity 28.)
+
+**Optimal solution:** $x_1 = x_2 = x_4 = 1$, $x_3 = x_5 = 0$, with weight $4+8+16 = 28$ and **profit 38**. It's the **only** optimum, because the other weight-28 subsets $\{8,20\}$ and $\{12,16\}$ use only 2 items, giving profit 37.
+=== 1.16.1
+Encryption takes a **key** and the plaintext **message**, and produces the **ciphertext**. The **user's personal details** play no part in the algorithm. **Option D**.
+=== 1.16.2
+- Caesar, DES and AES are all **symmetric**: the same secret key encrypts and decrypts.
+- The **Merkle–Hellman knapsack cryptosystem** is a (historical) **public-key** scheme based on the subset-sum (knapsack) problem.
+
+**Option D**.
+=== 1.16.3
+$n = pq = 65$ and $\varphi(n) = 12\cdot4 = 48$.
+
+**Private key:** $d = e^{-1} \bmod 48$. Since $7\cdot7 = 49 \equiv 1 \pmod{48}$, $d = 7$.
+
+**Encrypt 6:** $c = 6^7 \bmod 65$.
+
+- $6^2 = 36$
+- $6^4 = 36^2 = 1296 \equiv 1296-1235 = 61$
+- $6^7 = 6^4\cdot6^2\cdot6 \equiv 61\cdot36\cdot6 = 61\cdot216$. And $216 \equiv 21$.
+- $61\cdot21 = 1281 \equiv 1281 - 1235 = 46$
+
+$d = 7$ and the ciphertext is $46$, **option C**.
+=== 1.17.1
+Build the Huffman tree by repeatedly merging the two smallest probabilities:
+
+1. d 0.09 + a 0.11 → 0.20
+2. c 0.16 + 0.20 → 0.36
+3. e 0.24 + 0.36 → 0.60
+4. b 0.40 + 0.60 → 1.00
+
+Code lengths: b = 1, e = 2, c = 3, d = 4, a = 4.
+
+Average length:
+$$0.40(1) + 0.24(2) + 0.16(3) + 0.09(4) + 0.11(4) = 0.40+0.48+0.48+0.36+0.44 = 2.16$$
+**Option B**.
+=== 1.18.1
+A decision tree that sorts must have a leaf for each of the $n!$ orderings. A binary tree of height $h$ has at most $2^h$ leaves, so
+$$h \ge \lg(n!) = \Omega(n\lg n)$$
+**Option C**.
+=== 1.19.1
+Both searches keep the unexpanded states in **ascending order** and expand the smallest first. So the order is forced to be the same for both:
+
+- expand 1 → generates 2, 3
+- expand 2 → 3 (already present), 4
+- expand 3 → 4, 5
+- expand 4 → 5, 6
+- expand 5 → 6, 7
+- expand 6 → goal
+
+Both expand states 1, 2, 3, 4, 5 and then reach 6, so they expand the **same number of states**. **Option C**.
+=== 1.19.2
+A DFS tree is identified by a root whose interval $[d, f]$ encloses the intervals of all its descendants.
+
+- **c: 1/10** encloses g 2/7, f 3/4, h 5/6 and d 8/9. Tree 1 is {c, g, f, h, d}.
+- **b: 11/16** encloses e 12/15, which encloses a 13/14. Tree 2 is {b, e, a}.
+
+The forest is {a, b, e} and {c, d, f, g, h}, **option A**.
+=== 1.19.3
+The edges are A→B, A→C, B→D, B→E, C→E, E→F, F→C.
+
+DFS from A, visiting neighbours alphabetically:
+
+- A → B → D (dead end, back to B)
+- B → E → F → C
+- C's neighbour E is already visited; everything is visited now.
+
+The order is **A B D E F C**, **option B**.
+=== 1.19.4
+Informed (heuristic) searches use a heuristic estimate of the distance to the goal: hill climbing, best-first and $A^*$.
+
+**Depth-first search** uses no heuristic. It's an uninformed (blind) search. **Option D**.
+=== 1.19.5
+DFS finishing times give a **topological order**: sort vertices by decreasing finish time. **Strongly connected components** are found with DFS too, either Kosaraju's two-pass DFS or Tarjan's low-link DFS.
+
+Both are DFS applications, **option C**.
+=== 1.20.1
+Edges read from the figure: A→B 6, A→C 90, A→F 70, B→D 41, C→B 12, C→F 10, D→C 12, E→A 2, E→B 22, E→C 60, E→D 50, F→E 15.
+
+**Dijkstra from A:**
+
+| step | vertex picked | updates |
+|---|---|---|
+| 1 | A (0) | B = 6, C = 90, F = 70 |
+| 2 | B (6) | D = 6+41 = 47 |
+| 3 | D (47) | C = min(90, 47+12) = 59 |
+| 4 | C (59) | F = min(70, 59+10) = 69 |
+| 5 | F (69) | E = 69+15 = 84 |
+| 6 | E (84) | — |
+
+- **a.** The vertices are identified in the order **A, B, D, C, F, E**.
+- **b.** The shortest path to E is **A → B → D → C → F → E**.
+- **c.** Its cost is $6+41+12+10+15 = \mathbf{84}$.
+=== 1.20.2
+Edges: P→Q 1, P→S 6, P→T 7, Q→R 1, Q→S 4, R→S 2, R→U 1, S→T 3, S→U 2, T→U 2.
+
+| finalised | dist | updates |
+|---|---|---|
+| P | 0 | Q = 1, S = 6, T = 7 |
+| Q | 1 | R = 2, S = 5 |
+| R | 2 | S = 4, U = 3 |
+| U | 3 | — |
+| S | 4 | T = min(7, 7) = 7 |
+| T | 7 | — |
+
+The order is **P, Q, R, U, S, T**, **option B**.
+=== 1.20.3
+With a binary heap:
+
+- $|V|$ EXTRACT-MIN operations at $O(\log V)$ each
+- up to $|E|$ DECREASE-KEY operations at $O(\log V)$ each
+
+The total is $O((|E|+|V|)\log|V|)$, **option D**.
+=== 1.20.4
+With every edge weight equal (unweighted), vertices are finalised in order of hop count. That's exactly BFS, which uses a **FIFO queue** and runs in $O(V+E)$. **Option A**.

@@ -1,0 +1,75 @@
+=== 1.23.8
+From position 9 you can either step right to 10, or take the shortcut to 15. So
+$$T(9) = 1 + \min(T(10), T(15))$$
+which gives $\{y, z\} = \{10, 15\}$ and $yz = \mathbf{150}$.
+=== 1.23.9
+Floyd–Warshall computes $d^{(k)}_{ij}$, the shortest $i\to j$ path using only intermediate vertices $1..k$, from the $k-1$ table:
+$$d^{(k)}_{ij} = \min\left(d^{(k-1)}_{ij},\; d^{(k-1)}_{ik} + d^{(k-1)}_{kj}\right)$$
+That's overlapping subproblems with optimal substructure, solved bottom-up: **dynamic programming**, **option C**.
+=== 1.23.10
+X = A B C B D A B and Y = B D C A B A.
+
+One LCS is **B C B A**:
+
+- X: B(2) C(3) B(4) A(6)
+- Y: B(1) C(3) B(5) A(6)
+
+Others include B D A B and B C A B. No common subsequence of length 5 exists, which the DP table confirms. The length is **4**, **option C**.
+=== 1.23.11
+X = 0 1 2 1 3 0 1 and Y = 1 3 2 0 1 0.
+
+A common subsequence of length 4 is **1 2 0 1**:
+
+- X: positions 2, 3, 6, 7
+- Y: positions 1, 3, 4, 5
+
+Another one is 1 3 0 1. Y has only 6 symbols, and filling the LCS table shows no length-5 common subsequence. The LCS length is **4**.
+=== 1.23.12
+In a convex $n$-gon, each chord (diagonal) added splits one region into two. A triangulation ends with $n-2$ triangles: the interior angles total $(n-2)\pi$, and each triangle takes $\pi$. Starting from 1 region, getting to $n-2$ regions takes $n-3$ chords.
+
+**$n-3$ chords, $n-2$ triangles**, **option B**.
+=== 1.23.13
+- A: Plain recursion $F(n) = F(n-1)+F(n-2)$ makes about $F(n)$ calls, which is $\Theta(\phi^n)$ → **IV**
+- B: With memoization, each $F(k)$ is computed once → $O(n)$ → **III**
+- C: Using only additions and multiplications, via fast matrix powering of $\begin{pmatrix}1&1\\1&0\end{pmatrix}^n$ → $O(\lg n)$ → **II**
+- D: Optimal bitonic euclidean tour (the CLRS DP) → $O(n^2)$ → **I**
+
+A-IV, B-III, C-II, D-I, **option B**.
+=== 1.24.1
+1. Evaluate both polynomials at $2n$ complex roots of unity with the FFT: $O(n\lg n)$.
+2. Multiply the values pointwise: $O(n)$.
+3. Interpolate back with the inverse FFT: $O(n\lg n)$.
+
+The total is $\Theta(n\lg n)$, **option A**.
+=== 1.25.1
+Duality gives $s(x,y) = 1 - t(1-x, 1-y)$. Let $a = 1-x$ and $b = 1-y$.
+
+- Denominator: $a+b-ab = (1-x)+(1-y)-(1-x)(1-y) = 1 - xy$
+- Numerator: $ab = 1 - x - y + xy$
+
+So
+$$s = 1 - \frac{1-x-y+xy}{1-xy} = \frac{(1-xy) - (1-x-y+xy)}{1-xy} = \frac{x+y-2xy}{1-xy}$$
+**Option B**.
+=== 1.26.1
+The **order** of a schema is the number of fixed (non-?) positions.
+
+- ?10?101? has fixed symbols 1, 0, 1, 0, 1, so its order is **5**.
+- ???0??1 has fixed symbols 0 and 1, so its order is **2**.
+
+**Option B** (5, 2).
+=== 1.26.2
+This question's options were garbled in the source. The four orderings offered were:
+
+1. D, B, A, C
+2. B, D, A, C
+3. C, D, A, B
+4. B, C, A, D
+
+The four strategies are:
+
+- **Binary encoding**: a chromosome is a bit string. This is the classic default.
+- **Gray coding**: a binary code where adjacent values differ in one bit. It refines binary encoding to avoid "Hamming cliffs".
+- **Real-valued encoding**: genes are real numbers, used for continuous parameters.
+- **Permutation encoding**: a chromosome is an ordering, used for TSP and scheduling.
+
+There's no universally accepted "sequence" of these, and no official key was released. Treat this item as **not reliably answerable**. Know what each encoding is for, rather than an order.

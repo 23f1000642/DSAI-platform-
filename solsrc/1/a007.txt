@@ -1,0 +1,129 @@
+=== 1.20.5
+Edges: a→b 1, b→c 2, c→d 3, d→a 2, d→g 2, b→e −3, c→h −5, h→e 1, g→e 1, e→f 2, f→g 3, g→h 2.
+
+Run Dijkstra from a, finalising the smallest tentative distance each time:
+
+| pick | dist | updates |
+|---|---|---|
+| a | 0 | b = 1 |
+| b | 1 | c = 3, e = −2 |
+| e | −2 | f = 0 |
+| f | 0 | g = 3 |
+| c | 3 | d = 6, h = −2 |
+| g | 3 | (h, e not improved) |
+| h | −2 | e: −1 is not better than −2 |
+| d | 6 | — |
+
+The final values are a = 0, b = 1, c = 3, d = 6, e = −2, f = 0, g = 3, h = −2.
+
+Check the true shortest paths. The only route to h is via c (cost −2), and h→e gives −1, which is worse than −2 via b. So e, f and g are right, and so is everything else.
+
+Even with negative edges, here Dijkstra gets **all the vertices** right. **Option D**.
+=== 1.20.6
+There are three shortest S–T paths of cost 10: S-A-C-E-T, S-D-T and S-B-D-T. Distances are updated only on a *strictly* shorter path, so trace Dijkstra:
+
+| pick | dist | updates |
+|---|---|---|
+| S | 0 | A = 4, B = 3, D = 7 |
+| B | 3 | D via B = 7, not strictly better (stays via S) |
+| A | 4 | C = 5 |
+| C | 5 | E = 6, D via C = 8 (no) |
+| E | 6 | G = 8, **T = 10 (parent E)** |
+| D | 7 | T via D = 10, not strictly better |
+| G | 8 | T via G = 11 (no) |
+
+T keeps parent E, which keeps C, then A, then S. The reported path is **S A C E T**, **option D**.
+=== 1.20.7
+- A: Dijkstra works directly on the graph's own representation. True.
+- B: It always picks the unvisited node with the smallest tentative distance. True.
+- C: **Not true.** It minimises total **weight**, not the number of vertices or hops. A path with more edges can be cheaper.
+- D: It needs non-negative edge weights to be guaranteed correct. True.
+
+**Option C**.
+=== 1.20.8
+Dijkstra makes a locally optimal choice at each step, permanently finalising the closest unfinalised vertex, and never revises it. That's the **greedy** approach. **Option C**.
+=== 1.21.1
+The edges go from $i$ to $i+1$ and $i+2$, and adjacency lists are in **decreasing** order, so DFS tries $i+2$ first.
+
+- From 0, DFS keeps jumping by 2: 0, 2, 4, …, 100. That discovers all 51 even vertices.
+- 100 has no out-edges. Backtrack to 98: its other neighbour **99** is new. Its neighbours 100 and 101 are done or absent.
+- Back to 96, which discovers **97**. Then 94 discovers 95, and so on, down to 0 discovering **1**.
+
+The discovery order is 0, 2, 4, …, 100, 99, 97, …, 3, 1.
+
+Vertex 50 is the 26th discovered (0, 2, …, 50). The vertices after it are:
+
+- even vertices 52 to 100: 25 of them
+- all 50 odd vertices
+
+That's $25 + 50 = \mathbf{75}$.
+=== 1.22.1
+$h_1(k) = k \bmod 11$, $h_2(k) = 1 + (k \bmod 7)$, and the table size is 11.
+
+| key | $h_1$ | slot |
+|---|---|---|
+| 63 | 8 | 8 |
+| 50 | 6 | 6 |
+| 25 | 3 | 3 |
+| 79 | 2 | 2 |
+| 67 | 1 | 1 |
+| 24 | 2 (occupied) | see below |
+
+For 24: $h_2 = 1 + (24 \bmod 7) = 4$.
+
+- $i=1$: $(2+4) \bmod 11 = 6$, occupied
+- $i=2$: $(2+8) \bmod 11 = 10$, free
+
+So key 24 goes into slot **10**.
+=== 1.22.2
+$m = 701$, $n = 700$, $k = 123456$.
+
+- $h_1 = 123456 \bmod 701$. Since $701\times176 = 123376$, $h_1 = 80$.
+- $h_2 = 1 + (123456 \bmod 700)$. Since $700\times176 = 123200$, $h_2 = 1 + 256 = 257$.
+
+The first probe ($i=0$) is slot 80, and the second ($i=1$) is $80+257 = 337$. Consecutive probes are $h_2 = 257$ slots apart. **Option C**.
+=== 1.23.1
+Either $a_i$ is not used, and we need a subset of the first $i-1$ elements summing to $j$, giving $X[i-1,j]$. Or $a_i$ is used **once**, and the first $i-1$ elements must sum to $j - a_i$, giving $X[i-1, j-a_i]$.
+$$X[i,j] = X[i-1,j] \lor X[i-1,j-a_i]$$
+**Option B**. (Option A would allow reusing $a_i$.)
+=== 1.23.2
+By definition, $X[i,j]$ is true when some subset of the first $i$ elements sums to $j$. "A subset of the **whole** set $S$ sums to $W$" is exactly $X[n, W]$. **Option C**.
+=== 1.23.3
+This is the standard LCS recurrence:
+
+- If the last characters match: $l(i,j) = l(i-1,j-1) + 1$, so expr1 is $l(i-1,j-1)+1$. Neither A nor B gives this.
+- If they don't match, drop one of them: $\text{expr2} = \max(l(i-1,j),\, l(i,j-1))$.
+
+**Option C**.
+=== 1.23.4
+$l(i,j)$ depends only on $l(i-1,j-1)$, $l(i-1,j)$ and $l(i,j-1)$: the cells above, to the left and diagonally up-left.
+
+- In **row-major** order, all three are already filled.
+- In **column-major** order, they are too.
+
+So **B** is true, and C is false. A is unnecessary: only row 0 and column 0 need to be 0. D is too strong, since $L[p,q]$ with $p<r$ but $q>s$ is not needed.
+=== 1.23.5
+A best subsequence of $a_0..a_{n-1}$ either:
+
+- **skips $a_0$:** it's a subsequence of $a_1..a_{n-1}$ whose first element gets weight 1, i.e. value $Y$; or
+- **uses $a_0$:** $a_0$ gets weight 1, and the remaining chosen elements are pushed one position later, so every one of their weights halves. Their best value is $Y/2$, giving $a_0 + Y/2$.
+
+$X = \max(Y,\, a_0 + Y/2)$, **option B**.
+=== 1.23.6
+$L_i$ is computed from the already-solved subproblem $L_{i+1}$, bottom-up from $i = n-1$ down to 0, and the results are stored and reused. That's **dynamic programming**, running in $O(n)$.
+
+There's no branching or bounding, and no splitting into halves. **Option A**.
+
+(As written, the recurrence finds the longest increasing *contiguous* run. The question is about the paradigm.)
+=== 1.23.7
+Fill in the LCS table for A = qpqrr and B = pqprqrp. The LCS length is **x = 4**.
+
+Distinct LCSs of length 4:
+
+- **qpqr**: in A positions 1–4; in B q(2) p(3) q(5) r(6)
+- **pqrr**: in A positions 2,3,4,5; in B p(1) q(2) r(4) r(6)
+- **qprr**: in A q(1) p(2) r(4) r(5); in B q(2) p(3) r(4) r(6)
+
+No other string of length 4 is a subsequence of both, so **y = 3**.
+
+$x + 10y = 4 + 30 = \mathbf{34}$.
