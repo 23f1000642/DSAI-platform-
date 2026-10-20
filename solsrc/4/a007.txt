@@ -1,0 +1,121 @@
+=== 4.10.11
+Let $f = (p\land q)\lor(\lnot q\land r)$. The canonical CNF is the product of the **maxterms** for the rows where $f$ is false.
+
+| p q r | f |
+|---|---|
+| 000 | 0 |
+| 001 | 1 |
+| 010 | 0 |
+| 011 | 0 |
+| 100 | 0 |
+| 101 | 1 |
+| 110 | 1 |
+| 111 | 1 |
+
+f is false at 000, 010, 011 and 100. Each row gives a maxterm (a variable that is 0 appears plain, a variable that is 1 appears negated):
+
+$$f = (p\lor q\lor r)(p\lor\lnot q\lor r)(p\lor\lnot q\lor\lnot r)(\lnot p\lor q\lor r)$$
+=== 4.10.12
+$\lnot p\lor(p\to q) = \lnot p\lor\lnot p\lor q = \lnot p\lor q$.
+
+Meanwhile, $\lnot p\to q \equiv p\lor q$. Knowing that $p\lor q$ is true doesn't fix the value of $\lnot p\lor q$:
+
+- p = T, q = F gives false.
+- p = F, q = T gives true.
+
+So it **cannot be determined**. **Option D**.
+=== 4.10.13
+- **A** is modus ponens, a tautology.
+- **B:** $(\lnot x\to y)\land(\lnot x\to\lnot y)$ means $\lnot x$ leads to a contradiction, so it implies $x$. Tautology.
+- **C** is a tautology.
+- **D:** $\lnot x\to\lnot y\equiv x\lor\lnot y$, which isn't equivalent to $x\lor y$. For example, x = F, y = T makes the left side T and the right side F.
+
+D is **not** true. **Option D**.
+=== 4.10.14
+$p\lor(p\to q) = p\lor\lnot p\lor q$, which is always true. **Option C**.
+
+The others: A fails at p = F, q = T. B fails at p = F, q = T. D fails at p = T, q = F.
+=== 4.10.15
+"I stay only if you go" means stay → go. Its converse is **go → stay**: "If you go, I stay", i.e. "I stay if you go". **Option A**.
+=== 4.10.16
+**(i)** $(\lnot p\lor q)\Rightarrow(q\Rightarrow p)$. Take **p = F, q = T**:
+
+- the left side is $T\lor T = T$
+- the right side is $T\Rightarrow F = F$
+
+So the formula is false there, and it's **not a tautology**.
+
+**(ii)** A is a tautology, so A is true in every interpretation. Since $A\lor B$ is true whenever A is true, it's true in every interpretation regardless of B. So **$A\lor B$ is a tautology**. ∎
+=== 4.10.17
+$a\Leftrightarrow(b\lor\lnot b)$ makes **a = T**, and $b\Leftrightarrow c$. The formula becomes
+$$(T\land b)\to(T\land c)\lor d = b\to(c\lor d)$$
+Since c = b, that's $b\to b\lor d$, which is always **true**. **Option A**.
+=== 4.10.18
+- **$F_1 = P\Rightarrow\lnot P \equiv\lnot P$**, which is satisfiable (P = F).
+- **$F_2 = \lnot P\lor P$**, because $P\Rightarrow\lnot P\equiv\lnot P$ and $\lnot P\Rightarrow P\equiv P$. That's **valid**.
+
+**Option A**.
+=== 4.10.19
+"If X then Y unless Z" means "if X and not Z, then Y": $(X\land\lnot Z)\to Y$. **Option A**.
+=== 4.10.20
+1. $A\leftrightarrow(A\lor A) = A\leftrightarrow A$, which is a **tautology**.
+2. $(A\lor B)\to B$ is false when A = T, B = F, and true when B = T. **Neither.**
+3. $A\land\lnot(A\lor B) = A\land\lnot A\land\lnot B$, which is a **contradiction**.
+=== 4.10.21
+- **A is true.** Resolution is sound, so the premises imply the resolvent.
+- **B is false.** Take P = F, Q = T, R = F. Then $P\lor Q$ is true, but $P\lor R$ is false. The right side is false, so the implication fails.
+- **C is true.** Resolution preserves satisfiability in both directions here.
+- **D is true** under its intended reading.
+
+**Option B**.
+=== 4.10.22
+$P\to(Q\lor R) \equiv \lnot P\lor Q\lor R$, and $(P\land Q)\to R \equiv \lnot P\lor\lnot Q\lor R$.
+
+The whole formula is false when the first is true and the second false. That needs P = T, Q = T, R = F, and then the first is $\lnot T\lor T\lor F = T$. So it's **falsifiable**, but clearly satisfiable too. **Satisfiable but not valid**, **option A**.
+=== 4.10.23
+- $X = (P\lor Q)\to R \equiv (P\to R)\land(Q\to R)$
+- $Y = (P\to R)\lor(Q\to R)$
+
+A conjunction implies the corresponding disjunction, so **$X\to Y$** is a tautology. **Option B**.
+=== 4.10.24
+- **P1:** $(A\land B)\to C \equiv \lnot A\lor\lnot B\lor C$, but $(A\to C)\land(B\to C) \equiv (\lnot A\land\lnot B)\lor C$. These differ, e.g. at A = T, B = F, C = F. **Not a tautology.**
+- **P2:** $(A\lor B)\to C \equiv (A\to C)\land(B\to C)$, not the $\lor$ version. They differ at A = T, B = F, C = F. **Not a tautology.**
+
+**Option D**.
+=== 4.10.25
+- I. $P\lor\lnot Q$
+- II. $\lnot(\lnot P\land Q) = P\lor\lnot Q$
+- III. The minterms PQ, P¬Q and ¬P¬Q cover everything except ¬PQ, so this is $P\lor\lnot Q$.
+- IV. This covers everything except ¬P¬Q, so it's $P\lor Q$, which is different.
+
+**I, II and III**, **option B**.
+=== 4.10.26
+$P\,\Box\,Q$ is F only when P = F, Q = T. So $P\,\Box\,Q = P\lor\lnot Q$, i.e. "Q → P".
+
+Then $P\,\Box\,\lnot Q = P\lor\lnot\lnot Q = P\lor Q$. **Option B**.
+=== 4.10.27
+"Exactly two true" means one of these:
+
+- p, q true and r false: $(p\land q\land\lnot r)$
+- exactly one of p, q true, and r true: $(\lnot(p\leftrightarrow q))\land r$
+
+Their OR is **option B**.
+=== 4.10.28
+Check B: $(a\to c)\to(\lnot b\to(a\land c))$. Take a = F, b = F, c = F:
+
+- $a\to c = T$
+- $\lnot b = T$ and $a\land c = F$, so the right side is F
+
+The whole formula is F, so it's **not a tautology**. **Option B**.
+=== 4.10.29
+- P: good → ¬cheap
+- Q: cheap → ¬good
+
+Each is the contrapositive of the other, so they're equivalent. **L, M and N are all true**, **option D**.
+=== 4.10.30
+$p\leftrightarrow q = (\lnot p\lor q)\land(p\lor\lnot q) = (p\land q)\lor(\lnot p\land\lnot q)$.
+
+- A, B and D are all forms of this.
+- **C**, $(\lnot p\land q)\lor(p\land\lnot q)$, is XOR, i.e. $\lnot(p\leftrightarrow q)$.
+
+**Option C**.

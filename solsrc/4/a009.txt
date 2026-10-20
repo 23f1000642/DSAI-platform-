@@ -1,0 +1,106 @@
+=== 4.10.49
+Simplify the inside first: $(p\lor q)\land\lnot p = \lnot p\land q$. Then
+$$(\lnot p\land q)\to\lnot q \equiv p\lor\lnot q\lor\lnot q = p\lor\lnot q$$
+That's already a single maxterm, so the principal CNF is **$p\lor\lnot q$**. **Option A**.
+=== 4.10.50
+- (a) $p\to q \equiv\lnot p\lor q$ → (iv)
+- (b) $p\lor q \equiv\lnot p\to q$ → (iii)
+- (c) $p\land q \equiv\lnot(q\to\lnot p)$ → (i)
+- (d) $\lnot(p\to q) \equiv p\land\lnot q$ → (ii)
+
+**Option D**.
+=== 4.10.51
+The claim is "if $x^2\ge25$ then $x\ge6$". The proof shows "if $x\ge6$ then $x^2\ge25$". That's the **converse** (i), and it starts by assuming the claim's conclusion (ii).
+
+The claim itself is false anyway: x = 5 gives $25 \ge 25$, but $5 < 6$. **i and ii**, **option C**.
+=== 4.10.52
+- (a) $(p\to q)\Leftrightarrow(\lnot q\to\lnot p)$ is the **contrapositive** → i
+- (b) $(p\land q)\to r \Leftrightarrow p\to(q\to r)$ is **exportation** → ii
+- (c) $(p\to q)\Leftrightarrow((p\land\lnot q)\to\text{false})$ is **reductio ad absurdum** → iii
+- (d) $(p\leftrightarrow q)\Leftrightarrow(p\to q)\land(q\to p)$ is **equivalence** → iv
+
+**Option A**.
+=== 4.10.53
+"A radical is electable if conservative, and otherwise not electable" means: for a radical, E holds exactly when C does. That's **(ii)** $R\to(E\leftrightarrow C)$.
+
+(iv) $(\lnot R\lor\lnot E\lor C)\land(\lnot R\lor\lnot C\lor E) = (R\to(E\to C))\land(R\to(C\to E))$, which is the same thing.
+
+**(ii) and (iv)**, **option D**.
+=== 4.10.54
+"Exactly one x" means at least one, plus any two such x are equal:
+$$\exists x P(x)\land\forall x\forall y\,((P(x)\land P(y))\to x=y)$$
+**Option C**.
+=== 4.11.1
+$F$: every x has some y with $R(x,y)$.
+
+- **I.** $\exists y\exists x R(x,y)$ follows, since the domain is non-empty. ✔
+- **II.** One y that works for all x? No, that doesn't follow. ✘
+- **III.** Every y related to some x? No. ✘
+- **IV.** $\lnot\exists x\forall y\lnot R \equiv \forall x\exists y R = F$. ✔
+
+**I and IV**, **option B**.
+=== 4.12.1
+a: A
+$P(x): x = x^2$ holds only for x = 0 and x = 1.
+
+- (A) P(0) is T, (B) P(1) is T, (C) P(2) is F.
+- (D) $\exists x P(x)$ is T, (E) $\forall x P(x)$ is F.
+
+The true ones are (A), (B) and (D), which is choice **(3)**. In this garbled layout that's **option A** (", (B) and (D) Only").
+=== 4.12.2
+By De Morgan for quantifiers, $\lnot\exists x Q(x)\equiv\forall x\lnot Q(x)$. **Option B**.
+=== 4.13.1
+$\lnot q\lor p = \lnot(q\land\lnot p) = \lnot(\lnot p\land q)$. **Option D**.
+=== 4.14.1
+"a is a brother of b":
+
+- **Not symmetric.** If b is a sister, b isn't a brother of a.
+- **Not transitive.** a is a brother of b, and b is a brother of a, but a isn't a brother of a.
+- So it's **not an equivalence relation**.
+- **Not a partial order.** It isn't reflexive and isn't antisymmetric.
+
+NO, NO, NO, NO, **option A**.
+=== 4.14.2
+a: D
+$\langle x,y\rangle R\langle u,v\rangle \iff xv = yu$, i.e. $x/y = u/v$ (equal fractions).
+
+- **Reflexive:** $xy = yx$. ✔
+- **Symmetric:** ✔
+- **Transitive:** if $xv = yu$ and $uq = vp$, then $x/y = u/v = p/q$. ✔ (Valid when the naturals are positive.)
+- **Not asymmetric**, because it's reflexive.
+
+**(A), (B) and (C)**, choice (4). That's **option D**.
+=== 4.14.3
+- **Not reflexive:** (c,c) and (d,d) are missing.
+- **Not symmetric:** (c,d) is in R, but (d,c) isn't.
+- **Antisymmetric:** there's no pair (x,y), (y,x) with x ≠ y. ✔
+
+"ii and not i", **option D**.
+=== 4.15.1
+Monthly income = salary × 1.15, since the incentive is 15% of salary:
+
+| friend | salary | incentive | income |
+|---|---|---|---|
+| A | 92000 | 13800 | 105800 |
+| B | 96000 | 14400 | 110400 |
+| C | 84000 | 12600 | 96600 |
+| D | 88000 | 13200 | 101200 |
+| E | 80000 | 12000 | 92000 |
+| F | 76000 | 11400 | 87400 |
+
+The total income is 593400. They save 40%: $0.4\times593400 = \mathbf{237360}$. **Option B**.
+=== 4.16.1
+"Exactly two true" is the OR of three cases: $(p\land q\land\lnot r)\lor(p\land\lnot q\land r)\lor(\lnot p\land q\land r)$. **Option C**.
+=== 4.16.2
+X = {1,…,8}. P is true for even n. Q is true for {3, 4, 5, 7}.
+
+$P\leftrightarrow Q$ holds when they have the same truth value:
+
+- both true: n = 4
+- both false (odd and not in Q): n = 1
+
+The truth set is **{1, 4}**, **option A**.
+=== 4.17.1
+$x\Rightarrow y$ is equivalent to its contrapositive $\lnot y\Rightarrow\lnot x$. **Option C**.
+=== 4.17.2
+$\lnot\forall x F(x)\equiv\exists x\lnot F(x)$. **Option C**.

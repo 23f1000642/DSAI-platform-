@@ -1,0 +1,97 @@
+=== 4.10.31
+$\lnot((p\Rightarrow q)\land(\lnot r\lor\lnot s))$ is true when $(p\Rightarrow q)$ is false **or** $(\lnot r\lor\lnot s)$ is false.
+
+- **$\lnot r\lor\lnot s$ false** would need x to be both a perfect square and prime. That's impossible.
+- **$p\Rightarrow q$ false** needs $x\in\{8,9,10,11,12\}$ and x **not** composite. The only such x is **11**.
+
+**x = 11**.
+=== 4.10.32
+$P\land(P\Rightarrow Q)\equiv P\land Q$. Which of the expressions does that imply?
+
+- false ✘
+- Q ✔
+- true ✔
+- $P\lor Q$ ✔
+- $\lnot Q\lor P$ ✔ (P is true)
+
+**4** expressions.
+=== 4.10.33
+$\lnot p\Rightarrow\lnot q \equiv p\lor\lnot q$.
+
+- II: $q\Rightarrow p \equiv \lnot q\lor p$, the same. ✔
+- III: $\lnot q\lor p$, the same. ✔
+- I and IV are $\lnot p\lor q$, which is different.
+
+**II and III**, **option D**.
+=== 4.10.34
+$(p\to q)\to r$ is a contradiction, so it's false for **every** assignment. That means $p\to q$ is always true and r is always false. With r = F, we get $r\to p = T$, so the expression becomes $T\to q = q$.
+
+The expression is true exactly when q is true: **always true when q is TRUE**. **Option D**.
+
+(Strictly, $(p\to q)\to r$ can't be a contradiction for free variables p, q, r. The intended reading treats r as false and $p\to q$ as true.)
+=== 4.10.35
+"It is not raining and it is pleasant" is $\lnot p\land r$.
+
+"It is not pleasant only if it is raining and cold" means not-pleasant → (raining ∧ cold): $\lnot r\to(p\land q)$.
+
+Joined with **and**: $(\lnot p\land r)\land(\lnot r\to(p\land q))$, **option A**.
+=== 4.10.36
+- **S1:** $\lnot p\land(p\lor q) = \lnot p\land q$, which implies q. **Tautology.**
+- **S2:** $q\to(\lnot p\land q)$ fails when p = T, q = T. **Not a tautology.**
+
+**Option B**.
+=== 4.10.37
+- The antecedent is $(P\land Q)\to R$.
+- The consequent is $(P\land Q)\to(Q\to R) \equiv \lnot P\lor\lnot Q\lor\lnot Q\lor R \equiv (P\land Q)\to R$.
+
+So the antecedent and consequent are **equivalent** (D), and $X\to X$ is a **tautology** (B).
+
+**B and D**.
+=== 4.10.38
+"Fail grade cannot be given when the student scores more than 50%" means more-than-50% → no fail grade: $q\to\lnot p$. **Option A**.
+=== 4.10.39
+- **A:** $\lnot x\land y$ makes $y\Rightarrow x$ false, so A fails at x = F, y = T. ✘
+- **B:** $x\land\lnot y$ makes x true, so $\lnot x\Rightarrow y$ is true. ✔
+- **C:** $\lnot x\land y$ makes y true, so $\lnot x\Rightarrow y$ is true. ✔
+- **D:** $x\land\lnot y$ makes x true, so $y\Rightarrow x$ is true. ✔
+
+**B, C and D**.
+=== 4.10.40
+Checking all 16 assignments:
+
+- **P is valid.** It's a constructive dilemma: from $p\lor r$, $p\to q$ and $r\to s$ we get $q\lor s$, which is $\lnot s\to q$.
+- **Q is not valid.** p = F, q = T, r = T makes the premises true and $\lnot r$ false.
+- **R is not valid.** All of p, q, r false makes the premises true and the conclusion r false.
+- **S is valid.** p and $p\to r$ give r, then $q\lor\lnot r$ gives q.
+
+**P and S only**, **option C**.
+=== 4.10.41
+a: D
+(Here "7" is a misprint of ¬.) This is the same as GATE 1995. $\lnot P\Rightarrow Q$ is $P\lor Q$, and $\lnot P\lor(P\Rightarrow Q) = \lnot P\lor Q$. With P = T, Q = F the first is true and the second false. With P = F, Q = T both are true.
+
+So it **cannot be determined**. **Option D**.
+=== 4.10.42
+$\lnot q\lor p \equiv q\to p$. **Option B**.
+=== 4.10.43
+- **I: ∀m ∀n, m | n.** False, since 2 ∤ 3.
+- **II: ∃m ∀n, m | n.** True, with m = 1.
+
+**Option C**.
+=== 4.10.44
+From P and $P\to Q$, modus ponens gives **Q**, and conjunction then gives **$P\land Q$**. **B and C**.
+=== 4.10.45
+- **Equivalence:** $p\Leftrightarrow q$ → (iv)
+- **Contrapositive:** $p\Rightarrow q$ and $\lnot q\Rightarrow\lnot p$ → (iii)
+- **Converse:** $p\Rightarrow q$ and $q\Rightarrow p$ → (ii)
+- **Implication:** $p\Rightarrow q$ → (i)
+
+**Option D**.
+=== 4.10.46
+fix: D
+This is the **constructive dilemma**: $(P\to Q)\land(R\to S)$ and $P\lor R$ give **$Q\lor S$**. **Option D**.
+=== 4.10.47
+S is a logical consequence of $S_1,\dots,S_n$ exactly when $S_1\land\dots\land S_n\to S$ is **valid**. Equivalently, $S_1\land\dots\land S_n\land\lnot S$ is inconsistent. **Option B**.
+=== 4.10.48
+"Exactly two true" has three cases, and they're combined with **OR**:
+$$(p\land q\land\lnot r)\lor(p\land\lnot q\land r)\lor(\lnot p\land q\land r)$$
+**Option D**.
