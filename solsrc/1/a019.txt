@@ -1,0 +1,131 @@
+=== 1.42.11
+The edges are a–b 1, d–f 1, b–f 2, c–d 2, b–c 3, d–e 3, b–d 4, c–e 4, e–f 5, a–c 6 and c–f 7.
+
+Kruskal must take the edges in non-decreasing weight order (ties in any order):
+
+1. weight 1: a–b and d–f
+2. weight 2: b–f and d–c
+3. weight 3: b–c is skipped (b, f, d, c are already connected), then d–e is taken
+
+So d–e (3) must come **after** both weight-2 edges. In option D, (d–e) appears before (d–c), which weighs 2. That's impossible. **Option D**.
+=== 1.42.12
+- A: by the cut property, some MST contains any minimum-weight edge. True.
+- B: if $e$ is not in $T$, the cycle formed in $T + e$ has no edge heavier than $w$ (otherwise swapping would give a lighter tree). Since $w$ is the minimum, all its edges weigh $w$. True.
+- C: every MST contains *some* minimum-weight edge. True.
+- **D is false.** With several edges of weight $w$, for example a triangle with all weights $w$, a given edge $e$ can be left out of some MSTs.
+
+**Option D**.
+=== 1.42.13
+The edges are b–e 2, a–c 3, e–f 3, b–c 4, f–g 4, a–b 5, c–d 5, e–g 5, b–d 6, c–f 6, d–e 6 and d–f 6.
+
+Kruskal's order:
+
+1. b–e (2)
+2. {a–c, e–f} (3), in either order
+3. {b–c, f–g} (4), in either order
+4. c–d (5); a–b and e–g would form cycles
+
+Option **D** adds (b, c) with weight 4 **before** (a, c) with weight 3, which Kruskal never does. **D** is not a valid sequence.
+=== 1.42.14
+Vertex 0 must be a leaf. So build the best spanning tree on {1, 2, 3, 4}, then attach 0 by its cheapest edge.
+
+The edges among 1–4 are 3–4 (2), 2–4 (3), 1–3 (4), 2–3 (7), 1–4 (9) and 1–2 (12). Their MST is 3–4, 2–4, 1–3, with weight $2+3+4 = 9$.
+
+0's cheapest edge is to 1 or 3, with weight 1. The total is $9 + 1 = \mathbf{10}$, **option D**.
+=== 1.42.15
+Check the paths from 1 to 2 with at most 3 edges:
+
+| path | weight |
+|---|---|
+| 1–2 | 12 |
+| 1–0–2 | 1 + 8 = 9 |
+| 1–3–2 | 4 + 7 = 11 |
+| 1–0–3–2 | 1 + 1 + 7 = 9 |
+| 1–3–4–2 | 4 + 2 + 3 = 9 |
+| **1–0–4–2** | 1 + 4 + 3 = **8** |
+
+The minimum is **8**, **option B**.
+=== 1.42.16
+The edges are $(v_i, v_{i+1})$ with weight $2i+1$, and $(v_i, v_{i+2})$ with weight $2i+2$.
+
+Kruskal takes them in order 3, 4, 5, 6, …:
+
+- $(v_1,v_2)$ = 3 ✔
+- $(v_1,v_3)$ = 4 ✔
+- $(v_2,v_3)$ = 5 ✘, a cycle
+- $(v_2,v_4)$ = 6 ✔
+- $(v_3,v_4)$ = 7 ✘, a cycle
+- $(v_3,v_5)$ = 8 ✔
+- …
+
+So each $v_k$ for $k \ge 3$ joins through $(v_{k-2}, v_k)$, with weight $2k-2$:
+$$3 + \sum_{k=3}^{n}(2k-2) = 3 + 2\left(\frac{n(n-1)}{2} - 1\right) = n^2 - n + 1$$
+Check with $n = 4$: $3 + 4 + 6 = 13 = 16 - 4 + 1$ ✔. **Option B**.
+=== 1.42.17
+From the previous question, the MST is $v_1v_2$, $v_1v_3$, and $v_{k-2}v_k$ for each $k \ge 4$. So it's two "chains", odd-indexed and even-indexed, joined at $v_1v_2$.
+
+The path from $v_5$ to $v_6$ is $v_5 - v_3 - v_1 - v_2 - v_4 - v_6$, with weight
+$$8 + 4 + 3 + 6 + 10 = \mathbf{31}$$
+**Option C**.
+=== 1.42.18
+All weights are greater than 1, so squaring keeps their **order**. Kruskal makes the same choices, so $T' = T$.
+
+For a tree with at least 2 edges, $t' = \sum w_i^2 < (\sum w_i)^2 = t^2$. So **B** is the intended answer.
+
+If the graph has only 2 vertices, the tree has one edge and $t' = t^2$, so B fails in that edge case. That's why GATE gave **marks to all**.
+=== 1.42.19
+Name the vertices:
+
+- top row: TL, TR
+- middle row: L, C, R
+- bottom row: B1, B2, B3
+- the triangle's apex: T
+
+**Step 1: take every weight-1 edge.** These are TL–C, C–B1, L–B1, TR–R and T–B3. None of them form a cycle. That leaves 4 components:
+
+- X = {TL, C, L, B1}
+- Y = {TR, R}
+- {B2}
+- Z = {T, B3}
+
+**Step 2: join the 4 components with 3 weight-2 edges.**
+
+- **Y to X:** via TL–TR, C–TR or C–R. That's **3** choices.
+- **B2 to X:** only via B1–B2. That's **1** choice.
+- **Z to B2:** via B2–T or B2–B3. That's **2** choices.
+
+The choices are independent: $3\times1\times2 = \mathbf{6}$ MSTs.
+=== 1.42.20
+The MST edges are A–C 9, B–C 2, B–E 15, E–F 4 and D–F 6, totalling 36.
+
+There are 3 non-tree edges: A–B, C–D and D–E. Each must be **heavier** than every MST edge on the tree path between its endpoints (cycle property), and all weights are distinct integers.
+
+| non-tree edge | tree path | max on path | smallest allowed weight |
+|---|---|---|---|
+| A–B | A–C–B | 9 | 10 |
+| D–E | D–F–E | 6 | 7 |
+| C–D | C–B–E–F–D | 15 | 16 |
+
+7, 10 and 16 are distinct from each other and from the MST weights.
+
+The minimum total is $36 + 10 + 7 + 16 = \mathbf{69}$.
+=== 1.42.21
+Every spanning tree has exactly $n-1 = 99$ edges. Adding 5 to every edge adds the same 495 to **every** spanning tree, so the MST stays the same.
+
+The new weight is $500 + 99\times5 = \mathbf{995}$.
+=== 1.42.22
+- **P is true.** Every spanning tree has $n-1$ edges, so all trees go up by the same amount. Their relative order doesn't change.
+- **Q is false.** Paths with more edges go up by more. For example, a direct edge of weight 10 against a 3-edge path of weight 9: add 5 and the direct edge (15) beats the path (24).
+
+**P only**, **option A**.
+=== 1.42.23
+An MST of $K_4$ has 3 edges. The two lightest edges, 1 and 2, can never form a cycle, so they're always in the MST.
+
+To push the third MST edge as high as possible, make edges 1, 2 and **3** form a triangle. Then 3 is rejected. The fourth vertex must be reached by an edge of weight at least 4: put 4 on it, and 5 and 6 elsewhere.
+
+The maximum MST weight is $1 + 2 + 4 = \mathbf{7}$.
+=== 1.42.24
+- **II is true.** This is the cycle property: with distinct weights, the heaviest edge of any cycle is in no MST.
+- **I is false.** Take a triangle x–y (5), y–z (1), z–x (2), plus a vertex w with x–w (7) and w–y (8). Edge x–y is the **lightest** edge on the cycle x–y–w–x (5 < 7, 8). But it's the **heaviest** on the triangle x–y–z, so the cycle property excludes it from the MST.
+
+**II only**, **option B**.

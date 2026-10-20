@@ -1,0 +1,133 @@
+=== 1.32.36
+The recursion is Pascal's rule, $\binom mn = \binom{m-1}{n} + \binom{m-1}{n-1}$. It needs base cases that return 1:
+
+- $\binom m0 = 1$, i.e. $n = 0$
+- $\binom mm = 1$, i.e. $m = n$
+
+Every recursive path ends at one of these. So E is `(n == 0) || (m == n)`, **option C**.
+=== 1.32.37
+`f` recurses on $n/2$ **before** printing $n \bmod 2$, so it prints the binary representation most-significant bit first.
+
+$173 = 128+32+8+4+1 = 10101101_2$, so it prints **10101101**. **Option D**.
+=== 1.32.38
+**P1** recurses while $n/2 \ne 0$, then prints $n \bmod 2$. For $n = 1$ it prints 1, which is the same as the original. So it prints binary MSB-first: **10101101**, the same output.
+
+**P2** prints the bit **before** recursing, so its output is reversed: 10110101.
+
+**P1 only**, **option C**.
+=== 1.33.1
+Heapsort sorts **in place**, with $O(1)$ extra space. Insertion sort does too. Merge sort needs $O(n)$ auxiliary space.
+
+So P = insertion sort and Q = merge sort, **option D**.
+=== 1.34.1
+Binary search cuts the **comparisons** for each insertion to $O(\log n)$. But the element still has to be inserted by **shifting** up to $i$ elements, which is $O(i)$ per step. Shifting dominates, so the worst case **remains $\Theta(n^2)$**. **Option A**.
+=== 1.34.2
+Insertion sort does exactly one shift per inversion, plus $O(n)$ for the comparisons that end each pass. Its running time is $\Theta(n + I)$, where $I$ is the number of inversions.
+
+With $I \le n$, the time is $\Theta(n)$. **Option D**.
+=== 1.34.3
+Each insertion-sort swap fixes exactly one inversion, so we need exactly **2 inversions**.
+
+- The pair (15, 13) is always one inversion.
+- The rest depend on $x$:
+  - for every element of $\{1,3,5,7,9,11\}$ larger than $x$, one more inversion;
+  - if $x > 13$, one more ($x$ before 13);
+  - if $x > 15$, one more ($x$ before 15).
+
+| x | inversions | total |
+|---|---|---|
+| 10 | (11,10) + (15,13) | **2** ✔ |
+| 12 | (15,13) | 1 ✘ |
+| 14 | (14,13) + (15,13) | **2** ✔ |
+| 16 | (16,15) + (16,13) + (15,13) | 3 ✘ |
+
+Answer: **10 and 14** (A and C).
+=== 1.35.1
+Profit/weight ratios: object 1 = 5, object 2 = 2.5, object 3 = 2, object 4 = 2.
+
+Fill greedily with capacity $M = 15$:
+
+- object 1: w 2, p 10. Total weight 2.
+- object 2: w 4, p 10. Total weight 6, profit 20.
+- object 3: w 6, p 12. Total weight 12, profit 32.
+- 3 units of object 4: $3\times2 = 6$. Total weight 15, profit **38**.
+
+**Option B**.
+=== 1.35.2
+- **S1 is false.** Greedy isn't optimal for 0-1 knapsack, which needs DP or branch and bound.
+- **S2 is false as stated.** Fractional knapsack is solved efficiently by the **greedy** ratio method. DP isn't the standard efficient method for it.
+
+**Both incorrect**, **option C**.
+=== 1.36.1
+$h(x) = 3x \bmod 10$, with linear probing:
+
+| key | 3x mod 10 | stored at |
+|---|---|---|
+| 1 | 3 | 3 |
+| 4 | 2 | 2 |
+| 5 | 5 | 5 |
+| 6 | 8 | 8 |
+| 14 | 2 (taken) → 3 (taken) → **4** | 4 |
+| 15 | 5 (taken) → **6** | 6 |
+
+**4 and 6**, **option D**.
+=== 1.37.1
+If the item is equally likely to be at any position, the expected number of comparisons is $\frac{n+1}{2}$: on average the item is found **around the middle** of the array. **Option A**.
+=== 1.38.1
+fix: D
+X = a b c b d a b and Y = b d c a b a.
+
+The LCS length is **4**. LCSs include bcba, bcab and bdab.
+
+**⟨b, c, b, a⟩** is a common subsequence of length 4:
+
+- X: b(2) c(3) b(4) a(6)
+- Y: b(1) c(3) b(5) a(6)
+
+The options of length 3 (A and B) are common subsequences, but not the *longest*. Option C (b, c, a, a) isn't a subsequence of X: after its c (position 3), X has only one a (position 6).
+
+The correct answer is **D**. (The listed key, B, gives a common subsequence that isn't the longest one.)
+=== 1.39.1
+The dimensions are M1 10×100, M2 100×20, M3 20×5, M4 5×80.
+
+The best order is $(M_1(M_2M_3))M_4$:
+
+- $M_2M_3$: $100\cdot20\cdot5 = 10000$, giving 100×5
+- $M_1\times$ that: $10\cdot100\cdot5 = 5000$, giving 10×5
+- $\times M_4$: $10\cdot5\cdot80 = 4000$
+
+The total is **19000**. The other orders cost more: for example, $((M_1M_2)M_3)M_4 = 20000 + 1000 + 4000 = 25000$. **Option C**.
+=== 1.39.2
+The dimensions are 10×5, 5×20, 20×10, 10×5.
+
+| order | cost |
+|---|---|
+| $((A_1A_2)A_3)A_4$ | 1000 + 2000 + 500 = 3500 |
+| $(A_1A_2)(A_3A_4)$ | 1000 + 1000 + 1000 = 3000 |
+| $(A_1(A_2A_3))A_4$ | 1000 + 500 + 500 = 2000 |
+| $A_1(A_2(A_3A_4))$ | 1000 + 500 + 250 = 1750 |
+| $A_1((A_2A_3)A_4)$ | 1000 + 250 + 250 = **1500** |
+
+The minimum is **1500**.
+=== 1.39.3
+The dimension chain is $p = (2, 25, 3, 16, 1, 1000)$. $F_4$ produces a 1-column matrix, so collapse everything onto that thin dimension early:
+
+1. $F_3F_4$: $3\cdot16\cdot1 = 48$, giving 3×1
+2. $F_2(F_3F_4)$: $25\cdot3\cdot1 = 75$, giving 25×1
+3. $F_1(\dots)$: $2\cdot25\cdot1 = 50$, giving 2×1
+4. $(\dots)F_5$: $2\cdot1\cdot1000 = 2000$
+
+The total is 2173, which the DP table confirms is the minimum. In this parenthesisation $(F_1(F_2(F_3F_4)))F_5$, the only pair of *original* adjacent matrices multiplied directly is **$F_3F_4$**. **Option C**.
+=== 1.39.4
+The dimensions are 30×35, 35×15, 15×5, 5×10. The best order is $(A_1(A_2A_3))A_4$:
+
+- $A_2A_3$: $35\cdot15\cdot5 = 2625$
+- $A_1\times$ that: $30\cdot35\cdot5 = 5250$
+- $\times A_4$: $30\cdot5\cdot10 = 1500$
+
+The total is **9375**, **option C**.
+=== 1.39.5
+- **(i)** $(A_1A_2)A_3$: $10\cdot100\cdot5 + 10\cdot5\cdot50 = 5000 + 2500 = 7500$
+- **(ii)** $A_1(A_2A_3)$: $100\cdot5\cdot50 + 10\cdot100\cdot50 = 25000 + 50000 = 75000$
+
+$75000 / 7500 = 10$, so the first is **10 times** faster. **Option B**.

@@ -1,0 +1,145 @@
+=== 1.39.6
+The dimensions are $p = (5, 10, 3, 12, 5)$. Fill in the matrix-chain DP table:
+
+| subchain | best cost |
+|---|---|
+| $A_1A_2$ | 5·10·3 = 150 |
+| $A_2A_3$ | 10·3·12 = 360 |
+| $A_3A_4$ | 3·12·5 = 180 |
+| $A_1..A_3$ | min(150 + 5·3·12, 360 + 5·10·12) = 330 |
+| $A_2..A_4$ | min(360 + 10·12·5, 180 + 10·3·5) = 330 |
+| $A_1..A_4$ | min(330 + 250, **150 + 180 + 75**, 330 + 300) = **405** |
+
+The best order is $(A_1A_2)(A_3A_4)$, at **405**. **Option D**.
+=== 1.39.7
+The number of ways to parenthesise $n$ matrices is the Catalan number $C_{n-1} = \frac1n\binom{2n-2}{n-1} \sim \frac{4^n}{n^{3/2}}$. That grows exponentially, so it's **$\Omega(2^n)$**. **Option C**.
+=== 1.40.1
+Bottom-up two-way merge sort:
+
+- **Pass 1** merges adjacent pairs: [20, 47] [8, 15] [4, 9] [30, 40] [12, 17]
+- **Pass 2** merges pairs of runs: [8, 15, 20, 47] [4, 9, 30, 40] [12, 17]
+
+That's **8, 15, 20, 47, 4, 9, 30, 40, 12, 17**, **option B**.
+=== 1.40.2
+Merge sort makes $O(n\log n)$ comparisons. Each comparison is between two strings of length $n$, which can take $O(n)$ in the worst case. The total is $O(n^2\log n)$, **option B**.
+=== 1.40.3
+Model the time as $c\,n\log_2 n$. From $c\cdot64\cdot6 = 30$, we get $c = \frac{30}{384}$.
+
+In 6 minutes (360 s):
+$$n\log_2 n = 360\cdot\frac{384}{30} = 4608$$
+For $n = 512$: $512\times9 = 4608$ ✔. The answer is **512**, **option B**.
+=== 1.40.4
+Each comparison outputs one element. In the worst case, both lists stay non-empty until only one element remains. So the number of comparisons is $m+n-1$, **option D**.
+=== 1.40.5
+After the two recursive calls, **each half is sorted on its own**. Nothing relates the halves to each other yet. That's the merge step's job. **Option B**.
+=== 1.40.6
+This is the same question as before. There are $O(n\log n)$ string comparisons, each costing $O(n)$, for $O(n^2\log n)$ in total. **Option B**.
+=== 1.41.1
+Merging is one linear pass. Each comparison places one element, so it takes at most $m+n-1$ comparisons, i.e. $O(m+n)$. **Option C**.
+=== 1.41.2
+Optimal merge pattern: merge the two shortest lists first. Merging lengths $a$ and $b$ takes at most $a+b-1$ comparisons.
+
+| merge | result | comparisons |
+|---|---|---|
+| 20 + 24 | 44 | 43 |
+| 30 + 35 | 65 | 64 |
+| 44 + 50 | 94 | 93 |
+| 65 + 94 | 159 | 158 |
+
+The total is $43+64+93+158 = \mathbf{358}$.
+=== 1.42.1
+Kruskal runs in $O(m\log m) = O(m\log n)$: sorting dominates, and union-find is nearly linear. Which of the listed bounds also contain $m\log n$?
+
+- **D** $O(m\log n)$ ✔
+- **B** $O(mn)$ ✔, since $\log n \le n$
+- **E** $O(m^2)$ ✔, since a connected graph has $m \ge n-1 \ge \log n$
+- **A** $O(n^2)$ ✘ when $m \approx n^2$, because $m\log n$ exceeds $n^2$
+- **C** $O(m+n)$ ✘
+
+Answer: **B, D and E**.
+=== 1.42.2
+With the edges already sorted, Kruskal is just $m$ union-find operations:
+
+- union by rank with path compression: $O(m\,\alpha(n))$, essentially **linear in $m$**
+- union by rank alone: $O(m\log n)$
+
+The expected answer is **$O(m\,\alpha(m,n))$**, i.e. nearly $O(m)$.
+=== 1.42.3
+The edges are A–B 2, A–E 3, B–C 3, B–D 4, C–D 4 and E–D 5.
+
+Kruskal:
+
+1. A–B (2)
+2. A–E (3)
+3. B–C (3)
+4. Next, D: both B–D and C–D weigh 4. Either one completes the tree without a cycle.
+
+So there are **2** minimum spanning trees, each of weight 12:
+
+- {AB, AE, BC, **BD**}
+- {AB, AE, BC, **CD**}
+=== 1.42.4
+**(a) Weight $|u-v|$.** Every edge weighs at least 1, and a spanning tree needs $n-1$ edges. The **path** $0-1-2-\dots-(n-1)$ uses only weight-1 edges, so it's an MST, with weight $n-1$.
+
+**(b) Weight $u+v$.** Connect every vertex to 0: the **star** with edges $(0,v)$. Vertex $v$ must be joined by some edge, and the cheapest edge touching $v$ is $(0,v)$ with weight $v$. Taking that for every $v$ gives a spanning tree. Its weight is
+$$1 + 2 + \dots + (n-1) = \frac{n(n-1)}{2}$$
+and it's minimal.
+=== 1.42.5
+The graph has $n^2$ points, and each is adjacent to its 8 king-move neighbours. Edges have weight 1 (horizontal or vertical) or $\sqrt2$ (diagonal).
+
+**(a)** The weight-1 edges alone connect the whole grid, so the MST uses $n^2-1$ edges of weight 1: **$n^2-1$**.
+
+**(b)** Diagonal moves keep the parity of $x+y$ the same, so diagonal edges alone form **two** connected classes. A maximum spanning tree uses $n^2-2$ diagonal edges plus one unit edge to join the two classes:
+$$(n^2-2)\sqrt2 + 1$$
+=== 1.42.6
+- **A is true.** By the cut property, the globally lightest edge is in every MST.
+- **B is true.** If $e_{max}$ were on a cycle, the cycle property would exclude it from the MST. So if it's in an MST, it's a bridge, and removing it disconnects $G$.
+- **C is false.** If $e_{max}$ is a bridge, **every** spanning tree must contain it.
+- **D is true.** Distinct weights give a unique MST.
+
+The false statement is **C**.
+=== 1.42.7
+**(A)** Kruskal on the edges sorted by weight:
+
+| edge | weight | action |
+|---|---|---|
+| n1–n2 | 2 | take |
+| n1–n6 | 3 | take |
+| n2–n4 | 4 | take |
+| n4–n6 | 4 | skip (cycle n1-n2-n4-n6) |
+| n3–n4 | 7 | take |
+| n1–n3 | 8 | skip |
+| n4–n5 | 9 | take |
+| n2–n5 | 12 | skip |
+
+MST: {(n1,n2), (n1,n6), (n2,n4), (n3,n4), (n4,n5)}, with weight 25.
+
+**(B)** The two weight-4 edges lie on the same cycle n1-n2-n4-n6, and either can be dropped. So there are **2** distinct MSTs. (The other one uses (n4,n6) instead of (n2,n4).)
+
+**(C) Yes.** **(D) Yes.** All MSTs of a graph have the same multiset of edge weights, so the minimum and maximum edge weights are the same in every MST.
+=== 1.42.8
+The edges are a–c 1, a–d 2, c–d 2, b–g 2, e–i 2, b–d 3, h–i 4, h–f 4, j–i 5, a–b 6, a–e 8, g–h 8, e–h 8, f–i 9, e–f 11, g–i 14, d–h 15 and g–j 19.
+
+Kruskal:
+
+| edge | weight | action |
+|---|---|---|
+| a–c | 1 | take |
+| a–d | 2 | take |
+| c–d | 2 | skip |
+| b–g | 2 | take |
+| e–i | 2 | take |
+| b–d | 3 | take, joining {a,c,d} with {b,g} |
+| h–i | 4 | take |
+| h–f | 4 | take |
+| j–i | 5 | take |
+| a–b | 6 | skip |
+| a–e | 8 | take, joining the two halves |
+
+That's 9 edges for 10 vertices, with total weight $1+2+2+2+3+4+4+5+8 = \mathbf{31}$. **Option B**.
+=== 1.42.9
+$G$ is the complete graph $K_n$, and every edge has weight 1. Every spanning tree has $n-1$ edges, so **every** spanning tree is an MST of cost $n-1$. $K_n$ has $n^{n-2}$ of them (Cayley), which is more than one for $n \ge 3$. **Option C**.
+=== 1.42.10
+The cheapest edges join consecutive vertices, with weight 2. The path $v_1 - v_2 - \dots - v_n$ uses $n-1$ of them, and every edge weighs at least 2.
+
+The MST weight is $2(n-1) = 2n-2$, **option B**.

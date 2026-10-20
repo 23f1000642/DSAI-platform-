@@ -1,0 +1,138 @@
+=== 1.42.25
+Name the vertices T (top), L, R, BL and BR. The edges are T–BL 1, T–BR 3, T–L 4, L–BL 4, BL–BR 4, BR–R 5 and T–R $x$.
+
+The MST always takes T–BL (1) and T–BR (3). BL–BR (4) would close a cycle with them, so it's out. That leaves:
+
+- **L:** joined by T–L or L–BL, both weight 4. That's 2 choices.
+- **R:** joined by BR–R (5) or T–R ($x$). Setting $x = 5$ makes them a tie, giving 2 choices.
+
+$x = 5$ gives the most MSTs: $2\times2 = \mathbf{4}$.
+=== 1.42.26
+Adding $(u,v)$ with weight $w$ makes exactly one cycle in $T + (u,v)$: the tree path $u\leadsto v$ plus the new edge.
+
+$T$ is still an MST if and only if no edge on that path weighs more than $w$. Find the path with a DFS or BFS in $T$, which has $|V|-1$ edges, in $\Theta(|V|)$, and check the maximum. **Option D**.
+=== 1.42.27
+Every edge has weight at least 1. The path $v_1 - v_2 - \dots - v_{100}$ uses 99 edges of weight 1, so the MST weight is **99**.
+=== 1.42.28
+Label the 3×3 grid of vertices by row (top, middle, bottom) and column (0, 1, 2).
+
+**Weight-0.1 edges:**
+
+- top row: c0–c1, c1–c2
+- middle row: c0–c1
+- vertical middle to bottom: c0, c1, c2
+- bottom row: c1–c2
+
+These 7 edges contain no cycle. They form two components: the top row, and the 6 vertices of the bottom two rows.
+
+**One weight-0.9 edge** has to join the top row to the rest. All three top-to-middle vertical edges weigh 0.9, so any of them works.
+
+That gives **3** minimum spanning trees.
+=== 1.42.29
+- **S1 is false.** Take a triangle with all three edges of weight 1. Each MST leaves out a different edge, so no edge is in every MST.
+- **S2 is true.** With distinct weights, the MST is unique.
+
+**Option C**.
+=== 1.42.30
+- **A is true.** The two lightest edges can't form a cycle, so Kruskal always takes both.
+- **B is true.** Edge 3 is rejected only if it closes a triangle with edges 1 and 2. If that happens, edge 4 can't close a cycle using only edges 1–3, since no other cycle exists among them. So edge 4 is taken. Either way, at least one of edges 3 and 4 is in the MST.
+- **C is true.** This is the cut property, with distinct weights.
+- **D is false.** Distinct weights give a unique MST.
+
+Answer: **A, B and C**.
+=== 1.42.31
+$A[i][j] = 1$ for $j \le i$, so the edges go from each vertex to **smaller-numbered** vertices (ignoring self-loops).
+
+A spanning arborescence rooted at 5 gives every other vertex one parent, and that parent must have a larger number:
+
+- vertex 4: parent 5 (1 choice)
+- vertex 3: parent 4 or 5 (2 choices)
+- vertex 2: 3 choices
+- vertex 1: 4 choices
+
+Parents are always larger, so no cycle is possible, and every combination is a valid tree.
+
+The count is $1\times2\times3\times4 = \mathbf{24}$.
+=== 1.42.32
+**Weight-1 edges:** a–b, a–f, c–d, d–e. These leave 3 components: {a, b, f}, {c, d, e} and {g}.
+
+**Weight-2 edges** all touch g:
+
+- g to {a, b, f}: via g–a, g–b or g–f, giving 3 choices
+- g to {c, d, e}: via g–c, g–d or g–e, giving 3 choices
+
+The weight-3 edges are never needed.
+
+The number of MSTs is $3\times3 = \mathbf{9}$.
+=== 1.42.33
+The edges are A–B 7, A–D 6, A–C 3, B–D 1, D–C 8 and B–C $x$.
+
+An edge is in **every** MST exactly when, on every cycle through it, some other edge is strictly heavier. Check the cycles through B–C:
+
+| cycle | other edges | condition |
+|---|---|---|
+| B–C–A–B | 3, 7 | x < 7 |
+| B–C–D–B | 8, 1 | x < 8 |
+| B–C–A–D–B | 3, 6, 1 | **x < 6** |
+| B–C–D–A–B | 8, 6, 7 | x < 8 |
+
+So $x < 6$, and the largest integer is **5**.
+=== 1.42.34
+Remove $e$ from the MST $T$. That splits the vertices into two sides, $S$ and $V-S$.
+
+Any edge $f$ crossing this cut weighs at least $w(e)$. Otherwise $T - e + f$ would be a lighter spanning tree. Since $e$ already has the maximum weight, every crossing edge has exactly the maximum weight. That's a **cutset made entirely of maximum-weight edges**. **Option A**.
+
+B, C and D can fail. For example, $e$ might be a bridge and the only heavy edge.
+=== 1.42.35
+Label the octagon's corners N, NE, E, SE, S, SW, W, NW, and the centre O.
+
+- **Rim edges:** N–NE 4, NE–E 2, E–SE 1, SE–S 5, S–SW 6, SW–W 3, W–NW 1, NW–N 2
+- **Spokes:** O–N 3, O–NE 1, O–E 4, O–SE 5, O–S 4, O–SW 4, O–W 2, O–NW 2
+
+Kruskal:
+
+| weight | edges taken |
+|---|---|
+| 1 | E–SE, W–NW, O–NE |
+| 2 | NE–E, NW–N, O–W (O–NW would form a cycle) |
+| 3 | SW–W (O–N would form a cycle) |
+| 4 | O–S |
+
+That's 8 edges for 9 vertices. The weight is $3(1) + 3(2) + 3 + 4 = \mathbf{16}$, **option C**.
+=== 1.42.36
+Label the vertices P (apex), TL, TR, BL and BR. The edges are P–TL 2, BL–BR 3, TL–BR 4, TL–BL 5, TL–TR 6, TR–BR 7 and P–TR 8.
+
+Kruskal:
+
+| edge | weight | action |
+|---|---|---|
+| P–TL | 2 | take |
+| BL–BR | 3 | take |
+| TL–BR | 4 | take |
+| TL–BL | 5 | skip, cycle |
+| TL–TR | 6 | take |
+
+The weight is $2+3+4+6 = \mathbf{15}$, **option B**.
+=== 1.42.37
+This is the same as the earlier question.
+
+- Every MST contains $E_{min}$ (cut property). True.
+- If $E_{max}$ is in an MST, it must be a bridge. True.
+- Distinct weights give a unique MST. True.
+
+"No MST contains $E_{max}$" is **false**: if $E_{max}$ is a bridge, it's in every spanning tree. **Option C**.
+=== 1.42.38
+The edges are A–D 2, G–C 2, A–G 3, G–B 3, E–A 4, D–G 4, C–B 4, B–F 4, E–D 5, C–F 5 and A–C 6.
+
+Kruskal:
+
+| step | edge | weight |
+|---|---|---|
+| 1 | GC | 2 |
+| 2 | AD | 2 |
+| 3 | GB | 3 |
+| 4 | GA | 3 |
+| 5 | BF | 4 (DG and CB would form cycles) |
+| 6 | AE | 4 |
+
+The sequence GC, AD, GB, GA, BF, AE matches **option C**. (Ties can be taken in any order.)
