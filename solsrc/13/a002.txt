@@ -1,0 +1,83 @@
+=== 13.2.7
+**(a)** Trace the three calls:
+
+| call | count | q | p |
+|---|---|---|---|
+| set(7) | 1 | q[1] = 7 | p[7] = 1 |
+| set(3) | 2 | q[2] = 3 | p[3] = 2 |
+| set(9) | 3 | q[3] = 9 | p[9] = 3 |
+
+So count = **3**, q[1] = 7, q[2] = 3, q[3] = 9, p[7] = 1, p[3] = 2 and p[9] = 3.
+
+**(b)** "The first count elements of **q** contain values $i$ such that set(**i**) has been called."
+
+**(c)** Suppose set(i) was never called, but `p[i]` holds garbage $k$ with $1 \le k \le count$. Then `q[k]` was written by some call set(i′), so $q[k] = i' \ne i$. The second test `q[p[i]] ≠ i` therefore fails, and is_set returns false. If $k$ is out of range, the first test returns false. Either way, the answer is correct **without initialising** p or q. This is the classic constant-time sparse-set trick.
+=== 13.2.8
+Only scores **51 to 100** need counting, which is 50 different values. An array of **50** counters is enough. **Option A**.
+=== 13.2.9
+**The flaw:** after `A[i]` is replaced by `newc[j]`, the inner loop keeps going. If `newc[j]` equals a **later** `oldc[k]` ($k > j$), that character gets replaced again.
+
+| test | newc[j] equals a later oldc? | exposes the flaw? |
+|---|---|---|
+| 1. abc → dab | d, a: neither matches a later oldc | no |
+| 2. cde → bcd | b, c: neither matches a later oldc | no |
+| 3. bca → cda | newc[0] = c = oldc[1] | **yes** |
+| 4. abc → bac | newc[0] = b = oldc[1] | **yes** |
+
+**Only two** test cases can capture the flaw, **option B**.
+=== 13.2.10
+With A = "abcde":
+
+- **Test 3** (bca → cda): 'b' becomes 'c' (j = 0), then that 'c' becomes 'a' (j = 1). The expected result was 'c'. **Exposed.**
+- **Test 4** (abc → bac): 'a' becomes 'b', then 'b' becomes 'a', so the character is unchanged. **Exposed.**
+- Tests 1 and 2 produce the correct output.
+
+**3 and 4 only**, **option C**.
+=== 13.2.11
+The function keeps a range $[i, j]$, compares the middle element $k$ with $x$, and narrows the range. That's **binary search**. When $x$ is found, both conditions fire, so the loop exits with `listA[k] == x`. **Option B**.
+=== 13.2.12
+Removing 1 works like a heap's extract-min. Each time, move the **smaller** of the right neighbour and the lower neighbour into the hole:
+
+| hole | candidates (right, down) | moved |
+|---|---|---|
+| (1,1) | 2, 3 | **2** |
+| (1,2) | 5, 4 | **4** |
+| (2,2) | 6, 12 | **6** |
+| (2,3) | 23, 18 | **18** |
+| (3,3) | 25, ∞ | **25** |
+| (3,4) | ∞, ∞ | stop |
+
+That's **5** shifts.
+=== 13.2.13
+Process the elements in pairs: compare within each pair, then compare the larger one with the current max and the smaller with the current min. That's $\lceil 3n/2\rceil - 2$ comparisons, and it's optimal.
+
+So $n < t \le 3\lceil n/2\rceil$, **option C**.
+=== 13.2.14
+Rows run from −1 to m, which is $m + 2$ rows. Columns run from 1 to m, which is $m$ columns. That's $m(m+2)$ elements, **option D**.
+=== 13.2.15
+a: B
+In row-major order, $A[r][s][t]$ comes after $r$ full $b\times c$ planes, then $s$ full rows of length $c$, then $t$ elements:
+$$\&A[0][0][0] + w\,(b\cdot c\cdot r + c\cdot s + t)$$
+**Option B**.
+=== 13.3.1
+a: A
+A full B-tree of order $m$ and depth $d$ (root at depth 0) has $1 + m + \dots + m^d = \frac{m^{d+1}-1}{m-1}$ nodes. Each node holds $m - 1$ keys:
+$$\frac{m^{d+1}-1}{m-1}\cdot(m-1) = m^{d+1}-1$$
+**Option A**. The official key gave marks to all, because the definition of "depth" varies.
+=== 13.3.2
+a: B
+A non-leaf node holds $M - 1$ keys of 32 bytes and $M$ branches of 4 bytes:
+$$32(M-1) + 4M = 36M - 32$$
+**Option B**.
+=== 13.3.3
+a: A
+Each split creates a new node holding at least $\lceil m/2\rceil - 1$ keys. With $p$ nodes, there were at most $p - 1$ splits, spread over at least $1 + (\lceil m/2\rceil - 1)(p-1)$ keys inserted. Averaged per insertion, that's at most
+$$\frac{1}{\lceil m/2\rceil - 1}$$
+splits. **Option A**.
+=== 13.3.4
+Insertion visits $O(h)$ nodes, and each node costs $O(t)$ CPU work for the key shifting and splitting. The total is $O(th)$, **option D**.
+=== 13.3.5
+a: B
+A B-tree with minimum degree $t$ has at least $1 + 2(t-1)\sum_{i=1}^{h} t^{i-1} = 2t^h - 1$ keys. So $n \ge 2t^h - 1$, which gives
+$$h \le \log_t\frac{n+1}{2}$$
+**Option B**.

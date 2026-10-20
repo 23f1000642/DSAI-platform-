@@ -1,0 +1,110 @@
+=== 13.1.1
+The balance factor of a node is height(left) − height(right), counting an empty subtree as height −1.
+
+| node | left height | right height | balance factor |
+|---|---|---|---|
+| 1, 14, 16, 18, 24 (leaves) | −1 | −1 | 0 |
+| 5 | 0 (node 1) | −1 | **+1** |
+| 15 | 0 | 0 | **0** |
+| 12 | 1 (5) | 1 (15) | **0** |
+| 20 | 0 | 0 | **0** |
+| 17 | 2 (12) | 1 (20) | **+1** |
+
+Every balance factor is −1, 0 or +1, so the tree **is height-balanced** (an AVL tree).
+=== 13.1.2
+Inserting a child under g makes the path a → b → c → g → new node one level longer.
+
+- **c:** its left subtree has height 1, and its right subtree is empty (−1). Balance factor +2, so it's **unbalanced**.
+- **b:** left height 2 (through c, g, new node), right height 0 (d). Balance factor +2, so it's **unbalanced**.
+- **a:** left height 3, right height 1 (e–f). Balance factor +2, so it's **unbalanced**.
+
+**3** nodes become unbalanced, **option B**.
+=== 13.1.3
+**(a)** The smallest AVL tree of height $h$ has a root, one subtree that is a smallest tree of height $h-1$, and another that is a smallest tree of height $h-2$:
+$$N(h) = N(h-1) + N(h-2) + 1,\qquad N(0) = 1,\ N(1) = 2$$
+
+**(b)**
+
+| h | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|---|
+| N(h) | 1 | 2 | 4 | 7 | 12 | 20 | 33 | 54 | **88** |
+
+The smallest AVL tree of height 8 has **88** nodes.
+=== 13.1.4
+From the minimum-node recurrence: $N(0) = 1$, $N(1) = 2$, $N(2) = 4$, $N(3) = 7$.
+
+With 7 nodes, the height can be as large as **3** (height 4 would need 12 nodes). **Option B**.
+=== 13.1.5
+Each insertion costs $O(\log(\text{size}))$, and the tree grows to $n + n^2$ nodes:
+$$\sum_{k=n}^{n+n^2}\log k = \Theta(n^2\log n^2) = \Theta(n^2\log n)$$
+**Option C**.
+=== 13.1.6
+- An AVL tree is always balanced, so a search is $\Theta(\log n)$.
+- An ordinary BST can degenerate into a chain, so a search is $O(n)$ in the worst case.
+
+**Option A**.
+=== 13.1.7
+A BST can become a chain, which makes search, insert and delete all $O(n)$ in the worst case. An AVL tree keeps all three at $O(\log n)$. **Option D**.
+=== 13.1.8
+a: B
+This is the same figure as GATE 1996: inserting under g unbalances **c, b and a**. That's **3**, **option B**.
+=== 13.1.9
+a: C
+- **A is true.** AVL trees are more strictly balanced than red-black trees, and they may need more rotations when keys are inserted or deleted.
+- **R is false.** A red-black tree's height is **at most** $2\log_2(n+1)$, not greater than it. The AVL bound is also stated the wrong way round.
+
+**Option C**.
+=== 13.2.1
+Scan the array row by row with one loop. Move right along a row, and when you reach the end of the row, jump to the start of the next one:
+
+- **A** = `A[0,0]`
+- **B** = `i < n`
+- **C** = `j < n-1`
+- **D** = `i+1`
+
+```
+max := A[0,0]; i := 0; j := 0;
+while i < n do
+begin
+  if A[i,j] > max then max := A[i,j];
+  if j < n-1 then j := j+1
+  else begin j := 0; i := i+1 end
+end
+```
+=== 13.2.2
+Rows $1..i-1$ hold $1 + 2 + \dots + (i-1) = \frac{i(i-1)}{2}$ elements. Element $(i, j)$ is the $j$-th one in row $i$.
+
+With 1-based indexing, its position is $\frac{i(i-1)}{2} + j$. With a 0-based index, that's
+$$(j-1) + \frac{i(i-1)}{2}$$
+**Option C**.
+=== 13.2.3
+Use the **two-pointer** technique on the sorted array:
+```
+i := 1; j := n; found := false;
+while (i < j) and not found do
+begin
+   if A[i] + A[j] = M then found := true
+   else if A[i] + A[j] < M then i := i + 1
+   else j := j - 1
+end;
+if found then writeln(i, j) else writeln('no such pair')
+```
+**Why it works.** If $A[i] + A[j] < M$, then $A[i]$ pairs with every remaining $A[k]$ ($k \le j$) for at most $A[i] + A[j] < M$, so $i$ can't be part of any solution and can be discarded. The case $> M$ is symmetric, discarding $j$.
+
+Each step moves one pointer, so the algorithm is $O(n)$.
+=== 13.2.4
+This is a **sliding window** over $A[i..j]$, where `sum` is the window sum.
+
+- **Line 3:** `sum := A[1]`
+- **Line 6 (the `if`):** `sum < M`. The window is too small, so extend it (or stop when $j = n$).
+- **Line 11:** `sum := sum + A[j]`. Add the new element.
+
+When sum ≥ M, record $j - i$ if it's smaller than min, drop $A[i]$ and advance $i$.
+
+`min` starts at $n$ and stores $j - i$, so the program prints `min + 1`. That's the window length, or $n + 1$ if no window ever reaches $M$.
+=== 13.2.5
+In row-major order, row $i$ starts $(i-1)\times15$ locations after row 1:
+$$\text{addr} = 100 + (i-1)\cdot15 + (j-1) = 15i + j + 84$$
+**Option A**.
+=== 13.2.6
+The elements $v[i,j] = i - j$ and $v[j,i] = j - i$ cancel in pairs, and the diagonal is 0. So the total sum is **0**, **option A**.

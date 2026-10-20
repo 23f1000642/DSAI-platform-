@@ -1,0 +1,139 @@
+=== 13.4.1
+- (a) **Heap construction** with bottom-up BUILD-HEAP: $O(n)$ → **(q)**
+- (b) **Hashtable with linear probing**: in the worst case every key collides, so $O(n^2)$ → **(r)**
+- (c) **AVL tree construction**: $n$ inserts at $O(\log n)$ each, $O(n\log_2 n)$ → **(s)**
+- (d) **Digital trie construction**: building is proportional to the total key length, and for $n$ distinct keys over a decimal alphabet that's $\Omega(n\log_{10} n)$ → **(p)**
+
+a-q, b-r, c-s, d-p.
+=== 13.4.2
+Only 70 (index 13) breaks the max-heap property. Sift it up:
+
+1. Swap with its parent 10 (index 6).
+2. Swap with its parent 40 (index 3). It stops below 89.
+
+All other parent–child pairs are fine. That's **2** interchanges, **option C**.
+=== 13.4.3
+**(a) Claim:** in a binary tree, leaves = full nodes + 1. Induct on the height $h$.
+
+- **Base case** ($h = 0$): a single node, with 1 leaf and 0 full nodes. ✔
+- **Inductive step**, root $r$:
+  - If $r$ has **one** child, the leaves and full nodes are exactly those of the child's subtree, which satisfies the claim by induction.
+  - If $r$ has **two** children with $(L_1, F_1)$ and $(L_2, F_2)$, then $L = L_1 + L_2 = (F_1+1) + (F_2+1) = (F_1+F_2+1) + 1 = F + 1$. Here $r$ itself is the extra full node. ✔
+
+**(b) Insert 7, 6, 5, 4, 3, 2, 1 into a min-heap.** Each new key sifts up:
+```
+          1
+       /     \
+      4       2
+     / \     / \
+    7   5   6   3
+```
+(Array: 1, 4, 2, 7, 5, 6, 3.)
+
+**Delete the root.** Move the last element (3) to the root and sift it down: it swaps with 2.
+```
+          2
+       /     \
+      4       3
+     / \     /
+    7   5   6
+```
+(Array: 2, 4, 3, 7, 5, 6.)
+=== 13.4.4
+With 1-based indexing, the children of $i$ are $2i$ and $2i+1$. So the parent of $i$ is $\lfloor i/2\rfloor$, **option B**.
+=== 13.4.5
+The 7th smallest element is within depth 6 of the root. Search the top part of the heap: examining at most $1 + 2 + \dots + 2^6$ nodes, or keeping a small auxiliary heap and doing 7 extractions, costs a **constant** amount of work regardless of $n$. **$\Theta(1)$**, **option D**.
+=== 13.4.6
+Insert one key at a time, sifting up:
+
+| insert | heap (array) |
+|---|---|
+| 32 | 32 |
+| 15 | 32 15 |
+| 20 | 32 15 20 |
+| 30 | 32 30 20 15 (30 swaps with 15) |
+| 12 | 32 30 20 15 12 |
+| 25 | 32 30 25 15 12 20 (25 swaps with 20) |
+| 16 | 32 30 25 15 12 20 16 |
+
+That's tree **A**.
+=== 13.4.7
+fix: A
+Insert into [10, 8, 5, 3, 2]:
+
+- **Insert 1:** goes to index 6, under 5. No swap.
+- **Insert 7:** goes to index 7, under 5. 7 > 5, so they swap. 7 < 10, so it stops.
+
+The result is **10, 8, 7, 3, 2, 1, 5**, **option A**.
+
+(GATE 2014's identical question uses the same key. The key printed here, D, is a typo.)
+=== 13.4.8
+The minimum of a max-heap is in one of the **leaves**, and about $n/2$ elements are leaves. Each must be checked, so the time is $O(n)$. **Option A**.
+=== 13.4.9
+The children of index $i$ are $3i+1$, $3i+2$ and $3i+3$.
+
+- **A** (1, 3, 5, 6, 8, 9): the root isn't the maximum. ✘
+- **B** (9, 6, 3, 1, 8, 5): 6's children are 8 and 5, and 8 > 6. ✘
+- **C** (9, 3, 6, 8, 5, 1): 3's children are 5 and 1, and 5 > 3. ✘
+- **D** (9, 5, 6, 8, 3, 1): 9 is above 5, 6 and 8, and 5 is above 3 and 1. ✔
+
+**Option D**.
+=== 13.4.10
+Start from [9, 5, 6, 8, 3, 1]. The parent of $i$ is $\lfloor(i-1)/3\rfloor$.
+
+| insert | position | sift-up | array |
+|---|---|---|---|
+| 7 | index 6, parent 5 (index 1) | swap | 9 7 6 8 3 1 5 |
+| 2 | index 7, parent 7 | none | 9 7 6 8 3 1 5 2 |
+| 10 | index 8, parent index 2 (6) | swap with 6, then with 9 | 10 7 9 8 3 1 5 2 6 |
+| 4 | index 9, parent index 2 (9) | none | **10 7 9 8 3 1 5 2 6 4** |
+
+**Option A**.
+=== 13.4.11
+The path from the new leaf to the root has $\log_2 n$ nodes, already in sorted order. Binary search over $\log_2 n$ items takes $\Theta(\log_2\log_2 n)$ comparisons.
+
+(The elements still have to be shifted, but the question asks only for **comparisons**.) **Option B**.
+=== 13.4.12
+Check each array: the children of $i$ are $2i$ and $2i+1$ (1-based).
+
+- A: 12 has child 14. ✘
+- B: 14 has child 16. ✘
+- **C: 25 → 14, 16; 14 → 13, 10; 16 → 8, 12.** ✔
+- D: 12 has child 16. ✘
+
+**Option C**.
+=== 13.4.13
+Start from {25, 14, 16, 13, 10, 8, 12}.
+
+- **Delete 1:** move 12 to the root. 12 swaps with 16. Result: 16, 14, 12, 13, 10, 8.
+- **Delete 2:** move 8 to the root. 8 swaps with 14, then with 13. Result: **14, 13, 12, 8, 10**.
+
+**Option D**.
+=== 13.4.14
+- A: the tree isn't complete (5 has a child while 4's slots are empty). ✘
+- **B: complete, and every parent ≥ its children.** ✔
+- C: 5 has child 8. ✘
+- D: the root 5 is smaller than its children. ✘
+
+**Option B**.
+=== 13.4.15
+Insert into [10, 8, 5, 3, 2]:
+
+- **Insert 1:** goes under 5. No swap.
+- **Insert 7:** goes under 5. Swap.
+
+The result is **10, 8, 7, 3, 2, 1, 5**, **option A**.
+=== 13.4.16
+35 goes in at index 10, under index 5 (15). It swaps with 15, then with 30 (index 2), and stops below 40:
+
+**40, 35, 20, 10, 30, 16, 17, 8, 4, 15**, **option B**.
+=== 13.4.17
+Both subtrees are already heaps. Only the root needs sifting down, which is one HEAPIFY of $O(\log n)$. That's also needed in the worst case.
+
+The lower bound is **$\Omega(\log n)$**, **option A**.
+=== 13.4.18
+Only 100 (index 13) is out of place. It sifts up past 15 (index 6), then 50 (index 3), then 89 (the root). That's **3** interchanges, **option D**.
+=== 13.4.19
+Replace the deleted node with the last element. Then either **sift up** or **sift down**, depending on how it compares with its new parent. Either way, the work is bounded by the depth: $O(d)$.
+
+It isn't $O(1)$ in general. **Option B**.
