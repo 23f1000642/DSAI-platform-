@@ -1,0 +1,81 @@
+=== 12.19.4
+a: B
+Read from the inside out: `arrfptr[3]` is an array of 3 pointers, each to a function returning a pointer to an array of 10 ints. So x is an **array of three pointers** (to functions). **Option B** fits best. (Option C, "array of three function pointers", describes the same thing.)
+=== 12.19.5
+Postfix `++` binds tighter than unary `*`, so `*prtdata++` means `*(prtdata++)`. **Option A**.
+=== 12.19.6
+a: B
+Pointers hold **addresses**. They reach a value only indirectly, through dereferencing, so they can't "reference a value directly". **Option B**.
+=== 12.19.7
+a: C
+"Call by value is **always** more efficient" is false. Copying a large structure is slower than passing a reference. **Option C**.
+=== 12.20.1
+a: C
+- `x * 3` is 1.5, which is non-zero, so true.
+- `1.5 && 3` is 1, so the `||` short-circuits.
+
+The result is **1**. **Option C**.
+=== 12.20.2
+a: A
+Enumeration constants are integers. So an enum variable can be used anywhere an integer is allowed, for example in a `switch` ("search") statement. **Option A**.
+=== 12.20.3
+a: C
+- `int z = 7.0;` is valid: the value is converted to 7.
+- `double void = 0.000;` is invalid: `void` is a keyword.
+- `short array[2] = 0, 1, 2;` is invalid: it has no braces.
+- `char c = "\n";` is invalid, or at best questionable: a string is assigned to a char.
+
+Strictly, only **one** is correct. The commonly published answer is **Two** (C), which counts `char c = "\n"` as valid with a warning. We go with **C**.
+=== 12.20.4
+a: D
+`if (x == 3) y = 5;` uses the equality test.
+
+- A assigns instead of comparing.
+- C's semicolon ends the if, so y = 5 always runs.
+
+**Option D**.
+=== 12.20.5
+term becomes $x$, then $x^2/2!$, then $x^3/3!$, and so on, and the sum starts at 0. So it computes $x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots$. **Option B**.
+=== 12.20.6
+fix: D
+A Horn clause has **at most one positive literal**. **Option D**.
+
+(The official key says B, but that's not the standard definition.)
+=== 12.20.7
+a: C
+A static variable keeps its value throughout the life of the program, between calls. **Option C**.
+=== 12.20.8
+a: D
+Macros are substituted as text, so they're type-independent. The macro works for int, float or double. **Option D**.
+=== 12.20.9
+a: A
+The test `i++ < 0` compares 0 < 0, which is false, and i becomes 1. The loop ends right away, so it **terminates**. (The body `i--` never runs.) **Option A**.
+=== 12.20.10
+`y = x++` assigns the old value of x (1) to y, then increments x. So x = 2 and y = 1. **Option A**.
+=== 12.20.11
+`int *b, &a;` isn't valid C. A reference declaration (`&a`) exists only in C++, and there it needs an initialiser. So it's a **syntax error**. **Option C**.
+=== 12.20.12
+Array subscripting `[]` is a postfix operator, and it associates **left to right**. The unary operators `!` and `&` associate right to left. **Option C**.
+=== 12.20.13
+p goes through $1, a, a^2, \dots$, and the loop stops at the first $a^x\ge b$. So $x = \lceil\log_a b\rceil$.
+
+Option D has the ceiling in its comment but floor brackets in the formula, which is a typo. That's why the official key gave **marks to all**. The intended answer is $\lceil\log_a b\rceil$.
+=== 12.20.14
+A union is as big as its largest member: float, at **4 bytes**. **Option B**.
+=== 12.20.15
+`sum(5)` = 5 + 4 + 3 + 2 + 1 + sum(0) = 15 + 0 = **15**. **Option C**.
+=== 12.20.16
+fix: A
+Each of i, j and k ranges over 1..30, i.e. 30 values with exactly 10 in each residue class mod 3. For any i and j, exactly 10 values of k make $i + j + k\equiv0$.
+
+Total: $30\times30\times10 = \mathbf{9000}$. **Option A**.
+
+(The official key, C, reads `(i+j+k%3)` with % binding to k alone. The question intends the sum mod 3.)
+=== 12.20.17
+The even elements are 2 + 4 + 6 + 8 + 0 = **20**. **Option D**.
+=== 12.21.1
+The loop swaps `w[i]` with `w[x-i-1]` for **all** i from 0 to x−1. Each pair gets swapped twice, which undoes the reversal. The array ends up in its **original order**. **Option B**.
+=== 12.22.1
+`extern` variables have global (external) linkage. **Option B**.
+=== 12.23.1
+Row-major order: $\text{offset} = (p\cdot y\cdot z + q\cdot z + r)\times w$. **Option B**.

@@ -1,0 +1,67 @@
+=== 12.14.3
+`1 & 2` = 0, and `3/4` is integer division, also 0. The sum is **0**. **Option D**.
+=== 12.15.1
+a: A
+The inner loop runs only once per i, because of `break`, and only when $i\ge1$. Each time it adds $i + 0 - 1$:
+
+$0 + 1 + 2 + 3 = \mathbf{6}$ (for i = 1..4). **Option A**.
+=== 12.15.2
+a: C
+The outer i starts at 3. `while(i--)` runs with i = 3, 2, 1, then exits when it reads 0, leaving i = −1.
+
+Each pass declares a **new** inner i = 10, decrements it, and prints **9**. That's "999". After the loop, it prints the outer i: **−1**.
+
+Output: `999-1`. **Option C**.
+=== 12.15.3
+a: B
+The macro expands to `b + 2 * b + 2` = 3 + 6 + 2 = **11**. The macro body has no parentheses around x, so precedence bites. **Option B**.
+=== 12.15.4
+a: A
+The loop runs for digit = 0..9, which is 10 times. It prints `++count`: 2, 3, …, **11**.
+
+The question means "how many times / how many values are printed", and the loop body runs **10** times. **Option A** (the commonly accepted key).
+=== 12.15.5
+a: A
+−1 is all ones. Right-shifting a signed negative number is implementation-defined, but usually arithmetic, so it stays −1 = 0xffff (16-bit). Printed with `%x`: **ffff**. **Option A**.
+=== 12.15.6
+a: D
+`1/2` is integer division, so it's **0**. So `i = i + 0` and i stays 1. It prints `1,` forever. **Option D**.
+=== 12.15.7
+a: B
+`b / a` is integer division, $9/5 = 1$. Assigning that to a float gives **1.0**. **Option B**.
+=== 12.16.1
+a: B
+T is stored row-major, so each row (1024 words) is exactly one page. The table spans 17 pages, but memory holds only 16.
+
+For each column j, the inner loop touches pages 0, 1, …, 16 in order. Under LRU with 16 frames, cycling through 17 pages faults on **every** access. The page needed next is always the one that was just evicted.
+
+The total is $1024\times17 = \mathbf{17408}$ faults. **Option B**.
+=== 12.17.1
+In C (and most languages), parameters are passed **by value** by default. **Option A**.
+=== 12.18.1
+- `int *f()` declares a function returning a pointer to int.
+- `int (*f)()` declares a pointer to a function returning int.
+
+**Option D**.
+=== 12.19.1
+a: C
+- (i) `&44` is illegal: you can't take the address of a literal.
+- (ii) `int *P = &r;` is legal, assuming r is an int.
+- (iii) `int P = &a;` assigns a pointer to an int, which is invalid without a cast.
+- (iv) `int P = a;` is legal.
+
+**(ii) and (iv)**, **option C**.
+=== 12.19.2
+ptr points to arr[2] = 2, and i = 1:
+
+| statement | element | value |
+|---|---|---|
+| A: ptr[i] | arr[3] | 3 |
+| B: ptr[i+1] | arr[4] | 4 |
+| C: ptr[−i] | arr[1] | 1 |
+| D: ptr[−i+1] | arr[2] | 2 |
+
+Increasing order: **C, D, A, B**, which is choice (2). The A–D options in the PDF are garbled, so pick the one matching (2).
+=== 12.19.3
+a: C
+An array name is a constant, not an lvalue, so **`a = p;` is invalid**. **Option C**.
