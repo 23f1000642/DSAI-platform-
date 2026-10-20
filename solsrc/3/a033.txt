@@ -1,0 +1,36 @@
+=== 3.55.34
+NOT EXISTS keeps an employee only if **no** customer of theirs has a rating other than 'GOOD'. In other words, **all** their customers are GOOD (and each employee has at least one customer). **Option D**.
+=== 3.55.35
+The query groups by **Student_Name**, not Roll_No. The two students called Raj (rolls 1 and 3) fall into one group.
+
+The groups are Raj and Rohit, so **2** rows.
+=== 3.55.36
+The maximum-capacity theaters are those whose capacity is **≥ every** capacity:
+
+- `>= ALL (SELECT P2.capacity …)` is right.
+- C uses `> ALL(max)`, which is never true.
+- B and D use ANY, which matches far too many theaters.
+
+**Option A**.
+=== 3.55.37
+**District totals:**
+
+| district | total |
+|---|---|
+| Ajmer | 20 |
+| Bikaner | 40 |
+| Churu | 30 |
+| Dungargarh | 10 |
+
+The average total is $100/4 = 25$. Districts with a total ≥ 25 are Bikaner and Churu: **2** tuples.
+=== 3.55.38
+**Employees per department:** AA 4, AB 3, AC 3, AD 2, AE 1.
+
+The query averages these counts: $\frac{4+3+3+2+1}{5} = \frac{13}{5} = \mathbf{2.6}$
+=== 3.55.39
+- There are **no** players from Spain, so `> ALL (empty set)` is true for every row.
+- `> ANY (Germany's goals)`: Germany's goals are 16, 14, 11, 10, 10. Any player with more than 10 goals qualifies.
+
+Players with more than 10 goals: Klose, Ronaldo, G Muller, Fontaine, Pele, Klinsmann, Kocsis. That's **7**.
+=== 3.55.40
+A **full outer join** keeps every matched pair, plus the unmatched rows of **both** tables. That's a superset of the inner, left and right outer joins. **Query 4**, **option D**.

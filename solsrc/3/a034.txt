@@ -1,0 +1,48 @@
+=== 3.55.41
+**There is no join condition**, so `FROM Student S, Performance P` is a cross product.
+
+- The Performance rows with Marks > 84 are 86, 95, 90, 89 and 92: **5 rows**.
+- Each of the 5 students pairs with all 5 of those rows.
+
+GROUP BY Student_name gives one row per name. The 5 names are distinct, so the query returns **5** rows.
+=== 3.55.42
+The subquery returns the average cost of P4: $(200 + 250)/2 = 225$.
+
+Catalogue rows with cost > 225:
+
+- S2 P5 250
+- S3 P1 250
+- S3 P5 300
+- S3 P4 250
+
+That's **4** rows, **option A**.
+=== 3.55.43
+- $P(A>10)$: A ranges over the 15 integers 6–20, and 11–20 is 10 of them, so $\frac{10}{15} = \frac23$.
+- $P(B=18) = \frac1{20}$.
+
+The attributes are independent, so:
+$$P(A>10 \vee B=18) = \frac23 + \frac1{20} - \frac23\cdot\frac1{20} = \frac{40+3-2}{60} = \frac{41}{60}$$
+The estimate is $1200\times\frac{41}{60} = \mathbf{820}$.
+=== 3.55.44
+The subquery `(select avg(salary) from emp)` has no condition, so it's the average over **all employees in the company**. **Option B**.
+=== 3.55.45
+The D01 courses are C11 and C12. A student is returned when (D01 courses) − (their courses) is **empty**, i.e. they registered for **both** C11 and C12:
+
+| student | courses | both? |
+|---|---|---|
+| S01 | C11, C12 | ✔ |
+| S02 | C11 | ✘ |
+| S03 | C21, C22, C23 | ✘ |
+| S04 | C11, C12 | ✔ |
+| S05 | C11, C21 | ✘ |
+
+**2** rows.
+=== 3.55.46
+Female students with marks > 65: Aliya (70) and Aliya (80). Swati has exactly 65, which isn't > 65.
+
+**2** rows.
+=== 3.55.47
+- Mark is cid 102, which coaches team MI (tid 10).
+- The members of team 10 are pids 1 and 3, aged 31 and 26.
+
+MIN(age) = **26**.

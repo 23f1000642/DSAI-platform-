@@ -1,0 +1,54 @@
+=== 3.55.26
+Take the AC reservations, and keep a pid only if that passenger exists with age > 65:
+
+| pid | class | passenger age | kept? |
+|---|---|---|---|
+| 0 | AC | 65 | ✘ (not > 65) |
+| 1 | AC | 66 | ✔ |
+| 5 | AC | no passenger 5 | ✘ |
+| 3 | AC | 69 | ✔ |
+
+The result is **1, 3**, **option C**.
+=== 3.55.27
+Start from (1, 1). Each insertion uses X = MX + 1 and Y = 2·MY + 1:
+
+| X | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|
+| Y | 1 | 3 | 7 | 15 | 31 | 63 | **127** |
+
+In general $Y = 2^X - 1$, so for X = 7, Y = **127**. **Option A**.
+=== 3.55.28
+S(Borrower, Bank_Manager) and T(Bank_Manager, Loan_Amount) are joined on Bank_Manager:
+
+- Sunderajan appears **2** times in S and **2** times in T, giving 4 rows.
+- Ramgopal appears 1 × 1, giving 1 row.
+
+The count is $4 + 1 = \mathbf{5}$, **option C**.
+=== 3.55.29
+This follows GATE's official key. In the SQL standard GATE assumed:
+
+- HAVING is used to filter **groups**, so it goes with GROUP BY. Q is accepted as true.
+- The key treats R ("all GROUP BY attributes must appear in SELECT") as true.
+
+**Q and R**, **option C**.
+
+(Note: modern SQL actually allows HAVING without GROUP BY, where the whole table is one group, and GROUP BY columns don't have to be selected. So P and S are true in practice. GATE's key, however, is C.)
+=== 3.55.30
+No row in B has Name = 'Arun', so the subquery returns an **empty set**. `> ALL (empty set)` is **true** for every row.
+
+All 3 rows of A are returned. **Option B**.
+=== 3.55.31
+- **S1 is false.** A CHECK assertion can't fully replace a foreign key, e.g. it can't express ON DELETE actions, and many systems don't support general assertions.
+- **S2 is false.** `FOREIGN KEY (a) REFERENCES R` must refer to R's primary key (a, b). A single column can't reference a two-column key.
+
+**Both false**, **option D**.
+=== 3.55.32
+The subquery returns (dept_id, latest hire_date) for each department at location 1700. The pairwise `IN` matches each employee whose (department, hire date) equals one of those pairs. Pairwise comparison is valid SQL, so the query runs and returns the latest hires. **Option B**.
+=== 3.55.33
+`IN` returns each R row once if it has **any** match, regardless of duplicates in S.
+
+- **C** joins with the **distinct** S.a values, so each R row matches at most once. It keeps R's own duplicates and doesn't multiply them by S's duplicates. That's exactly IN.
+- **A** multiplies R rows by the number of matching S rows.
+- **B** removes R's own duplicates.
+
+**Option C**.

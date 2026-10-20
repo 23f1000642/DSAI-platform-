@@ -1,0 +1,45 @@
+=== 3.55.48
+- **A ✔.** EXISTS with a correlated subquery.
+- **B ✘.** `SIZEOF` isn't an SQL function.
+- **C ✔.** A COUNT(\*) > 0 test with a correlated subquery.
+- **D ✔.** Students and Enrolled share only **rollno**, so the NATURAL JOIN is on rollno, and the WHERE clause filters course 1470.
+
+**A, C and D**.
+=== 3.55.49
+The maximum SR Nagar amount is 65000. Loans with amount > 65000 are L11 (90000), L23 (80000) and L25 (70000).
+
+**3** rows.
+=== 3.55.50
+The Jaipur teams are IDs 2, 1 and 6. Their raiders' Raidpoints are 219 (Ankush), 250 (Arjun) and 215 (Gopal). All are > 200.
+
+**3** rows.
+=== 3.55.51
+The query has **equality** predicates (Genre.Name = 'Comedy' and the join columns) and one **range** predicate (CustomerRating > 3.4).
+
+- A B+-tree supports both equality and range lookups.
+- A hash index supports **only equality**.
+
+So:
+
+- **A ✔:** B+-trees everywhere work.
+- **B ✔:** a hash on Name is fine (it's an equality test), with B+-trees elsewhere.
+- **C ✘:** a hash on CustomerRating can't answer `> 3.4`.
+- **D ✘:** hashing everything fails on the rating range.
+
+**A and B**.
+=== 3.55.52
+`FROM student, department` without a WHERE clause is a cross product.
+
+- Rows: $3\times2 = 6$
+- Columns: $3 + 2 = 5$
+
+**Option D**.
+=== 3.55.53
+After the update the marks are 15, 25, 35 and NULL. NULL + 5 is still NULL. AVG **ignores NULLs**:
+$$\frac{15+25+35}{3} = \mathbf{25}$$
+**Option C**.
+=== 3.55.54
+- **(i)** Setting a **foreign key** to NULL is allowed, so it succeeds.
+- **(ii)** Setting a **primary key** to NULL violates entity integrity (and student rows still reference Dept 1), so it fails.
+
+**Option C**.

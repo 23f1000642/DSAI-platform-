@@ -1,0 +1,37 @@
+=== 3.55.20
+- **Query1** counts the B rows with B.balance ≥ A.balance. That **includes A itself and everyone tied with A**. If two customers tie for the top, both get 2 instead of 1, so Query1 is wrong.
+- **Query2** gives 1 + (the number with a strictly larger balance), which is the right formula. But a top customer has **no** matching B rows, so they vanish after GROUP BY. Query2 is wrong too.
+
+Statement 4 (neither is correct) is true.
+
+Statement 1 is also true. On some databases, such as an empty account table, both queries return the same rows. On others they differ: with distinct balances, Query1 includes the top customer and Query2 leaves them out.
+
+**1 and 4**, **option C**.
+=== 3.55.21
+- **Query1** returns each enrolled student once **per course**, so it can have duplicates.
+- **Query2** returns each paid student once, since student is paid's key.
+- **Query4** (EXISTS) also returns each paid student who is enrolled, once.
+
+So Query2 and Query4 always match, but Query1 and Query2 can differ when a student takes several courses. Query3 is a join that also repeats per course, so it never returns fewer rows than Query2. **Option B**.
+=== 3.55.22
+For x = 5000, **every** student paid more than x, since the smallest payment is 6000. The selection keeps everything either way.
+
+- **Plan 1** filters during a cheap sequential scan.
+- **Plan 2** filters only after the expensive indexed join, on the same number of tuples.
+
+Both do the same join work, and Plan 1's filter is no worse, so Plan 1 is faster for all databases. The two plans always output the same rows, so A is false. Projection without DISTINCT may repeat a course in either plan.
+
+**Option C**.
+=== 3.55.23
+- **Q1** keeps employees for whom **no** department-5 employee earns ≥ their salary, i.e. they earn more than everyone in department 5. Correct.
+- **Q2** uses `> ANY`, which means more than **at least one** department-5 salary. That's wrong.
+
+**Option A**.
+=== 3.55.24
+The innermost query gives the non-blue parts. The middle query finds the suppliers who supplied **some part not in that set**, i.e. a **blue** part. The outer query returns the suppliers **not** in that set: **those who have never supplied a blue part**. That includes suppliers who supplied nothing.
+
+None of the options says this exactly. That's why GATE gave **marks to all**.
+=== 3.55.25
+The keys of Suppliers are sid and (sname, city). Every FD has one of these keys on its left side. Parts has the key pid, and Catalog has the key (sid, pid), with no other FDs.
+
+Every relation is in **BCNF**. **Option A**.
