@@ -1,0 +1,87 @@
+=== 13.17.30
+a: C
+**Chaining** keeps a linked list of the keys that collide in each bucket. **Option C**.
+=== 13.17.31
+a: A
+An **XOR linked list** stores prev ⊕ next in a single pointer field. Knowing one neighbour, you can recover the other, so the list can be traversed in both directions with one pointer per node. R explains A. **Option A**.
+=== 13.18.1
+Check the children of index $i$, which are $2i$ and $2i+1$ (1-based):
+
+- A: 13 has child 14. ✘
+- B: 14 (index 3) has children 9 and 13, which is fine, but 15 (index 2) has child 17. ✘
+- **C:** 26 → 15, 17; 15 → 14, 11; 17 → 9, 13. ✔
+- D: 13 has child 17. ✘
+
+**Option C**.
+=== 13.19.1
+a: C
+The cheapest edges join consecutive vertices, with weight 4. The path $v_1 \dots v_n$ uses $n - 1$ of them:
+$$4(n-1) = 4n - 4$$
+**Option C**.
+=== 13.19.2
+a: 1
+By Cayley's formula, $n^{n-2} = 5^3 = \mathbf{125}$. That's choice 1.
+=== 13.20.1
+This is bubble sort. Each swap removes exactly one inversion. A descending array of 30 elements has every pair inverted:
+$$\binom{30}{2} = \mathbf{435}$$
+=== 13.21.1
+To behave like a stack, the most recently pushed element must have the **smallest** key, so DELETEMIN removes it first. So the keys must be **strictly decreasing**. **Option D**.
+=== 13.21.2
+Both EXTRACT-MAX (remove the root, then sift down) and INSERT (sift up) take $O(\log n)$. **Option B**.
+=== 13.21.3
+a: D
+- **Insert 10:** it goes under 15. No swap. The array is 20, 18, 15, 13, 12, 10.
+- **Insert 17:** it goes under 15 (index 3). Swap. The array is **20, 18, 17, 13, 12, 10, 15**.
+
+**Option D**.
+=== 13.21.4
+a: A
+A **heap** gives $O(\log n)$ insert and delete-max/min, which is the standard way to implement a priority queue. **Option A**.
+=== 13.22.1
+Use two arrays, a "sparse set":
+
+- `A[1..n]`, indexed by value
+- `B[1..n]`, holding the members densely
+- a counter `count`, starting at 0
+
+The invariant: $X\in S$ iff $1 \le A[X] \le count$ and $B[A[X]] = X$. So the arrays never need initialising.
+
+```
+MEMBER(X):   return (1 <= A[X] <= count) and (B[A[X]] = X)
+FIND-ONE(S): if count = 0 then "empty" else return B[1]
+ADD(X):      if not MEMBER(X) then
+                 count := count + 1;  B[count] := X;  A[X] := count
+DELETE(X):   if MEMBER(X) then
+                 k := A[X];  Y := B[count];       { last element }
+                 B[k] := Y;  A[Y] := k;           { move it into the hole }
+                 count := count - 1
+```
+
+**Example:** with S = {7, 2, 9}, count = 3 and B = [7, 2, 9, …]. Then A[7] = 1, A[2] = 2 and A[9] = 3. Every operation is $O(1)$.
+=== 13.22.2
+1. **Reverse the queue's order onto the stack.** Delete each item from Q and push it onto S, $n$ times. The front item is now at the **bottom**, i.e. the order is reversed.
+2. **Pop everything back into the queue.** Pop S and insert into Q, $n$ times. Q now holds the items in **reverse** order.
+3. **Move to the stack again.** Delete from Q and push onto S, $n$ times. Q's reversed order puts the **original front item last**, so it's now on the **top** of S, with every other item in order.
+
+That's $3n$ operations, i.e. $O(n)$. The only extra storage is one temporary variable.
+=== 13.22.3
+- **i is false.** Stacks are LIFO.
+- **ii is true.** Linked lists make insertion and deletion $O(1)$.
+- **iii is true.** A circular array reuses freed space.
+- **iv is false.** Queues are FIFO.
+
+**ii and iii**, **option A**.
+=== 13.22.4
+A queue can be implemented with **two** stacks: an input stack, and an output stack that you refill when it's empty. **Option B**.
+=== 13.22.5
+- **Pushes, $x$.** Every insert pushes once onto S1, which is $n$ pushes. Each element that is eventually deleted gets moved to S2, which is one more push. All $m$ deleted elements must be moved, and elements that are never deleted may be moved too, but at most $n$ in all. So $n + m \le x \le 2n$.
+- **Pops, $y$.** Each deleted element is popped from S1 when moved and from S2 when deleted, which is $2m$ pops at least. Other elements may be moved, adding pops up to $n + m$. So $2m \le y \le n + m$.
+
+**Option A**.
+=== 13.22.6
+One slot is always left empty, so "full" and "empty" can be told apart:
+
+- **empty:** REAR == FRONT
+- **full:** (REAR + 1) mod n == FRONT
+
+**Option A**.

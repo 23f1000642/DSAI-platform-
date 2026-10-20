@@ -1,0 +1,146 @@
+=== 13.13.28
+a: D
+With chaining, each bucket holds a linked list that can grow without limit. So **there is no upper limit**. **Option D**.
+=== 13.13.29
+a: C
+$KA = 123456\times0.6180339887 = 76300.0041\dots$. The fractional part is $0.0041$, and $\lfloor 10000\times0.0041\rfloor = \mathbf{41}$. **Option C**.
+=== 13.13.30
+- **Hashing** is $O(1)$ on **average**, but its worst case is $O(n)$.
+- **Direct addressing** is $O(1)$ even in the **worst case**.
+
+**Option C**.
+=== 13.13.31
+With universal hashing and $n \le m$, the expected number of other keys colliding with $K$ is at most $\frac{n-1}{m} < 1$. **Option A**.
+=== 13.13.32
+a: D
+$h(x) = (6x+3) \bmod 4$ with linear probing over 7 slots:
+
+| key | hash | placed at |
+|---|---|---|
+| 1 | 9 mod 4 = 1 | 1 |
+| 3 | 21 mod 4 = 1 | 2 |
+| 8 | 51 mod 4 = 3 | 3 |
+| 10 | 63 mod 4 = 3 | 4 |
+| 5 | 33 mod 4 = 1 | 5 |
+
+The table is **\_, 1, 3, 8, 10, 5, \_**, **option D**.
+=== 13.13.33
+Using $A = 0.618033$ exactly: $kA = 123456\times0.618033 = 76299.882\dots$. The fractional part is $0.882$, and $\lfloor100\times0.882\rfloor = \mathbf{88}$. **Option C**.
+
+(With the more precise $A = 0.6180339887$, the fractional part would be about 0.004. The question fixes A to six decimal places.)
+=== 13.13.34
+a: B
+The keys are 43, 36, 92, 87, 11, 47, 11, 13, 14, mod 11 with linear probing:
+
+| key | home | placed at |
+|---|---|---|
+| 43 | 10 | 10 |
+| 36 | 3 | 3 |
+| 92 | 4 | 4 |
+| 87 | 10 | 0 |
+| 11 | 0 | 1 |
+| 47 | 3 | 5 |
+| 11 | 0 | 2 |
+| 13 | 2 | 6 |
+| 14 | 3 | 3 to 6 are taken, so **7** |
+
+**Option B**.
+=== 13.14.1
+The precedence is ↑ (right-associative) > \* > +.
+$$a + (b*c) + (d*(e\uparrow f))$$
+The postfix form is:
+$$a\ b\ c * +\ d\ e\ f \uparrow * +$$
+=== 13.14.2
+The standard shunting-yard conversion needs only an **operator stack**. Operands go straight to the output. **Option A**.
+=== 13.14.3
+$3 * \log(x+1) - a/2$, with log as a unary operator:
+$$3\ x\ 1 + \log * \ a\ 2 / -$$
+=== 13.14.4
+The expression is $a + b\times c - d\ \hat{}\ e\ \hat{}\ f$.
+
+Here − has **lower** precedence than +. So it groups as $(a + b\times c) - (d\ \hat{}\ (e\ \hat{}\ f))$, with ^ right-associative:
+$$a\ b\ c \times +\ d\ e\ f\ \hat{}\ \hat{}\ -$$
+**Option A**.
+=== 13.14.5
+Evaluate 8 2 3 ^ / 2 3 \* + 5 1 \* − with a stack:
+
+1. $2^3 = 8$, so the stack is [8, 8]
+2. $8/8 = 1$, so the stack is [1]
+3. Push 2 and 3, then \* gives 6. The stack is [1, 6]
+
+After the first \*, the top two elements are **6, 1**. **Option A**.
+=== 13.14.6
+a: C
+Evaluate from the right, applying each operator to the two values to its right:
+
+1. $+33 = 6$
+2. $\uparrow3\,6 = 3^6 = 729$
+3. $+3\,729 = 732$
+4. $+3\,732 = 735$
+5. $*\,735\,3 = 2205$
+
+**2205**, **option C**.
+=== 13.14.7
+Postfix expressions are evaluated with a **stack**. **Option A**.
+=== 13.15.1
+a: A
+In the worst case, a split happens at **every** level: 4 new siblings. The root split also creates a new root, so that's 5 in total. **Option A**.
+=== 13.16.1
+a: C
+Keys mod 7 with linear probing:
+
+- 37 → 2
+- 38 → 3
+- 72 → 2, taken, so 4
+- 48 → 6
+- 98 → 0
+- 11 → 4, taken, so **5**
+- 56 → 0, 1 is free, so 1
+
+11 is at **5**, **option C**.
+=== 13.17.1
+To insert into a circular linked list, you set the new node's next pointer and update its predecessor's next pointer. That's **two pointers**. **Option B**.
+=== 13.17.2
+**(a)** $f(x, y)$ appends list $x$ in front of $y$:
+$$f([32,16,8],[9,11,12]) = [32,16,8,9,11,12]$$
+
+**(b)** $g(x) = f(g(cdr(x)), [car(x)])$ reverses the list:
+$$g([5,1,8,9]) = [9,8,1,5]$$
+=== 13.17.3
+Represent each list as a chain of cons-cells (a data/sublist field and a next field). Nested parentheses become sublist pointers:
+
+Read as LISP, (((a b) c) d ((e))) is a 3-element list:
+
+1. the sublist ((a b) c)
+2. the atom d
+3. the sublist ((e))
+
+```
+[•|•]──►[d|•]──►[•|/]
+ │               │
+ ▼               ▼
+[•|•]──►[c|/]   [•|/]
+ │               │
+ ▼               ▼
+[a|•]──►[b|/]   [e|/]
+```
+Each box is [element | next]. "/" means NIL, and a "•" in the element field points to a sublist.
+=== 13.17.4
+We can't reach the predecessor of node $X$, but we can insert **after** $X$:
+```
+Y->data = d;
+Y->next = X->next;
+X->next = Y;
+```
+That gives $d_1, \dots, d_j, d, \dots, d_n$ in $O(1)$, without touching the header.
+=== 13.17.5
+Binary search needs random access to the middle element. A linked list doesn't offer that, so each step takes $O(n)$. **Option B**.
+=== 13.17.6
+- **I is true.** More entries mean more collisions.
+- **II is false.** Recursion has overhead.
+- **III is true.** Quicksort's worst case is $O(n^2)$.
+- **IV is false.** Binary search on a linked list isn't efficient.
+
+**I and III**, **option D**.
+=== 13.17.7
+A circular doubly linked list gives the tail in $O(1)$ (head->prev). Concatenating is then a fixed number of pointer changes. **Option C**.

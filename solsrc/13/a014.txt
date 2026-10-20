@@ -1,0 +1,65 @@
+=== 13.17.8
+**(a)** t2 visits every node after the first, so S1 compares **n − 1** times.
+
+**(b)** S2 runs once for each new distinct value:
+
+- **Minimum: 0**, when all elements are equal.
+- **Maximum: n − 1**, when all elements are distinct.
+
+**(c)** \*j starts at 1 and goes up once per new distinct value. When the function finishes, it holds the **number of distinct elements**, i.e. the length of the list after duplicates are removed.
+=== 13.17.9
+Name the cells A (p, cell i), B (i+1), C (i+2) and D (i+3).
+
+1. `q := p->next` sets q to B.
+2. `p->next := q->next` makes A → C.
+3. `q->next := (q->next)->next` makes B → D.
+4. `(p->next)->next := q` makes C → B.
+
+Result: A → C → B → D. **It swaps the two nodes after p** (cells i+1 and i+2).
+=== 13.17.10
+We can't reach p's predecessor, so insert a node **after** p and swap the data:
+```
+new = allocate();
+new->data = p->data;     /* copy p's data into the new node */
+new->next = p->next;
+p->next  = new;          /* new node now follows p */
+p->data  = D;            /* p now holds D, so D sits before the old p->data */
+```
+This is $O(1)$.
+
+It doesn't work if p must be the address of the original data, e.g. when outside pointers refer to it.
+=== 13.17.11
+In the worst case, the element is last or missing, so the search compares all **n** nodes. **Option D**.
+=== 13.17.12
+f returns 1 exactly when every adjacent pair satisfies $p\text{->data} \le p\text{->next->data}$. That means the list is sorted in **non-decreasing** order. **Option B**.
+=== 13.17.13
+If p points to the **rear**:
+
+- **Enqueue:** insert after rear, then move p. That's $O(1)$.
+- **Dequeue:** remove rear->next, the front. That's $O(1)$.
+
+**Option A**.
+=== 13.17.14
+With unsorted lists, membership and cardinality are $O(n)$. **Union** and **intersection** need each element of one list checked against the other: $O(mn)$. **Option D**.
+=== 13.17.15
+The function swaps the values of each adjacent pair (1,2), (3,4), (5,6). 7 is left alone.
+
+The result is **2, 1, 4, 3, 6, 5, 7**, **option B**.
+=== 13.17.16
+After the loop, p is the last node and q the second-to-last.
+
+1. `q->next = NULL` detaches the last node.
+2. `p->next = head` links it to the front.
+3. `head = p` makes it the new head.
+
+**Option D**.
+=== 13.17.17
+- $\Theta(N)$ deletes: $O(1)$ each, since a pointer is given.
+- $O(\log N)$ inserts: each needs an $O(N)$ search in a sorted list.
+- $O(\log N)$ finds: $O(N)$ each.
+- $\Theta(N)$ decrease-keys: each may need an $O(N)$ move to keep the list sorted.
+
+$$\Theta(N)\cdot O(1) + O(\log N)\cdot O(N) + O(\log N)\cdot O(N) + \Theta(N)\cdot O(N) = O(N^2)$$
+**Option C**.
+=== 13.17.18
+`p = n; while (p->next != NULL)`. If list n is **empty** (n is NULL), `p->next` dereferences NULL. Otherwise, m is appended to the end of n. **Option B**.

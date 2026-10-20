@@ -1,0 +1,49 @@
+=== 13.17.19
+The $i$-th insertion may scan $i$ nodes to find its place:
+$$\sum_{i=1}^{n} i = \Theta(n^2)$$
+**Option C**.
+=== 13.17.20
+Reverse the list in place with three pointers (prev, curr, next): one pass, $O(1)$ space. Every node has to be visited, so **$\Theta(n)$** is optimal. **Option A**.
+=== 13.17.21
+- **SLLdel** has to find the predecessor by walking from the head: $O(n)$.
+- **DLLdel** gets the predecessor from the prev pointer: $O(1)$.
+
+**Option D**.
+=== 13.17.22
+The loop removes each node after ptr1 whose value is in L2. Otherwise it advances. The first node, 1, is never checked.
+
+| value | in L2? | result |
+|---|---|---|
+| 7 | no | kept |
+| 12 | yes | removed |
+| 3 | no | kept |
+| 9 | yes | removed |
+| 5 | no | kept |
+| 11 | yes | removed |
+| 15 | yes | removed |
+| 8 | no | kept |
+
+L1 becomes 1, 7, 3, 5, 8: **5** nodes.
+=== 13.17.23
+Copy the next node's data into $x$ and delete the next node instead. That's $O(1)$.
+
+But if $x$ is the **last** node, there's no next node to copy from. Then you must find the predecessor, which takes $O(n)$. The worst case is **$O(n)$**, **option A**.
+=== 13.17.24
+This is the pairwise swap again: **2, 1, 4, 3, 6, 5, 7**. **Option B**.
+=== 13.17.25
+a: D
+- Inserting at the front or end, and deleting the front, are all $O(1)$ with head and tail pointers.
+- **Deleting the last node** needs the second-to-last node, which takes $O(n)$ to reach.
+
+**Option D**.
+=== 13.17.26
+a: B
+Moving **backward** (Backup) is $O(1)$ through the prev pointer, but a singly linked list can't do it. **Option B**.
+=== 13.17.27
+a: D
+Stop at the **last** node (p->next == NULL), then link q after it: `p->next = q`. **Option D**.
+=== 13.17.28
+a: B
+Deleting the **first** element of a singly linked list is $O(1)$, not $O(n)$. So B is false. **Option B**.
+=== 13.17.29
+In general you have to find the predecessor of $a$ (and the copy-the-next-node trick fails for the last node). That's **$O(n)$**, **option B**.
