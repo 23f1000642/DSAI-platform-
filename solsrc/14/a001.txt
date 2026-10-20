@@ -1,0 +1,3 @@
+=== 14.1.1
+a: C
+A portable program runs on different platforms (hardware or OS) with little or no change: it's **platform-independent**. **Option C**.
